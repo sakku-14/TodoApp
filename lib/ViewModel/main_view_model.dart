@@ -10,7 +10,7 @@ class MainViewModel extends _$MainViewModel {
 
   @override
   MainViewModelState build() {
-    return MainViewModelState();
+    return const MainViewModelState();
   }
 
   /// 選択されたコンボボックスの値を更新する

@@ -23,6 +23,7 @@ class SortComboBoxView extends StatelessWidget {
             ),
           ]
         ],
+        key: const ValueKey('dropdown'),
         value: isSelectedValue,
         onChanged: (String? value) {
           if (value == null || value.isEmpty) return;
@@ -31,9 +32,4 @@ class SortComboBoxView extends StatelessWidget {
       ),
     );
   }
-}
-
-enum SortComboBoxValue {
-  editDate,
-  prioritySeverity,
 }
