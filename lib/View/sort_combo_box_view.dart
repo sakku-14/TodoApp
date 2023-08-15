@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+/// WidgetTestで使用するKey
+final sortComboBoxKey = UniqueKey();
+
 class SortComboBoxView extends StatelessWidget {
   const SortComboBoxView({
     super.key,
@@ -23,7 +26,7 @@ class SortComboBoxView extends StatelessWidget {
             ),
           ]
         ],
-        key: const ValueKey('dropdown'),
+        key: sortComboBoxKey,
         value: isSelectedValue,
         onChanged: (String? value) {
           if (value == null || value.isEmpty) return;
