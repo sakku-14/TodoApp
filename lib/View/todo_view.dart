@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+/// WidgetTestで使用するKey
+final todoKey = UniqueKey();
+
 class TodoView extends StatelessWidget {
   final String todoTitle;
   final int emergencyPoint;
@@ -16,6 +19,7 @@ class TodoView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
+        key: todoKey,
         title: Text(todoTitle),
         trailing: Wrap(
           spacing: 8,
