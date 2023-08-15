@@ -35,31 +35,30 @@ main() {
     });
 
     testWidgets('ソート用ComboBoxの値が切り替わること', (tester) async {
-      // 定数を切り出す
-      // test用のKey
+      const String editDate = '登録日時';
+      const String emergencyPriority = '緊急度×重要度';
+
       await tester.pumpWidget(mainView(const MainView()));
 
-      // ドロップダウンが開く前に、「登録日時」を持つWidgetが1つあること
+      // 「登録日時」を持つWidgetが1つあること
       expect(
           (tester.widget(find.byKey(const Key('dropdown'))) as DropdownButton)
               .value,
-          equals('登録日時'));
+          equals(editDate));
 
-      // ドロップダウンをtapで開く
-      await tester.tap(find.text('登録日時'));
-
-      // 描画を待つ
+      // ドロップダウンをtapして描画(開くまで)を待つ
+      await tester.tap(find.text(editDate));
       await tester.pumpAndSettle();
 
-      // 「緊急度×重要度」をtap
-      await tester.tap(find.text('緊急度×重要度').last);
+      // 「緊急度×重要度」をtapして描画(閉じるまで)を待つ
+      await tester.tap(find.text(emergencyPriority).last);
       await tester.pumpAndSettle();
 
       // 「緊急度×重要度」を持つWidgetが1つあること
       expect(
           (tester.widget(find.byKey(const Key('dropdown'))) as DropdownButton)
               .value,
-          equals('緊急度×重要度'));
+          equals(emergencyPriority));
     });
   });
 }
