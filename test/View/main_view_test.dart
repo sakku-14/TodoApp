@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:todo_app/View/main_view.dart';
+import 'package:todo_app/View/sort_combo_box_view.dart';
 
 main() {
+  /// 各WidgetのKey
+  final sortComboBoxInput = find.byKey(sortComboBoxKey);
+
   ProviderScope mainView(Widget widget) {
     return ProviderScope(
       child: MaterialApp(
@@ -31,7 +35,7 @@ main() {
 
       // when
       // then
-      expect(find.byKey(const Key('dropdown')), findsOneWidget);
+      expect(sortComboBoxInput, findsOneWidget);
     });
 
     testWidgets('ソート用ComboBoxの値が切り替わること', (tester) async {
@@ -41,9 +45,7 @@ main() {
       await tester.pumpWidget(mainView(const MainView()));
 
       // 「登録日時」を持つWidgetが1つあること
-      expect(
-          (tester.widget(find.byKey(const Key('dropdown'))) as DropdownButton)
-              .value,
+      expect((tester.widget(sortComboBoxInput) as DropdownButton).value,
           equals(editDate));
 
       // ドロップダウンをtapして描画(開くまで)を待つ
@@ -55,9 +57,7 @@ main() {
       await tester.pumpAndSettle();
 
       // 「緊急度×重要度」を持つWidgetが1つあること
-      expect(
-          (tester.widget(find.byKey(const Key('dropdown'))) as DropdownButton)
-              .value,
+      expect((tester.widget(sortComboBoxInput) as DropdownButton).value,
           equals(emergencyPriority));
     });
   });
