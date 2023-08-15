@@ -61,4 +61,24 @@ main() {
           equals(emergencyPriority));
     });
   });
+
+  group('Todo追加ボタン', () {
+    testWidgets('Todo追加ボタンを押下すると、SnackBarが表示されること2', (tester) async {
+      // given
+      await tester.pumpWidget(mainView(const MainView()));
+      var floatingActionButton =
+          find.widgetWithIcon(FloatingActionButton, Icons.add);
+      var snackBar = find.widgetWithText(SnackBar, 'Todo追加ボタンが押下されました');
+
+      // デフォルト表示として、Todo追加ボタンが存在していること
+      expect(floatingActionButton, findsOneWidget);
+
+      // when
+      await tester.tap(floatingActionButton); // Todo追加ボタンを押下する
+      await tester.pumpAndSettle();
+
+      // then
+      expect(snackBar, findsOneWidget); // SnackBarが表示されること
+    });
+  });
 }

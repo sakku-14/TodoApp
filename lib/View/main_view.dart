@@ -20,6 +20,13 @@ class MainView extends ConsumerWidget {
         isSelectedValue: state.sortComboBoxValue,
         updateSelectedValue: notifier.updateSelectedValue,
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          notifier.onTapAddTodoButton(context);
+        },
+        tooltip: 'Todo追加ボタン',
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }
