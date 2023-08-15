@@ -4,15 +4,16 @@ import 'package:flutter/material.dart';
 final sortComboBoxKey = UniqueKey();
 
 class SortComboBoxView extends StatelessWidget {
+  final List<String> dropDownValues;
+  final String isSelectedValue;
+  final Function updateSelectedValue;
+
   const SortComboBoxView({
     super.key,
     required this.dropDownValues,
     required this.isSelectedValue,
     required this.updateSelectedValue,
   });
-  final List<String> dropDownValues;
-  final String isSelectedValue;
-  final Function updateSelectedValue;
 
   @override
   Widget build(BuildContext context) {
