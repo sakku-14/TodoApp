@@ -23,7 +23,11 @@ class MainView extends ConsumerWidget {
             isSelectedValue: state.sortComboBoxValue,
             updateSelectedValue: notifier.updateSelectedValue,
           ),
-          TodoView(),
+          const TodoView(
+            todoTitle: 'Todo Title',
+            emergencyPoint: 2,
+            priorityPoint: 2,
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton(

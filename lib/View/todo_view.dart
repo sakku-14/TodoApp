@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
 
 class TodoView extends StatelessWidget {
-  const TodoView({super.key});
+  final String todoTitle;
+  final int emergencyPoint;
+  final int priorityPoint;
+
+  const TodoView({
+    super.key,
+    required this.todoTitle,
+    required this.emergencyPoint,
+    required this.priorityPoint,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        title: const Text('Todoのタイトル'),
+        title: Text(todoTitle),
         trailing: Wrap(
           spacing: 8,
           children: [
@@ -15,21 +24,21 @@ class TodoView extends StatelessWidget {
               alignment: Alignment.center,
               width: 30,
               height: 40,
-              child: Text('1'),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.red,
               ),
+              child: Text(emergencyPoint.toString()),
             ),
             Container(
               alignment: Alignment.center,
               width: 30,
               height: 40,
-              child: Text('2'),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.yellow,
               ),
+              child: Text(priorityPoint.toString()),
             ),
           ],
         ),
