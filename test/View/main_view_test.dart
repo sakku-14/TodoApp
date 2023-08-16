@@ -3,10 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:todo_app/View/main_view.dart';
 import 'package:todo_app/View/sort_combo_box_view.dart';
+import 'package:todo_app/View/todo_view.dart';
 
 main() {
   /// 各WidgetのKey
   final sortComboBoxInput = find.byKey(sortComboBoxKey);
+  final todoInput = find.byKey(todoKey);
 
   ProviderScope mainView(Widget widget) {
     return ProviderScope(
@@ -62,8 +64,16 @@ main() {
     });
   });
 
+  group('Todo', () {
+    testWidgets('単体のTodoが表示されていること', (tester) async {
+      await tester.pumpWidget(mainView(const MainView()));
+
+      expect(todoInput, findsOneWidget); // TodoViewが1つ存在すること
+    });
+  });
+
   group('Todo追加ボタン', () {
-    testWidgets('Todo追加ボタンを押下すると、SnackBarが表示されること2', (tester) async {
+    testWidgets('Todo追加ボタンを押下すると、SnackBarが表示されること', (tester) async {
       // given
       await tester.pumpWidget(mainView(const MainView()));
       var floatingActionButton =

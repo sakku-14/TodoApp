@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_app/View/sort_combo_box_view.dart';
+import 'package:todo_app/View/todo_view.dart';
 import 'package:todo_app/ViewModel/main_view_model.dart';
 
 class MainView extends ConsumerWidget {
@@ -15,10 +16,19 @@ class MainView extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('Todoアプリ'),
       ),
-      body: SortComboBoxView(
-        dropDownValues: MainViewModel.sortComboBoxValues,
-        isSelectedValue: state.sortComboBoxValue,
-        updateSelectedValue: notifier.updateSelectedValue,
+      body: Column(
+        children: [
+          SortComboBoxView(
+            dropDownValues: MainViewModel.sortComboBoxValues,
+            isSelectedValue: state.sortComboBoxValue,
+            updateSelectedValue: notifier.updateSelectedValue,
+          ),
+          const TodoView(
+            todoTitle: 'Todo Title',
+            emergencyPoint: 2,
+            priorityPoint: 2,
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
