@@ -21,32 +21,39 @@ class TodoView extends StatelessWidget {
       child: ListTile(
         key: todoKey,
         title: Text(todoTitle),
-        trailing: Wrap(
-          spacing: 8,
-          children: [
-            // 緊急度
-            Container(
-              alignment: Alignment.center,
-              width: 30,
-              height: 40,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.red,
-              ),
-              child: Text(emergencyPoint.toString()),
+        trailing: FractionallySizedBox(
+          widthFactor: 0.15,
+          heightFactor: 0.7,
+          child: FittedBox(
+            fit: BoxFit.fitHeight,
+            child: Wrap(
+              spacing: 5,
+              children: [
+                // 緊急度
+                Container(
+                  padding: const EdgeInsets.all(3),
+                  alignment: Alignment.center,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.redAccent,
+                  ),
+                  child: Text(
+                    emergencyPoint.toString(),
+                  ),
+                ),
+                // 重要度
+                Container(
+                  padding: const EdgeInsets.all(3),
+                  alignment: Alignment.center,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.orangeAccent,
+                  ),
+                  child: Text(priorityPoint.toString()),
+                ),
+              ],
             ),
-            // 重要度
-            Container(
-              alignment: Alignment.center,
-              width: 30,
-              height: 40,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.yellow,
-              ),
-              child: Text(priorityPoint.toString()),
-            ),
-          ],
+          ),
         ),
       ),
     );
