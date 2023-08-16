@@ -69,12 +69,6 @@ main() {
       await tester.pumpWidget(mainView(const MainView()));
 
       expect(todoInput, findsOneWidget); // TodoViewが1つ存在すること
-
-      //expect(find.text(todoTitle), findsOneWidget); // タイトルが正しく表示されていること
-      // expect(find.text(emergencyPoint.toString()),
-      //     findsOneWidget); // タイトルが正しく表示されていること
-      // expect(find.text(priorityPoint.toString()),
-      //     findsOneWidget); // タイトルが正しく表示されていること
     });
   });
 

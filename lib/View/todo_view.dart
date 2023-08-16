@@ -24,6 +24,7 @@ class TodoView extends StatelessWidget {
         trailing: Wrap(
           spacing: 8,
           children: [
+            // 緊急度
             Container(
               alignment: Alignment.center,
               width: 30,
@@ -34,6 +35,7 @@ class TodoView extends StatelessWidget {
               ),
               child: Text(emergencyPoint.toString()),
             ),
+            // 重要度
             Container(
               alignment: Alignment.center,
               width: 30,
