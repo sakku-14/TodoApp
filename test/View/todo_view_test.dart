@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:todo_app/View/todo_view.dart';
+import 'package:todo_app/ViewModel/Dto/todo_dto.dart';
 
 main() {
   MaterialApp todoView(Widget widget) {
@@ -15,10 +16,8 @@ main() {
     const int priorityPoint = 2;
 
     // Test用のTodoを生成
-    await tester.pumpWidget(todoView(const TodoView(
-      todoTitle: todoTitle,
-      emergencyPoint: emergencyPoint,
-      priorityPoint: priorityPoint,
+    await tester.pumpWidget(todoView(TodoView(
+      todoDto: TodoDto(todoTitle, emergencyPoint, priorityPoint),
     )));
 
     expect(find.text(todoTitle), findsOneWidget); // タイトルが正しく表示されていること

@@ -3,12 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:todo_app/View/main_view.dart';
 import 'package:todo_app/View/sort_combo_box_view.dart';
-import 'package:todo_app/View/todo_view.dart';
 
 main() {
   /// 各WidgetのKey
   final sortComboBoxInput = find.byKey(sortComboBoxKey);
-  final todoInput = find.byKey(todoKey);
 
   ProviderScope mainView(Widget widget) {
     return ProviderScope(
@@ -64,11 +62,32 @@ main() {
     });
   });
 
-  group('Todo', () {
-    testWidgets('単体のTodoが表示されていること', (tester) async {
+  group('Todoリストタブ', () {
+    testWidgets('Todoリスト表示タブが表示されていること', (tester) async {
+      // given
+      var todoListTab = find.byKey(todoTabControllerViewKey);
+
+      // when
       await tester.pumpWidget(mainView(const MainView()));
 
-      expect(todoInput, findsOneWidget); // TodoViewが1つ存在すること
+      // then
+      expect(todoListTab, findsOneWidget);
+    });
+
+    testWidgets('Todoリストのタブを切り替えると、Todoリストの内容が切り替わること', (tester) async {
+      // given
+      var todoListTab = find.widgetWithText(Tab, '作業中');
+      var notBeginTodoElementTitle = find.text('notBegin');
+      var progressTodoElementTitle = find.text('progress');
+
+      // when
+      await tester.pumpWidget(mainView(const MainView()));
+      await tester.tap(todoListTab);
+      await tester.pumpAndSettle();
+
+      // then
+      expect(notBeginTodoElementTitle, findsNothing);
+      expect(progressTodoElementTitle, findsAtLeastNWidgets(1));
     });
   });
 
