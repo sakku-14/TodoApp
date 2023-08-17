@@ -5,9 +5,6 @@ import 'package:todo_app/ViewModel/main_view_model.dart';
 
 import 'TabView/todo_tab_controller_view.dart';
 
-var scaffoldColumnKey = GlobalKey();
-var sortComboBoxKey = GlobalKey();
-
 class MainView extends ConsumerWidget {
   const MainView({super.key});
 
@@ -16,27 +13,23 @@ class MainView extends ConsumerWidget {
     var state = ref.watch(mainViewModelProvider);
     var notifier = ref.read(mainViewModelProvider.notifier);
 
-    // bodyの各Widgetの高さの比率定義（合計で１になるよう設定すること）
-    const sortComboBoxHeightRatio = 0.07;
-    const todoTabControllerRatio = 1 - sortComboBoxHeightRatio;
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Todoアプリ'),
       ),
       body: Column(
-        key: scaffoldColumnKey,
         children: [
-          SortComboBoxView(
-            dropDownValues: MainViewModel.sortComboBoxValues,
-            isSelectedValue: state.sortComboBoxValue,
-            updateSelectedValue: notifier.updateSelectedValue,
-            parentColumnKey: scaffoldColumnKey,
-            sortComboBoxHeightRatio: sortComboBoxHeightRatio,
+          Flexible(
+            flex: 1,
+            child: SortComboBoxView(
+              dropDownValues: MainViewModel.sortComboBoxValues,
+              isSelectedValue: state.sortComboBoxValue,
+              updateSelectedValue: notifier.updateSelectedValue,
+            ),
           ),
-          TodoTabControllerView(
-            parentColumnKey: scaffoldColumnKey,
-            todoTabControllerRatio: todoTabControllerRatio,
+          const Flexible(
+            flex: 10,
+            child: TodoTabControllerView(),
           ),
         ],
       ),
