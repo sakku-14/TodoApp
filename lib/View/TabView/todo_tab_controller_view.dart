@@ -1,16 +1,78 @@
+import 'dart:math' as math; // Debug用
+
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:todo_app/View/todo_view.dart';
 
-GlobalKey tabBarKey = GlobalKey();
+// region Debug用
+var random = math.Random();
+List<TodoView> todoContents = [
+  TodoView(
+      todoTitle: 'todoTitle',
+      emergencyPoint: random.nextInt(3) + 1,
+      priorityPoint: random.nextInt(3) + 1),
+  TodoView(
+      todoTitle: 'todoTitle',
+      emergencyPoint: random.nextInt(3) + 1,
+      priorityPoint: random.nextInt(3) + 1),
+  TodoView(
+      todoTitle: 'todoTitle',
+      emergencyPoint: random.nextInt(3) + 1,
+      priorityPoint: random.nextInt(3) + 1),
+  TodoView(
+      todoTitle: 'todoTitle',
+      emergencyPoint: random.nextInt(3) + 1,
+      priorityPoint: random.nextInt(3) + 1),
+  TodoView(
+      todoTitle: 'todoTitle',
+      emergencyPoint: random.nextInt(3) + 1,
+      priorityPoint: random.nextInt(3) + 1),
+  TodoView(
+      todoTitle: 'todoTitle',
+      emergencyPoint: random.nextInt(3) + 1,
+      priorityPoint: random.nextInt(3) + 1),
+  TodoView(
+      todoTitle: 'todoTitle',
+      emergencyPoint: random.nextInt(3) + 1,
+      priorityPoint: random.nextInt(3) + 1),
+  TodoView(
+      todoTitle: 'todoTitle',
+      emergencyPoint: random.nextInt(3) + 1,
+      priorityPoint: random.nextInt(3) + 1),
+  TodoView(
+      todoTitle: 'todoTitle',
+      emergencyPoint: random.nextInt(3) + 1,
+      priorityPoint: random.nextInt(3) + 1),
+  TodoView(
+      todoTitle: 'todoTitle',
+      emergencyPoint: random.nextInt(3) + 1,
+      priorityPoint: random.nextInt(3) + 1),
+  TodoView(
+      todoTitle: 'todoTitle',
+      emergencyPoint: random.nextInt(3) + 1,
+      priorityPoint: random.nextInt(3) + 1),
+  TodoView(
+      todoTitle: 'todoTitle',
+      emergencyPoint: random.nextInt(3) + 1,
+      priorityPoint: random.nextInt(3) + 1),
+];
+
+var todoViews = SingleChildScrollView(
+  child: Column(
+    children: todoContents,
+  ),
+);
+// endregion
 
 class TodoTabControllerView extends StatefulWidget {
-  const TodoTabControllerView(
-      {super.key,
-      required this.parentColumnKey,
-      required this.sortComboBoxKey});
+  const TodoTabControllerView({
+    super.key,
+    required this.parentColumnKey,
+    required this.todoTabControllerRatio,
+  });
 
   final GlobalKey parentColumnKey;
-  final GlobalKey sortComboBoxKey;
+  final double todoTabControllerRatio;
 
   @override
   State<TodoTabControllerView> createState() => _TodoTabControllerViewState();
@@ -35,21 +97,19 @@ class _TodoTabControllerViewState extends State<TodoTabControllerView> {
 
   @override
   Widget build(BuildContext context) {
-    var thisHeight = parentHeight * 0.9;
-    if (thisHeight <= 0) thisHeight = 0;
-    print('parentHeight: {$parentHeight}, thisHeight: {$thisHeight}');
+    var availableHeight = parentHeight * widget.todoTabControllerRatio;
+    if (availableHeight <= 0) availableHeight = 0;
 
     return DefaultTabController(
       initialIndex: 0, // 最初に表示するタブ
       length: 4, // タブの数
       child: SizedBox(
-        height: thisHeight,
+        height: availableHeight,
         child: Column(
           children: [
             SizedBox(
-              height: 50,
-              child: TabBar(
-                key: tabBarKey,
+              height: availableHeight * 0.07,
+              child: const TabBar(
                 tabs: <Widget>[
                   Tab(child: Text('未着手')),
                   Tab(child: Text('作業中')),
@@ -58,97 +118,17 @@ class _TodoTabControllerViewState extends State<TodoTabControllerView> {
                 ],
               ),
             ),
-            thisHeight == 0
+            availableHeight == 0
                 ? Container()
                 : SizedBox(
                     width: double.infinity,
-                    height: thisHeight - 50,
-                    child: const TabBarView(
+                    height: availableHeight * 0.93,
+                    child: TabBarView(
                       children: <Widget>[
-                        SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                            ],
-                          ),
-                        ),
-                        SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                              Text('data1'),
-                            ],
-                          ),
-                        ),
-                        Text('data3'),
-                        Text('data4'),
+                        todoViews,
+                        todoViews,
+                        todoViews,
+                        todoViews,
                       ],
                     ),
                   ),

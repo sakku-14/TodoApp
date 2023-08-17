@@ -16,6 +16,10 @@ class MainView extends ConsumerWidget {
     var state = ref.watch(mainViewModelProvider);
     var notifier = ref.read(mainViewModelProvider.notifier);
 
+    // bodyの各Widgetの高さの比率定義（合計で１になるよう設定すること）
+    const sortComboBoxHeightRatio = 0.07;
+    const todoTabControllerRatio = 1 - sortComboBoxHeightRatio;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Todoアプリ'),
@@ -24,15 +28,15 @@ class MainView extends ConsumerWidget {
         key: scaffoldColumnKey,
         children: [
           SortComboBoxView(
-            key: sortComboBoxKey,
             dropDownValues: MainViewModel.sortComboBoxValues,
             isSelectedValue: state.sortComboBoxValue,
             updateSelectedValue: notifier.updateSelectedValue,
             parentColumnKey: scaffoldColumnKey,
+            sortComboBoxHeightRatio: sortComboBoxHeightRatio,
           ),
           TodoTabControllerView(
             parentColumnKey: scaffoldColumnKey,
-            sortComboBoxKey: sortComboBoxKey,
+            todoTabControllerRatio: todoTabControllerRatio,
           ),
         ],
       ),

@@ -5,17 +5,20 @@ import 'package:flutter/scheduler.dart';
 final sortComboBoxKey = UniqueKey();
 
 class SortComboBoxView extends StatefulWidget {
+  final List<String> dropDownValues;
+  final String isSelectedValue;
+  final Function updateSelectedValue;
+  final GlobalKey parentColumnKey;
+  final double sortComboBoxHeightRatio;
+
   const SortComboBoxView({
     super.key,
     required this.dropDownValues,
     required this.isSelectedValue,
     required this.updateSelectedValue,
     required this.parentColumnKey,
+    required this.sortComboBoxHeightRatio,
   });
-  final List<String> dropDownValues;
-  final String isSelectedValue;
-  final Function updateSelectedValue;
-  final GlobalKey parentColumnKey;
 
   @override
   State<SortComboBoxView> createState() => _SortComboBoxViewState();
@@ -41,7 +44,7 @@ class _SortComboBoxViewState extends State<SortComboBoxView> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: parentHeight * 0.1,
+      height: parentHeight * widget.sortComboBoxHeightRatio,
       child: Center(
         child: DropdownButton(
           items: [
