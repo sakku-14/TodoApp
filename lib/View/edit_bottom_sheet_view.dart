@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todo_app/ViewModel/edit_bottom_sheet_view_model.dart';
 
-class EditBottomSheetView extends StatelessWidget {
+class EditBottomSheetView extends ConsumerWidget {
   const EditBottomSheetView({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    var notifier = ref.read(editBottomSheetViewModelProvider.notifier);
     var screenSize = MediaQuery.of(context).size;
     String? todoTitle = '初期値';
     return Column(
@@ -34,8 +37,8 @@ class EditBottomSheetView extends StatelessWidget {
               width: screenSize.width * 0.3,
               child: TextButton(
                 onPressed: () {
-                  ScaffoldMessenger.of(context)
-                      .showSnackBar(SnackBar(content: Text('$todoTitle')));
+                  if (todoTitle == null) return;
+                  notifier.updateTodo(todoTitle.toString());
                 },
                 onLongPress: () {},
                 child: const Text('更新'),
