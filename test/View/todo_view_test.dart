@@ -39,9 +39,7 @@ main() {
     expect(find.text('2'), findsNWidgets(2)); // 緊急度×優先度を表す「2」が2つ存在すること
   });
 
-  testWidgets(
-      'Todoを右にスライドすると削除/編集アイコンが表示'
-      'されタップすることでアイコンに対応したSnackBarが表示されること', (tester) async {
+  testWidgets('Todoを右にスライドすると削除/編集アイコンが表示されタップできること', (tester) async {
     var todoDeleteIcon = find.widgetWithIcon(SlidableAction, Icons.delete);
     var todoEditIcon = find.widgetWithIcon(SlidableAction, Icons.edit);
 
@@ -70,6 +68,5 @@ main() {
     // 編集アイコンが表示されていて、タップできること
     expect(todoEditIcon, findsOneWidget);
     await tester.tap(todoEditIcon);
-    await tester.pumpAndSettle();
   });
 }
