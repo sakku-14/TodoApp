@@ -16,33 +16,27 @@ class TodoView extends StatelessWidget {
     required this.priorityPoint,
   });
 
-  dialogSlidableAction(BuildContext context, String? action) {
-    debugPrint(action);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Slidable(
       key: const ValueKey(0),
       startActionPane: ActionPane(
         motion: const DrawerMotion(),
-        dismissible: DismissiblePane(onDismissed: () {
-          // TODO:23.8.16:A.Uehara:削除処理呼び出し
-          debugPrint('Deleted Action');
-        }),
         children: [
           // A SlidableAction can have an icon and/or a label.
           SlidableAction(
-            onPressed: dialogSlidableAction(context,
-                'Pushed Delete Icon'), // TODO:23.8.16:A.Uehara:削除処理呼び出し
+            onPressed: (context) {
+              // TODO:23.8.16:A.Uehara:削除処理呼び出し
+            },
             backgroundColor: const Color(0xFFFE4A49),
             foregroundColor: Colors.white,
             icon: Icons.delete,
             label: 'Delete',
           ),
           SlidableAction(
-            onPressed: dialogSlidableAction(
-                context, 'Pushed Edit Icon'), // TODO:23.8.16:A.Uehara:更新処理呼び出し
+            onPressed: (context) {
+              // TODO:23.8.16:A.Uehara:更新処理呼び出し
+            },
             backgroundColor: const Color(0xFF21B7CA),
             foregroundColor: Colors.white,
             icon: Icons.edit,
