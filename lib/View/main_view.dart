@@ -3,6 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_app/View/sort_combo_box_view.dart';
 import 'package:todo_app/ViewModel/main_view_model.dart';
 
+import 'TabView/todo_tab_controller_view.dart';
+
+var scaffoldColumnKey = GlobalKey();
+var sortComboBoxKey = GlobalKey();
+
 class MainView extends ConsumerWidget {
   const MainView({super.key});
 
@@ -15,10 +20,21 @@ class MainView extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('Todoアプリ'),
       ),
-      body: SortComboBoxView(
-        dropDownValues: MainViewModel.sortComboBoxValues,
-        isSelectedValue: state.sortComboBoxValue,
-        updateSelectedValue: notifier.updateSelectedValue,
+      body: Column(
+        key: scaffoldColumnKey,
+        children: [
+          SortComboBoxView(
+            key: sortComboBoxKey,
+            dropDownValues: MainViewModel.sortComboBoxValues,
+            isSelectedValue: state.sortComboBoxValue,
+            updateSelectedValue: notifier.updateSelectedValue,
+            parentColumnKey: scaffoldColumnKey,
+          ),
+          TodoTabControllerView(
+            parentColumnKey: scaffoldColumnKey,
+            sortComboBoxKey: sortComboBoxKey,
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
