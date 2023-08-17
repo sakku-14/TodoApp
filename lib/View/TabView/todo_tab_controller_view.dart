@@ -1,72 +1,22 @@
-import 'dart:math' as math; // Debug用
-
 import 'package:flutter/material.dart';
-import 'package:todo_app/View/todo_view.dart';
+import 'package:todo_app/View/TabView/todo_tab_contents_view.dart';
+import 'package:todo_app/ViewModel/Dto/todo_dto.dart';
 
-// region Debug用
-var random = math.Random();
-List<TodoView> todoContents = [
-  TodoView(
-      todoTitle: 'todoTitle',
-      emergencyPoint: random.nextInt(3) + 1,
-      priorityPoint: random.nextInt(3) + 1),
-  TodoView(
-      todoTitle: 'todoTitle',
-      emergencyPoint: random.nextInt(3) + 1,
-      priorityPoint: random.nextInt(3) + 1),
-  TodoView(
-      todoTitle: 'todoTitle',
-      emergencyPoint: random.nextInt(3) + 1,
-      priorityPoint: random.nextInt(3) + 1),
-  TodoView(
-      todoTitle: 'todoTitle',
-      emergencyPoint: random.nextInt(3) + 1,
-      priorityPoint: random.nextInt(3) + 1),
-  TodoView(
-      todoTitle: 'todoTitle',
-      emergencyPoint: random.nextInt(3) + 1,
-      priorityPoint: random.nextInt(3) + 1),
-  TodoView(
-      todoTitle: 'todoTitle',
-      emergencyPoint: random.nextInt(3) + 1,
-      priorityPoint: random.nextInt(3) + 1),
-  TodoView(
-      todoTitle: 'todoTitle',
-      emergencyPoint: random.nextInt(3) + 1,
-      priorityPoint: random.nextInt(3) + 1),
-  TodoView(
-      todoTitle: 'todoTitle',
-      emergencyPoint: random.nextInt(3) + 1,
-      priorityPoint: random.nextInt(3) + 1),
-  TodoView(
-      todoTitle: 'todoTitle',
-      emergencyPoint: random.nextInt(3) + 1,
-      priorityPoint: random.nextInt(3) + 1),
-  TodoView(
-      todoTitle: 'todoTitle',
-      emergencyPoint: random.nextInt(3) + 1,
-      priorityPoint: random.nextInt(3) + 1),
-  TodoView(
-      todoTitle: 'todoTitle',
-      emergencyPoint: random.nextInt(3) + 1,
-      priorityPoint: random.nextInt(3) + 1),
-  TodoView(
-      todoTitle: 'todoTitle',
-      emergencyPoint: random.nextInt(3) + 1,
-      priorityPoint: random.nextInt(3) + 1),
-];
-
-var todoViews = SingleChildScrollView(
-  child: Column(
-    children: todoContents,
-  ),
-);
-// endregion
+var todoTabContentsViewKey = UniqueKey();
 
 class TodoTabControllerView extends StatelessWidget {
   const TodoTabControllerView({
     super.key,
+    required this.notBeginTodoDtoList,
+    required this.progressTodoDtoList,
+    required this.stayTodoDtoList,
+    required this.completeTodoDtoList,
   });
+
+  final List<TodoDto> notBeginTodoDtoList;
+  final List<TodoDto> progressTodoDtoList;
+  final List<TodoDto> stayTodoDtoList;
+  final List<TodoDto> completeTodoDtoList;
 
   @override
   Widget build(BuildContext context) {
@@ -88,13 +38,12 @@ class TodoTabControllerView extends StatelessWidget {
           ),
           Flexible(
             flex: 10,
-            child: TabBarView(
-              children: <Widget>[
-                todoViews,
-                todoViews,
-                todoViews,
-                todoViews,
-              ],
+            child: TodoTabContentsView(
+              key: todoTabContentsViewKey,
+              notBeginTodoDtoList: notBeginTodoDtoList,
+              progressTodoDtoList: progressTodoDtoList,
+              stayTodoDtoList: stayTodoDtoList,
+              completeTodoDtoList: completeTodoDtoList,
             ),
           ),
         ],
