@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todo_app/View/common_bottom_sheet_view.dart';
 import 'package:todo_app/ViewModel/edit_bottom_sheet_view_model.dart';
 
 class EditBottomSheetView extends ConsumerWidget {
-  const EditBottomSheetView({super.key});
+  EditBottomSheetView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final commonBottomSheetViewKey =
+        GlobalObjectKey<CommonBottomSheetViewState>(context);
     var notifier = ref.read(editBottomSheetViewModelProvider.notifier);
     var screenSize = MediaQuery.of(context).size;
-    String? todoTitle = '初期値';
+
+    //String? todoTitle = '初期値';
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
@@ -37,8 +41,10 @@ class EditBottomSheetView extends ConsumerWidget {
               width: screenSize.width * 0.3,
               child: TextButton(
                 onPressed: () {
-                  if (todoTitle == null) return;
-                  notifier.updateTodo(todoTitle.toString());
+                  var inputInfo =
+                      commonBottomSheetViewKey.currentState?.getInputInfo();
+                  if (inputInfo == null) return;
+                  notifier.updateTodo(inputInfo.$1.toString());
                 },
                 onLongPress: () {},
                 child: const Text('更新'),
@@ -46,22 +52,7 @@ class EditBottomSheetView extends ConsumerWidget {
             ),
           ],
         ),
-        // TODO:23.8.17:A.Uehara:ここから下は共通のダイアログを使う
-        Container(
-          margin: EdgeInsets.all(screenSize.width * 0.1),
-          child: SizedBox(
-            width: screenSize.width * 0.8,
-            child: TextField(
-              onChanged: (text) {
-                todoTitle = text;
-              },
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'タイトル',
-              ),
-            ),
-          ),
-        ),
+        CommonBottomSheetView(key: commonBottomSheetViewKey),
       ],
     );
   }

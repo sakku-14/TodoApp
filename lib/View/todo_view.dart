@@ -40,7 +40,7 @@ class TodoView extends StatelessWidget {
               showModalBottomSheet(
                 context: context,
                 builder: (context) {
-                  return const EditBottomSheetView();
+                  return EditBottomSheetView();
                 },
               );
             },
