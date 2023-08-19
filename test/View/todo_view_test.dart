@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:todo_app/View/todo_view.dart';
+import 'package:todo_app/ViewModel/Dto/todo_dto.dart';
 
 main() {
   /// 各WidgetのKey
@@ -29,10 +30,8 @@ main() {
     const int priorityPoint = 2;
 
     // Test用のTodoを生成
-    await tester.pumpWidget(todoView(const TodoView(
-      todoTitle: todoTitle,
-      emergencyPoint: emergencyPoint,
-      priorityPoint: priorityPoint,
+    await tester.pumpWidget(todoView(TodoView(
+      todoDto: TodoDto(todoTitle, emergencyPoint, priorityPoint),
     )));
 
     expect(find.text(todoTitle), findsOneWidget); // タイトルが正しく表示されていること
@@ -48,10 +47,8 @@ main() {
     const int priorityPoint = 2;
 
     // Test用のTodoを生成
-    await tester.pumpWidget(todoView(const TodoView(
-      todoTitle: todoTitle,
-      emergencyPoint: emergencyPoint,
-      priorityPoint: priorityPoint,
+    await tester.pumpWidget(todoView(TodoView(
+      todoDto: TodoDto(todoTitle, emergencyPoint, priorityPoint),
     )));
 
     // Todoをスライドして、描画完了まで待機
