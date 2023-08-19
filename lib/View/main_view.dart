@@ -42,6 +42,8 @@ class MainView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var state = ref.watch(mainViewModelProvider);
     var notifier = ref.read(mainViewModelProvider.notifier);
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
 
     return Scaffold(
       appBar: AppBar(
@@ -58,7 +60,7 @@ class MainView extends ConsumerWidget {
             ),
           ),
           Flexible(
-            flex: 10,
+            flex: isLandscape ? 7 : 10,
             child: TodoTabControllerView(
               key: todoTabControllerViewKey,
               notBeginTodoDtoList: notBeginTodoDtoList,
