@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_app/View/common_bottom_sheet_view.dart';
 
+import '../ViewModel/edit_bottom_sheet_view_model.dart';
+
 class EditBottomSheetView extends ConsumerWidget {
   const EditBottomSheetView({Key? key}) : super(key: key);
 
@@ -9,7 +11,7 @@ class EditBottomSheetView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final commonButtonSheetViewKey =
         GlobalObjectKey<CommonBottomSheetViewState>(context);
-    // var notifier = ref.read(editBottomSheetViewModelProvider.notifier);
+    var notifier = ref.read(editBottomSheetViewModelProvider.notifier);
     var screenSize = MediaQuery.of(context).size;
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -41,8 +43,8 @@ class EditBottomSheetView extends ConsumerWidget {
                   var inputInfo =
                       commonButtonSheetViewKey.currentState?.getInputInfo();
                   if (inputInfo == null) return;
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(inputInfo.$1.toString())));
+                  notifier.updateTodo(context, inputInfo.$1.toString(),
+                      inputInfo.$2, inputInfo.$3, inputInfo.$4);
                 },
                 onLongPress: () {},
                 child: const Text('更新'),
