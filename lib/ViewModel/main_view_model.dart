@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'main_view_model_state.dart';
@@ -17,11 +16,5 @@ class MainViewModel extends _$MainViewModel {
   /// 選択されたコンボボックスの値を更新する
   void updateSelectedValue(String selectedValue) {
     state = state.copyWith(sortComboBoxValue: selectedValue);
-  }
-
-  void onTapAddTodoButton(BuildContext context) {
-    // TODO:23.8.15:Y.Sakuma:本実装では、ここからモーダルボトムシートを表示し、UseCaseを呼び出す
-    ScaffoldMessenger.of(context)
-        .showSnackBar(const SnackBar(content: Text('Todo追加ボタンが押下されました')));
   }
 }
