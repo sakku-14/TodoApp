@@ -1,4 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:todo_app/Domain/Event/update_todo_event.dart';
+import 'package:todo_app/Infrastructure/event_bus.dart';
 
 import '../Infrastructure/Repository/todo_list_repository.dart';
 
@@ -14,7 +16,8 @@ class UpdateTodoUseCase {
     // 変更されたTodoを特定してRepositoryを更新
     if (!todoListRepository.save(title)) return;
 
-    // 更新処理が正常に完了したらEvent通知
+    // 更新処理が正常に完了したらDomainEvent通知
+    eventBus.fire(UpdateTodoEvent());
   }
 }
 
