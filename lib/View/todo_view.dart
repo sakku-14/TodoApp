@@ -55,72 +55,46 @@ class TodoView extends StatelessWidget {
           title: Text(todoDto.title),
           trailing: FractionallySizedBox(
             widthFactor: 0.2,
-            child: Stack(
-              children: [
-                Row(
-                  mainAxisAlignment: isLandscape
-                      ? MainAxisAlignment.spaceEvenly
-                      : MainAxisAlignment.spaceBetween,
-                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Container(
-                      width: 30,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Color(0xfff7a3a3),
+            child: Center(
+              child: Row(
+                mainAxisAlignment: isLandscape
+                    ? MainAxisAlignment.spaceEvenly
+                    : MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    width: 30,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Color(0xfff7a3a3),
+                    ),
+                    child: Center(
+                      child: Text(
+                        todoDto.emergencyPoint.toString(),
+                        style: const TextStyle(
+                          fontSize: 18,
+                          color: Colors.black54,
+                        ),
                       ),
                     ),
-                    Container(
-                      width: 30,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Color(0xfff7d092),
-                      ),
-                    ),
-                  ],
-                ),
-                Center(
-                  child: Row(
-                    mainAxisAlignment: isLandscape
-                        ? MainAxisAlignment.spaceEvenly
-                        : MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        width: 30,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.transparent,
-                        ),
-                        child: Center(
-                          child: Text(
-                            todoDto.emergencyPoint.toString(),
-                            style: const TextStyle(
-                              fontSize: 18,
-                              color: Colors.black54,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        width: 30,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.transparent,
-                        ),
-                        child: Center(
-                          child: Text(
-                            todoDto.priorityPoint.toString(),
-                            style: const TextStyle(
-                              fontSize: 18,
-                              color: Colors.black54,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
                   ),
-                ),
-              ],
+                  Container(
+                    width: 30,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Color(0xfff7d092),
+                    ),
+                    child: Center(
+                      child: Text(
+                        todoDto.priorityPoint.toString(),
+                        style: const TextStyle(
+                          fontSize: 18,
+                          color: Colors.black54,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
