@@ -21,7 +21,9 @@ class EditBottomSheetView extends ConsumerWidget {
             SizedBox(
               width: screenSize.width * 0.3,
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
                 onLongPress: () {},
                 child: const Text('キャンセル'),
               ),
@@ -45,6 +47,7 @@ class EditBottomSheetView extends ConsumerWidget {
                   if (inputInfo == null) return;
                   notifier.updateTodo(context, inputInfo.$1.toString(),
                       inputInfo.$2, inputInfo.$3, inputInfo.$4);
+                  Navigator.of(context).pop();
                 },
                 onLongPress: () {},
                 child: const Text('更新'),

@@ -33,7 +33,6 @@ class TodoView extends StatelessWidget {
           ),
           SlidableAction(
             onPressed: (context) {
-              // TODO:23.8.16:A.Uehara:更新処理呼び出し
               showModalBottomSheet(
                 context: context,
                 builder: (context) {
