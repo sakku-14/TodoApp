@@ -79,6 +79,7 @@ class MainView extends ConsumerWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showModalBottomSheet(
+            isScrollControlled: true,
             context: context,
             builder: (context) {
               return const AddBottomSheetView();

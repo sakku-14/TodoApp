@@ -34,6 +34,7 @@ class TodoView extends StatelessWidget {
           SlidableAction(
             onPressed: (context) {
               showModalBottomSheet(
+                isScrollControlled: true,
                 context: context,
                 builder: (context) {
                   return const EditBottomSheetView();

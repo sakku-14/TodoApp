@@ -23,14 +23,17 @@ class CommonBottomSheetViewState extends State<CommonBottomSheetView> {
 
   @override
   Widget build(BuildContext context) {
-    var screenSize = MediaQuery.of(context).size;
     return Column(
       children: [
         /// タイトル
         Container(
-          margin: EdgeInsets.only(top: screenSize.height * 0.02),
+          padding: const EdgeInsets.only(
+            left: 40,
+            right: 40,
+            top: 20,
+            bottom: 10,
+          ),
           child: SizedBox(
-            width: screenSize.width * 0.8,
             child: TextField(
               onChanged: (text) {
                 todoTitle = text;
@@ -45,17 +48,19 @@ class CommonBottomSheetViewState extends State<CommonBottomSheetView> {
 
         /// 緊急度
         Container(
-          margin: EdgeInsets.only(top: screenSize.height * 0.02),
+          padding: const EdgeInsets.only(
+            left: 30,
+            right: 30,
+            top: 10,
+            bottom: 10,
+          ),
           child: SizedBox(
-            width: screenSize.width * 0.8,
             child: Column(
               children: [
-                Text(
+                const Text(
                   '緊急度',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: screenSize.width * 0.04),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                 ),
                 SizedBox(
                   width: double.infinity,
@@ -81,17 +86,19 @@ class CommonBottomSheetViewState extends State<CommonBottomSheetView> {
 
         /// 重要度
         Container(
-          margin: EdgeInsets.only(top: screenSize.height * 0.02),
+          padding: const EdgeInsets.only(
+            left: 30,
+            right: 30,
+            top: 10,
+            bottom: 10,
+          ),
           child: SizedBox(
-            width: screenSize.width * 0.8,
             child: Column(
               children: [
-                Text(
+                const Text(
                   '重要度',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: screenSize.width * 0.04),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                 ),
                 SizedBox(
                   width: double.infinity,
@@ -117,20 +124,19 @@ class CommonBottomSheetViewState extends State<CommonBottomSheetView> {
 
         /// ステータス
         Container(
-          margin: EdgeInsets.only(
-            top: screenSize.height * 0.02,
-            bottom: screenSize.height * 0.05,
+          padding: const EdgeInsets.only(
+            left: 30,
+            right: 30,
+            top: 10,
+            bottom: 20,
           ),
           child: SizedBox(
-            width: screenSize.width * 0.8,
             child: Column(
               children: [
-                Text(
+                const Text(
                   'ステータス',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: screenSize.width * 0.04),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                 ),
                 SizedBox(
                   width: double.infinity,
