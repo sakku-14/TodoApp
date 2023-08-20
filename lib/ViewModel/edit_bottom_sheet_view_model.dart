@@ -13,10 +13,6 @@ class EditBottomSheetViewModel extends _$EditBottomSheetViewModel {
 
   /// Todoを更新する処理を呼び出す
   void updateTodo(BuildContext context, TodoDto todoDto) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('【更新】タイトル：${todoDto.title}、'
-            '緊急度：${todoDto.emergencyPoint}、'
-            '重要度：${todoDto.priorityPoint}、'
-            'ステータス：${todoDto.status}')));
+    // Todo更新処理呼び出し
   }
 }

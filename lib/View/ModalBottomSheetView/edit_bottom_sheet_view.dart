@@ -4,6 +4,11 @@ import 'package:todo_app/View/ModalBottomSheetView/common_bottom_sheet_view.dart
 
 import '../../ViewModel/edit_bottom_sheet_view_model.dart';
 
+// WidgetTest用Key
+var editBottomSheetKey = UniqueKey();
+var cancelButtonKey = UniqueKey();
+var editButtonKey = UniqueKey();
+
 class EditBottomSheetView extends ConsumerWidget {
   const EditBottomSheetView({Key? key}) : super(key: key);
 
@@ -13,6 +18,7 @@ class EditBottomSheetView extends ConsumerWidget {
         GlobalObjectKey<CommonBottomSheetViewState>(context);
     var notifier = ref.read(editBottomSheetViewModelProvider.notifier);
     return Column(
+      key: editBottomSheetKey,
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         Stack(
@@ -30,6 +36,7 @@ class EditBottomSheetView extends ConsumerWidget {
               children: [
                 SizedBox(
                   child: TextButton(
+                    key: cancelButtonKey,
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
@@ -39,6 +46,7 @@ class EditBottomSheetView extends ConsumerWidget {
                 ),
                 SizedBox(
                   child: TextButton(
+                    key: editButtonKey,
                     onPressed: () {
                       var todoDto =
                           commonButtonSheetViewKey.currentState?.getInputInfo();

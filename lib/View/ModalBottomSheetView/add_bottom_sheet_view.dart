@@ -4,6 +4,11 @@ import 'package:todo_app/View/ModalBottomSheetView/common_bottom_sheet_view.dart
 
 import '../../ViewModel/add_bottom_sheet_view_model.dart';
 
+// WidgetTest用Key
+var addBottomSheetKey = UniqueKey();
+var cancelButtonKey = UniqueKey();
+var addButtonKey = UniqueKey();
+
 class AddBottomSheetView extends ConsumerWidget {
   const AddBottomSheetView({Key? key}) : super(key: key);
 
@@ -13,6 +18,7 @@ class AddBottomSheetView extends ConsumerWidget {
         GlobalObjectKey<CommonBottomSheetViewState>(context);
     var notifier = ref.read(addBottomSheetViewModelProvider.notifier);
     return Column(
+      key: addBottomSheetKey,
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         Stack(
@@ -30,6 +36,7 @@ class AddBottomSheetView extends ConsumerWidget {
               children: [
                 SizedBox(
                   child: TextButton(
+                    key: cancelButtonKey,
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
@@ -39,6 +46,7 @@ class AddBottomSheetView extends ConsumerWidget {
                 ),
                 SizedBox(
                   child: TextButton(
+                    key: addButtonKey,
                     onPressed: () {
                       var todoDto =
                           commonButtonSheetViewKey.currentState?.getInputInfo();

@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 
 import '../../ViewModel/Dto/todo_dto.dart';
 
+// WidgetTestで使用するKey
+final emergencyKey = UniqueKey();
+final priorityKey = UniqueKey();
+final statusKey = UniqueKey();
+
 class CommonBottomSheetView extends StatefulWidget {
   const CommonBottomSheetView({Key? key}) : super(key: key);
 
@@ -65,6 +70,7 @@ class CommonBottomSheetViewState extends State<CommonBottomSheetView> {
                 SizedBox(
                   width: double.infinity,
                   child: CupertinoSegmentedControl(
+                    key: emergencyKey,
                     children: const {
                       1: Text("1"),
                       2: Text("2"),
@@ -103,6 +109,7 @@ class CommonBottomSheetViewState extends State<CommonBottomSheetView> {
                 SizedBox(
                   width: double.infinity,
                   child: CupertinoSegmentedControl(
+                    key: priorityKey,
                     children: const {
                       1: Text("1"),
                       2: Text("2"),
@@ -141,6 +148,7 @@ class CommonBottomSheetViewState extends State<CommonBottomSheetView> {
                 SizedBox(
                   width: double.infinity,
                   child: CupertinoSegmentedControl(
+                    key: statusKey,
                     children: const {
                       1: Text("未着手"),
                       2: Text("作業中"),
