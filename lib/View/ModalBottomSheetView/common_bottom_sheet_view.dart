@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../ViewModel/Dto/todo_dto.dart';
+
 class CommonBottomSheetView extends StatefulWidget {
   const CommonBottomSheetView({Key? key}) : super(key: key);
 
@@ -9,14 +11,14 @@ class CommonBottomSheetView extends StatefulWidget {
 }
 
 class CommonBottomSheetViewState extends State<CommonBottomSheetView> {
-  String? todoTitle = '初期値';
+  String todoTitle = '初期値';
   int emergencyPoint = 1;
   int priorityPoint = 1;
   int todoStatus = 1;
 
   /// Todoの入力情報を取得
-  (String?, int, int, int) getInputInfo() {
-    return (todoTitle, emergencyPoint, priorityPoint, todoStatus);
+  TodoDto getInputInfo() {
+    return TodoDto(todoTitle, emergencyPoint, priorityPoint, todoStatus);
   }
 
   @override

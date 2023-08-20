@@ -42,11 +42,13 @@ class EditBottomSheetView extends ConsumerWidget {
               width: screenSize.width * 0.3,
               child: TextButton(
                 onPressed: () {
-                  var inputInfo =
+                  var todoDto =
                       commonButtonSheetViewKey.currentState?.getInputInfo();
-                  if (inputInfo == null) return;
-                  notifier.updateTodo(context, inputInfo.$1.toString(),
-                      inputInfo.$2, inputInfo.$3, inputInfo.$4);
+                  if (todoDto == null) return;
+                  notifier.updateTodo(
+                    context,
+                    todoDto,
+                  );
                   Navigator.of(context).pop();
                 },
                 onLongPress: () {},
