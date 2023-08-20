@@ -17,6 +17,16 @@ main() {
     );
   }
 
+  /// TodoDtoを生成
+  TodoDto createTodoDto() {
+    const String todoTitle = '単体試験用タイトル';
+    const int emergencyPoint = 2;
+    const int priorityPoint = 2;
+    const int status = 1;
+
+    return TodoDto(todoTitle, emergencyPoint, priorityPoint, status);
+  }
+
   /// Todoをスライドさせる
   Future slideToRight(WidgetTester tester) async {
     // Todoをスライドして、描画完了まで待機：Offset(+右/-左, +上/-下)
@@ -26,12 +36,10 @@ main() {
 
   testWidgets('Todoが正しく生成できること', (tester) async {
     const String todoTitle = '単体試験用タイトル';
-    const int emergencyPoint = 2;
-    const int priorityPoint = 2;
 
     // Test用のTodoを生成
     await tester.pumpWidget(todoView(TodoView(
-      todoDto: TodoDto(todoTitle, emergencyPoint, priorityPoint),
+      todoDto: createTodoDto(),
     )));
 
     expect(find.text(todoTitle), findsOneWidget); // タイトルが正しく表示されていること
@@ -42,13 +50,9 @@ main() {
     var todoDeleteIcon = find.widgetWithIcon(SlidableAction, Icons.delete);
     var todoEditIcon = find.widgetWithIcon(SlidableAction, Icons.edit);
 
-    const String todoTitle = '単体試験用タイトル';
-    const int emergencyPoint = 2;
-    const int priorityPoint = 2;
-
     // Test用のTodoを生成
     await tester.pumpWidget(todoView(TodoView(
-      todoDto: TodoDto(todoTitle, emergencyPoint, priorityPoint),
+      todoDto: createTodoDto(),
     )));
 
     // Todoをスライドして、描画完了まで待機
