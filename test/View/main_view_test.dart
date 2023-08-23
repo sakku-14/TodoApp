@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:todo_app/View/ModalBottomSheetView/add_bottom_sheet_view.dart';
 import 'package:todo_app/View/main_view.dart';
 import 'package:todo_app/View/sort_combo_box_view.dart';
-import 'package:todo_app/View/todo_view.dart';
 
 main() {
   /// 各WidgetのKey
   final sortComboBoxInput = find.byKey(sortComboBoxKey);
-  final todoInput = find.byKey(todoKey);
+  final addBottomSheetInput = find.byKey(addBottomSheetKey);
 
   ProviderScope mainView(Widget widget) {
     return ProviderScope(
@@ -64,21 +64,41 @@ main() {
     });
   });
 
-  group('Todo', () {
-    testWidgets('単体のTodoが表示されていること', (tester) async {
+  group('Todoリストタブ', () {
+    testWidgets('Todoリスト表示タブが表示されていること', (tester) async {
+      // given
+      var todoListTab = find.byKey(todoTabControllerViewKey);
+
+      // when
       await tester.pumpWidget(mainView(const MainView()));
 
-      expect(todoInput, findsOneWidget); // TodoViewが1つ存在すること
+      // then
+      expect(todoListTab, findsOneWidget);
+    });
+
+    testWidgets('Todoリストのタブを切り替えると、Todoリストの内容が切り替わること', (tester) async {
+      // given
+      var todoListTab = find.widgetWithText(Tab, '作業中');
+      var notBeginTodoElementTitle = find.text('notBegin');
+      var progressTodoElementTitle = find.text('progress');
+
+      // when
+      await tester.pumpWidget(mainView(const MainView()));
+      await tester.tap(todoListTab);
+      await tester.pumpAndSettle();
+
+      // then
+      expect(notBeginTodoElementTitle, findsNothing);
+      expect(progressTodoElementTitle, findsAtLeastNWidgets(1));
     });
   });
 
   group('Todo追加ボタン', () {
-    testWidgets('Todo追加ボタンを押下すると、SnackBarが表示されること', (tester) async {
+    testWidgets('Todo追加ボタンを押下すると、登録用ボトムシートが表示されること', (tester) async {
       // given
       await tester.pumpWidget(mainView(const MainView()));
       var floatingActionButton =
           find.widgetWithIcon(FloatingActionButton, Icons.add);
-      var snackBar = find.widgetWithText(SnackBar, 'Todo追加ボタンが押下されました');
 
       // デフォルト表示として、Todo追加ボタンが存在していること
       expect(floatingActionButton, findsOneWidget);
@@ -88,7 +108,8 @@ main() {
       await tester.pumpAndSettle();
 
       // then
-      expect(snackBar, findsOneWidget); // SnackBarが表示されること
+      expect(addBottomSheetInput, findsOneWidget); // ボトムシートが表示されていること
+      expect(find.text('Todoの登録'), findsOneWidget); // タイトルが「登録」であること
     });
   });
 }
