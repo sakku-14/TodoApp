@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_app/View/sort_combo_box_view.dart';
 import 'package:todo_app/ViewModel/Dto/todo_dto.dart';
-import 'package:todo_app/ViewModel/main_view_model.dart';
+import 'package:todo_app/ViewModel/MainViewModel/main_view_model.dart';
 
+import '../ViewModel/SortComboBoxViewModel/sort_combo_box_view_model.dart';
 import 'ModalBottomSheetView/add_bottom_sheet_view.dart';
 import 'TabView/todo_tab_controller_view.dart';
 
@@ -45,8 +46,11 @@ class MainView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var state = ref.watch(mainViewModelProvider);
-    var notifier = ref.read(mainViewModelProvider.notifier);
+    var mainState = ref.watch(mainViewModelProvider);
+    var mainNotifier = ref.read(mainViewModelProvider.notifier);
+    var sortComboBoxState = ref.watch(sortComboBoxViewModelProvider);
+    var sortComboBoxNotifier = ref.read(sortComboBoxViewModelProvider.notifier);
+
     final isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
 
@@ -59,9 +63,9 @@ class MainView extends ConsumerWidget {
           Flexible(
             flex: 1,
             child: SortComboBoxView(
-              dropDownValues: MainViewModel.sortComboBoxValues,
-              isSelectedValue: state.sortComboBoxValue,
-              updateSelectedValue: notifier.updateSelectedValue,
+              dropDownValues: SortComboBoxViewModel.sortComboBoxValues,
+              isSelectedValue: sortComboBoxState.sortComboBoxValue,
+              updateSelectedValue: sortComboBoxNotifier.updateSelectedValue,
             ),
           ),
           Flexible(
