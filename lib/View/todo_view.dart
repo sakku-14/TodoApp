@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:todo_app/View/ModalBottomSheetView/edit_bottom_sheet_view.dart';
 import 'package:todo_app/ViewModel/Dto/todo_dto.dart';
 
 /// WidgetTestで使用するKey
@@ -34,7 +35,13 @@ class TodoView extends StatelessWidget {
           ),
           SlidableAction(
             onPressed: (context) {
-              // TODO:23.8.16:A.Uehara:更新処理呼び出し
+              showModalBottomSheet(
+                isScrollControlled: true,
+                context: context,
+                builder: (context) {
+                  return const EditBottomSheetView();
+                },
+              );
             },
             backgroundColor: const Color(0xFF21B7CA),
             foregroundColor: Colors.white,
