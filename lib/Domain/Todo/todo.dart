@@ -4,8 +4,6 @@ part 'todo.freezed.dart';
 
 @freezed
 abstract class Todo with _$Todo {
-  const Todo._();
-
   const factory Todo({
     required DateTime createDateTime,
     required String title,
