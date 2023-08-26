@@ -1,9 +1,12 @@
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:todo_app/Infrastructure/event_bus.dart';
 
-import '../Domain/Event/add_todo_event.dart';
-import '../Domain/Todo/todo.dart';
-import '../Infrastructure/Repository/todo_list_repository.dart';
-import '../ViewModel/Dto/todo_dto.dart';
+import '../../Domain/Event/add_todo_event.dart';
+import '../../Domain/Todo/todo.dart';
+import '../../Infrastructure/Repository/todo_list_repository.dart';
+import '../../ViewModel/Dto/todo_dto.dart';
+
+part 'add_todo_use_case.g.dart';
 
 class AddTodoUseCase {
   late final TodoListRepository todoListRepository;
@@ -26,4 +29,9 @@ class AddTodoUseCase {
     // 更新処理が完了した時のみ通知
     eventBus.fire(AddTodoEvent());
   }
+}
+
+@riverpod
+AddTodoUseCase addTodoUseCase(AddTodoUseCaseRef ref) {
+  return AddTodoUseCase(ref.watch(todoListRepositoryProvider.notifier));
 }

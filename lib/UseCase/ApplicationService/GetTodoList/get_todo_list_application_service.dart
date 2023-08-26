@@ -1,5 +1,9 @@
-import '../../Infrastructure/Repository/todo_list_repository.dart';
-import '../../ViewModel/Dto/todo_dto.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+import '../../../Infrastructure/Repository/todo_list_repository.dart';
+import '../../../ViewModel/Dto/todo_dto.dart';
+
+part 'get_todo_list_application_service.g.dart';
 
 class GetTodoListApplicationService {
   late final TodoListRepository todoListRepository;
@@ -23,4 +27,11 @@ class GetTodoListApplicationService {
     ];
     return todoDtoList;
   }
+}
+
+@riverpod
+GetTodoListApplicationService getTodoListApplicationService(
+    GetTodoListApplicationServiceRef ref) {
+  return GetTodoListApplicationService(
+      ref.watch(todoListRepositoryProvider.notifier));
 }

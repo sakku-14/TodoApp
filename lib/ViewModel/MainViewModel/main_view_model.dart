@@ -1,9 +1,8 @@
 import 'dart:math' as math;
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:todo_app/Infrastructure/Repository/todo_list_repository.dart';
 import 'package:todo_app/Infrastructure/event_bus.dart';
-import 'package:todo_app/UseCase/ApplicationService/get_todo_list_application_service.dart';
+import 'package:todo_app/UseCase/ApplicationService/GetTodoList/get_todo_list_application_service.dart';
 
 import '../../Domain/Event/add_todo_event.dart';
 import '../Dto/todo_dto.dart';
@@ -13,11 +12,12 @@ part 'main_view_model.g.dart';
 
 @riverpod
 class MainViewModel extends _$MainViewModel {
-  final GetTodoListApplicationService _getTodoListApplicationService =
-      GetTodoListApplicationService(TodoListRepository());
+  late GetTodoListApplicationService _getTodoListApplicationService;
 
   @override
   MainViewModelState build() {
+    _getTodoListApplicationService =
+        ref.watch(getTodoListApplicationServiceProvider);
     // TODO:23.8.19:A.Uehara:Buildメソッドが複数回呼ばれる可能性があり、多重購読になるから違う購読方法を知りたい
     eventBus.on<AddTodoEvent>().listen((event) => addTodo(event));
 

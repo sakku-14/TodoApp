@@ -1,7 +1,17 @@
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
 import '../../Domain/Todo/todo.dart';
 
-class TodoListRepository {
+part 'todo_list_repository.g.dart';
+
+@riverpod
+class TodoListRepository extends _$TodoListRepository {
   final List<Todo> _todoList = <Todo>[];
+
+  @override
+  TodoListRepository build() {
+    return TodoListRepository();
+  }
 
   /// Todoを新規追加
   bool save(Todo todo) {
