@@ -17,56 +17,58 @@ class EditBottomSheetView extends ConsumerWidget {
     final commonButtonSheetViewKey =
         GlobalObjectKey<CommonBottomSheetViewState>(context);
     var notifier = ref.read(editBottomSheetViewModelProvider.notifier);
-    return Column(
-      key: editBottomSheetKey,
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        Stack(
-          children: <Widget>[
-            Container(
-              alignment: Alignment.center,
-              margin: const EdgeInsets.only(top: 10),
-              child: const Text(
-                'Todoの更新',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+    return SingleChildScrollView(
+      child: Column(
+        key: editBottomSheetKey,
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Stack(
+            children: <Widget>[
+              Container(
+                alignment: Alignment.center,
+                margin: const EdgeInsets.only(top: 10),
+                child: const Text(
+                  'Todoの更新',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                ),
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(
-                  child: TextButton(
-                    key: cancelButtonKey,
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    onLongPress: () {},
-                    child: const Text('キャンセル'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    child: TextButton(
+                      key: cancelButtonKey,
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      onLongPress: () {},
+                      child: const Text('キャンセル'),
+                    ),
                   ),
-                ),
-                SizedBox(
-                  child: TextButton(
-                    key: editButtonKey,
-                    onPressed: () {
-                      var todoDto =
-                          commonButtonSheetViewKey.currentState?.getInputInfo();
-                      if (todoDto == null) return;
-                      notifier.updateTodo(
-                        context,
-                        todoDto,
-                      );
-                      Navigator.of(context).pop();
-                    },
-                    onLongPress: () {},
-                    child: const Text('更新'),
+                  SizedBox(
+                    child: TextButton(
+                      key: editButtonKey,
+                      onPressed: () {
+                        var todoDto = commonButtonSheetViewKey.currentState
+                            ?.getInputInfo();
+                        if (todoDto == null) return;
+                        notifier.updateTodo(
+                          context,
+                          todoDto,
+                        );
+                        Navigator.of(context).pop();
+                      },
+                      onLongPress: () {},
+                      child: const Text('更新'),
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ],
-        ),
-        CommonBottomSheetView(key: commonButtonSheetViewKey),
-      ],
+                ],
+              ),
+            ],
+          ),
+          CommonBottomSheetView(key: commonButtonSheetViewKey),
+        ],
+      ),
     );
   }
 }
