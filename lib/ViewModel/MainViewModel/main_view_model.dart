@@ -1,7 +1,9 @@
 import 'dart:math' as math;
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:todo_app/Infrastructure/Repository/todo_list_repository.dart';
 import 'package:todo_app/Infrastructure/event_bus.dart';
+import 'package:todo_app/UseCase/ApplicationService/get_todo_list_application_service.dart';
 
 import '../../Domain/Event/add_todo_event.dart';
 import '../Dto/todo_dto.dart';
@@ -11,6 +13,9 @@ part 'main_view_model.g.dart';
 
 @riverpod
 class MainViewModel extends _$MainViewModel {
+  final GetTodoListApplicationService _getTodoListApplicationService =
+      GetTodoListApplicationService(TodoListRepository());
+
   @override
   MainViewModelState build() {
     // TODO:23.8.19:A.Uehara:Buildメソッドが複数回呼ばれる可能性があり、多重購読になるから違う購読方法を知りたい
@@ -56,7 +61,33 @@ class MainViewModel extends _$MainViewModel {
   /// Todoを新規追加
   void addTodo(AddTodoEvent event) {
     // 新規追加されたTodoを取得
+    var todoList = _getTodoListApplicationService.getTodoList();
+
+    List<TodoDto> notBeginTodoDtoList = [];
+    List<TodoDto> progressTodoDtoList = [];
+    List<TodoDto> stayTodoDtoList = [];
+    List<TodoDto> completeTodoDtoList = [];
+
     // ステータスをチェック
-    // ステータスから対応したタブのStateに格納
+    for (int i = 0; i < todoList.length; i++) {
+      switch (todoList[i].status) {
+        case 1:
+          notBeginTodoDtoList.add(todoList[i]);
+        case 2:
+          progressTodoDtoList.add(todoList[i]);
+        case 3:
+          stayTodoDtoList.add(todoList[i]);
+        case 4:
+          completeTodoDtoList.add(todoList[i]);
+      }
+    }
+
+    // Viewを更新
+    state = state.copyWith(
+      notBeginTodoDtoList: notBeginTodoDtoList,
+      progressTodoDtoList: progressTodoDtoList,
+      stayTodoDtoList: stayTodoDtoList,
+      completeTodoDtoList: completeTodoDtoList,
+    );
   }
 }

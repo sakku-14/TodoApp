@@ -15,10 +15,30 @@ class TodoListRepository {
         status: todo.status,
       );
 
-      _todoList.add(newTodo);
+      _todoList.add(clone(newTodo));
       return true;
     } catch (e) {
       return false;
     }
+  }
+
+  /// TodoListを取得
+  List<Todo> getTodoList() {
+    List<Todo> todoList = [];
+    for (int i = 0; i < _todoList.length; i++) {
+      todoList.add(clone(_todoList[i]));
+    }
+    return todoList;
+  }
+
+  /// Todoのクローン生成
+  Todo clone(Todo todo) {
+    return Todo(
+      createDateTime: todo.createDateTime,
+      title: todo.title,
+      emergencyPoint: todo.emergencyPoint,
+      priorityPoint: todo.priorityPoint,
+      status: todo.status,
+    );
   }
 }
