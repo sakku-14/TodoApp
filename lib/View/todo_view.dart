@@ -16,6 +16,8 @@ class TodoView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     return Slidable(
       key: const ValueKey(0),
       startActionPane: ActionPane(
@@ -59,34 +61,44 @@ class TodoView extends StatelessWidget {
           key: todoKey,
           title: Text(todoDto.title),
           trailing: FractionallySizedBox(
-            widthFactor: 0.15,
-            heightFactor: 0.7,
-            child: FittedBox(
-              fit: BoxFit.fitHeight,
-              child: Wrap(
-                spacing: 5,
+            widthFactor: 0.2,
+            child: Center(
+              child: Row(
+                mainAxisAlignment: isLandscape
+                    ? MainAxisAlignment.spaceEvenly
+                    : MainAxisAlignment.spaceBetween,
                 children: [
-                  // 緊急度
                   Container(
-                    padding: const EdgeInsets.all(3),
-                    alignment: Alignment.center,
+                    width: 30,
                     decoration: const BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Colors.redAccent,
+                      color: Color(0xfff7a3a3),
                     ),
-                    child: Text(
-                      todoDto.emergencyPoint.toString(),
+                    child: Center(
+                      child: Text(
+                        todoDto.emergencyPoint.toString(),
+                        style: const TextStyle(
+                          fontSize: 18,
+                          color: Colors.black54,
+                        ),
+                      ),
                     ),
                   ),
-                  // 重要度
                   Container(
-                    padding: const EdgeInsets.all(3),
-                    alignment: Alignment.center,
+                    width: 30,
                     decoration: const BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Colors.orangeAccent,
+                      color: Color(0xfff7d092),
                     ),
-                    child: Text(todoDto.priorityPoint.toString()),
+                    child: Center(
+                      child: Text(
+                        todoDto.priorityPoint.toString(),
+                        style: const TextStyle(
+                          fontSize: 18,
+                          color: Colors.black54,
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),
