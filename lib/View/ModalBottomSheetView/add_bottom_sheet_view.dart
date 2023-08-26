@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_app/View/ModalBottomSheetView/common_bottom_sheet_view.dart';
 
-import '../../ViewModel/add_bottom_sheet_view_model.dart';
+import '../../ViewModel/AddBottomSheetViewModel/add_bottom_sheet_view_model.dart';
 
 // WidgetTest用Key
 var addBottomSheetKey = UniqueKey();
@@ -53,7 +53,6 @@ class AddBottomSheetView extends ConsumerWidget {
                             ?.getInputInfo();
                         if (todoDto == null) return;
                         notifier.addTodo(
-                          context,
                           todoDto,
                         );
                         Navigator.of(context).pop();
