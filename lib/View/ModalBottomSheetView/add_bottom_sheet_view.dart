@@ -17,56 +17,58 @@ class AddBottomSheetView extends ConsumerWidget {
     final commonButtonSheetViewKey =
         GlobalObjectKey<CommonBottomSheetViewState>(context);
     var notifier = ref.read(addBottomSheetViewModelProvider.notifier);
-    return Column(
-      key: addBottomSheetKey,
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        Stack(
-          children: <Widget>[
-            Container(
-              alignment: Alignment.center,
-              margin: const EdgeInsets.only(top: 10),
-              child: const Text(
-                'Todoの登録',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+    return SingleChildScrollView(
+      child: Column(
+        key: addBottomSheetKey,
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Stack(
+            children: <Widget>[
+              Container(
+                alignment: Alignment.center,
+                margin: const EdgeInsets.only(top: 10),
+                child: const Text(
+                  'Todoの登録',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                ),
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(
-                  child: TextButton(
-                    key: cancelButtonKey,
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    onLongPress: () {},
-                    child: const Text('キャンセル'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    child: TextButton(
+                      key: cancelButtonKey,
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      onLongPress: () {},
+                      child: const Text('キャンセル'),
+                    ),
                   ),
-                ),
-                SizedBox(
-                  child: TextButton(
-                    key: addButtonKey,
-                    onPressed: () {
-                      var todoDto =
-                          commonButtonSheetViewKey.currentState?.getInputInfo();
-                      if (todoDto == null) return;
-                      notifier.addTodo(
-                        context,
-                        todoDto,
-                      );
-                      Navigator.of(context).pop();
-                    },
-                    onLongPress: () {},
-                    child: const Text('登録'),
+                  SizedBox(
+                    child: TextButton(
+                      key: addButtonKey,
+                      onPressed: () {
+                        var todoDto = commonButtonSheetViewKey.currentState
+                            ?.getInputInfo();
+                        if (todoDto == null) return;
+                        notifier.addTodo(
+                          context,
+                          todoDto,
+                        );
+                        Navigator.of(context).pop();
+                      },
+                      onLongPress: () {},
+                      child: const Text('登録'),
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ],
-        ),
-        CommonBottomSheetView(key: commonButtonSheetViewKey),
-      ],
+                ],
+              ),
+            ],
+          ),
+          CommonBottomSheetView(key: commonButtonSheetViewKey),
+        ],
+      ),
     );
   }
 }
