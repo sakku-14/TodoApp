@@ -54,6 +54,7 @@ class AddBottomSheetView extends ConsumerWidget {
                         if (todoDto == null) return;
                         notifier.addTodo(
                           todoDto,
+                          context,
                         );
                         Navigator.of(context).pop();
                       },

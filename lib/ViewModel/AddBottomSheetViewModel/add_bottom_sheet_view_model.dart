@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:todo_app/UseCase/AddTodoUseCase/add_todo_use_case.dart';
 import 'package:todo_app/ViewModel/Dto/todo_dto.dart';
@@ -15,8 +16,12 @@ class AddBottomSheetViewModel extends _$AddBottomSheetViewModel {
   }
 
   /// Todoを登録する処理を呼び出す
-  void addTodo(TodoDto todoDto) {
+  void addTodo(TodoDto todoDto, BuildContext context) {
     // Todo登録処理呼び出し
-    _addTodoUseCase.execute(todoDto);
+    if (!_addTodoUseCase.execute(todoDto)) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Filed Add Todo'),
+      ));
+    }
   }
 }

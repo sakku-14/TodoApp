@@ -16,6 +16,7 @@ class CommonBottomSheetView extends StatefulWidget {
 }
 
 class CommonBottomSheetViewState extends State<CommonBottomSheetView> {
+  // TODO:23.8.27:A.Uehara:現状ボトムシートが未入力の時は以下の初期値でTodoが作成されるが、将来的には未入力の時はボトムシートで制限をかけたい
   String todoTitle = '初期値';
   int emergencyPoint = 1;
   int priorityPoint = 1;

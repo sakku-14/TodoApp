@@ -34,11 +34,15 @@ class TodoListRepository extends _$TodoListRepository {
 
   /// TodoListを取得
   List<Todo> getTodoList() {
-    List<Todo> todoList = [];
-    for (int i = 0; i < _todoList.length; i++) {
-      todoList.add(clone(_todoList[i]));
+    try {
+      List<Todo> todoList = [];
+      for (int i = 0; i < _todoList.length; i++) {
+        todoList.add(clone(_todoList[i]));
+      }
+      return todoList;
+    } catch (e) {
+      return List<Todo>.empty();
     }
-    return todoList;
   }
 
   /// Todoのクローン生成

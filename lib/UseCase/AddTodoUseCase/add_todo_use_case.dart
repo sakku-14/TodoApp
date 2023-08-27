@@ -14,7 +14,7 @@ class AddTodoUseCase {
   AddTodoUseCase(this.todoListRepository);
 
   /// Todoを新規登録
-  void execute(TodoDto todoDto) {
+  bool execute(TodoDto todoDto) {
     var todo = Todo(
       createDateTime: DateTime.now(),
       title: todoDto.title,
@@ -24,10 +24,12 @@ class AddTodoUseCase {
     );
 
     // Repositoryへ新規登録
-    if (!todoListRepository.save(todo)) return;
+    if (!todoListRepository.save(todo)) return false;
 
     // 更新処理が完了した時のみ通知
     eventBus.fire(AddTodoEvent());
+
+    return true;
   }
 }
 

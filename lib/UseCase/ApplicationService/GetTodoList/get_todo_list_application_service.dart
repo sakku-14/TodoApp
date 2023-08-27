@@ -13,6 +13,10 @@ class GetTodoListApplicationService {
   /// Todoを新規登録
   List<TodoDto> getTodoList() {
     var todoList = todoListRepository.getTodoList();
+    // TodoListが空の場合は空のTodoDtoListを返す
+    if (todoList.isEmpty) {
+      return List<TodoDto>.empty();
+    }
 
     // TodoListからTodoDtoListに変換
     var todoDtoList = [
