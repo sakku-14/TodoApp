@@ -226,6 +226,14 @@ class MockMainViewModel extends _i1.Mock implements _i7.MainViewModel {
         ),
       ) as _i5.MainViewModelState);
   @override
+  void dispose() => super.noSuchMethod(
+        Invocation.method(
+          #dispose,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
   void addTodo(_i8.AddTodoEvent? event) => super.noSuchMethod(
         Invocation.method(
           #addTodo,
