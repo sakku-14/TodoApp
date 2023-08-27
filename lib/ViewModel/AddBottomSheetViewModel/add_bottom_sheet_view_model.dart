@@ -18,7 +18,8 @@ class AddBottomSheetViewModel extends _$AddBottomSheetViewModel {
   /// Todoを登録する処理を呼び出す
   void addTodo(TodoDto todoDto, BuildContext context) {
     // Todo登録処理呼び出し
-    if (!_addTodoUseCase.execute(todoDto)) {
+    var result = _addTodoUseCase.execute(todoDto);
+    if (!result) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('Filed Add Todo'),
       ));

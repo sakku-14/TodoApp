@@ -7,7 +7,7 @@ part of 'todo_list_repository.dart';
 // **************************************************************************
 
 String _$todoListRepositoryHash() =>
-    r'72f9e680b8febdee7cbcd76b4698fe3ee2c0bacf';
+    r'a3c06d8e954fc86b5a70a461545d8cd4af77a2ee';
 
 /// See also [TodoListRepository].
 @ProviderFor(TodoListRepository)
