@@ -32,7 +32,7 @@ void main() {
     useCase.execute(todoDto);
 
     verify(todoListRepository.save(any)).called(1);
-    //verify(eventBus.fire(AddTodoEvent())).called(1);
+    // verify(mainViewModel.addTodo(AddTodoEvent())).called(1);
   });
 
   testWidgets('Todoの登録に失敗した場合はイベント発行されないこと', (tester) async {
