@@ -84,7 +84,7 @@ class TodoTabControllerView extends StatelessWidget {
       child: Text(
         targetList.length.toString(),
         style: const TextStyle(
-          fontSize: 15,
+          fontSize: 13,
         ),
       ),
     );
