@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:todo_app/View/ModalBottomSheetView/edit_bottom_sheet_view.dart';
 import 'package:todo_app/View/todo_view.dart';
 import 'package:todo_app/ViewModel/Dto/todo_dto.dart';
@@ -47,6 +48,20 @@ main() {
     expect(find.text(todoTitle), findsOneWidget); // タイトルが正しく表示されていること
     expect(find.text('2'), findsNWidgets(2)); // 緊急度×優先度を表す「2」が2つ存在すること
   });
+
+  // >>>>>>>>>>>>>
+  testGoldens('try_golden_test', (WidgetTester tester) async {
+    // Test用のTodoを生成
+    await tester.pumpWidgetBuilder(todoView(TodoView(
+      todoDto: createTodoDto(),
+    )));
+
+    // Todoをスライドして、描画完了まで待機
+    await slideToRight(tester);
+
+    await screenMatchesGolden(tester, 'try_golden');
+  });
+  // >>>>>>>>>>>>>
 
   testWidgets('Todoを右にスライドすると削除/編集アイコンが表示されること', (tester) async {
     var todoDeleteIcon = find.widgetWithIcon(SlidableAction, Icons.delete);
