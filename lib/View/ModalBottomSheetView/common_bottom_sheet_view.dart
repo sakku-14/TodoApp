@@ -15,15 +15,11 @@ class CommonBottomSheetView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    String? todoTitle;
-    int? emergencyPoint;
-    int? priorityPoint;
-    int? todoStatus;
+    String todoTitle = "";
+    int emergencyPoint = 1;
+    int priorityPoint = 1;
+    int todoStatus = 1;
 
-    /// Todoの入力情報を取得
-    // TodoDto getInputInfo() {
-    //   return TodoDto(todoTitle, emergencyPoint, priorityPoint, todoStatus);
-    // }
     var notifier = ref.read(commonBottomSheetViewModelProvider.notifier);
 
     return Column(
@@ -40,17 +36,12 @@ class CommonBottomSheetView extends ConsumerWidget {
             child: TextField(
               onChanged: (text) {
                 todoTitle = text;
-                if (todoTitle != null &&
-                    emergencyPoint != null &&
-                    priorityPoint != null &&
-                    todoStatus != null) {
-                  notifier.holdInputTodoInfo(TodoDto(
-                    todoTitle!,
-                    emergencyPoint!,
-                    priorityPoint!,
-                    todoStatus!,
-                  ));
-                }
+                notifier.holdInputTodoInfo(TodoDto(
+                  todoTitle,
+                  emergencyPoint,
+                  priorityPoint,
+                  todoStatus,
+                ));
               },
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
@@ -87,17 +78,12 @@ class CommonBottomSheetView extends ConsumerWidget {
                     },
                     onValueChanged: (value) {
                       emergencyPoint = value;
-                      if (todoTitle != null &&
-                          emergencyPoint != null &&
-                          priorityPoint != null &&
-                          todoStatus != null) {
-                        notifier.holdInputTodoInfo(TodoDto(
-                          todoTitle!,
-                          emergencyPoint!,
-                          priorityPoint!,
-                          todoStatus!,
-                        ));
-                      }
+                      notifier.holdInputTodoInfo(TodoDto(
+                        todoTitle,
+                        emergencyPoint,
+                        priorityPoint,
+                        todoStatus,
+                      ));
                     },
                     selectedColor: CupertinoColors.secondaryLabel,
                     pressedColor: CupertinoColors.secondaryLabel,
@@ -137,17 +123,12 @@ class CommonBottomSheetView extends ConsumerWidget {
                     },
                     onValueChanged: (value) {
                       priorityPoint = value;
-                      if (todoTitle != null &&
-                          emergencyPoint != null &&
-                          priorityPoint != null &&
-                          todoStatus != null) {
-                        notifier.holdInputTodoInfo(TodoDto(
-                          todoTitle!,
-                          emergencyPoint!,
-                          priorityPoint!,
-                          todoStatus!,
-                        ));
-                      }
+                      notifier.holdInputTodoInfo(TodoDto(
+                        todoTitle,
+                        emergencyPoint,
+                        priorityPoint,
+                        todoStatus,
+                      ));
                     },
                     selectedColor: CupertinoColors.secondaryLabel,
                     pressedColor: CupertinoColors.secondaryLabel,
@@ -188,17 +169,12 @@ class CommonBottomSheetView extends ConsumerWidget {
                     },
                     onValueChanged: (value) {
                       todoStatus = value;
-                      if (todoTitle != null &&
-                          emergencyPoint != null &&
-                          priorityPoint != null &&
-                          todoStatus != null) {
-                        notifier.holdInputTodoInfo(TodoDto(
-                          todoTitle!,
-                          emergencyPoint!,
-                          priorityPoint!,
-                          todoStatus!,
-                        ));
-                      }
+                      notifier.holdInputTodoInfo(TodoDto(
+                        todoTitle,
+                        emergencyPoint,
+                        priorityPoint,
+                        todoStatus,
+                      ));
                     },
                     selectedColor: CupertinoColors.secondaryLabel,
                     pressedColor: CupertinoColors.secondaryLabel,

@@ -21,11 +21,12 @@ class AddBottomSheetViewModel extends _$AddBottomSheetViewModel {
 
   /// 登録可否を判定し、登録可能グラグを更新する
   void judgeAddAble(TodoDto todoDto) {
-    // イベント引数のタイトル、各ポイントがNullかどうか判定
     if (todoDto.title.isNotEmpty) {
-      // nullではない場合はフラグをTrueに変える
+      // nullではない場合のみフラグをTrueに変える
       state = state.copyWith(isAdd: true);
+      return;
     }
+    state = state.copyWith(isAdd: false);
   }
 
   /// Todoを登録する処理を呼び出す

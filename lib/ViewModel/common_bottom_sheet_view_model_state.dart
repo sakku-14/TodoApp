@@ -6,9 +6,9 @@ part 'common_bottom_sheet_view_model_state.freezed.dart';
 abstract class CommonBottomSheetViewModelState
     with _$CommonBottomSheetViewModelState {
   const factory CommonBottomSheetViewModelState({
-    String? title,
-    int? emergencyPoint,
-    int? priorityPoint,
-    int? status,
+    String title,
+    int emergencyPoint,
+    int priorityPoint,
+    int status,
   }) = _CommonBottomSheetViewModelState;
 }
