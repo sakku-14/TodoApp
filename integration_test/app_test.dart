@@ -45,11 +45,20 @@ void main() {
     expect(lastTodo.hitTestable(), findsNothing);
     expect(scrollArea, findsOneWidget);
 
-    await widgetTester.scrollUntilVisible(
-      lastTodo,
-      500.0,
-      scrollable: scrollArea,
-    );
+    // 方法１
+    // 指定のウィジェットを指定のOffsetとスピードでスクロールしてくれる
+    // await widgetTester.fling(scrollArea, const Offset(0, -500.0), 10000);
+
+    // 方法２
+    // 最後のTodoが見えるまでスクロールする
+    await widgetTester.ensureVisible(lastTodo);
+
+    // 方法３
+    // await widgetTester.scrollUntilVisible(
+    //   lastTodo,
+    //   500.0,
+    //   scrollable: scrollArea,
+    // );
     await widgetTester.pumpAndSettle();
 
     expect(firstTodo.hitTestable(), findsNothing);
