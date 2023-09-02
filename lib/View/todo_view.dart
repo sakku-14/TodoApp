@@ -23,7 +23,6 @@ class TodoView extends StatelessWidget {
       startActionPane: ActionPane(
         motion: const DrawerMotion(),
         children: [
-          // A SlidableAction can have an icon and/or a label.
           SlidableAction(
             onPressed: (context) {
               // TODO:23.8.16:A.Uehara:削除処理呼び出し

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:todo_app/View/todo_view.dart';
 import 'package:todo_app/ViewModel/Dto/todo_dto.dart';
 
@@ -21,8 +22,11 @@ class TodoTabContentsView extends StatelessWidget {
         ? [Container()]
         : todoDtoList.map((e) => TodoView(todoDto: e)).toList();
     var todoViews = SingleChildScrollView(
-      child: Column(
-        children: todoContents,
+      child: SlidableAutoCloseBehavior(
+        closeWhenOpened: true,
+        child: Column(
+          children: todoContents,
+        ),
       ),
     );
     return todoViews;
