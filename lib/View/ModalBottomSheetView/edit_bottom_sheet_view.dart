@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_app/View/ModalBottomSheetView/common_bottom_sheet_view.dart';
 
+import '../../ViewModel/CommonBottomSheetViewModel/common_bottom_sheet_view_model.dart';
+import '../../ViewModel/Dto/todo_dto.dart';
 import '../../ViewModel/EditBottomSheetViewModel/edit_bottom_sheet_view_model.dart';
 
 // WidgetTest用Key
@@ -14,9 +16,9 @@ class EditBottomSheetView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final commonButtonSheetViewKey =
-        GlobalObjectKey<CommonBottomSheetViewState>(context);
-    var notifier = ref.read(editBottomSheetViewModelProvider.notifier);
+    var editBottomSheetNotifier =
+        ref.read(editBottomSheetViewModelProvider.notifier);
+    var commonBottomSheetState = ref.read(commonBottomSheetViewModelProvider);
     return SingleChildScrollView(
       child: Column(
         key: editBottomSheetKey,
@@ -48,16 +50,19 @@ class EditBottomSheetView extends ConsumerWidget {
                   SizedBox(
                     child: TextButton(
                       key: editButtonKey,
-                      onPressed: () {
-                        var todoDto = commonButtonSheetViewKey.currentState
-                            ?.getInputInfo();
-                        if (todoDto == null) return;
-                        notifier.updateTodo(
-                          todoDto,
-                        );
-                        Navigator.of(context).pop();
-                      },
-                      onLongPress: () {},
+                      onPressed: commonBottomSheetState.title == null
+                          ? null
+                          : () {
+                              editBottomSheetNotifier.updateTodo(
+                                TodoDto(
+                                  commonBottomSheetState.title!,
+                                  commonBottomSheetState.emergencyPoint!,
+                                  commonBottomSheetState.priorityPoint!,
+                                  commonBottomSheetState.status!,
+                                ),
+                              );
+                              Navigator.of(context).pop();
+                            },
                       child: const Text('更新'),
                     ),
                   ),
@@ -65,7 +70,7 @@ class EditBottomSheetView extends ConsumerWidget {
               ),
             ],
           ),
-          CommonBottomSheetView(key: commonButtonSheetViewKey),
+          const CommonBottomSheetView(),
         ],
       ),
     );

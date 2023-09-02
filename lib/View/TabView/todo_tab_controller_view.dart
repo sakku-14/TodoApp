@@ -25,14 +25,42 @@ class TodoTabControllerView extends StatelessWidget {
       length: 4, // タブの数
       child: Column(
         children: [
-          const Flexible(
-            flex: 1,
+          Flexible(
+            flex: 2,
             child: TabBar(
               tabs: <Widget>[
-                Tab(child: Text('未着手')),
-                Tab(child: Text('作業中')),
-                Tab(child: Text('保留')),
-                Tab(child: Text('完了')),
+                Tab(
+                  child: Column(
+                    children: [
+                      const Text('未着手'),
+                      todoCount(notBeginTodoDtoList),
+                    ],
+                  ),
+                ),
+                Tab(
+                  child: Column(
+                    children: [
+                      const Text('作業中'),
+                      todoCount(progressTodoDtoList),
+                    ],
+                  ),
+                ),
+                Tab(
+                  child: Column(
+                    children: [
+                      const Text('保留'),
+                      todoCount(stayTodoDtoList),
+                    ],
+                  ),
+                ),
+                Tab(
+                  child: Column(
+                    children: [
+                      const Text('完了'),
+                      todoCount(completeTodoDtoList),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
@@ -47,6 +75,17 @@ class TodoTabControllerView extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Center todoCount(List<TodoDto> targetList) {
+    return Center(
+      child: Text(
+        targetList.length.toString(),
+        style: const TextStyle(
+          fontSize: 13,
+        ),
       ),
     );
   }
