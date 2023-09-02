@@ -7,6 +7,7 @@ import 'package:todo_app/View/ModalBottomSheetView/common_bottom_sheet_view.dart
 main() {
   /// 各WidgetのKey
   final addBottomSheetViewInput = find.byKey(addBottomSheetKey);
+  final titleInput = find.byKey(titleKey);
   final emergencyInput = find.byKey(emergencyKey);
   final priorityInput = find.byKey(priorityKey);
   final statusInput = find.byKey(statusKey);
@@ -20,30 +21,6 @@ main() {
       ),
     );
   }
-
-  testWidgets('キャンセルボタンを押下するとボトムシートが閉じること', (tester) async {
-    // AddBottomSheetViewを生成
-    await tester.pumpWidget(addBottomSheetView(const AddBottomSheetView()));
-
-    // キャンセルテキストボタンをタップ
-    await tester.tap(cancelButtonInput);
-    await tester.pumpAndSettle();
-
-    // ボトムシートが存在しないこと
-    expect(addBottomSheetViewInput, findsNothing);
-  });
-
-  testWidgets('登録ボタンを押下すると登録処理を呼び出し、かつボトムシートが閉じること', (tester) async {
-    // AddBottomSheetViewを生成
-    await tester.pumpWidget(addBottomSheetView(const AddBottomSheetView()));
-
-    // 登録テキストボタンをタップ
-    await tester.tap(addButtonInput);
-    await tester.pumpAndSettle();
-
-    // ボトムシートが存在しないこと
-    expect(addBottomSheetViewInput, findsNothing);
-  });
 
   testWidgets('登録用ボトムシートの表示項目が正しいこと', (tester) async {
     // AddBottomSheetViewを生成
@@ -65,5 +42,45 @@ main() {
     // ステータス選択肢
     expect(find.text('ステータス'), findsOneWidget);
     expect(statusInput, findsOneWidget);
+  });
+
+  testWidgets('キャンセルボタンを押下するとボトムシートが閉じること', (tester) async {
+    // AddBottomSheetViewを生成
+    await tester.pumpWidget(addBottomSheetView(const AddBottomSheetView()));
+
+    // キャンセルテキストボタンをタップ
+    await tester.tap(cancelButtonInput);
+    await tester.pumpAndSettle();
+
+    // ボトムシートが存在しないこと
+    expect(addBottomSheetViewInput, findsNothing);
+  });
+
+  testWidgets('タイトルが空の状態で登録ボタンを押下してもボトムシートが閉じないこと', (tester) async {
+    // AddBottomSheetViewを生成
+    await tester.pumpWidget(addBottomSheetView(const AddBottomSheetView()));
+
+    // 登録テキストボタンをタップ
+    await tester.tap(addButtonInput);
+    await tester.pumpAndSettle();
+
+    // ボトムシートが存在すること
+    expect(addBottomSheetViewInput, findsOneWidget);
+  });
+
+  testWidgets('タイトルが入力された状態で登録ボタンを押下するとボトムシートが閉じること', (tester) async {
+    // AddBottomSheetViewを生成
+    await tester.pumpWidget(addBottomSheetView(const AddBottomSheetView()));
+
+    // titleを入力
+    await tester.enterText(titleInput, 'text');
+    await tester.pumpAndSettle();
+
+    // 登録テキストボタンをタップ
+    await tester.tap(addButtonInput);
+    await tester.pumpAndSettle();
+
+    // ボトムシートが存在しないこと
+    expect(addBottomSheetViewInput, findsNothing);
   });
 }
