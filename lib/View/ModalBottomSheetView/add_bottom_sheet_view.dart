@@ -54,10 +54,10 @@ class AddBottomSheetView extends ConsumerWidget {
                           ? () {
                               notifier.addTodo(
                                 TodoDto(
-                                  commonBottomSheetState.title!,
-                                  commonBottomSheetState.emergencyPoint!,
-                                  commonBottomSheetState.priorityPoint!,
-                                  commonBottomSheetState.status!,
+                                  commonBottomSheetState.title,
+                                  commonBottomSheetState.emergencyPoint,
+                                  commonBottomSheetState.priorityPoint,
+                                  commonBottomSheetState.status,
                                 ),
                                 context,
                               );

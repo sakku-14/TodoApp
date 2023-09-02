@@ -50,19 +50,17 @@ class EditBottomSheetView extends ConsumerWidget {
                   SizedBox(
                     child: TextButton(
                       key: editButtonKey,
-                      onPressed: commonBottomSheetState.title == null
-                          ? null
-                          : () {
-                              editBottomSheetNotifier.updateTodo(
-                                TodoDto(
-                                  commonBottomSheetState.title!,
-                                  commonBottomSheetState.emergencyPoint!,
-                                  commonBottomSheetState.priorityPoint!,
-                                  commonBottomSheetState.status!,
-                                ),
-                              );
-                              Navigator.of(context).pop();
-                            },
+                      onPressed: () {
+                        editBottomSheetNotifier.updateTodo(
+                          TodoDto(
+                            commonBottomSheetState.title,
+                            commonBottomSheetState.emergencyPoint,
+                            commonBottomSheetState.priorityPoint,
+                            commonBottomSheetState.status,
+                          ),
+                        );
+                        Navigator.of(context).pop();
+                      },
                       child: const Text('更新'),
                     ),
                   ),
