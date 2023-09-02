@@ -5,6 +5,10 @@ import 'package:todo_app/View/TabView/todo_tab_contents_view.dart';
 import 'todo_tab_controller_view_test.dart';
 
 main() {
+  var notBeginCount = 20;
+  var progressCount = 15;
+  var stayCount = 10;
+  var completeCount = 5;
   MaterialApp todoTabContents(
       Widget first, Widget second, Widget third, Widget forth) {
     return MaterialApp(
@@ -26,10 +30,10 @@ main() {
               Flexible(
                 flex: 1,
                 child: TodoTabContentsView(
-                  notBeginTodoDtoList: notBeginTodoDtoList,
-                  progressTodoDtoList: progressTodoDtoList,
-                  stayTodoDtoList: stayTodoDtoList,
-                  completeTodoDtoList: completeTodoDtoList,
+                  notBeginTodoDtoList: createNotBeginTodoDtoList(notBeginCount),
+                  progressTodoDtoList: createProgressTodoDtoList(progressCount),
+                  stayTodoDtoList: createStayTodoDtoList(stayCount),
+                  completeTodoDtoList: createCompleteTodoDtoList(completeCount),
                 ),
               ),
             ],

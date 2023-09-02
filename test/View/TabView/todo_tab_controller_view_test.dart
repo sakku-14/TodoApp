@@ -7,45 +7,66 @@ import 'package:todo_app/ViewModel/Dto/todo_dto.dart';
 
 // region Debug用
 var random = math.Random();
-var notBeginTodoDtoList = [
-  for (var i = 0; i < 16; i++) ...[
-    TodoDto('notBegin', random.nextInt(3) + 1, random.nextInt(3) + 1,
-        random.nextInt(4) + 1)
-  ]
-];
-var progressTodoDtoList = [
-  for (var i = 0; i < 16; i++) ...[
-    TodoDto('progress', random.nextInt(3) + 1, random.nextInt(3) + 1,
-        random.nextInt(4) + 1)
-  ]
-];
-var stayTodoDtoList = [
-  for (var i = 0; i < 16; i++) ...[
-    TodoDto('stay', random.nextInt(3) + 1, random.nextInt(3) + 1,
-        random.nextInt(4) + 1)
-  ]
-];
-var completeTodoDtoList = [
-  for (var i = 0; i < 16; i++) ...[
-    TodoDto('complete', random.nextInt(3) + 1, random.nextInt(3) + 1,
-        random.nextInt(4) + 1)
-  ]
-];
+List<TodoDto> createNotBeginTodoDtoList(int createCount) {
+  return [
+    for (var i = 0; i < createCount; i++) ...[
+      TodoDto('notBegin', random.nextInt(3) + 1, random.nextInt(3) + 1,
+          random.nextInt(4) + 1)
+    ]
+  ];
+}
+
+List<TodoDto> createProgressTodoDtoList(int createCount) {
+  return [
+    for (var i = 0; i < createCount; i++) ...[
+      TodoDto('notBegin', random.nextInt(3) + 1, random.nextInt(3) + 1,
+          random.nextInt(4) + 1)
+    ]
+  ];
+}
+
+List<TodoDto> createStayTodoDtoList(int createCount) {
+  return [
+    for (var i = 0; i < createCount; i++) ...[
+      TodoDto('notBegin', random.nextInt(3) + 1, random.nextInt(3) + 1,
+          random.nextInt(4) + 1)
+    ]
+  ];
+}
+
+List<TodoDto> createCompleteTodoDtoList(int createCount) {
+  return [
+    for (var i = 0; i < createCount; i++) ...[
+      TodoDto('notBegin', random.nextInt(3) + 1, random.nextInt(3) + 1,
+          random.nextInt(4) + 1)
+    ]
+  ];
+}
+
 // endregion
 main() {
+  var notBeginCount = 20;
+  var progressCount = 15;
+  var stayCount = 10;
+  var completeCount = 5;
+
   var tabOfNotBegin = find.widgetWithText(Tab, '未着手');
+  var tabOfNotBeginCount = find.widgetWithText(Tab, notBeginCount.toString());
   var tabOfProgress = find.widgetWithText(Tab, '作業中');
+  var tabOfProgressCount = find.widgetWithText(Tab, progressCount.toString());
   var tabOfStay = find.widgetWithText(Tab, '保留');
+  var tabOfStayCount = find.widgetWithText(Tab, stayCount.toString());
   var tabOfComplete = find.widgetWithText(Tab, '完了');
+  var tabOfCompleteCount = find.widgetWithText(Tab, completeCount.toString());
 
   MaterialApp todoTabControllerView() {
     return MaterialApp(
       home: Scaffold(
         body: TodoTabControllerView(
-          notBeginTodoDtoList: notBeginTodoDtoList,
-          progressTodoDtoList: progressTodoDtoList,
-          stayTodoDtoList: stayTodoDtoList,
-          completeTodoDtoList: completeTodoDtoList,
+          notBeginTodoDtoList: createNotBeginTodoDtoList(notBeginCount),
+          progressTodoDtoList: createProgressTodoDtoList(progressCount),
+          stayTodoDtoList: createStayTodoDtoList(stayCount),
+          completeTodoDtoList: createCompleteTodoDtoList(completeCount),
         ),
       ),
     );
@@ -73,5 +94,18 @@ main() {
 
     // then
     expect(todoTabContentsView, findsOneWidget);
+  });
+
+  testWidgets('Todoリストの各タブに個数が表示されていること', (widgetTester) async {
+    // given
+
+    // when
+    await widgetTester.pumpWidget(todoTabControllerView());
+
+    // then
+    expect(tabOfNotBeginCount, findsOneWidget);
+    expect(tabOfProgressCount, findsOneWidget);
+    expect(tabOfStayCount, findsOneWidget);
+    expect(tabOfCompleteCount, findsOneWidget);
   });
 }

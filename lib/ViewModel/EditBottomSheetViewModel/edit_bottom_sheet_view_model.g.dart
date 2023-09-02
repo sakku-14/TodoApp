@@ -7,12 +7,12 @@ part of 'edit_bottom_sheet_view_model.dart';
 // **************************************************************************
 
 String _$editBottomSheetViewModelHash() =>
-    r'2c2c3beadf07592844d5685472fb76de19d2e41f';
+    r'60909a6239ef3244584762789db197183a8d447f';
 
 /// See also [EditBottomSheetViewModel].
 @ProviderFor(EditBottomSheetViewModel)
 final editBottomSheetViewModelProvider = AutoDisposeNotifierProvider<
-    EditBottomSheetViewModel, EditBottomSheetViewModel>.internal(
+    EditBottomSheetViewModel, EditBottomSheetViewModelState>.internal(
   EditBottomSheetViewModel.new,
   name: r'editBottomSheetViewModelProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -23,6 +23,6 @@ final editBottomSheetViewModelProvider = AutoDisposeNotifierProvider<
 );
 
 typedef _$EditBottomSheetViewModel
-    = AutoDisposeNotifier<EditBottomSheetViewModel>;
+    = AutoDisposeNotifier<EditBottomSheetViewModelState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member

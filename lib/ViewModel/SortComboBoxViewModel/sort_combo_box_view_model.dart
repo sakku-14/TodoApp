@@ -1,16 +1,16 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import 'main_view_model_state.dart';
+import 'sort_combo_box_view_model_state.dart';
 
-part 'main_view_model.g.dart';
+part 'sort_combo_box_view_model.g.dart';
 
 @riverpod
-class MainViewModel extends _$MainViewModel {
+class SortComboBoxViewModel extends _$SortComboBoxViewModel {
   static List<String> sortComboBoxValues = ['登録日時', '緊急度×重要度'];
 
   @override
-  MainViewModelState build() {
-    return const MainViewModelState();
+  SortComboBoxViewModelState build() {
+    return const SortComboBoxViewModelState();
   }
 
   /// 選択されたコンボボックスの値を更新する

@@ -1,33 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todo_app/ViewModel/CommonBottomSheetViewModel/common_bottom_sheet_view_model.dart';
 
 import '../../ViewModel/Dto/todo_dto.dart';
 
 // WidgetTestで使用するKey
+final titleKey = UniqueKey();
 final emergencyKey = UniqueKey();
 final priorityKey = UniqueKey();
 final statusKey = UniqueKey();
 
-class CommonBottomSheetView extends StatefulWidget {
-  const CommonBottomSheetView({Key? key}) : super(key: key);
+class CommonBottomSheetView extends ConsumerWidget {
+  const CommonBottomSheetView({super.key});
 
   @override
-  CommonBottomSheetViewState createState() => CommonBottomSheetViewState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    var state = ref.watch(commonBottomSheetViewModelProvider);
+    var notifier = ref.read(commonBottomSheetViewModelProvider.notifier);
 
-class CommonBottomSheetViewState extends State<CommonBottomSheetView> {
-  String todoTitle = '初期値';
-  int emergencyPoint = 1;
-  int priorityPoint = 1;
-  int todoStatus = 1;
-
-  /// Todoの入力情報を取得
-  TodoDto getInputInfo() {
-    return TodoDto(todoTitle, emergencyPoint, priorityPoint, todoStatus);
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return Column(
       children: [
         /// タイトル
@@ -40,8 +31,14 @@ class CommonBottomSheetViewState extends State<CommonBottomSheetView> {
           ),
           child: SizedBox(
             child: TextField(
+              key: titleKey,
               onChanged: (text) {
-                todoTitle = text;
+                notifier.holdInputTodoInfo(TodoDto(
+                  text,
+                  state.emergencyPoint,
+                  state.priorityPoint,
+                  state.status,
+                ));
               },
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
@@ -76,8 +73,14 @@ class CommonBottomSheetViewState extends State<CommonBottomSheetView> {
                       2: Text("2"),
                       3: Text("3"),
                     },
+                    groupValue: state.emergencyPoint,
                     onValueChanged: (value) {
-                      emergencyPoint = value;
+                      notifier.holdInputTodoInfo(TodoDto(
+                        state.title,
+                        value,
+                        state.priorityPoint,
+                        state.status,
+                      ));
                     },
                     selectedColor: CupertinoColors.secondaryLabel,
                     pressedColor: CupertinoColors.secondaryLabel,
@@ -115,8 +118,14 @@ class CommonBottomSheetViewState extends State<CommonBottomSheetView> {
                       2: Text("2"),
                       3: Text("3"),
                     },
+                    groupValue: state.priorityPoint,
                     onValueChanged: (value) {
-                      priorityPoint = value;
+                      notifier.holdInputTodoInfo(TodoDto(
+                        state.title,
+                        state.emergencyPoint,
+                        value,
+                        state.status,
+                      ));
                     },
                     selectedColor: CupertinoColors.secondaryLabel,
                     pressedColor: CupertinoColors.secondaryLabel,
@@ -155,8 +164,14 @@ class CommonBottomSheetViewState extends State<CommonBottomSheetView> {
                       3: Text("保留"),
                       4: Text("完了"),
                     },
+                    groupValue: state.status,
                     onValueChanged: (value) {
-                      todoStatus = value;
+                      notifier.holdInputTodoInfo(TodoDto(
+                        state.title,
+                        state.emergencyPoint,
+                        state.priorityPoint,
+                        value,
+                      ));
                     },
                     selectedColor: CupertinoColors.secondaryLabel,
                     pressedColor: CupertinoColors.secondaryLabel,
