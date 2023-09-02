@@ -16,10 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$CommonBottomSheetViewModelState {
-  String? get title => throw _privateConstructorUsedError;
-  int? get emergencyPoint => throw _privateConstructorUsedError;
-  int? get priorityPoint => throw _privateConstructorUsedError;
-  int? get status => throw _privateConstructorUsedError;
+  String get title => throw _privateConstructorUsedError;
+  int get emergencyPoint => throw _privateConstructorUsedError;
+  int get priorityPoint => throw _privateConstructorUsedError;
+  int get status => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CommonBottomSheetViewModelStateCopyWith<CommonBottomSheetViewModelState>
@@ -34,8 +34,7 @@ abstract class $CommonBottomSheetViewModelStateCopyWith<$Res> {
       _$CommonBottomSheetViewModelStateCopyWithImpl<$Res,
           CommonBottomSheetViewModelState>;
   @useResult
-  $Res call(
-      {String? title, int? emergencyPoint, int? priorityPoint, int? status});
+  $Res call({String title, int emergencyPoint, int priorityPoint, int status});
 }
 
 /// @nodoc
@@ -52,28 +51,28 @@ class _$CommonBottomSheetViewModelStateCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? title = freezed,
-    Object? emergencyPoint = freezed,
-    Object? priorityPoint = freezed,
-    Object? status = freezed,
+    Object? title = null,
+    Object? emergencyPoint = null,
+    Object? priorityPoint = null,
+    Object? status = null,
   }) {
     return _then(_value.copyWith(
-      title: freezed == title
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String?,
-      emergencyPoint: freezed == emergencyPoint
+              as String,
+      emergencyPoint: null == emergencyPoint
           ? _value.emergencyPoint
           : emergencyPoint // ignore: cast_nullable_to_non_nullable
-              as int?,
-      priorityPoint: freezed == priorityPoint
+              as int,
+      priorityPoint: null == priorityPoint
           ? _value.priorityPoint
           : priorityPoint // ignore: cast_nullable_to_non_nullable
-              as int?,
-      status: freezed == status
+              as int,
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
     ) as $Val);
   }
 }
@@ -87,8 +86,7 @@ abstract class _$$_CommonBottomSheetViewModelStateCopyWith<$Res>
       __$$_CommonBottomSheetViewModelStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String? title, int? emergencyPoint, int? priorityPoint, int? status});
+  $Res call({String title, int emergencyPoint, int priorityPoint, int status});
 }
 
 /// @nodoc
@@ -104,28 +102,28 @@ class __$$_CommonBottomSheetViewModelStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? title = freezed,
-    Object? emergencyPoint = freezed,
-    Object? priorityPoint = freezed,
-    Object? status = freezed,
+    Object? title = null,
+    Object? emergencyPoint = null,
+    Object? priorityPoint = null,
+    Object? status = null,
   }) {
     return _then(_$_CommonBottomSheetViewModelState(
-      title: freezed == title
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String?,
-      emergencyPoint: freezed == emergencyPoint
+              as String,
+      emergencyPoint: null == emergencyPoint
           ? _value.emergencyPoint
           : emergencyPoint // ignore: cast_nullable_to_non_nullable
-              as int?,
-      priorityPoint: freezed == priorityPoint
+              as int,
+      priorityPoint: null == priorityPoint
           ? _value.priorityPoint
           : priorityPoint // ignore: cast_nullable_to_non_nullable
-              as int?,
-      status: freezed == status
+              as int,
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
     ));
   }
 }
@@ -135,16 +133,23 @@ class __$$_CommonBottomSheetViewModelStateCopyWithImpl<$Res>
 class _$_CommonBottomSheetViewModelState
     implements _CommonBottomSheetViewModelState {
   const _$_CommonBottomSheetViewModelState(
-      {this.title, this.emergencyPoint, this.priorityPoint, this.status});
+      {this.title = "",
+      this.emergencyPoint = 1,
+      this.priorityPoint = 1,
+      this.status = 1});
 
   @override
-  final String? title;
+  @JsonKey()
+  final String title;
   @override
-  final int? emergencyPoint;
+  @JsonKey()
+  final int emergencyPoint;
   @override
-  final int? priorityPoint;
+  @JsonKey()
+  final int priorityPoint;
   @override
-  final int? status;
+  @JsonKey()
+  final int status;
 
   @override
   String toString() {
@@ -180,19 +185,19 @@ class _$_CommonBottomSheetViewModelState
 abstract class _CommonBottomSheetViewModelState
     implements CommonBottomSheetViewModelState {
   const factory _CommonBottomSheetViewModelState(
-      {final String? title,
-      final int? emergencyPoint,
-      final int? priorityPoint,
-      final int? status}) = _$_CommonBottomSheetViewModelState;
+      {final String title,
+      final int emergencyPoint,
+      final int priorityPoint,
+      final int status}) = _$_CommonBottomSheetViewModelState;
 
   @override
-  String? get title;
+  String get title;
   @override
-  int? get emergencyPoint;
+  int get emergencyPoint;
   @override
-  int? get priorityPoint;
+  int get priorityPoint;
   @override
-  int? get status;
+  int get status;
   @override
   @JsonKey(ignore: true)
   _$$_CommonBottomSheetViewModelStateCopyWith<
