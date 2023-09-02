@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_app/View/ModalBottomSheetView/common_bottom_sheet_view.dart';
 
+import '../../ViewModel/AddBottomSheetViewModel/add_bottom_sheet_view_model.dart';
+import '../../ViewModel/CommonBottomSheetViewModel/common_bottom_sheet_view_model.dart';
 import '../../ViewModel/Dto/todo_dto.dart';
-import '../../ViewModel/add_bottom_sheet_view_model.dart';
-import '../../ViewModel/common_bottom_sheet_view_model.dart';
 
 // WidgetTest用Key
 var addBottomSheetKey = UniqueKey();
@@ -53,13 +53,13 @@ class AddBottomSheetView extends ConsumerWidget {
                       onPressed: addBottomSheetState.isAdd
                           ? () {
                               notifier.addTodo(
-                                context,
                                 TodoDto(
                                   commonBottomSheetState.title!,
                                   commonBottomSheetState.emergencyPoint!,
                                   commonBottomSheetState.priorityPoint!,
                                   commonBottomSheetState.status!,
                                 ),
+                                context,
                               );
                               Navigator.of(context).pop();
                             }

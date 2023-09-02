@@ -12,7 +12,7 @@ String _$editBottomSheetViewModelHash() =>
 /// See also [EditBottomSheetViewModel].
 @ProviderFor(EditBottomSheetViewModel)
 final editBottomSheetViewModelProvider = AutoDisposeNotifierProvider<
-    EditBottomSheetViewModel, EditBottomSheetViewModel>.internal(
+    EditBottomSheetViewModel, EditBottomSheetViewModelState>.internal(
   EditBottomSheetViewModel.new,
   name: r'editBottomSheetViewModelProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -23,6 +23,6 @@ final editBottomSheetViewModelProvider = AutoDisposeNotifierProvider<
 );
 
 typedef _$EditBottomSheetViewModel
-    = AutoDisposeNotifier<EditBottomSheetViewModel>;
+    = AutoDisposeNotifier<EditBottomSheetViewModelState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member

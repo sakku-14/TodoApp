@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_app/View/ModalBottomSheetView/common_bottom_sheet_view.dart';
 
+import '../../ViewModel/CommonBottomSheetViewModel/common_bottom_sheet_view_model.dart';
 import '../../ViewModel/Dto/todo_dto.dart';
-import '../../ViewModel/common_bottom_sheet_view_model.dart';
-import '../../ViewModel/edit_bottom_sheet_view_model.dart';
+import '../../ViewModel/EditBottomSheetViewModel/edit_bottom_sheet_view_model.dart';
 
 // WidgetTest用Key
 var editBottomSheetKey = UniqueKey();
@@ -54,7 +54,6 @@ class EditBottomSheetView extends ConsumerWidget {
                           ? null
                           : () {
                               editBottomSheetNotifier.updateTodo(
-                                context,
                                 TodoDto(
                                   commonBottomSheetState.title!,
                                   commonBottomSheetState.emergencyPoint!,

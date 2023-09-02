@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'main_view_model_state.dart';
+part of 'sort_combo_box_view_model_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,27 +15,29 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$MainViewModelState {
+mixin _$SortComboBoxViewModelState {
   String get sortComboBoxValue => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $MainViewModelStateCopyWith<MainViewModelState> get copyWith =>
-      throw _privateConstructorUsedError;
+  $SortComboBoxViewModelStateCopyWith<SortComboBoxViewModelState>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $MainViewModelStateCopyWith<$Res> {
-  factory $MainViewModelStateCopyWith(
-          MainViewModelState value, $Res Function(MainViewModelState) then) =
-      _$MainViewModelStateCopyWithImpl<$Res, MainViewModelState>;
+abstract class $SortComboBoxViewModelStateCopyWith<$Res> {
+  factory $SortComboBoxViewModelStateCopyWith(SortComboBoxViewModelState value,
+          $Res Function(SortComboBoxViewModelState) then) =
+      _$SortComboBoxViewModelStateCopyWithImpl<$Res,
+          SortComboBoxViewModelState>;
   @useResult
   $Res call({String sortComboBoxValue});
 }
 
 /// @nodoc
-class _$MainViewModelStateCopyWithImpl<$Res, $Val extends MainViewModelState>
-    implements $MainViewModelStateCopyWith<$Res> {
-  _$MainViewModelStateCopyWithImpl(this._value, this._then);
+class _$SortComboBoxViewModelStateCopyWithImpl<$Res,
+        $Val extends SortComboBoxViewModelState>
+    implements $SortComboBoxViewModelStateCopyWith<$Res> {
+  _$SortComboBoxViewModelStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -57,22 +59,25 @@ class _$MainViewModelStateCopyWithImpl<$Res, $Val extends MainViewModelState>
 }
 
 /// @nodoc
-abstract class _$$_MainViewModelStateCopyWith<$Res>
-    implements $MainViewModelStateCopyWith<$Res> {
-  factory _$$_MainViewModelStateCopyWith(_$_MainViewModelState value,
-          $Res Function(_$_MainViewModelState) then) =
-      __$$_MainViewModelStateCopyWithImpl<$Res>;
+abstract class _$$_SortComboBoxViewModelStateCopyWith<$Res>
+    implements $SortComboBoxViewModelStateCopyWith<$Res> {
+  factory _$$_SortComboBoxViewModelStateCopyWith(
+          _$_SortComboBoxViewModelState value,
+          $Res Function(_$_SortComboBoxViewModelState) then) =
+      __$$_SortComboBoxViewModelStateCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String sortComboBoxValue});
 }
 
 /// @nodoc
-class __$$_MainViewModelStateCopyWithImpl<$Res>
-    extends _$MainViewModelStateCopyWithImpl<$Res, _$_MainViewModelState>
-    implements _$$_MainViewModelStateCopyWith<$Res> {
-  __$$_MainViewModelStateCopyWithImpl(
-      _$_MainViewModelState _value, $Res Function(_$_MainViewModelState) _then)
+class __$$_SortComboBoxViewModelStateCopyWithImpl<$Res>
+    extends _$SortComboBoxViewModelStateCopyWithImpl<$Res,
+        _$_SortComboBoxViewModelState>
+    implements _$$_SortComboBoxViewModelStateCopyWith<$Res> {
+  __$$_SortComboBoxViewModelStateCopyWithImpl(
+      _$_SortComboBoxViewModelState _value,
+      $Res Function(_$_SortComboBoxViewModelState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -80,7 +85,7 @@ class __$$_MainViewModelStateCopyWithImpl<$Res>
   $Res call({
     Object? sortComboBoxValue = null,
   }) {
-    return _then(_$_MainViewModelState(
+    return _then(_$_SortComboBoxViewModelState(
       sortComboBoxValue: null == sortComboBoxValue
           ? _value.sortComboBoxValue
           : sortComboBoxValue // ignore: cast_nullable_to_non_nullable
@@ -91,8 +96,8 @@ class __$$_MainViewModelStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_MainViewModelState implements _MainViewModelState {
-  const _$_MainViewModelState({this.sortComboBoxValue = '登録日時'});
+class _$_SortComboBoxViewModelState implements _SortComboBoxViewModelState {
+  const _$_SortComboBoxViewModelState({this.sortComboBoxValue = '登録日時'});
 
   @override
   @JsonKey()
@@ -100,14 +105,14 @@ class _$_MainViewModelState implements _MainViewModelState {
 
   @override
   String toString() {
-    return 'MainViewModelState(sortComboBoxValue: $sortComboBoxValue)';
+    return 'SortComboBoxViewModelState(sortComboBoxValue: $sortComboBoxValue)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MainViewModelState &&
+            other is _$_SortComboBoxViewModelState &&
             (identical(other.sortComboBoxValue, sortComboBoxValue) ||
                 other.sortComboBoxValue == sortComboBoxValue));
   }
@@ -118,19 +123,20 @@ class _$_MainViewModelState implements _MainViewModelState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MainViewModelStateCopyWith<_$_MainViewModelState> get copyWith =>
-      __$$_MainViewModelStateCopyWithImpl<_$_MainViewModelState>(
-          this, _$identity);
+  _$$_SortComboBoxViewModelStateCopyWith<_$_SortComboBoxViewModelState>
+      get copyWith => __$$_SortComboBoxViewModelStateCopyWithImpl<
+          _$_SortComboBoxViewModelState>(this, _$identity);
 }
 
-abstract class _MainViewModelState implements MainViewModelState {
-  const factory _MainViewModelState({final String sortComboBoxValue}) =
-      _$_MainViewModelState;
+abstract class _SortComboBoxViewModelState
+    implements SortComboBoxViewModelState {
+  const factory _SortComboBoxViewModelState({final String sortComboBoxValue}) =
+      _$_SortComboBoxViewModelState;
 
   @override
   String get sortComboBoxValue;
   @override
   @JsonKey(ignore: true)
-  _$$_MainViewModelStateCopyWith<_$_MainViewModelState> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_SortComboBoxViewModelStateCopyWith<_$_SortComboBoxViewModelState>
+      get copyWith => throw _privateConstructorUsedError;
 }
