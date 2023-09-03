@@ -26,4 +26,15 @@ class CommonBottomSheetViewModel extends _$CommonBottomSheetViewModel {
     // Add/EditBottomSheetに書き換えられた値を通知する
     eventBus.fire(ChangedCommonBottomSheetInputInfoEvent(todoDto));
   }
+
+  /// CommonBottomSheetStateを生成する
+  CommonBottomSheetViewModelState initCommonBottomSheetState(TodoDto todoDto) {
+    state = state.copyWith(
+      title: todoDto.title,
+      emergencyPoint: 2,
+      priorityPoint: 2,
+      status: 2,
+    );
+    return state;
+  }
 }

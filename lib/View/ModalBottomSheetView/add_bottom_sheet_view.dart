@@ -50,7 +50,7 @@ class AddBottomSheetView extends ConsumerWidget {
                   SizedBox(
                     child: TextButton(
                       key: addButtonKey,
-                      onPressed: addBottomSheetState.isAdd
+                      onPressed: addBottomSheetState.isAddable
                           ? () {
                               notifier.addTodo(
                                 TodoDto(
@@ -71,7 +71,15 @@ class AddBottomSheetView extends ConsumerWidget {
               ),
             ],
           ),
-          const CommonBottomSheetView(),
+          CommonBottomSheetView(
+            isEdit: false,
+            todoDto: TodoDto(
+              "",
+              1,
+              1,
+              1,
+            ),
+          ),
         ],
       ),
     );

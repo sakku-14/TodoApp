@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:todo_app/View/ModalBottomSheetView/edit_bottom_sheet_view.dart';
 import 'package:todo_app/ViewModel/Dto/todo_dto.dart';
@@ -6,7 +7,7 @@ import 'package:todo_app/ViewModel/Dto/todo_dto.dart';
 /// WidgetTestで使用するKey
 final todoKey = UniqueKey();
 
-class TodoView extends StatelessWidget {
+class TodoView extends ConsumerWidget {
   final TodoDto todoDto;
 
   const TodoView({
@@ -15,7 +16,7 @@ class TodoView extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
     return Slidable(
@@ -41,7 +42,7 @@ class TodoView extends StatelessWidget {
                   return Padding(
                     padding: EdgeInsets.only(
                         bottom: MediaQuery.of(context).viewInsets.bottom),
-                    child: const EditBottomSheetView(),
+                    child: EditBottomSheetView(todoDto: todoDto),
                   );
                 },
               );

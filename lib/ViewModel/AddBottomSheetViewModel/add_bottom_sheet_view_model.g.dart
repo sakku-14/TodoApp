@@ -7,7 +7,7 @@ part of 'add_bottom_sheet_view_model.dart';
 // **************************************************************************
 
 String _$addBottomSheetViewModelHash() =>
-    r'437fcebfe31dccd990daec864b628932c44f6291';
+    r'0a4f0f3c615cee15f7b603719fdc2c9003fae213';
 
 /// See also [AddBottomSheetViewModel].
 @ProviderFor(AddBottomSheetViewModel)

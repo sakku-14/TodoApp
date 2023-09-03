@@ -6,6 +6,6 @@ part 'edit_bottom_sheet_view_model_state.freezed.dart';
 abstract class EditBottomSheetViewModelState
     with _$EditBottomSheetViewModelState {
   const factory EditBottomSheetViewModelState({
-    @Default('Todo Title') String todoTitle,
+    @Default(true) bool isEditable,
   }) = _EditBottomSheetViewModelState;
 }

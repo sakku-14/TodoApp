@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$EditBottomSheetViewModelState {
-  String get todoTitle => throw _privateConstructorUsedError;
+  bool get isEditable => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $EditBottomSheetViewModelStateCopyWith<EditBottomSheetViewModelState>
@@ -31,7 +31,7 @@ abstract class $EditBottomSheetViewModelStateCopyWith<$Res> {
       _$EditBottomSheetViewModelStateCopyWithImpl<$Res,
           EditBottomSheetViewModelState>;
   @useResult
-  $Res call({String todoTitle});
+  $Res call({bool isEditable});
 }
 
 /// @nodoc
@@ -48,13 +48,13 @@ class _$EditBottomSheetViewModelStateCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? todoTitle = null,
+    Object? isEditable = null,
   }) {
     return _then(_value.copyWith(
-      todoTitle: null == todoTitle
-          ? _value.todoTitle
-          : todoTitle // ignore: cast_nullable_to_non_nullable
-              as String,
+      isEditable: null == isEditable
+          ? _value.isEditable
+          : isEditable // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -68,7 +68,7 @@ abstract class _$$_EditBottomSheetViewModelStateCopyWith<$Res>
       __$$_EditBottomSheetViewModelStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String todoTitle});
+  $Res call({bool isEditable});
 }
 
 /// @nodoc
@@ -84,13 +84,13 @@ class __$$_EditBottomSheetViewModelStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? todoTitle = null,
+    Object? isEditable = null,
   }) {
     return _then(_$_EditBottomSheetViewModelState(
-      todoTitle: null == todoTitle
-          ? _value.todoTitle
-          : todoTitle // ignore: cast_nullable_to_non_nullable
-              as String,
+      isEditable: null == isEditable
+          ? _value.isEditable
+          : isEditable // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -99,15 +99,15 @@ class __$$_EditBottomSheetViewModelStateCopyWithImpl<$Res>
 
 class _$_EditBottomSheetViewModelState
     implements _EditBottomSheetViewModelState {
-  const _$_EditBottomSheetViewModelState({this.todoTitle = 'Todo Title'});
+  const _$_EditBottomSheetViewModelState({this.isEditable = true});
 
   @override
   @JsonKey()
-  final String todoTitle;
+  final bool isEditable;
 
   @override
   String toString() {
-    return 'EditBottomSheetViewModelState(todoTitle: $todoTitle)';
+    return 'EditBottomSheetViewModelState(isEditable: $isEditable)';
   }
 
   @override
@@ -115,12 +115,12 @@ class _$_EditBottomSheetViewModelState
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_EditBottomSheetViewModelState &&
-            (identical(other.todoTitle, todoTitle) ||
-                other.todoTitle == todoTitle));
+            (identical(other.isEditable, isEditable) ||
+                other.isEditable == isEditable));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, todoTitle);
+  int get hashCode => Object.hash(runtimeType, isEditable);
 
   @JsonKey(ignore: true)
   @override
@@ -132,11 +132,11 @@ class _$_EditBottomSheetViewModelState
 
 abstract class _EditBottomSheetViewModelState
     implements EditBottomSheetViewModelState {
-  const factory _EditBottomSheetViewModelState({final String todoTitle}) =
+  const factory _EditBottomSheetViewModelState({final bool isEditable}) =
       _$_EditBottomSheetViewModelState;
 
   @override
-  String get todoTitle;
+  bool get isEditable;
   @override
   @JsonKey(ignore: true)
   _$$_EditBottomSheetViewModelStateCopyWith<_$_EditBottomSheetViewModelState>

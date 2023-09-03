@@ -10,9 +10,19 @@ final titleKey = UniqueKey();
 final emergencyKey = UniqueKey();
 final priorityKey = UniqueKey();
 final statusKey = UniqueKey();
+bool isFirstEdit = true;
 
 class CommonBottomSheetView extends ConsumerWidget {
-  const CommonBottomSheetView({super.key});
+  final TodoDto? todoDto;
+  final bool isEdit;
+  final TextEditingController? areaController;
+
+  const CommonBottomSheetView({
+    super.key,
+    required this.isEdit,
+    this.todoDto,
+    this.areaController,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -32,6 +42,11 @@ class CommonBottomSheetView extends ConsumerWidget {
           child: SizedBox(
             child: TextField(
               key: titleKey,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Todoのタイトル',
+              ),
+              controller: isEdit ? areaController : null,
               onChanged: (text) {
                 notifier.holdInputTodoInfo(TodoDto(
                   text,
@@ -40,10 +55,6 @@ class CommonBottomSheetView extends ConsumerWidget {
                   state.status,
                 ));
               },
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Todoのタイトル',
-              ),
             ),
           ),
         ),
@@ -73,8 +84,11 @@ class CommonBottomSheetView extends ConsumerWidget {
                       2: Text("2"),
                       3: Text("3"),
                     },
-                    groupValue: state.emergencyPoint,
+                    groupValue: isFirstEdit
+                        ? todoDto?.emergencyPoint
+                        : state.emergencyPoint,
                     onValueChanged: (value) {
+                      isFirstEdit = false;
                       notifier.holdInputTodoInfo(TodoDto(
                         state.title,
                         value,
@@ -118,8 +132,11 @@ class CommonBottomSheetView extends ConsumerWidget {
                       2: Text("2"),
                       3: Text("3"),
                     },
-                    groupValue: state.priorityPoint,
+                    groupValue: isFirstEdit
+                        ? todoDto?.priorityPoint
+                        : state.priorityPoint,
                     onValueChanged: (value) {
+                      isFirstEdit = false;
                       notifier.holdInputTodoInfo(TodoDto(
                         state.title,
                         state.emergencyPoint,
@@ -164,8 +181,9 @@ class CommonBottomSheetView extends ConsumerWidget {
                       3: Text("保留"),
                       4: Text("完了"),
                     },
-                    groupValue: state.status,
+                    groupValue: isFirstEdit ? todoDto?.status : state.status,
                     onValueChanged: (value) {
+                      isFirstEdit = false;
                       notifier.holdInputTodoInfo(TodoDto(
                         state.title,
                         state.emergencyPoint,

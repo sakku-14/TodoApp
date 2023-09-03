@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:todo_app/UseCase/AddTodoUseCase/add_todo_use_case.dart';
 import 'package:todo_app/Infrastructure/event_bus.dart';
+import 'package:todo_app/UseCase/AddTodoUseCase/add_todo_use_case.dart';
 import 'package:todo_app/ViewModel/Dto/todo_dto.dart';
 import 'package:todo_app/ViewModel/Event/changed_common_bottom_sheet_input_info_event.dart';
 
@@ -27,10 +27,10 @@ class AddBottomSheetViewModel extends _$AddBottomSheetViewModel {
   void judgeAddAble(TodoDto todoDto) {
     if (todoDto.title.isNotEmpty) {
       // nullではない場合のみフラグをTrueに変える
-      state = state.copyWith(isAdd: true);
+      state = state.copyWith(isAddable: true);
       return;
     }
-    state = state.copyWith(isAdd: false);
+    state = state.copyWith(isAddable: false);
   }
 
   /// Todoを登録する処理を呼び出す

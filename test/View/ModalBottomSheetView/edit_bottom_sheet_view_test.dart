@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:todo_app/View/ModalBottomSheetView/common_bottom_sheet_view.dart';
 import 'package:todo_app/View/ModalBottomSheetView/edit_bottom_sheet_view.dart';
+import 'package:todo_app/ViewModel/Dto/todo_dto.dart';
 
 main() {
   /// 各WidgetのKey
@@ -23,7 +24,14 @@ main() {
 
   testWidgets('キャンセルボタンを押下するとボトムシートが閉じること', (tester) async {
     // AddBottomSheetViewを生成
-    await tester.pumpWidget(editBottomSheetView(const EditBottomSheetView()));
+    await tester.pumpWidget(editBottomSheetView(EditBottomSheetView(
+      todoDto: TodoDto(
+        "aaa",
+        1,
+        1,
+        1,
+      ),
+    )));
 
     // キャンセルテキストボタンをタップ
     await tester.tap(cancelButtonInput);
@@ -35,7 +43,14 @@ main() {
 
   testWidgets('登録ボタンを押下すると登録処理を呼び出し、かつボトムシートが閉じること', (tester) async {
     // AddBottomSheetViewを生成
-    await tester.pumpWidget(editBottomSheetView(const EditBottomSheetView()));
+    await tester.pumpWidget(editBottomSheetView(EditBottomSheetView(
+      todoDto: TodoDto(
+        "aaa",
+        1,
+        1,
+        1,
+      ),
+    )));
 
     // 登録テキストボタンをタップ
     await tester.tap(editButtonInput);
@@ -47,7 +62,14 @@ main() {
 
   testWidgets('更新用ボトムシートの表示項目が正しいこと', (tester) async {
     // EditBottomSheetViewを生成
-    await tester.pumpWidget(editBottomSheetView(const EditBottomSheetView()));
+    await tester.pumpWidget(editBottomSheetView(EditBottomSheetView(
+      todoDto: TodoDto(
+        "aaa",
+        1,
+        1,
+        1,
+      ),
+    )));
 
     // 各項目が正しいこと
     // ボトムシートヘッダー部分
