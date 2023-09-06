@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:todo_app/ViewModel/Dto/todo_dto.dart';
 import 'package:todo_app/ViewModel/Event/changed_common_bottom_sheet_input_info_event.dart';
@@ -9,6 +10,8 @@ part 'common_bottom_sheet_view_model.g.dart';
 
 @riverpod
 class CommonBottomSheetViewModel extends _$CommonBottomSheetViewModel {
+  TextEditingController textField = TextEditingController();
+
   @override
   CommonBottomSheetViewModelState build() {
     return const CommonBottomSheetViewModelState();
@@ -35,5 +38,7 @@ class CommonBottomSheetViewModel extends _$CommonBottomSheetViewModel {
       priorityPoint: todoDto.priorityPoint,
       status: todoDto.status,
     );
+
+    textField = TextEditingController(text: todoDto.title);
   }
 }

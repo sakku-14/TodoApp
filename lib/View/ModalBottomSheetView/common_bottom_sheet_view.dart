@@ -14,13 +14,11 @@ final statusKey = UniqueKey();
 class CommonBottomSheetView extends ConsumerStatefulWidget {
   const CommonBottomSheetView(
     this.isEdit,
-    this.todoDto,
-    this.areaController, {
+    this.todoDto, {
     Key? key,
   }) : super(key: key);
   final bool isEdit;
   final TodoDto todoDto;
-  final TextEditingController? areaController;
 
   @override
   CommonBottomSheetViewModelState createState() =>
@@ -60,7 +58,7 @@ class CommonBottomSheetViewModelState
                 border: OutlineInputBorder(),
                 labelText: 'Todoのタイトル',
               ),
-              controller: widget.isEdit ? widget.areaController : null,
+              controller: widget.isEdit ? notifier.textField : null,
               onChanged: (text) {
                 notifier.holdInputTodoInfo(TodoDto(
                   text,
