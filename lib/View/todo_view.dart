@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:todo_app/Infrastructure/event_bus.dart';
 import 'package:todo_app/View/ModalBottomSheetView/edit_bottom_sheet_view.dart';
 import 'package:todo_app/ViewModel/Dto/todo_dto.dart';
+import 'package:todo_app/ViewModel/Event/edit_ready_event.dart';
 
 /// WidgetTestで使用するKey
 final todoKey = UniqueKey();
@@ -35,6 +37,9 @@ class TodoView extends ConsumerWidget {
           ),
           SlidableAction(
             onPressed: (context) {
+              // 共通部のStateに初期値を通知する
+              eventBus.fire(EditReadyEvent(todoDto));
+
               showModalBottomSheet(
                 isScrollControlled: true,
                 context: context,

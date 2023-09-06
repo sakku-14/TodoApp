@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todo_app/Infrastructure/event_bus.dart';
 import 'package:todo_app/View/sort_combo_box_view.dart';
+import 'package:todo_app/ViewModel/Dto/todo_dto.dart';
+import 'package:todo_app/ViewModel/Event/edit_ready_event.dart';
 import 'package:todo_app/ViewModel/MainViewModel/main_view_model.dart';
 
 import '../ViewModel/SortComboBoxViewModel/sort_combo_box_view_model.dart';
@@ -51,6 +54,9 @@ class MainView extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          // 共通部のStateに初期値を通知する
+          eventBus.fire(EditReadyEvent(TodoDto('', 1, 1, 1)));
+
           showModalBottomSheet(
             isScrollControlled: true,
             context: context,

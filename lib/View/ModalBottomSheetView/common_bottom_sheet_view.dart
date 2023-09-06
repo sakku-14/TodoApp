@@ -3,25 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_app/ViewModel/CommonBottomSheetViewModel/common_bottom_sheet_view_model.dart';
 
-import '../../ViewModel/Dto/todo_dto.dart';
-
 // WidgetTestで使用するKey
 final titleKey = UniqueKey();
 final emergencyKey = UniqueKey();
 final priorityKey = UniqueKey();
 final statusKey = UniqueKey();
-bool isFirstEdit = true;
 
 class CommonBottomSheetView extends ConsumerWidget {
-  final TodoDto? todoDto;
-  final bool isEdit;
-  final TextEditingController? areaController;
-
   const CommonBottomSheetView({
     super.key,
-    required this.isEdit,
-    this.todoDto,
-    this.areaController,
   });
 
   @override
@@ -46,14 +36,9 @@ class CommonBottomSheetView extends ConsumerWidget {
                 border: OutlineInputBorder(),
                 labelText: 'Todoのタイトル',
               ),
-              controller: isEdit ? areaController : null,
+              controller: notifier.controller,
               onChanged: (text) {
-                notifier.holdInputTodoInfo(TodoDto(
-                  text,
-                  state.emergencyPoint,
-                  state.priorityPoint,
-                  state.status,
-                ));
+                notifier.setTitle();
               },
             ),
           ),
@@ -84,17 +69,9 @@ class CommonBottomSheetView extends ConsumerWidget {
                       2: Text("2"),
                       3: Text("3"),
                     },
-                    groupValue: isFirstEdit
-                        ? todoDto?.emergencyPoint
-                        : state.emergencyPoint,
+                    groupValue: state.emergencyPoint,
                     onValueChanged: (value) {
-                      isFirstEdit = false;
-                      notifier.holdInputTodoInfo(TodoDto(
-                        state.title,
-                        value,
-                        state.priorityPoint,
-                        state.status,
-                      ));
+                      notifier.setEmergencyPoint(value);
                     },
                     selectedColor: CupertinoColors.secondaryLabel,
                     pressedColor: CupertinoColors.secondaryLabel,
@@ -132,17 +109,9 @@ class CommonBottomSheetView extends ConsumerWidget {
                       2: Text("2"),
                       3: Text("3"),
                     },
-                    groupValue: isFirstEdit
-                        ? todoDto?.priorityPoint
-                        : state.priorityPoint,
+                    groupValue: state.priorityPoint,
                     onValueChanged: (value) {
-                      isFirstEdit = false;
-                      notifier.holdInputTodoInfo(TodoDto(
-                        state.title,
-                        state.emergencyPoint,
-                        value,
-                        state.status,
-                      ));
+                      notifier.setPriorityPoint(value);
                     },
                     selectedColor: CupertinoColors.secondaryLabel,
                     pressedColor: CupertinoColors.secondaryLabel,
@@ -181,15 +150,9 @@ class CommonBottomSheetView extends ConsumerWidget {
                       3: Text("保留"),
                       4: Text("完了"),
                     },
-                    groupValue: isFirstEdit ? todoDto?.status : state.status,
+                    groupValue: state.status,
                     onValueChanged: (value) {
-                      isFirstEdit = false;
-                      notifier.holdInputTodoInfo(TodoDto(
-                        state.title,
-                        state.emergencyPoint,
-                        state.priorityPoint,
-                        value,
-                      ));
+                      notifier.setStatus(value);
                     },
                     selectedColor: CupertinoColors.secondaryLabel,
                     pressedColor: CupertinoColors.secondaryLabel,
