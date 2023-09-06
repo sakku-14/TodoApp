@@ -72,13 +72,14 @@ class AddBottomSheetView extends ConsumerWidget {
             ],
           ),
           CommonBottomSheetView(
-            isEdit: false,
-            todoDto: TodoDto(
+            false,
+            TodoDto(
               "",
               1,
               1,
               1,
             ),
+            null,
           ),
         ],
       ),

@@ -28,13 +28,12 @@ class CommonBottomSheetViewModel extends _$CommonBottomSheetViewModel {
   }
 
   /// CommonBottomSheetStateを生成する
-  CommonBottomSheetViewModelState initCommonBottomSheetState(TodoDto todoDto) {
+  Future<void> initCommonBottomSheetState(TodoDto todoDto) async {
     state = state.copyWith(
       title: todoDto.title,
-      emergencyPoint: 2,
-      priorityPoint: 2,
-      status: 2,
+      emergencyPoint: todoDto.emergencyPoint,
+      priorityPoint: todoDto.priorityPoint,
+      status: todoDto.status,
     );
-    return state;
   }
 }

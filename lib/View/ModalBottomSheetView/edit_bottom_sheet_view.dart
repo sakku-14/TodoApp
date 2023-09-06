@@ -79,9 +79,9 @@ class EditBottomSheetView extends ConsumerWidget {
             ],
           ),
           CommonBottomSheetView(
-            isEdit: true,
-            todoDto: todoDto,
-            areaController: TextEditingController(text: todoDto.title),
+            true,
+            todoDto,
+            TextEditingController(text: todoDto.title),
           ),
         ],
       ),
