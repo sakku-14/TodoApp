@@ -11,8 +11,6 @@ final emergencyKey = UniqueKey();
 final priorityKey = UniqueKey();
 final statusKey = UniqueKey();
 
-bool isFirstEdit = true;
-
 class CommonBottomSheetView extends ConsumerStatefulWidget {
   const CommonBottomSheetView(
     this.isEdit,
@@ -100,11 +98,8 @@ class CommonBottomSheetViewModelState
                       2: Text("2"),
                       3: Text("3"),
                     },
-                    groupValue: isFirstEdit
-                        ? widget.todoDto.emergencyPoint
-                        : state.emergencyPoint,
+                    groupValue: state.emergencyPoint,
                     onValueChanged: (value) {
-                      isFirstEdit = false;
                       notifier.holdInputTodoInfo(TodoDto(
                         state.title,
                         value,
@@ -148,11 +143,8 @@ class CommonBottomSheetViewModelState
                       2: Text("2"),
                       3: Text("3"),
                     },
-                    groupValue: isFirstEdit
-                        ? widget.todoDto.priorityPoint
-                        : state.priorityPoint,
+                    groupValue: state.priorityPoint,
                     onValueChanged: (value) {
-                      isFirstEdit = false;
                       notifier.holdInputTodoInfo(TodoDto(
                         state.title,
                         state.emergencyPoint,
@@ -197,10 +189,8 @@ class CommonBottomSheetViewModelState
                       3: Text("保留"),
                       4: Text("完了"),
                     },
-                    groupValue:
-                        isFirstEdit ? widget.todoDto.status : state.status,
+                    groupValue: state.status,
                     onValueChanged: (value) {
-                      isFirstEdit = false;
                       notifier.holdInputTodoInfo(TodoDto(
                         state.title,
                         state.emergencyPoint,

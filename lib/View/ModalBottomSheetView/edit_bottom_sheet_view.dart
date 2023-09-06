@@ -48,7 +48,6 @@ class EditBottomSheetView extends ConsumerWidget {
                       key: cancelButtonKey,
                       onPressed: () {
                         Navigator.of(context).pop();
-                        isFirstEdit = true;
                       },
                       onLongPress: () {},
                       child: const Text('キャンセル'),
@@ -68,7 +67,6 @@ class EditBottomSheetView extends ConsumerWidget {
                                 ),
                               );
                               Navigator.of(context).pop();
-                              isFirstEdit = true;
                             }
                           : null,
                       child: const Text('更新'),
