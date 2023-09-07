@@ -10,4 +10,9 @@ class TodoDto {
     this.priorityPoint,
     this.status,
   );
+
+  @override
+  String toString() {
+    return 'title: $title, emergencyPoint: $emergencyPoint, priorityPoint: $priorityPoint, status: $status';
+  }
 }

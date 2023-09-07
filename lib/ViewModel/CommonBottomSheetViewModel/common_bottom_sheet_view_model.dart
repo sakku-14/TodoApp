@@ -18,20 +18,25 @@ class CommonBottomSheetViewModel extends _$CommonBottomSheetViewModel {
     eventBus
         .on<EditReadyEvent>()
         .listen((event) => holdInputTodoInfo(event.todoDto));
+    ref.keepAlive();
     return const CommonBottomSheetViewModelState();
   }
 
   /// 更新時、登録時のボトムシートに入力された値を保持する
   void holdInputTodoInfo(TodoDto todoDto) {
+    print('holdInputTodoInfo_begin:${todoDto.toString()}');
     state = state.copyWith(
       title: todoDto.title,
       emergencyPoint: todoDto.emergencyPoint,
       priorityPoint: todoDto.priorityPoint,
       status: todoDto.status,
     );
+    controller = TextEditingController(text: todoDto.title);
+    print('holdInputTodoInfo_update_state:${todoDto.toString()}');
 
     // Add/EditBottomSheetに書き換えられた値を通知する
     eventBus.fire(ChangedCommonBottomSheetInputInfoEvent(todoDto));
+    print('holdInputTodoInfo_publish_event:${todoDto.toString()}');
   }
 
   void setTitle() {
@@ -60,16 +65,5 @@ class CommonBottomSheetViewModel extends _$CommonBottomSheetViewModel {
 
     eventBus.fire(ChangedCommonBottomSheetInputInfoEvent(TodoDto(
         state.title, state.emergencyPoint, state.priorityPoint, state.status)));
-  }
-
-  /// CommonBottomSheetStateを生成する
-  CommonBottomSheetViewModelState initCommonBottomSheetState(TodoDto todoDto) {
-    state = state.copyWith(
-      title: todoDto.title,
-      emergencyPoint: 2,
-      priorityPoint: 2,
-      status: 2,
-    );
-    return state;
   }
 }

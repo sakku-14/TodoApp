@@ -39,6 +39,7 @@ class TodoView extends ConsumerWidget {
             onPressed: (context) {
               // 共通部のStateに初期値を通知する
               eventBus.fire(EditReadyEvent(todoDto));
+              print('todo_view_publish: ${todoDto.toString()}');
 
               showModalBottomSheet(
                 isScrollControlled: true,
@@ -47,7 +48,7 @@ class TodoView extends ConsumerWidget {
                   return Padding(
                     padding: EdgeInsets.only(
                         bottom: MediaQuery.of(context).viewInsets.bottom),
-                    child: EditBottomSheetView(todoDto: todoDto),
+                    child: const EditBottomSheetView(),
                   );
                 },
               );

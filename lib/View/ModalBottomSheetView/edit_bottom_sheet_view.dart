@@ -12,10 +12,8 @@ var cancelButtonKey = UniqueKey();
 var editButtonKey = UniqueKey();
 
 class EditBottomSheetView extends ConsumerWidget {
-  final TodoDto todoDto;
   const EditBottomSheetView({
     Key? key,
-    required this.todoDto,
   }) : super(key: key);
 
   @override

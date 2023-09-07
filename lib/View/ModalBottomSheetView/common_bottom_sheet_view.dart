@@ -19,6 +19,8 @@ class CommonBottomSheetView extends ConsumerWidget {
     var state = ref.watch(commonBottomSheetViewModelProvider);
     var notifier = ref.read(commonBottomSheetViewModelProvider.notifier);
 
+    print(state.toString());
+
     return Column(
       children: [
         /// タイトル
