@@ -58,7 +58,7 @@ class CommonBottomSheetViewModelState
                 border: OutlineInputBorder(),
                 labelText: 'Todoのタイトル',
               ),
-              controller: widget.isEdit ? notifier.textField : null,
+              controller: widget.isEdit ? textField : null,
               onChanged: (text) {
                 notifier.holdInputTodoInfo(TodoDto(
                   text,

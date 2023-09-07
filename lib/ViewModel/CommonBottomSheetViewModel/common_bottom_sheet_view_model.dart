@@ -8,10 +8,10 @@ import 'common_bottom_sheet_view_model_state.dart';
 
 part 'common_bottom_sheet_view_model.g.dart';
 
+TextEditingController textField = TextEditingController();
+
 @riverpod
 class CommonBottomSheetViewModel extends _$CommonBottomSheetViewModel {
-  TextEditingController textField = TextEditingController();
-
   @override
   CommonBottomSheetViewModelState build() {
     return const CommonBottomSheetViewModelState();

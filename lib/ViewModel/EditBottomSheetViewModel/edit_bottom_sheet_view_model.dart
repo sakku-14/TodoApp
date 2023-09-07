@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:todo_app/UseCase/update_todo_use_case.dart';
 import 'package:todo_app/ViewModel/Dto/todo_dto.dart';
@@ -14,12 +16,16 @@ class EditBottomSheetViewModel extends _$EditBottomSheetViewModel {
   late final UpdateTodoUseCase _updateTodoUseCase =
       UpdateTodoUseCase(TodoListRepository());
 
-  @override
-  EditBottomSheetViewModelState build() {
-    // TODO:23.8.31:A.Uehara:Buildメソッドが複数呼ばれる可能性があり、多重購読になるから違う購読方法を知りたい
-    eventBus
+  StreamSubscription<ChangedCommonBottomSheetInputInfoEvent>? _myEvent;
+
+  EditBottomSheetViewModel() {
+    _myEvent = eventBus
         .on<ChangedCommonBottomSheetInputInfoEvent>()
         .listen((event) => judgeEditAble(event.todoDto));
+  }
+
+  @override
+  EditBottomSheetViewModelState build() {
     return const EditBottomSheetViewModelState();
   }
 

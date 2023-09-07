@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:todo_app/Infrastructure/event_bus.dart';
@@ -12,15 +14,21 @@ part 'add_bottom_sheet_view_model.g.dart';
 @riverpod
 class AddBottomSheetViewModel extends _$AddBottomSheetViewModel {
   late AddTodoUseCase _addTodoUseCase;
+  StreamSubscription? _subscription;
+  AddBottomSheetViewModel() {
+    _subscription = eventBus
+        .on<ChangedCommonBottomSheetInputInfoEvent>()
+        .listen((event) => judgeAddAble(event.todoDto));
+  }
 
   @override
   AddBottomSheetViewModelState build() {
     _addTodoUseCase = ref.watch(addTodoUseCaseProvider);
-    // TODO:23.8.31:A.Uehara:Buildメソッドが複数呼ばれる可能性があり、多重購読になるから違う購読方法を知りたい
-    eventBus
-        .on<ChangedCommonBottomSheetInputInfoEvent>()
-        .listen((event) => judgeAddAble(event.todoDto));
     return const AddBottomSheetViewModelState();
+  }
+
+  void dispose() {
+    _subscription?.cancel();
   }
 
   /// 登録可否を判定し、登録可能グラグを更新する

@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -14,14 +13,15 @@ part 'main_view_model.g.dart';
 @riverpod
 class MainViewModel extends _$MainViewModel {
   late GetTodoListApplicationService _getTodoListApplicationService;
-  StreamSubscription? _subscription;
+
+  MainViewModel() {
+    eventBus.on<AddTodoEvent>().listen((event) => addTodo(event));
+  }
+
   @override
   MainViewModelState build() {
     _getTodoListApplicationService =
         ref.watch(getTodoListApplicationServiceProvider);
-    // TODO:23.8.19:A.Uehara:Buildメソッドが複数回呼ばれる可能性があり、多重購読になるから違う購読方法を知りたい
-    _subscription =
-        eventBus.on<AddTodoEvent>().listen((event) => addTodo(event));
 
     // TODO:23.8.19:A.Uehara:MainView生成時にDebug用Todoを生成せいているが、本来はRepositoryから取得する
     // region Debug用
@@ -58,11 +58,6 @@ class MainViewModel extends _$MainViewModel {
       stayTodoDtoList: stayTodoDtoList,
       completeTodoDtoList: completeTodoDtoList,
     );
-  }
-
-  @override
-  void dispose() {
-    _subscription?.cancel();
   }
 
   /// Todoを新規追加
