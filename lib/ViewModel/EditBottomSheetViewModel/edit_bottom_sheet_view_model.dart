@@ -16,7 +16,7 @@ class EditBottomSheetViewModel extends _$EditBottomSheetViewModel {
   late final UpdateTodoUseCase _updateTodoUseCase =
       UpdateTodoUseCase(TodoListRepository());
 
-  StreamSubscription<ChangedCommonBottomSheetInputInfoEvent>? _myEvent;
+  StreamSubscription? _myEvent;
 
   EditBottomSheetViewModel() {
     _myEvent = eventBus
@@ -26,6 +26,10 @@ class EditBottomSheetViewModel extends _$EditBottomSheetViewModel {
 
   @override
   EditBottomSheetViewModelState build() {
+    ref.onDispose(() {
+      _myEvent?.cancel();
+    });
+
     return const EditBottomSheetViewModelState();
   }
 

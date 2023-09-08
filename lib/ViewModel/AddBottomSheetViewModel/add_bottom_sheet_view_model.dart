@@ -14,9 +14,11 @@ part 'add_bottom_sheet_view_model.g.dart';
 @riverpod
 class AddBottomSheetViewModel extends _$AddBottomSheetViewModel {
   late AddTodoUseCase _addTodoUseCase;
-  StreamSubscription? _subscription;
+
+  StreamSubscription? _myEvent;
+
   AddBottomSheetViewModel() {
-    _subscription = eventBus
+    _myEvent = eventBus
         .on<ChangedCommonBottomSheetInputInfoEvent>()
         .listen((event) => judgeAddAble(event.todoDto));
   }
@@ -24,11 +26,12 @@ class AddBottomSheetViewModel extends _$AddBottomSheetViewModel {
   @override
   AddBottomSheetViewModelState build() {
     _addTodoUseCase = ref.watch(addTodoUseCaseProvider);
-    return const AddBottomSheetViewModelState();
-  }
 
-  void dispose() {
-    _subscription?.cancel();
+    ref.onDispose(() {
+      _myEvent?.cancel();
+    });
+
+    return const AddBottomSheetViewModelState();
   }
 
   /// 登録可否を判定し、登録可能グラグを更新する

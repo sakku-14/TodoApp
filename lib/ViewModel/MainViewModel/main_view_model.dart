@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -14,14 +15,20 @@ part 'main_view_model.g.dart';
 class MainViewModel extends _$MainViewModel {
   late GetTodoListApplicationService _getTodoListApplicationService;
 
+  StreamSubscription? _myEvent;
+
   MainViewModel() {
-    eventBus.on<AddTodoEvent>().listen((event) => addTodo(event));
+    _myEvent = eventBus.on<AddTodoEvent>().listen((event) => addTodo(event));
   }
 
   @override
   MainViewModelState build() {
     _getTodoListApplicationService =
         ref.watch(getTodoListApplicationServiceProvider);
+
+    ref.onDispose(() {
+      _myEvent?.cancel();
+    });
 
     // TODO:23.8.19:A.Uehara:MainView生成時にDebug用Todoを生成せいているが、本来はRepositoryから取得する
     // region Debug用
