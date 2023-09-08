@@ -41,7 +41,7 @@ main() {
     expect(editBottomSheetViewInput, findsNothing);
   });
 
-  testWidgets('登録ボタンを押下すると登録処理を呼び出し、かつボトムシートが閉じること', (tester) async {
+  testWidgets('更新ボタンを押下すると更新処理を呼び出し、かつボトムシートが閉じること', (tester) async {
     // AddBottomSheetViewを生成
     await tester.pumpWidget(editBottomSheetView(EditBottomSheetView(
       todoDto: TodoDto(
@@ -70,6 +70,7 @@ main() {
         1,
       ),
     )));
+    await tester.pumpAndSettle();
 
     // 各項目が正しいこと
     // ボトムシートヘッダー部分
