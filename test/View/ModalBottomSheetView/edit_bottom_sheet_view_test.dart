@@ -8,6 +8,7 @@ import 'package:todo_app/ViewModel/Dto/todo_dto.dart';
 main() {
   /// 各WidgetのKey
   final editBottomSheetViewInput = find.byKey(editBottomSheetKey);
+  final titleInput = find.byKey(titleKey);
   final emergencyInput = find.byKey(emergencyKey);
   final priorityInput = find.byKey(priorityKey);
   final statusInput = find.byKey(statusKey);
@@ -88,5 +89,66 @@ main() {
     // ステータス選択肢
     expect(find.text('ステータス'), findsOneWidget);
     expect(statusInput, findsOneWidget);
+  });
+
+  testWidgets('タイトルが空の状態で更新ボタンを押下してもボトムシートが閉じないこと', (tester) async {
+    // EditBottomSheetViewを生成
+    await tester.pumpWidget(editBottomSheetView(EditBottomSheetView(
+      todoDto: TodoDto(
+        "aaa",
+        1,
+        2,
+        3,
+      ),
+    )));
+    await tester.pumpAndSettle();
+
+    await tester.enterText(titleInput, '');
+    await tester.pumpAndSettle();
+
+    // 更新テキストボタンをタップ
+    await tester.tap(editButtonInput);
+    await tester.pumpAndSettle();
+
+    // ボトムシートが存在すること
+    expect(editBottomSheetViewInput, findsOneWidget);
+  });
+
+  testWidgets('タイトルが入力された状態で更新ボタンを押下するとボトムシートが閉じること', (tester) async {
+    // EditBottomSheetViewを生成
+    await tester.pumpWidget(editBottomSheetView(EditBottomSheetView(
+      todoDto: TodoDto(
+        "aaa",
+        1,
+        2,
+        3,
+      ),
+    )));
+    await tester.pumpAndSettle();
+
+    // 更新テキストボタンをタップ
+    await tester.tap(editButtonInput);
+    await tester.pumpAndSettle();
+
+    // ボトムシートが存在しないこと
+    expect(editBottomSheetViewInput, findsNothing);
+  });
+
+  testWidgets('更新用ボトムシートが開かれた時、Todoの情報が反映されていること', (tester) async {
+    // AddBottomSheetViewを生成
+    await tester.pumpWidget(editBottomSheetView(EditBottomSheetView(
+      todoDto: TodoDto(
+        "aaa",
+        1,
+        2,
+        3,
+      ),
+    )));
+    await tester.pumpAndSettle();
+
+    // TextFieldに「aaa」が入力されていること
+    expect(find.text('aaa'), findsOneWidget);
+
+    // TODO:2023/09/09:A.Uehara:緊急度、重要度、ステータスがTodoの状態を反映して表示されるテストは、コードにテスト用コードを増やさないとできないっぽいので一旦省略
   });
 }
