@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:todo_app/UseCase/update_todo_use_case.dart';
 import 'package:todo_app/ViewModel/Dto/todo_dto.dart';
@@ -18,7 +19,10 @@ class EditBottomSheetViewModel extends _$EditBottomSheetViewModel {
   }
 
   /// Todoを更新する処理を呼び出す
-  void updateTodo(TodoDto todoDto) {
+  void onUpdateTodo(TodoDto todoDto, BuildContext context) {
     _updateTodoUseCase.execute(todoDto);
+
+    // ボトムシートを閉じる
+    Navigator.of(context).pop();
   }
 }

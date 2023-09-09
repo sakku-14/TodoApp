@@ -51,8 +51,7 @@ class AddBottomSheetView extends ConsumerWidget {
                     child: TextButton(
                       key: addButtonKey,
                       onPressed: addBottomSheetState.isAdd
-                          ? () {
-                              notifier.addTodo(
+                          ? () => notifier.onAddTodo(
                                 TodoDto(
                                   commonBottomSheetState.title,
                                   commonBottomSheetState.emergencyPoint,
@@ -60,9 +59,7 @@ class AddBottomSheetView extends ConsumerWidget {
                                   commonBottomSheetState.status,
                                 ),
                                 context,
-                              );
-                              Navigator.of(context).pop();
-                            }
+                              )
                           : null,
                       child: const Text('登録'),
                     ),
