@@ -133,7 +133,7 @@ class __$$_CommonBottomSheetViewModelStateCopyWithImpl<$Res>
 class _$_CommonBottomSheetViewModelState
     implements _CommonBottomSheetViewModelState {
   const _$_CommonBottomSheetViewModelState(
-      {this.title = "",
+      {this.title = '',
       this.emergencyPoint = 1,
       this.priorityPoint = 1,
       this.status = 1});

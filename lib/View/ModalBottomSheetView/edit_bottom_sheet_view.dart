@@ -12,13 +12,19 @@ var cancelButtonKey = UniqueKey();
 var editButtonKey = UniqueKey();
 
 class EditBottomSheetView extends ConsumerWidget {
-  const EditBottomSheetView({Key? key}) : super(key: key);
+  final TodoDto todoDto;
+  const EditBottomSheetView({
+    Key? key,
+    required this.todoDto,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    var editBottomSheetState = ref.watch(editBottomSheetViewModelProvider);
     var editBottomSheetNotifier =
         ref.read(editBottomSheetViewModelProvider.notifier);
-    var commonBottomSheetState = ref.read(commonBottomSheetViewModelProvider);
+    var commonBottomSheetState = ref.watch(commonBottomSheetViewModelProvider);
+
     return SingleChildScrollView(
       child: Column(
         key: editBottomSheetKey,
@@ -50,17 +56,19 @@ class EditBottomSheetView extends ConsumerWidget {
                   SizedBox(
                     child: TextButton(
                       key: editButtonKey,
-                      onPressed: () {
-                        editBottomSheetNotifier.updateTodo(
-                          TodoDto(
-                            commonBottomSheetState.title,
-                            commonBottomSheetState.emergencyPoint,
-                            commonBottomSheetState.priorityPoint,
-                            commonBottomSheetState.status,
-                          ),
-                        );
-                        Navigator.of(context).pop();
-                      },
+                      onPressed: editBottomSheetState.isEditable
+                          ? () {
+                              editBottomSheetNotifier.updateTodo(
+                                TodoDto(
+                                  commonBottomSheetState.title,
+                                  commonBottomSheetState.emergencyPoint,
+                                  commonBottomSheetState.priorityPoint,
+                                  commonBottomSheetState.status,
+                                ),
+                              );
+                              Navigator.of(context).pop();
+                            }
+                          : null,
                       child: const Text('更新'),
                     ),
                   ),
@@ -68,7 +76,10 @@ class EditBottomSheetView extends ConsumerWidget {
               ),
             ],
           ),
-          const CommonBottomSheetView(),
+          CommonBottomSheetView(
+            true,
+            todoDto,
+          ),
         ],
       ),
     );

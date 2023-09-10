@@ -6,6 +6,6 @@ part 'add_bottom_sheet_view_model_state.freezed.dart';
 abstract class AddBottomSheetViewModelState
     with _$AddBottomSheetViewModelState {
   const factory AddBottomSheetViewModelState({
-    @Default(false) bool isAdd,
+    @Default(false) bool isAddable,
   }) = _AddBottomSheetViewModelState;
 }

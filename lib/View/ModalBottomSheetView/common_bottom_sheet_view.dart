@@ -11,11 +11,33 @@ final emergencyKey = UniqueKey();
 final priorityKey = UniqueKey();
 final statusKey = UniqueKey();
 
-class CommonBottomSheetView extends ConsumerWidget {
-  const CommonBottomSheetView({super.key});
+class CommonBottomSheetView extends ConsumerStatefulWidget {
+  const CommonBottomSheetView(
+    this.isEdit,
+    this.todoDto, {
+    Key? key,
+  }) : super(key: key);
+  final bool isEdit;
+  final TodoDto todoDto;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  CommonBottomSheetViewModelState createState() =>
+      CommonBottomSheetViewModelState();
+}
+
+class CommonBottomSheetViewModelState
+    extends ConsumerState<CommonBottomSheetView> {
+  @override
+  void initState() {
+    super.initState();
+    var notifier = ref.read(commonBottomSheetViewModelProvider.notifier);
+    Future(() {
+      notifier.initCommonBottomSheetState(widget.todoDto);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     var state = ref.watch(commonBottomSheetViewModelProvider);
     var notifier = ref.read(commonBottomSheetViewModelProvider.notifier);
 
@@ -32,6 +54,11 @@ class CommonBottomSheetView extends ConsumerWidget {
           child: SizedBox(
             child: TextField(
               key: titleKey,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Todoのタイトル',
+              ),
+              controller: widget.isEdit ? textField : null,
               onChanged: (text) {
                 notifier.holdInputTodoInfo(TodoDto(
                   text,
@@ -40,10 +67,6 @@ class CommonBottomSheetView extends ConsumerWidget {
                   state.status,
                 ));
               },
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Todoのタイトル',
-              ),
             ),
           ),
         ),

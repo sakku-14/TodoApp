@@ -25,6 +25,7 @@ main() {
   testWidgets('登録用ボトムシートの表示項目が正しいこと', (tester) async {
     // AddBottomSheetViewを生成
     await tester.pumpWidget(addBottomSheetView(const AddBottomSheetView()));
+    await tester.pumpAndSettle();
 
     // 各項目が正しいこと
     // ボトムシートヘッダー部分

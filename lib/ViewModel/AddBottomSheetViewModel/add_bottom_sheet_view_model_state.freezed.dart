@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AddBottomSheetViewModelState {
-  bool get isAdd => throw _privateConstructorUsedError;
+  bool get isAddable => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AddBottomSheetViewModelStateCopyWith<AddBottomSheetViewModelState>
@@ -31,7 +31,7 @@ abstract class $AddBottomSheetViewModelStateCopyWith<$Res> {
       _$AddBottomSheetViewModelStateCopyWithImpl<$Res,
           AddBottomSheetViewModelState>;
   @useResult
-  $Res call({bool isAdd});
+  $Res call({bool isAddable});
 }
 
 /// @nodoc
@@ -48,12 +48,12 @@ class _$AddBottomSheetViewModelStateCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isAdd = null,
+    Object? isAddable = null,
   }) {
     return _then(_value.copyWith(
-      isAdd: null == isAdd
-          ? _value.isAdd
-          : isAdd // ignore: cast_nullable_to_non_nullable
+      isAddable: null == isAddable
+          ? _value.isAddable
+          : isAddable // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -68,7 +68,7 @@ abstract class _$$_AddBottomSheetViewModelStateCopyWith<$Res>
       __$$_AddBottomSheetViewModelStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isAdd});
+  $Res call({bool isAddable});
 }
 
 /// @nodoc
@@ -84,12 +84,12 @@ class __$$_AddBottomSheetViewModelStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isAdd = null,
+    Object? isAddable = null,
   }) {
     return _then(_$_AddBottomSheetViewModelState(
-      isAdd: null == isAdd
-          ? _value.isAdd
-          : isAdd // ignore: cast_nullable_to_non_nullable
+      isAddable: null == isAddable
+          ? _value.isAddable
+          : isAddable // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -98,15 +98,15 @@ class __$$_AddBottomSheetViewModelStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_AddBottomSheetViewModelState implements _AddBottomSheetViewModelState {
-  const _$_AddBottomSheetViewModelState({this.isAdd = false});
+  const _$_AddBottomSheetViewModelState({this.isAddable = false});
 
   @override
   @JsonKey()
-  final bool isAdd;
+  final bool isAddable;
 
   @override
   String toString() {
-    return 'AddBottomSheetViewModelState(isAdd: $isAdd)';
+    return 'AddBottomSheetViewModelState(isAddable: $isAddable)';
   }
 
   @override
@@ -114,11 +114,12 @@ class _$_AddBottomSheetViewModelState implements _AddBottomSheetViewModelState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AddBottomSheetViewModelState &&
-            (identical(other.isAdd, isAdd) || other.isAdd == isAdd));
+            (identical(other.isAddable, isAddable) ||
+                other.isAddable == isAddable));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isAdd);
+  int get hashCode => Object.hash(runtimeType, isAddable);
 
   @JsonKey(ignore: true)
   @override
@@ -130,11 +131,11 @@ class _$_AddBottomSheetViewModelState implements _AddBottomSheetViewModelState {
 
 abstract class _AddBottomSheetViewModelState
     implements AddBottomSheetViewModelState {
-  const factory _AddBottomSheetViewModelState({final bool isAdd}) =
+  const factory _AddBottomSheetViewModelState({final bool isAddable}) =
       _$_AddBottomSheetViewModelState;
 
   @override
-  bool get isAdd;
+  bool get isAddable;
   @override
   @JsonKey(ignore: true)
   _$$_AddBottomSheetViewModelStateCopyWith<_$_AddBottomSheetViewModelState>

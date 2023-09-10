@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:todo_app/ViewModel/Dto/todo_dto.dart';
 import 'package:todo_app/ViewModel/Event/changed_common_bottom_sheet_input_info_event.dart';
@@ -6,6 +7,8 @@ import '../../Infrastructure/event_bus.dart';
 import 'common_bottom_sheet_view_model_state.dart';
 
 part 'common_bottom_sheet_view_model.g.dart';
+
+TextEditingController textField = TextEditingController();
 
 @riverpod
 class CommonBottomSheetViewModel extends _$CommonBottomSheetViewModel {
@@ -25,5 +28,17 @@ class CommonBottomSheetViewModel extends _$CommonBottomSheetViewModel {
 
     // Add/EditBottomSheetに書き換えられた値を通知する
     eventBus.fire(ChangedCommonBottomSheetInputInfoEvent(todoDto));
+  }
+
+  /// CommonBottomSheetStateを生成する
+  Future<void> initCommonBottomSheetState(TodoDto todoDto) async {
+    state = state.copyWith(
+      title: todoDto.title,
+      emergencyPoint: todoDto.emergencyPoint,
+      priorityPoint: todoDto.priorityPoint,
+      status: todoDto.status,
+    );
+
+    textField = TextEditingController(text: todoDto.title);
   }
 }
