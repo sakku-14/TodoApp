@@ -2,9 +2,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:todo_app/Domain/Todo/todo.dart';
 import 'package:todo_app/Infrastructure/Repository/todo_list_repository.dart';
 
-Todo createTodo(String title) {
+Todo createTodo(DateTime createAt, String title) {
   return Todo(
-    createAt: DateTime.now(),
+    createAt: createAt,
     title: title,
     emergencyPoint: 1,
     priorityPoint: 1,
@@ -17,7 +17,7 @@ void main() {
     var todoListRepository = TodoListRepository();
     var todoCount = 5;
     for (var i = 0; i < todoCount; i++) {
-      var todo = createTodo('単体試験用タイトル$i');
+      var todo = createTodo(DateTime.now(), '単体試験用タイトル$i');
       todoListRepository.save(todo);
     }
 
@@ -28,7 +28,7 @@ void main() {
     var todoListRepository = TodoListRepository();
     var todoCount = 5;
     for (var i = 0; i < todoCount; i++) {
-      var todo = createTodo('単体試験用タイトル$i');
+      var todo = createTodo(DateTime.now(), '単体試験用タイトル$i');
       todoListRepository.save(todo);
     }
 
@@ -40,44 +40,38 @@ void main() {
 
   testWidgets('特定のTodoを更新できること', (tester) async {
     var todoListRepository = TodoListRepository();
-    var todoCount = 5;
 
-    var initTodoList = <Todo>[];
-    // テスト用のTodoをRepositoryに登録
-    for (int i = 0; i < todoCount; i++) {
-      var initTodo = createTodo('単体試験用タイトル$i');
-      todoListRepository.save(initTodo);
-      initTodoList.add(initTodo);
-    }
+    var initTodoDate1 = DateTime.now();
+    var initTodoDate2 = DateTime.now();
+    var initTodoDate3 = DateTime.now();
 
-    var updateTodoList = <Todo>[];
-    // 更新用のTodoを生成
-    for (int i = 0; i < todoCount; i++) {
-      var updateTodo = Todo(
-        createAt: initTodoList[i].createAt,
-        title: '更新後の単体試験用タイトル$i',
-        emergencyPoint: 2,
-        priorityPoint: 2,
-        status: 2,
-      );
-      updateTodoList.add(updateTodo);
-    }
+    var initTodo1 = createTodo(initTodoDate1, '単体試験用タイトル1');
+    var initTodo2 = createTodo(initTodoDate2, '単体試験用タイトル2');
+    var initTodo3 = createTodo(initTodoDate3, '単体試験用タイトル3');
+    todoListRepository.save(initTodo1);
+    todoListRepository.save(initTodo2);
+    todoListRepository.save(initTodo3);
+
+    var updateTodo = Todo(
+      createAt: initTodo2.createAt,
+      title: '更新後の単体試験用タイトル2',
+      emergencyPoint: 2,
+      priorityPoint: 2,
+      status: 2,
+    );
 
     // 更新用処理を実行
-    for (int i = 0; i < todoCount; i++) {
-      todoListRepository.update(updateTodoList[i]);
-    }
+    todoListRepository.update(updateTodo);
 
     // 更新後のTodoListを取得
     var updatedTodoList = todoListRepository.getTodoList();
 
     // 更新されたことを確認
-    for (int i = 0; i < todoCount; i++) {
-      expect(updatedTodoList[i].title, updateTodoList[i].title);
-      expect(
-          updatedTodoList[i].emergencyPoint, updateTodoList[i].emergencyPoint);
-      expect(updatedTodoList[i].priorityPoint, updateTodoList[i].priorityPoint);
-      expect(updatedTodoList[i].status, updateTodoList[i].status);
-    }
+    var updatedTodo = updatedTodoList
+        .firstWhere((element) => element.createAt == updateTodo.createAt);
+    expect(updatedTodo.title, '更新後の単体試験用タイトル2');
+    expect(updatedTodo.emergencyPoint, 2);
+    expect(updatedTodo.priorityPoint, 2);
+    expect(updatedTodo.status, 2);
   });
 }
