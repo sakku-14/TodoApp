@@ -1,10 +1,9 @@
 import 'dart:async';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:todo_app/UseCase/update_todo_use_case.dart';
+import 'package:todo_app/UseCase/UpdateTodoUseCase/update_todo_use_case.dart';
 import 'package:todo_app/ViewModel/Dto/todo_dto.dart';
 
-import '../../Infrastructure/Repository/todo_list_repository.dart';
 import '../../Infrastructure/event_bus.dart';
 import '../Event/changed_common_bottom_sheet_input_info_event.dart';
 import 'edit_bottom_sheet_view_model_state.dart';
@@ -13,8 +12,7 @@ part 'edit_bottom_sheet_view_model.g.dart';
 
 @riverpod
 class EditBottomSheetViewModel extends _$EditBottomSheetViewModel {
-  late final UpdateTodoUseCase _updateTodoUseCase =
-      UpdateTodoUseCase(TodoListRepository());
+  late final UpdateTodoUseCase _updateTodoUseCase;
 
   StreamSubscription? _myEvent;
 
@@ -26,6 +24,7 @@ class EditBottomSheetViewModel extends _$EditBottomSheetViewModel {
 
   @override
   EditBottomSheetViewModelState build() {
+    _updateTodoUseCase = ref.watch(updateTodoUseCaseProvider);
     ref.onDispose(() {
       _myEvent?.cancel();
     });

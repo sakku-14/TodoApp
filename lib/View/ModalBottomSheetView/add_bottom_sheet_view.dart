@@ -74,13 +74,7 @@ class AddBottomSheetView extends ConsumerWidget {
           ),
           CommonBottomSheetView(
             false,
-            TodoDto(
-              DateTime.now(),
-              "",
-              1,
-              1,
-              1,
-            ),
+            TodoDto(null, '', 1, 1, 1),
           ),
         ],
       ),

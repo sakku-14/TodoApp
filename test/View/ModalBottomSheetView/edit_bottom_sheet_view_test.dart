@@ -54,6 +54,7 @@ main() {
         1,
       ),
     )));
+    await tester.pumpAndSettle();
 
     // 登録テキストボタンをタップ
     await tester.tap(editButtonInput);

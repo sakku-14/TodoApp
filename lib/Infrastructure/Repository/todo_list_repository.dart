@@ -45,6 +45,30 @@ class TodoListRepository extends _$TodoListRepository {
     }
   }
 
+  /// 特定のTodoを更新
+  bool update(Todo todo) {
+    int index;
+    try {
+      index =
+          _todoList.indexWhere((element) => element.createAt == todo.createAt);
+    } catch (e) {
+      return false;
+    }
+
+    // 要素が見つからない場合、-1が返される
+    if (index == -1) return false;
+
+    _todoList[index] = Todo(
+      createAt: todo.createAt,
+      title: todo.title,
+      emergencyPoint: todo.emergencyPoint,
+      priorityPoint: todo.priorityPoint,
+      status: todo.status,
+    );
+
+    return true;
+  }
+
   /// Todoのクローン生成
   Todo clone(Todo todo) {
     return Todo(

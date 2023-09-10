@@ -118,6 +118,14 @@ class MockTodoListRepository extends _i1.Mock
         returnValue: <_i4.Todo>[],
       ) as List<_i4.Todo>);
   @override
+  bool update(_i4.Todo? todo) => (super.noSuchMethod(
+        Invocation.method(
+          #update,
+          [todo],
+        ),
+        returnValue: false,
+      ) as bool);
+  @override
   _i4.Todo clone(_i4.Todo? todo) => (super.noSuchMethod(
         Invocation.method(
           #clone,

@@ -17,6 +17,7 @@ class CommonBottomSheetView extends ConsumerStatefulWidget {
     this.todoDto, {
     Key? key,
   }) : super(key: key);
+
   final bool isEdit;
   final TodoDto todoDto;
 
