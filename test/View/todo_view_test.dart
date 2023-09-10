@@ -21,12 +21,13 @@ main() {
 
   /// TodoDtoを生成
   TodoDto createTodoDto() {
+    DateTime createAt = DateTime.now();
     const String todoTitle = '単体試験用タイトル';
     const int emergencyPoint = 2;
     const int priorityPoint = 2;
     const int status = 1;
 
-    return TodoDto(todoTitle, emergencyPoint, priorityPoint, status);
+    return TodoDto(createAt, todoTitle, emergencyPoint, priorityPoint, status);
   }
 
   /// Todoをスライドさせる

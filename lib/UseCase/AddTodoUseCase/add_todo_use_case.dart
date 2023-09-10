@@ -16,7 +16,7 @@ class AddTodoUseCase {
   /// Todoを新規登録
   bool execute(TodoDto todoDto) {
     var todo = Todo(
-      createDateTime: DateTime.now(),
+      createAt: DateTime.now(),
       title: todoDto.title,
       emergencyPoint: todoDto.emergencyPoint,
       priorityPoint: todoDto.priorityPoint,

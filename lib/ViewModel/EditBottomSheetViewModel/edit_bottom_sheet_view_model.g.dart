@@ -7,7 +7,7 @@ part of 'edit_bottom_sheet_view_model.dart';
 // **************************************************************************
 
 String _$editBottomSheetViewModelHash() =>
-    r'7204cea9ca3e51a606095d8a6b4380eaddbf060f';
+    r'373f27dc5d9cd3611e56246fac63ed6d2a2bbcce';
 
 /// See also [EditBottomSheetViewModel].
 @ProviderFor(EditBottomSheetViewModel)
