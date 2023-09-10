@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Todo {
-  DateTime get createDateTime => throw _privateConstructorUsedError;
+  DateTime get createAt => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   int get emergencyPoint => throw _privateConstructorUsedError;
   int get priorityPoint => throw _privateConstructorUsedError;
@@ -32,7 +32,7 @@ abstract class $TodoCopyWith<$Res> {
       _$TodoCopyWithImpl<$Res, Todo>;
   @useResult
   $Res call(
-      {DateTime createDateTime,
+      {DateTime createAt,
       String title,
       int emergencyPoint,
       int priorityPoint,
@@ -52,16 +52,16 @@ class _$TodoCopyWithImpl<$Res, $Val extends Todo>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? createDateTime = null,
+    Object? createAt = null,
     Object? title = null,
     Object? emergencyPoint = null,
     Object? priorityPoint = null,
     Object? status = null,
   }) {
     return _then(_value.copyWith(
-      createDateTime: null == createDateTime
-          ? _value.createDateTime
-          : createDateTime // ignore: cast_nullable_to_non_nullable
+      createAt: null == createAt
+          ? _value.createAt
+          : createAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
       title: null == title
           ? _value.title
@@ -90,7 +90,7 @@ abstract class _$$_TodoCopyWith<$Res> implements $TodoCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {DateTime createDateTime,
+      {DateTime createAt,
       String title,
       int emergencyPoint,
       int priorityPoint,
@@ -106,16 +106,16 @@ class __$$_TodoCopyWithImpl<$Res> extends _$TodoCopyWithImpl<$Res, _$_Todo>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? createDateTime = null,
+    Object? createAt = null,
     Object? title = null,
     Object? emergencyPoint = null,
     Object? priorityPoint = null,
     Object? status = null,
   }) {
     return _then(_$_Todo(
-      createDateTime: null == createDateTime
-          ? _value.createDateTime
-          : createDateTime // ignore: cast_nullable_to_non_nullable
+      createAt: null == createAt
+          ? _value.createAt
+          : createAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
       title: null == title
           ? _value.title
@@ -141,14 +141,14 @@ class __$$_TodoCopyWithImpl<$Res> extends _$TodoCopyWithImpl<$Res, _$_Todo>
 
 class _$_Todo implements _Todo {
   const _$_Todo(
-      {required this.createDateTime,
+      {required this.createAt,
       required this.title,
       required this.emergencyPoint,
       required this.priorityPoint,
       required this.status});
 
   @override
-  final DateTime createDateTime;
+  final DateTime createAt;
   @override
   final String title;
   @override
@@ -160,7 +160,7 @@ class _$_Todo implements _Todo {
 
   @override
   String toString() {
-    return 'Todo(createDateTime: $createDateTime, title: $title, emergencyPoint: $emergencyPoint, priorityPoint: $priorityPoint, status: $status)';
+    return 'Todo(createAt: $createAt, title: $title, emergencyPoint: $emergencyPoint, priorityPoint: $priorityPoint, status: $status)';
   }
 
   @override
@@ -168,8 +168,8 @@ class _$_Todo implements _Todo {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Todo &&
-            (identical(other.createDateTime, createDateTime) ||
-                other.createDateTime == createDateTime) &&
+            (identical(other.createAt, createAt) ||
+                other.createAt == createAt) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.emergencyPoint, emergencyPoint) ||
                 other.emergencyPoint == emergencyPoint) &&
@@ -179,8 +179,8 @@ class _$_Todo implements _Todo {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, createDateTime, title,
-      emergencyPoint, priorityPoint, status);
+  int get hashCode => Object.hash(
+      runtimeType, createAt, title, emergencyPoint, priorityPoint, status);
 
   @JsonKey(ignore: true)
   @override
@@ -191,14 +191,14 @@ class _$_Todo implements _Todo {
 
 abstract class _Todo implements Todo {
   const factory _Todo(
-      {required final DateTime createDateTime,
+      {required final DateTime createAt,
       required final String title,
       required final int emergencyPoint,
       required final int priorityPoint,
       required final int status}) = _$_Todo;
 
   @override
-  DateTime get createDateTime;
+  DateTime get createAt;
   @override
   String get title;
   @override

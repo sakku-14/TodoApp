@@ -27,6 +27,7 @@ main() {
     // AddBottomSheetViewを生成
     await tester.pumpWidget(editBottomSheetView(EditBottomSheetView(
       todoDto: TodoDto(
+        DateTime.now(),
         "aaa",
         1,
         1,
@@ -46,6 +47,7 @@ main() {
     // AddBottomSheetViewを生成
     await tester.pumpWidget(editBottomSheetView(EditBottomSheetView(
       todoDto: TodoDto(
+        DateTime.now(),
         "aaa",
         1,
         1,
@@ -65,6 +67,7 @@ main() {
     // EditBottomSheetViewを生成
     await tester.pumpWidget(editBottomSheetView(EditBottomSheetView(
       todoDto: TodoDto(
+        DateTime.now(),
         "aaa",
         1,
         1,
@@ -95,6 +98,7 @@ main() {
     // EditBottomSheetViewを生成
     await tester.pumpWidget(editBottomSheetView(EditBottomSheetView(
       todoDto: TodoDto(
+        DateTime.now(),
         "aaa",
         1,
         2,
@@ -118,6 +122,7 @@ main() {
     // EditBottomSheetViewを生成
     await tester.pumpWidget(editBottomSheetView(EditBottomSheetView(
       todoDto: TodoDto(
+        DateTime.now(),
         "aaa",
         1,
         2,
@@ -138,6 +143,7 @@ main() {
     // AddBottomSheetViewを生成
     await tester.pumpWidget(editBottomSheetView(EditBottomSheetView(
       todoDto: TodoDto(
+        DateTime.now(),
         "aaa",
         1,
         2,

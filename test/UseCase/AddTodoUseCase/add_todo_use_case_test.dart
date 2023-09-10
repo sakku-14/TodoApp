@@ -26,7 +26,7 @@ void main() {
 
   testWidgets('Todoを登録できた場合はイベント発行できること', (tester) async {
     final useCase = AddTodoUseCase(todoListRepository);
-    var todoDto = TodoDto('単体試験用タイトル', 1, 1, 1);
+    var todoDto = TodoDto(DateTime.now(), '単体試験用タイトル', 1, 1, 1);
     when(todoListRepository.save(any)).thenReturn(true);
 
     useCase.execute(todoDto);
@@ -37,7 +37,7 @@ void main() {
 
   testWidgets('Todoの登録に失敗した場合はイベント発行されないこと', (tester) async {
     final useCase = AddTodoUseCase(todoListRepository);
-    var todoDto = TodoDto('単体試験用タイトル', 1, 1, 1);
+    var todoDto = TodoDto(DateTime.now(), '単体試験用タイトル', 1, 1, 1);
     when(todoListRepository.save(any)).thenReturn(false);
 
     useCase.execute(todoDto);

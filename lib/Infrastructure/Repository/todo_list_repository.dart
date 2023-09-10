@@ -18,7 +18,7 @@ class TodoListRepository extends _$TodoListRepository {
     // 保存処理
     try {
       final newTodo = todo.copyWith(
-        createDateTime: todo.createDateTime,
+        createAt: todo.createAt,
         title: todo.title,
         emergencyPoint: todo.emergencyPoint,
         priorityPoint: todo.priorityPoint,
@@ -48,7 +48,7 @@ class TodoListRepository extends _$TodoListRepository {
   /// Todoのクローン生成
   Todo clone(Todo todo) {
     return Todo(
-      createDateTime: todo.createDateTime,
+      createAt: todo.createAt,
       title: todo.title,
       emergencyPoint: todo.emergencyPoint,
       priorityPoint: todo.priorityPoint,

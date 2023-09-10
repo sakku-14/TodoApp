@@ -7,7 +7,7 @@ part of 'common_bottom_sheet_view_model.dart';
 // **************************************************************************
 
 String _$commonBottomSheetViewModelHash() =>
-    r'4408997fd2ff525dfcf84ecc9e2fb9ea89c7ec1a';
+    r'9b2dccb2d2622367bd2b41bcd14561cb4cd0895d';
 
 /// See also [CommonBottomSheetViewModel].
 @ProviderFor(CommonBottomSheetViewModel)

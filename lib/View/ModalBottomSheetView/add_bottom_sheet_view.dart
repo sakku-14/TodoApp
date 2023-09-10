@@ -54,6 +54,7 @@ class AddBottomSheetView extends ConsumerWidget {
                           ? () {
                               notifier.addTodo(
                                 TodoDto(
+                                  commonBottomSheetState.createAt,
                                   commonBottomSheetState.title,
                                   commonBottomSheetState.emergencyPoint,
                                   commonBottomSheetState.priorityPoint,
@@ -74,6 +75,7 @@ class AddBottomSheetView extends ConsumerWidget {
           CommonBottomSheetView(
             false,
             TodoDto(
+              DateTime.now(),
               "",
               1,
               1,

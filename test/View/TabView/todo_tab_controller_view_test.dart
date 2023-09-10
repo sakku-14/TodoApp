@@ -10,8 +10,8 @@ var random = math.Random();
 List<TodoDto> createNotBeginTodoDtoList(int createCount) {
   return [
     for (var i = 0; i < createCount; i++) ...[
-      TodoDto('notBegin', random.nextInt(3) + 1, random.nextInt(3) + 1,
-          random.nextInt(4) + 1)
+      TodoDto(DateTime.now(), 'notBegin', random.nextInt(3) + 1,
+          random.nextInt(3) + 1, random.nextInt(4) + 1)
     ]
   ];
 }
@@ -19,8 +19,8 @@ List<TodoDto> createNotBeginTodoDtoList(int createCount) {
 List<TodoDto> createProgressTodoDtoList(int createCount) {
   return [
     for (var i = 0; i < createCount; i++) ...[
-      TodoDto('notBegin', random.nextInt(3) + 1, random.nextInt(3) + 1,
-          random.nextInt(4) + 1)
+      TodoDto(DateTime.now(), 'notBegin', random.nextInt(3) + 1,
+          random.nextInt(3) + 1, random.nextInt(4) + 1)
     ]
   ];
 }
@@ -28,8 +28,8 @@ List<TodoDto> createProgressTodoDtoList(int createCount) {
 List<TodoDto> createStayTodoDtoList(int createCount) {
   return [
     for (var i = 0; i < createCount; i++) ...[
-      TodoDto('notBegin', random.nextInt(3) + 1, random.nextInt(3) + 1,
-          random.nextInt(4) + 1)
+      TodoDto(DateTime.now(), 'notBegin', random.nextInt(3) + 1,
+          random.nextInt(3) + 1, random.nextInt(4) + 1)
     ]
   ];
 }
@@ -37,8 +37,8 @@ List<TodoDto> createStayTodoDtoList(int createCount) {
 List<TodoDto> createCompleteTodoDtoList(int createCount) {
   return [
     for (var i = 0; i < createCount; i++) ...[
-      TodoDto('notBegin', random.nextInt(3) + 1, random.nextInt(3) + 1,
-          random.nextInt(4) + 1)
+      TodoDto(DateTime.now(), 'notBegin', random.nextInt(3) + 1,
+          random.nextInt(3) + 1, random.nextInt(4) + 1)
     ]
   ];
 }

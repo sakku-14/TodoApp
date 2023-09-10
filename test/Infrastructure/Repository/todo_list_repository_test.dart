@@ -4,7 +4,7 @@ import 'package:todo_app/Infrastructure/Repository/todo_list_repository.dart';
 
 Todo createTodo(String title) {
   return Todo(
-    createDateTime: DateTime.now(),
+    createAt: DateTime.now(),
     title: title,
     emergencyPoint: 1,
     priorityPoint: 1,

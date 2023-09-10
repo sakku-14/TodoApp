@@ -61,6 +61,7 @@ class CommonBottomSheetViewModelState
               controller: widget.isEdit ? textField : null,
               onChanged: (text) {
                 notifier.holdInputTodoInfo(TodoDto(
+                  state.createAt,
                   text,
                   state.emergencyPoint,
                   state.priorityPoint,
@@ -99,6 +100,7 @@ class CommonBottomSheetViewModelState
                     groupValue: state.emergencyPoint,
                     onValueChanged: (value) {
                       notifier.holdInputTodoInfo(TodoDto(
+                        state.createAt,
                         state.title,
                         value,
                         state.priorityPoint,
@@ -144,6 +146,7 @@ class CommonBottomSheetViewModelState
                     groupValue: state.priorityPoint,
                     onValueChanged: (value) {
                       notifier.holdInputTodoInfo(TodoDto(
+                        state.createAt,
                         state.title,
                         state.emergencyPoint,
                         value,
@@ -190,6 +193,7 @@ class CommonBottomSheetViewModelState
                     groupValue: state.status,
                     onValueChanged: (value) {
                       notifier.holdInputTodoInfo(TodoDto(
+                        state.createAt,
                         state.title,
                         state.emergencyPoint,
                         state.priorityPoint,

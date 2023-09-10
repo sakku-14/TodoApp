@@ -22,6 +22,7 @@ class GetTodoListApplicationService {
     var todoDtoList = [
       for (var i = 0; i < todoList.length; i++) ...[
         TodoDto(
+          todoList[i].createAt,
           todoList[i].title,
           todoList[i].emergencyPoint,
           todoList[i].priorityPoint,

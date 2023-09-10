@@ -6,6 +6,7 @@ part 'common_bottom_sheet_view_model_state.freezed.dart';
 abstract class CommonBottomSheetViewModelState
     with _$CommonBottomSheetViewModelState {
   const factory CommonBottomSheetViewModelState({
+    DateTime? createAt,
     @Default('') String title,
     @Default(1) int emergencyPoint,
     @Default(1) int priorityPoint,

@@ -33,6 +33,7 @@ class CommonBottomSheetViewModel extends _$CommonBottomSheetViewModel {
   /// CommonBottomSheetStateを生成する
   Future<void> initCommonBottomSheetState(TodoDto todoDto) async {
     state = state.copyWith(
+      createAt: todoDto.createAt!,
       title: todoDto.title,
       emergencyPoint: todoDto.emergencyPoint,
       priorityPoint: todoDto.priorityPoint,

@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$CommonBottomSheetViewModelState {
+  DateTime? get createAt => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   int get emergencyPoint => throw _privateConstructorUsedError;
   int get priorityPoint => throw _privateConstructorUsedError;
@@ -34,7 +35,12 @@ abstract class $CommonBottomSheetViewModelStateCopyWith<$Res> {
       _$CommonBottomSheetViewModelStateCopyWithImpl<$Res,
           CommonBottomSheetViewModelState>;
   @useResult
-  $Res call({String title, int emergencyPoint, int priorityPoint, int status});
+  $Res call(
+      {DateTime? createAt,
+      String title,
+      int emergencyPoint,
+      int priorityPoint,
+      int status});
 }
 
 /// @nodoc
@@ -51,12 +57,17 @@ class _$CommonBottomSheetViewModelStateCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? createAt = freezed,
     Object? title = null,
     Object? emergencyPoint = null,
     Object? priorityPoint = null,
     Object? status = null,
   }) {
     return _then(_value.copyWith(
+      createAt: freezed == createAt
+          ? _value.createAt
+          : createAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -86,7 +97,12 @@ abstract class _$$_CommonBottomSheetViewModelStateCopyWith<$Res>
       __$$_CommonBottomSheetViewModelStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String title, int emergencyPoint, int priorityPoint, int status});
+  $Res call(
+      {DateTime? createAt,
+      String title,
+      int emergencyPoint,
+      int priorityPoint,
+      int status});
 }
 
 /// @nodoc
@@ -102,12 +118,17 @@ class __$$_CommonBottomSheetViewModelStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? createAt = freezed,
     Object? title = null,
     Object? emergencyPoint = null,
     Object? priorityPoint = null,
     Object? status = null,
   }) {
     return _then(_$_CommonBottomSheetViewModelState(
+      createAt: freezed == createAt
+          ? _value.createAt
+          : createAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -133,11 +154,14 @@ class __$$_CommonBottomSheetViewModelStateCopyWithImpl<$Res>
 class _$_CommonBottomSheetViewModelState
     implements _CommonBottomSheetViewModelState {
   const _$_CommonBottomSheetViewModelState(
-      {this.title = '',
+      {this.createAt,
+      this.title = '',
       this.emergencyPoint = 1,
       this.priorityPoint = 1,
       this.status = 1});
 
+  @override
+  final DateTime? createAt;
   @override
   @JsonKey()
   final String title;
@@ -153,7 +177,7 @@ class _$_CommonBottomSheetViewModelState
 
   @override
   String toString() {
-    return 'CommonBottomSheetViewModelState(title: $title, emergencyPoint: $emergencyPoint, priorityPoint: $priorityPoint, status: $status)';
+    return 'CommonBottomSheetViewModelState(createAt: $createAt, title: $title, emergencyPoint: $emergencyPoint, priorityPoint: $priorityPoint, status: $status)';
   }
 
   @override
@@ -161,6 +185,8 @@ class _$_CommonBottomSheetViewModelState
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_CommonBottomSheetViewModelState &&
+            (identical(other.createAt, createAt) ||
+                other.createAt == createAt) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.emergencyPoint, emergencyPoint) ||
                 other.emergencyPoint == emergencyPoint) &&
@@ -170,8 +196,8 @@ class _$_CommonBottomSheetViewModelState
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, title, emergencyPoint, priorityPoint, status);
+  int get hashCode => Object.hash(
+      runtimeType, createAt, title, emergencyPoint, priorityPoint, status);
 
   @JsonKey(ignore: true)
   @override
@@ -185,11 +211,14 @@ class _$_CommonBottomSheetViewModelState
 abstract class _CommonBottomSheetViewModelState
     implements CommonBottomSheetViewModelState {
   const factory _CommonBottomSheetViewModelState(
-      {final String title,
+      {final DateTime? createAt,
+      final String title,
       final int emergencyPoint,
       final int priorityPoint,
       final int status}) = _$_CommonBottomSheetViewModelState;
 
+  @override
+  DateTime? get createAt;
   @override
   String get title;
   @override
