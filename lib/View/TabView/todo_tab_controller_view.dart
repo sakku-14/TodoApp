@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/View/TabView/todo_count_view.dart';
 import 'package:todo_app/View/TabView/todo_tab_contents_view.dart';
 import 'package:todo_app/ViewModel/Dto/todo_dto.dart';
 
@@ -33,7 +34,9 @@ class TodoTabControllerView extends StatelessWidget {
                   child: Column(
                     children: [
                       const Text('未着手'),
-                      todoCount(notBeginTodoDtoList),
+                      TodoCountView(
+                        targetListCount: notBeginTodoDtoList.length,
+                      ),
                     ],
                   ),
                 ),
@@ -41,7 +44,9 @@ class TodoTabControllerView extends StatelessWidget {
                   child: Column(
                     children: [
                       const Text('作業中'),
-                      todoCount(progressTodoDtoList),
+                      TodoCountView(
+                        targetListCount: progressTodoDtoList.length,
+                      ),
                     ],
                   ),
                 ),
@@ -49,7 +54,7 @@ class TodoTabControllerView extends StatelessWidget {
                   child: Column(
                     children: [
                       const Text('保留'),
-                      todoCount(stayTodoDtoList),
+                      TodoCountView(targetListCount: stayTodoDtoList.length),
                     ],
                   ),
                 ),
@@ -57,7 +62,9 @@ class TodoTabControllerView extends StatelessWidget {
                   child: Column(
                     children: [
                       const Text('完了'),
-                      todoCount(completeTodoDtoList),
+                      TodoCountView(
+                        targetListCount: completeTodoDtoList.length,
+                      ),
                     ],
                   ),
                 ),
@@ -75,17 +82,6 @@ class TodoTabControllerView extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Center todoCount(List<TodoDto> targetList) {
-    return Center(
-      child: Text(
-        targetList.length.toString(),
-        style: const TextStyle(
-          fontSize: 13,
-        ),
       ),
     );
   }
