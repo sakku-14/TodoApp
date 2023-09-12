@@ -57,8 +57,7 @@ class EditBottomSheetView extends ConsumerWidget {
                     child: TextButton(
                       key: editButtonKey,
                       onPressed: editBottomSheetState.isEditable
-                          ? () {
-                              editBottomSheetNotifier.updateTodo(
+                          ? () => editBottomSheetNotifier.onUpdateTodo(
                                 TodoDto(
                                   commonBottomSheetState.createAt,
                                   commonBottomSheetState.title,
@@ -66,9 +65,8 @@ class EditBottomSheetView extends ConsumerWidget {
                                   commonBottomSheetState.priorityPoint,
                                   commonBottomSheetState.status,
                                 ),
-                              );
-                              Navigator.of(context).pop();
-                            }
+                                context,
+                              )
                           : null,
                       child: const Text('更新'),
                     ),
