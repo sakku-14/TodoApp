@@ -3,17 +3,29 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'sort_type.g.dart';
 
 @riverpod
-SortType sortType(SortTypeRef ref) {
-  return SortType.createdAt;
+class SortType extends _$SortType {
+  @override
+  SortState build() => SortState.createdAt;
+
+  void update(SortState newState) => state = newState;
 }
 
-enum SortType {
+enum SortState {
   createdAt('登録日時'),
   emergencyTimesPrimary('緊急度×重要度');
 
-  const SortType(this.typeName);
-
+  const SortState(this.typeName);
   final String typeName;
+
+  factory SortState.fromName(String name) {
+    switch (name) {
+      case '登録日時':
+        return SortState.createdAt;
+      case '緊急度×重要度':
+        return SortState.emergencyTimesPrimary;
+    }
+    return SortState.createdAt;
+  }
   List<String> get sortTypeList =>
-      [SortType.createdAt.typeName, SortType.emergencyTimesPrimary.typeName];
+      [SortState.createdAt.typeName, SortState.emergencyTimesPrimary.typeName];
 }
