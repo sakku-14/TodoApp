@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:todo_app/View/TabView/todo_tab_contents_view.dart';
 
-import 'todo_tab_controller_view_test.dart';
-
 main() {
   var notBeginCount = 20;
   var progressCount = 15;
@@ -29,12 +27,7 @@ main() {
               ),
               Flexible(
                 flex: 1,
-                child: TodoTabContentsView(
-                  notBeginTodoDtoList: createNotBeginTodoDtoList(notBeginCount),
-                  progressTodoDtoList: createProgressTodoDtoList(progressCount),
-                  stayTodoDtoList: createStayTodoDtoList(stayCount),
-                  completeTodoDtoList: createCompleteTodoDtoList(completeCount),
-                ),
+                child: TodoTabContentsView(),
               ),
             ],
           ),

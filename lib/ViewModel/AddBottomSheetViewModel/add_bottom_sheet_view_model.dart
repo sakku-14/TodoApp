@@ -2,10 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:todo_app/Infrastructure/event_bus.dart';
 import 'package:todo_app/UseCase/AddTodoUseCase/add_todo_use_case.dart';
 import 'package:todo_app/ViewModel/Dto/todo_dto.dart';
-import 'package:todo_app/ViewModel/Event/changed_common_bottom_sheet_input_info_event.dart';
 
 import 'add_bottom_sheet_view_model_state.dart';
 
@@ -18,9 +16,9 @@ class AddBottomSheetViewModel extends _$AddBottomSheetViewModel {
   StreamSubscription? _myEvent;
 
   AddBottomSheetViewModel() {
-    _myEvent = eventBus
-        .on<ChangedCommonBottomSheetInputInfoEvent>()
-        .listen((event) => judgeAddAble(event.todoDto));
+    // _myEvent = eventBus
+    //     .on<ChangedCommonBottomSheetInputInfoEvent>()
+    //     .listen((event) => judgeAddAble(event.todoDto));
   }
 
   @override

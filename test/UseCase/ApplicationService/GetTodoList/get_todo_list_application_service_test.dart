@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:todo_app/Domain/Todo/todo.dart';
+import 'package:todo_app/Domain/TodoList/todo.dart';
 import 'package:todo_app/Infrastructure/Repository/todo_list_repository.dart';
 import 'package:todo_app/UseCase/ApplicationService/GetTodoList/get_todo_list_application_service.dart';
 import 'package:todo_app/ViewModel/Dto/todo_dto.dart';

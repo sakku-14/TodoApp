@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:todo_app/Domain/Todo/todo.dart';
+import 'package:todo_app/Domain/TodoList/todo.dart';
 import 'package:todo_app/Infrastructure/Repository/todo_list_repository.dart';
 
 Todo createTodo(DateTime createAt, String title) {

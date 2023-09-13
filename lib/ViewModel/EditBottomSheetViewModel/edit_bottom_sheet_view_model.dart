@@ -4,8 +4,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:todo_app/UseCase/UpdateTodoUseCase/update_todo_use_case.dart';
 import 'package:todo_app/ViewModel/Dto/todo_dto.dart';
 
-import '../../Infrastructure/event_bus.dart';
-import '../Event/changed_common_bottom_sheet_input_info_event.dart';
 import 'edit_bottom_sheet_view_model_state.dart';
 
 part 'edit_bottom_sheet_view_model.g.dart';
@@ -17,9 +15,9 @@ class EditBottomSheetViewModel extends _$EditBottomSheetViewModel {
   StreamSubscription? _myEvent;
 
   EditBottomSheetViewModel() {
-    _myEvent = eventBus
-        .on<ChangedCommonBottomSheetInputInfoEvent>()
-        .listen((event) => judgeEditAble(event.todoDto));
+    // _myEvent = eventBus
+    //     .on<ChangedCommonBottomSheetInputInfoEvent>()
+    //     .listen((event) => judgeEditAble(event.todoDto));
   }
 
   @override

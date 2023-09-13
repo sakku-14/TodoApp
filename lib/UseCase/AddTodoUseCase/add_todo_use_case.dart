@@ -1,10 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:todo_app/Infrastructure/event_bus.dart';
-
-import '../../Domain/Event/add_todo_event.dart';
-import '../../Domain/Todo/todo.dart';
-import '../../Infrastructure/Repository/todo_list_repository.dart';
-import '../../ViewModel/Dto/todo_dto.dart';
+import 'package:todo_app/Domain/TodoList/todo.dart';
+import 'package:todo_app/Infrastructure/Repository/todo_list_repository.dart';
+import 'package:todo_app/ViewModel/Dto/todo_dto.dart';
 
 part 'add_todo_use_case.g.dart';
 
@@ -27,7 +24,7 @@ class AddTodoUseCase {
     if (!todoListRepository.save(todo)) return false;
 
     // 更新処理が完了した時のみ通知
-    eventBus.fire(AddTodoEvent());
+    // eventBus.fire(AddTodoEvent());
 
     return true;
   }

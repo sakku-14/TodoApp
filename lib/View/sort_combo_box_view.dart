@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// WidgetTestで使用するKey
 final sortComboBoxKey = UniqueKey();
 
-class SortComboBoxView extends StatelessWidget {
+class SortComboBoxView extends ConsumerWidget {
   final List<String> dropDownValues;
   final String isSelectedValue;
   final Function updateSelectedValue;
@@ -16,7 +17,7 @@ class SortComboBoxView extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Center(
       child: DropdownButton(
         items: [

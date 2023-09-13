@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:todo_app/ViewModel/Dto/todo_dto.dart';
-import 'package:todo_app/ViewModel/Event/changed_common_bottom_sheet_input_info_event.dart';
 
-import '../../Infrastructure/event_bus.dart';
 import 'common_bottom_sheet_view_model_state.dart';
 
 part 'common_bottom_sheet_view_model.g.dart';
@@ -27,7 +25,7 @@ class CommonBottomSheetViewModel extends _$CommonBottomSheetViewModel {
     );
 
     // Add/EditBottomSheetに書き換えられた値を通知する
-    eventBus.fire(ChangedCommonBottomSheetInputInfoEvent(todoDto));
+    // eventBus.fire(ChangedCommonBottomSheetInputInfoEvent(todoDto));
   }
 
   /// CommonBottomSheetStateを生成する

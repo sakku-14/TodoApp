@@ -5,7 +5,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:riverpod_annotation/riverpod_annotation.dart' as _i2;
-import 'package:todo_app/Domain/Todo/todo.dart' as _i4;
+import 'package:todo_app/Domain/TodoList/todo.dart' as _i4;
 import 'package:todo_app/Infrastructure/Repository/todo_list_repository.dart'
     as _i3;
 

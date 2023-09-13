@@ -1,25 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todo_app/Domain/TodoList/todo.dart';
+import 'package:todo_app/Domain/TodoList/todo_list.dart';
 import 'package:todo_app/View/TabView/todo_tab_contents_view.dart';
-import 'package:todo_app/ViewModel/Dto/todo_dto.dart';
 
 var todoTabContentsViewKey = UniqueKey();
 
-class TodoTabControllerView extends StatelessWidget {
+class TodoTabControllerView extends ConsumerWidget {
   const TodoTabControllerView({
     super.key,
-    required this.notBeginTodoDtoList,
-    required this.progressTodoDtoList,
-    required this.stayTodoDtoList,
-    required this.completeTodoDtoList,
   });
 
-  final List<TodoDto> notBeginTodoDtoList;
-  final List<TodoDto> progressTodoDtoList;
-  final List<TodoDto> stayTodoDtoList;
-  final List<TodoDto> completeTodoDtoList;
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return DefaultTabController(
       initialIndex: 0, // 最初に表示するタブ
       length: 4, // タブの数
@@ -33,7 +26,8 @@ class TodoTabControllerView extends StatelessWidget {
                   child: Column(
                     children: [
                       const Text('未着手'),
-                      todoCount(notBeginTodoDtoList),
+                      todoCount(ref.watch(todoListProvider.select(
+                          (value) => value.value?.getNotBeginTodoList()))),
                     ],
                   ),
                 ),
@@ -41,7 +35,8 @@ class TodoTabControllerView extends StatelessWidget {
                   child: Column(
                     children: [
                       const Text('作業中'),
-                      todoCount(progressTodoDtoList),
+                      todoCount(ref.watch(todoListProvider.select(
+                          (value) => value.value?.getNotBeginTodoList()))),
                     ],
                   ),
                 ),
@@ -49,7 +44,8 @@ class TodoTabControllerView extends StatelessWidget {
                   child: Column(
                     children: [
                       const Text('保留'),
-                      todoCount(stayTodoDtoList),
+                      todoCount(ref.watch(todoListProvider.select(
+                          (value) => value.value?.getNotBeginTodoList()))),
                     ],
                   ),
                 ),
@@ -57,7 +53,8 @@ class TodoTabControllerView extends StatelessWidget {
                   child: Column(
                     children: [
                       const Text('完了'),
-                      todoCount(completeTodoDtoList),
+                      todoCount(ref.watch(todoListProvider.select(
+                          (value) => value.value?.getNotBeginTodoList()))),
                     ],
                   ),
                 ),
@@ -66,23 +63,17 @@ class TodoTabControllerView extends StatelessWidget {
           ),
           Flexible(
             flex: 10,
-            child: TodoTabContentsView(
-              key: todoTabContentsViewKey,
-              notBeginTodoDtoList: notBeginTodoDtoList,
-              progressTodoDtoList: progressTodoDtoList,
-              stayTodoDtoList: stayTodoDtoList,
-              completeTodoDtoList: completeTodoDtoList,
-            ),
+            child: TodoTabContentsView(key: todoTabContentsViewKey),
           ),
         ],
       ),
     );
   }
 
-  Center todoCount(List<TodoDto> targetList) {
+  Center todoCount(List<Todo>? targetList) {
     return Center(
       child: Text(
-        targetList.length.toString(),
+        targetList == null ? '0' : targetList.length.toString(),
         style: const TextStyle(
           fontSize: 13,
         ),

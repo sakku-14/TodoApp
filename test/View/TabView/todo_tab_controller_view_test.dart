@@ -62,12 +62,7 @@ main() {
   MaterialApp todoTabControllerView() {
     return MaterialApp(
       home: Scaffold(
-        body: TodoTabControllerView(
-          notBeginTodoDtoList: createNotBeginTodoDtoList(notBeginCount),
-          progressTodoDtoList: createProgressTodoDtoList(progressCount),
-          stayTodoDtoList: createStayTodoDtoList(stayCount),
-          completeTodoDtoList: createCompleteTodoDtoList(completeCount),
-        ),
+        body: TodoTabControllerView(),
       ),
     );
   }

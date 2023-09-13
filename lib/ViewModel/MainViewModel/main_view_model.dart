@@ -2,12 +2,9 @@ import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:todo_app/Infrastructure/event_bus.dart';
 import 'package:todo_app/UseCase/ApplicationService/GetTodoList/get_todo_list_application_service.dart';
+import 'package:todo_app/ViewModel/Dto/todo_dto.dart';
 
-import '../../Domain/Event/add_todo_event.dart';
-import '../../Domain/Event/update_todo_event.dart';
-import '../Dto/todo_dto.dart';
 import 'main_view_model_state.dart';
 
 part 'main_view_model.g.dart';
@@ -19,8 +16,8 @@ class MainViewModel extends _$MainViewModel {
   StreamSubscription? _myEvent;
 
   MainViewModel() {
-    _myEvent = eventBus.on<AddTodoEvent>().listen((event) => addTodo());
-    _myEvent = eventBus.on<UpdateTodoEvent>().listen((event) => addTodo());
+    // _myEvent = eventBus.on<AddTodoEvent>().listen((event) => addTodo());
+    // _myEvent = eventBus.on<UpdateTodoEvent>().listen((event) => addTodo());
   }
 
   @override

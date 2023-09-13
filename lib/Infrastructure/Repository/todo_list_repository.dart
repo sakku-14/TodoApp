@@ -1,6 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import '../../Domain/Todo/todo.dart';
+import 'package:todo_app/Domain/TodoList/todo.dart';
 
 part 'todo_list_repository.g.dart';
 
