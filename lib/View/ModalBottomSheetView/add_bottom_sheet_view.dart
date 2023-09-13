@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todo_app/Domain/EditTodo/edit_todo.dart';
 import 'package:todo_app/View/ModalBottomSheetView/common_bottom_sheet_view.dart';
 
 import '../../ViewModel/AddBottomSheetViewModel/add_bottom_sheet_view_model.dart';
@@ -16,9 +17,6 @@ class AddBottomSheetView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var notifier = ref.read(addBottomSheetViewModelProvider.notifier);
-    var addBottomSheetState = ref.watch(addBottomSheetViewModelProvider);
-    var commonBottomSheetState = ref.watch(commonBottomSheetViewModelProvider);
     return SingleChildScrollView(
       child: Column(
         key: addBottomSheetKey,
@@ -50,7 +48,7 @@ class AddBottomSheetView extends ConsumerWidget {
                   SizedBox(
                     child: TextButton(
                       key: addButtonKey,
-                      onPressed: addBottomSheetState.isAddable
+                      onPressed: ref.watch(editTodoProvider).canSubmit()
                           ? () {
                               notifier.addTodo(
                                 TodoDto(

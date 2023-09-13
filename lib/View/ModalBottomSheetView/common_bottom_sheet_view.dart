@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo_app/ViewModel/CommonBottomSheetViewModel/common_bottom_sheet_view_model.dart';
+import 'package:todo_app/Domain/EditTodo/edit_todo.dart';
+import 'package:todo_app/Domain/Tab/tab.dart';
 
 import '../../ViewModel/Dto/todo_dto.dart';
 
@@ -28,20 +29,17 @@ class CommonBottomSheetView extends ConsumerStatefulWidget {
 
 class CommonBottomSheetViewModelState
     extends ConsumerState<CommonBottomSheetView> {
+  late TextEditingController textController;
+
   @override
   void initState() {
     super.initState();
-    var notifier = ref.read(commonBottomSheetViewModelProvider.notifier);
-    Future(() {
-      notifier.initCommonBottomSheetState(widget.todoDto);
-    });
+    textController =
+        TextEditingController(text: ref.watch(editTodoProvider).title);
   }
 
   @override
   Widget build(BuildContext context) {
-    var state = ref.watch(commonBottomSheetViewModelProvider);
-    var notifier = ref.read(commonBottomSheetViewModelProvider.notifier);
-
     return Column(
       children: [
         /// タイトル
@@ -59,15 +57,9 @@ class CommonBottomSheetViewModelState
                 border: OutlineInputBorder(),
                 labelText: 'Todoのタイトル',
               ),
-              controller: widget.isEdit ? textField : null,
+              controller: textController,
               onChanged: (text) {
-                notifier.holdInputTodoInfo(TodoDto(
-                  state.createAt,
-                  text,
-                  state.emergencyPoint,
-                  state.priorityPoint,
-                  state.status,
-                ));
+                ref.read(editTodoProvider.notifier).setTitle(text);
               },
             ),
           ),
@@ -98,15 +90,11 @@ class CommonBottomSheetViewModelState
                       2: Text("2"),
                       3: Text("3"),
                     },
-                    groupValue: state.emergencyPoint,
+                    groupValue: ref.watch(editTodoProvider).emergencyPoint,
                     onValueChanged: (value) {
-                      notifier.holdInputTodoInfo(TodoDto(
-                        state.createAt,
-                        state.title,
-                        value,
-                        state.priorityPoint,
-                        state.status,
-                      ));
+                      ref
+                          .read(editTodoProvider.notifier)
+                          .setEmergencyPoint(value);
                     },
                     selectedColor: CupertinoColors.secondaryLabel,
                     pressedColor: CupertinoColors.secondaryLabel,
@@ -144,15 +132,11 @@ class CommonBottomSheetViewModelState
                       2: Text("2"),
                       3: Text("3"),
                     },
-                    groupValue: state.priorityPoint,
+                    groupValue: ref.watch(editTodoProvider).primaryPoint,
                     onValueChanged: (value) {
-                      notifier.holdInputTodoInfo(TodoDto(
-                        state.createAt,
-                        state.title,
-                        state.emergencyPoint,
-                        value,
-                        state.status,
-                      ));
+                      ref
+                          .read(editTodoProvider.notifier)
+                          .setPrimaryPoint(value);
                     },
                     selectedColor: CupertinoColors.secondaryLabel,
                     pressedColor: CupertinoColors.secondaryLabel,
@@ -185,21 +169,17 @@ class CommonBottomSheetViewModelState
                   width: double.infinity,
                   child: CupertinoSegmentedControl(
                     key: statusKey,
-                    children: const {
-                      1: Text("未着手"),
-                      2: Text("作業中"),
-                      3: Text("保留"),
-                      4: Text("完了"),
+                    children: {
+                      1: Text(TabState.notBegin.tabName),
+                      2: Text(TabState.progress.tabName),
+                      3: Text(TabState.stay.tabName),
+                      4: Text(TabState.complete.tabName),
                     },
-                    groupValue: state.status,
+                    groupValue: ref.watch(editTodoProvider).tabStatus.tabName,
                     onValueChanged: (value) {
-                      notifier.holdInputTodoInfo(TodoDto(
-                        state.createAt,
-                        state.title,
-                        state.emergencyPoint,
-                        state.priorityPoint,
-                        value,
-                      ));
+                      ref
+                          .read(editTodoProvider.notifier)
+                          .setTabStatus(TabState.fromName(value as String));
                     },
                     selectedColor: CupertinoColors.secondaryLabel,
                     pressedColor: CupertinoColors.secondaryLabel,
