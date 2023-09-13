@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todo_app/Domain/Tab/tab.dart';
 import 'package:todo_app/Domain/TodoList/todo.dart';
 import 'package:todo_app/Domain/TodoList/todo_list.dart';
 import 'package:todo_app/View/TabView/todo_tab_contents_view.dart';
@@ -25,7 +26,7 @@ class TodoTabControllerView extends ConsumerWidget {
                 Tab(
                   child: Column(
                     children: [
-                      const Text('未着手'),
+                      Text(TabState.notBegin.tabName),
                       todoCount(ref.watch(todoListProvider.select(
                           (value) => value.value?.getNotBeginTodoList()))),
                     ],
@@ -34,7 +35,7 @@ class TodoTabControllerView extends ConsumerWidget {
                 Tab(
                   child: Column(
                     children: [
-                      const Text('作業中'),
+                      Text(TabState.progress.tabName),
                       todoCount(ref.watch(todoListProvider.select(
                           (value) => value.value?.getNotBeginTodoList()))),
                     ],
@@ -43,7 +44,7 @@ class TodoTabControllerView extends ConsumerWidget {
                 Tab(
                   child: Column(
                     children: [
-                      const Text('保留'),
+                      Text(TabState.stay.tabName),
                       todoCount(ref.watch(todoListProvider.select(
                           (value) => value.value?.getNotBeginTodoList()))),
                     ],
@@ -52,7 +53,7 @@ class TodoTabControllerView extends ConsumerWidget {
                 Tab(
                   child: Column(
                     children: [
-                      const Text('完了'),
+                      Text(TabState.complete.tabName),
                       todoCount(ref.watch(todoListProvider.select(
                           (value) => value.value?.getNotBeginTodoList()))),
                     ],
