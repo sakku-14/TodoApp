@@ -13,9 +13,6 @@ class MainView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // var sortComboBoxState = ref.watch(sortComboBoxViewModelProvider);
-    // var sortComboBoxNotifier = ref.read(sortComboBoxViewModelProvider.notifier);
-
     final isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
 
