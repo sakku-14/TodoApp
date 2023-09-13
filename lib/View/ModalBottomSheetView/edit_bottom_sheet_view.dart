@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_app/Domain/EditTodo/edit_todo.dart';
+import 'package:todo_app/UseCase/UpdateTodoUseCase/update_todo_use_case.dart';
 import 'package:todo_app/View/ModalBottomSheetView/common_bottom_sheet_view.dart';
 
-import '../../ViewModel/CommonBottomSheetViewModel/common_bottom_sheet_view_model.dart';
 import '../../ViewModel/Dto/todo_dto.dart';
-import '../../ViewModel/EditBottomSheetViewModel/edit_bottom_sheet_view_model.dart';
 
 // WidgetTest用Key
 var editBottomSheetKey = UniqueKey();
@@ -21,6 +20,8 @@ class EditBottomSheetView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    var state = ref.watch(editTodoProvider);
+
     return SingleChildScrollView(
       child: Column(
         key: editBottomSheetKey,
@@ -54,15 +55,15 @@ class EditBottomSheetView extends ConsumerWidget {
                       key: editButtonKey,
                       onPressed: ref.watch(editTodoProvider).canSubmit()
                           ? () {
-                              editBottomSheetNotifier.updateTodo(
-                                TodoDto(
-                                  commonBottomSheetState.createAt,
-                                  commonBottomSheetState.title,
-                                  commonBottomSheetState.emergencyPoint,
-                                  commonBottomSheetState.priorityPoint,
-                                  commonBottomSheetState.status,
-                                ),
-                              );
+                              // Todo更新処理呼び出し
+                              ref
+                                  .watch(updateTodoUseCaseProvider)
+                                  .execute(TodoDto(
+                                    state.title,
+                                    state.emergencyPoint,
+                                    state.primaryPoint,
+                                    state.tabStatus,
+                                  ));
                               Navigator.of(context).pop();
                             }
                           : null,
@@ -73,10 +74,7 @@ class EditBottomSheetView extends ConsumerWidget {
               ),
             ],
           ),
-          CommonBottomSheetView(
-            true,
-            todoDto,
-          ),
+          CommonBottomSheetView(todoDto: todoDto),
         ],
       ),
     );

@@ -20,7 +20,7 @@ mixin _$Todo {
   String get title => throw _privateConstructorUsedError;
   int get emergencyPoint => throw _privateConstructorUsedError;
   int get priorityPoint => throw _privateConstructorUsedError;
-  int get status => throw _privateConstructorUsedError;
+  TabState get status => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TodoCopyWith<Todo> get copyWith => throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ abstract class $TodoCopyWith<$Res> {
       String title,
       int emergencyPoint,
       int priorityPoint,
-      int status});
+      TabState status});
 }
 
 /// @nodoc
@@ -78,7 +78,7 @@ class _$TodoCopyWithImpl<$Res, $Val extends Todo>
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as int,
+              as TabState,
     ) as $Val);
   }
 }
@@ -94,7 +94,7 @@ abstract class _$$_TodoCopyWith<$Res> implements $TodoCopyWith<$Res> {
       String title,
       int emergencyPoint,
       int priorityPoint,
-      int status});
+      TabState status});
 }
 
 /// @nodoc
@@ -132,7 +132,7 @@ class __$$_TodoCopyWithImpl<$Res> extends _$TodoCopyWithImpl<$Res, _$_Todo>
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as int,
+              as TabState,
     ));
   }
 }
@@ -156,7 +156,7 @@ class _$_Todo implements _Todo {
   @override
   final int priorityPoint;
   @override
-  final int status;
+  final TabState status;
 
   @override
   String toString() {
@@ -195,7 +195,7 @@ abstract class _Todo implements Todo {
       required final String title,
       required final int emergencyPoint,
       required final int priorityPoint,
-      required final int status}) = _$_Todo;
+      required final TabState status}) = _$_Todo;
 
   @override
   DateTime get createAt;
@@ -206,7 +206,7 @@ abstract class _Todo implements Todo {
   @override
   int get priorityPoint;
   @override
-  int get status;
+  TabState get status;
   @override
   @JsonKey(ignore: true)
   _$$_TodoCopyWith<_$_Todo> get copyWith => throw _privateConstructorUsedError;

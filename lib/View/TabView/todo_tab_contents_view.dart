@@ -17,8 +17,13 @@ class TodoTabContentsView extends ConsumerWidget {
         ? [Container()]
         : todoList
             .map((e) => TodoView(
-                todoDto: TodoDto(e.createAt, e.title, e.emergencyPoint,
-                    e.priorityPoint, e.status)))
+                    todoDto: TodoDto(
+                  e.title,
+                  e.emergencyPoint,
+                  e.priorityPoint,
+                  e.status,
+                  createAt: e.createAt,
+                )))
             .toList();
     var todoViews = SingleChildScrollView(
       child: SlidableAutoCloseBehavior(

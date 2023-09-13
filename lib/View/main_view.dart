@@ -22,7 +22,7 @@ class MainView extends ConsumerWidget {
       ),
       body: Column(
         children: [
-          Flexible(
+          const Flexible(
             flex: 1,
             child: SortComboBoxView(),
           ),

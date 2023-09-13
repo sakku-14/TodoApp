@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_app/Domain/EditTodo/edit_todo.dart';
+import 'package:todo_app/UseCase/AddTodoUseCase/add_todo_use_case.dart';
 import 'package:todo_app/View/ModalBottomSheetView/common_bottom_sheet_view.dart';
-
-import '../../ViewModel/AddBottomSheetViewModel/add_bottom_sheet_view_model.dart';
-import '../../ViewModel/CommonBottomSheetViewModel/common_bottom_sheet_view_model.dart';
-import '../../ViewModel/Dto/todo_dto.dart';
+import 'package:todo_app/ViewModel/Dto/todo_dto.dart';
 
 // WidgetTest用Key
 var addBottomSheetKey = UniqueKey();
@@ -17,6 +15,7 @@ class AddBottomSheetView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    var state = ref.watch(editTodoProvider);
     return SingleChildScrollView(
       child: Column(
         key: addBottomSheetKey,
@@ -48,18 +47,23 @@ class AddBottomSheetView extends ConsumerWidget {
                   SizedBox(
                     child: TextButton(
                       key: addButtonKey,
-                      onPressed: ref.watch(editTodoProvider).canSubmit()
+                      onPressed: state.canSubmit()
                           ? () {
-                              notifier.addTodo(
-                                TodoDto(
-                                  commonBottomSheetState.createAt,
-                                  commonBottomSheetState.title,
-                                  commonBottomSheetState.emergencyPoint,
-                                  commonBottomSheetState.priorityPoint,
-                                  commonBottomSheetState.status,
-                                ),
-                                context,
-                              );
+                              // Todo登録処理呼び出し
+                              var result = ref
+                                  .read(addTodoUseCaseProvider)
+                                  .execute(TodoDto(
+                                      state.title,
+                                      state.emergencyPoint,
+                                      state.primaryPoint,
+                                      state.tabStatus));
+                              if (!result) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('Filed Add Todo'),
+                                  ),
+                                );
+                              }
                               Navigator.of(context).pop();
                             }
                           : null,
@@ -70,10 +74,7 @@ class AddBottomSheetView extends ConsumerWidget {
               ),
             ],
           ),
-          CommonBottomSheetView(
-            false,
-            TodoDto(null, '', 1, 1, 1),
-          ),
+          CommonBottomSheetView(),
         ],
       ),
     );

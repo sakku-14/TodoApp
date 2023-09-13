@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$EditTodoState {
+  DateTime? get createAt => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   int get emergencyPoint => throw _privateConstructorUsedError;
   int get primaryPoint => throw _privateConstructorUsedError;
@@ -33,7 +34,11 @@ abstract class $EditTodoStateCopyWith<$Res> {
       _$EditTodoStateCopyWithImpl<$Res, EditTodoState>;
   @useResult
   $Res call(
-      {String title, int emergencyPoint, int primaryPoint, TabState tabStatus});
+      {DateTime? createAt,
+      String title,
+      int emergencyPoint,
+      int primaryPoint,
+      TabState tabStatus});
 }
 
 /// @nodoc
@@ -49,12 +54,17 @@ class _$EditTodoStateCopyWithImpl<$Res, $Val extends EditTodoState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? createAt = freezed,
     Object? title = null,
     Object? emergencyPoint = null,
     Object? primaryPoint = null,
     Object? tabStatus = null,
   }) {
     return _then(_value.copyWith(
+      createAt: freezed == createAt
+          ? _value.createAt
+          : createAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -84,7 +94,11 @@ abstract class _$$_EditTodoStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String title, int emergencyPoint, int primaryPoint, TabState tabStatus});
+      {DateTime? createAt,
+      String title,
+      int emergencyPoint,
+      int primaryPoint,
+      TabState tabStatus});
 }
 
 /// @nodoc
@@ -98,12 +112,17 @@ class __$$_EditTodoStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? createAt = freezed,
     Object? title = null,
     Object? emergencyPoint = null,
     Object? primaryPoint = null,
     Object? tabStatus = null,
   }) {
     return _then(_$_EditTodoState(
+      createAt: freezed == createAt
+          ? _value.createAt
+          : createAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -128,12 +147,15 @@ class __$$_EditTodoStateCopyWithImpl<$Res>
 
 class _$_EditTodoState extends _EditTodoState {
   _$_EditTodoState(
-      {this.title = '',
+      {this.createAt,
+      this.title = '',
       this.emergencyPoint = 1,
       this.primaryPoint = 1,
       this.tabStatus = TabState.notBegin})
       : super._();
 
+  @override
+  final DateTime? createAt;
   @override
   @JsonKey()
   final String title;
@@ -149,7 +171,7 @@ class _$_EditTodoState extends _EditTodoState {
 
   @override
   String toString() {
-    return 'EditTodoState(title: $title, emergencyPoint: $emergencyPoint, primaryPoint: $primaryPoint, tabStatus: $tabStatus)';
+    return 'EditTodoState(createAt: $createAt, title: $title, emergencyPoint: $emergencyPoint, primaryPoint: $primaryPoint, tabStatus: $tabStatus)';
   }
 
   @override
@@ -157,6 +179,8 @@ class _$_EditTodoState extends _EditTodoState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_EditTodoState &&
+            (identical(other.createAt, createAt) ||
+                other.createAt == createAt) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.emergencyPoint, emergencyPoint) ||
                 other.emergencyPoint == emergencyPoint) &&
@@ -167,8 +191,8 @@ class _$_EditTodoState extends _EditTodoState {
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, title, emergencyPoint, primaryPoint, tabStatus);
+  int get hashCode => Object.hash(
+      runtimeType, createAt, title, emergencyPoint, primaryPoint, tabStatus);
 
   @JsonKey(ignore: true)
   @override
@@ -179,12 +203,15 @@ class _$_EditTodoState extends _EditTodoState {
 
 abstract class _EditTodoState extends EditTodoState {
   factory _EditTodoState(
-      {final String title,
+      {final DateTime? createAt,
+      final String title,
       final int emergencyPoint,
       final int primaryPoint,
       final TabState tabStatus}) = _$_EditTodoState;
   _EditTodoState._() : super._();
 
+  @override
+  DateTime? get createAt;
   @override
   String get title;
   @override

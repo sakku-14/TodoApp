@@ -13,14 +13,12 @@ final priorityKey = UniqueKey();
 final statusKey = UniqueKey();
 
 class CommonBottomSheetView extends ConsumerStatefulWidget {
-  const CommonBottomSheetView(
-    this.isEdit,
-    this.todoDto, {
+  CommonBottomSheetView({
     Key? key,
+    todoDto,
   }) : super(key: key);
 
-  final bool isEdit;
-  final TodoDto todoDto;
+  TodoDto? todoDto;
 
   @override
   CommonBottomSheetViewModelState createState() =>
@@ -29,13 +27,20 @@ class CommonBottomSheetView extends ConsumerStatefulWidget {
 
 class CommonBottomSheetViewModelState
     extends ConsumerState<CommonBottomSheetView> {
-  late TextEditingController textController;
-
   @override
   void initState() {
     super.initState();
-    textController =
-        TextEditingController(text: ref.watch(editTodoProvider).title);
+    Future(() {
+      if (widget.todoDto != null) {
+        var todoDto = widget.todoDto;
+        ref.read(editTodoProvider.notifier).setInitialValue(
+            todoDto!.createAt!,
+            todoDto!.title,
+            todoDto!.emergencyPoint,
+            todoDto!.priorityPoint,
+            todoDto!.status);
+      }
+    });
   }
 
   @override
@@ -57,7 +62,7 @@ class CommonBottomSheetViewModelState
                 border: OutlineInputBorder(),
                 labelText: 'Todoのタイトル',
               ),
-              controller: textController,
+              controller: ref.watch(editTodoProvider.notifier).textController,
               onChanged: (text) {
                 ref.read(editTodoProvider.notifier).setTitle(text);
               },
@@ -170,16 +175,14 @@ class CommonBottomSheetViewModelState
                   child: CupertinoSegmentedControl(
                     key: statusKey,
                     children: {
-                      1: Text(TabState.notBegin.tabName),
-                      2: Text(TabState.progress.tabName),
-                      3: Text(TabState.stay.tabName),
-                      4: Text(TabState.complete.tabName),
+                      TabState.notBegin: Text(TabState.notBegin.tabName),
+                      TabState.progress: Text(TabState.progress.tabName),
+                      TabState.stay: Text(TabState.stay.tabName),
+                      TabState.complete: Text(TabState.complete.tabName),
                     },
-                    groupValue: ref.watch(editTodoProvider).tabStatus.tabName,
+                    groupValue: ref.watch(editTodoProvider).tabStatus,
                     onValueChanged: (value) {
-                      ref
-                          .read(editTodoProvider.notifier)
-                          .setTabStatus(TabState.fromName(value as String));
+                      ref.read(editTodoProvider.notifier).setTabStatus(value);
                     },
                     selectedColor: CupertinoColors.secondaryLabel,
                     pressedColor: CupertinoColors.secondaryLabel,
