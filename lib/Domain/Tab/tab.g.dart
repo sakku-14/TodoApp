@@ -6,11 +6,11 @@ part of 'tab.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$tabHash() => r'2417f7d3b6a5c155e6377ee960c19ba58f3f40ff';
+String _$tabHash() => r'ac402b0e4b347dbf7d4e6674c42149513f454a5d';
 
 /// See also [tab].
 @ProviderFor(tab)
-final tabProvider = AutoDisposeProvider<Tab>.internal(
+final tabProvider = AutoDisposeProvider<TabState>.internal(
   tab,
   name: r'tabProvider',
   debugGetCreateSourceHash:
@@ -19,6 +19,6 @@ final tabProvider = AutoDisposeProvider<Tab>.internal(
   allTransitiveDependencies: null,
 );
 
-typedef TabRef = AutoDisposeProviderRef<Tab>;
+typedef TabRef = AutoDisposeProviderRef<TabState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
