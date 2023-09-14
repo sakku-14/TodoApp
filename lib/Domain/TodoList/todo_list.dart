@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:todo_app/Domain/Tab/tab.dart';
 import 'package:todo_app/Domain/TodoList/todo.dart';
 import 'package:todo_app/Infrastructure/Repository/todo_list_repository.dart';
 
@@ -7,28 +8,59 @@ part 'todo_list.freezed.dart';
 part 'todo_list.g.dart';
 
 @riverpod
-Future<TodoList> todoList(TodoListRef ref) async {
-  // DBから取得する処理と想定
-  await Future.delayed(const Duration(seconds: 0));
-  var todoList = ref.watch(todoListRepositoryProvider).getTodoList();
+class TodoList extends _$TodoList {
+  @override
+  TodoListState build() {
+    var todoList = ref.watch(todoListRepositoryProvider.notifier).getTodoList();
+    return TodoListState(todoList: todoList);
+  }
 
-  // 今は初期のTodoは空（メモリ上でしか保持していないから）
-  return TodoList(todoList: todoList);
+  void add(Todo todo) {
+    state = state.add(todo);
+  }
+
+  void update(Todo newTodo) {
+    state = state.update(newTodo);
+  }
+
+  void delete(Todo todo) {
+    state = state.delete(todo);
+  }
 }
 
 @freezed
-abstract class TodoList with _$TodoList {
-  factory TodoList({
+abstract class TodoListState with _$TodoListState {
+  factory TodoListState({
     required List<Todo> todoList,
-  }) = _TodoList;
-  TodoList._();
+  }) = _TodoListState;
+  TodoListState._();
 
   List<Todo> getNotBeginTodoList() =>
-      this.todoList.where((element) => element.status == 1).toList();
+      todoList.where((element) => element.status == TabState.notBegin).toList();
   List<Todo> getProgressTodoList() =>
-      this.todoList.where((element) => element.status == 2).toList();
+      todoList.where((element) => element.status == TabState.progress).toList();
   List<Todo> getStayTodoList() =>
-      this.todoList.where((element) => element.status == 3).toList();
+      todoList.where((element) => element.status == TabState.stay).toList();
   List<Todo> getCompleteTodoList() =>
-      this.todoList.where((element) => element.status == 4).toList();
+      todoList.where((element) => element.status == TabState.complete).toList();
+  Todo getTodo(DateTime createAt) => todoList
+      .where((element) => element.createAt == createAt)
+      .toList()
+      .elementAt(0);
+
+  TodoListState add(Todo todo) {
+    return TodoListState(todoList: [...todoList, todo]);
+  }
+
+  TodoListState update(Todo todo) {
+    return TodoListState(
+        todoList: [...todoList]
+          ..removeWhere((element) => element.createAt == todo.createAt)
+          ..add(todo));
+  }
+
+  TodoListState delete(Todo todo) {
+    todoList.remove(todo);
+    return TodoListState(todoList: todoList);
+  }
 }

@@ -26,7 +26,7 @@ main() {
   testWidgets('キャンセルボタンを押下するとボトムシートが閉じること', (tester) async {
     // AddBottomSheetViewを生成
     await tester.pumpWidget(editBottomSheetView(EditBottomSheetView(
-      todoDto: TodoDto(
+      todo: TodoDto(
         DateTime.now(),
         "aaa",
         1,
@@ -46,7 +46,7 @@ main() {
   testWidgets('更新ボタンを押下すると更新処理を呼び出し、かつボトムシートが閉じること', (tester) async {
     // AddBottomSheetViewを生成
     await tester.pumpWidget(editBottomSheetView(EditBottomSheetView(
-      todoDto: TodoDto(
+      todo: TodoDto(
         DateTime.now(),
         "aaa",
         1,
@@ -67,7 +67,7 @@ main() {
   testWidgets('更新用ボトムシートの表示項目が正しいこと', (tester) async {
     // EditBottomSheetViewを生成
     await tester.pumpWidget(editBottomSheetView(EditBottomSheetView(
-      todoDto: TodoDto(
+      todo: TodoDto(
         DateTime.now(),
         "aaa",
         1,
@@ -98,7 +98,7 @@ main() {
   testWidgets('タイトルが空の状態で更新ボタンを押下してもボトムシートが閉じないこと', (tester) async {
     // EditBottomSheetViewを生成
     await tester.pumpWidget(editBottomSheetView(EditBottomSheetView(
-      todoDto: TodoDto(
+      todo: TodoDto(
         DateTime.now(),
         "aaa",
         1,
@@ -122,7 +122,7 @@ main() {
   testWidgets('タイトルが入力された状態で更新ボタンを押下するとボトムシートが閉じること', (tester) async {
     // EditBottomSheetViewを生成
     await tester.pumpWidget(editBottomSheetView(EditBottomSheetView(
-      todoDto: TodoDto(
+      todo: TodoDto(
         DateTime.now(),
         "aaa",
         1,
@@ -143,7 +143,7 @@ main() {
   testWidgets('更新用ボトムシートが開かれた時、Todoの情報が反映されていること', (tester) async {
     // AddBottomSheetViewを生成
     await tester.pumpWidget(editBottomSheetView(EditBottomSheetView(
-      todoDto: TodoDto(
+      todo: TodoDto(
         DateTime.now(),
         "aaa",
         1,

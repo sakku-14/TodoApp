@@ -6,12 +6,13 @@ part of 'todo_list.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$todoListHash() => r'bc2eb940d3dbafb47460a2f59e9b489cd5d59235';
+String _$todoListHash() => r'33ba5c7f534e9ab1481e91b66c019871a54bf52f';
 
-/// See also [todoList].
-@ProviderFor(todoList)
-final todoListProvider = AutoDisposeFutureProvider<TodoList>.internal(
-  todoList,
+/// See also [TodoList].
+@ProviderFor(TodoList)
+final todoListProvider =
+    AutoDisposeNotifierProvider<TodoList, TodoListState>.internal(
+  TodoList.new,
   name: r'todoListProvider',
   debugGetCreateSourceHash:
       const bool.fromEnvironment('dart.vm.product') ? null : _$todoListHash,
@@ -19,6 +20,6 @@ final todoListProvider = AutoDisposeFutureProvider<TodoList>.internal(
   allTransitiveDependencies: null,
 );
 
-typedef TodoListRef = AutoDisposeFutureProviderRef<TodoList>;
+typedef _$TodoList = AutoDisposeNotifier<TodoListState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member

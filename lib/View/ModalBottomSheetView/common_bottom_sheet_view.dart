@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_app/Domain/EditTodo/edit_todo.dart';
 import 'package:todo_app/Domain/Tab/tab.dart';
-
-import '../../ViewModel/Dto/todo_dto.dart';
+import 'package:todo_app/Domain/TodoList/todo.dart';
 
 // WidgetTestで使用するKey
 final titleKey = UniqueKey();
@@ -12,39 +11,16 @@ final emergencyKey = UniqueKey();
 final priorityKey = UniqueKey();
 final statusKey = UniqueKey();
 
-class CommonBottomSheetView extends ConsumerStatefulWidget {
+class CommonBottomSheetView extends ConsumerWidget {
   CommonBottomSheetView({
     Key? key,
     todoDto,
   }) : super(key: key);
 
-  TodoDto? todoDto;
+  Todo? todo;
 
   @override
-  CommonBottomSheetViewModelState createState() =>
-      CommonBottomSheetViewModelState();
-}
-
-class CommonBottomSheetViewModelState
-    extends ConsumerState<CommonBottomSheetView> {
-  @override
-  void initState() {
-    super.initState();
-    Future(() {
-      if (widget.todoDto != null) {
-        var todoDto = widget.todoDto;
-        ref.read(editTodoProvider.notifier).setInitialValue(
-            todoDto!.createAt!,
-            todoDto!.title,
-            todoDto!.emergencyPoint,
-            todoDto!.priorityPoint,
-            todoDto!.status);
-      }
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       children: [
         /// タイトル

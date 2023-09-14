@@ -41,7 +41,7 @@ class TodoView extends StatelessWidget {
                   return Padding(
                     padding: EdgeInsets.only(
                         bottom: MediaQuery.of(context).viewInsets.bottom),
-                    child: EditBottomSheetView(todoDto: todoDto),
+                    child: EditBottomSheetView(createAt: todoDto.createAt!),
                   );
                 },
               );

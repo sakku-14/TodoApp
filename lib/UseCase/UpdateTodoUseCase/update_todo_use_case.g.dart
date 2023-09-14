@@ -6,7 +6,7 @@ part of 'update_todo_use_case.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$updateTodoUseCaseHash() => r'b67d026d17f57647b73fe6214d8e0a25358caaee';
+String _$updateTodoUseCaseHash() => r'a6ae6463fa5ab62cfd245f6e067c02224a5552c9';
 
 /// See also [updateTodoUseCase].
 @ProviderFor(updateTodoUseCase)

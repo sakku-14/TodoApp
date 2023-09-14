@@ -27,8 +27,8 @@ class TodoTabControllerView extends ConsumerWidget {
                   child: Column(
                     children: [
                       Text(TabState.notBegin.tabName),
-                      todoCount(ref.watch(todoListProvider.select(
-                          (value) => value.value?.getNotBeginTodoList()))),
+                      todoCount(ref.watch(todoListProvider
+                          .select((value) => value.getNotBeginTodoList()))),
                     ],
                   ),
                 ),
@@ -36,8 +36,8 @@ class TodoTabControllerView extends ConsumerWidget {
                   child: Column(
                     children: [
                       Text(TabState.progress.tabName),
-                      todoCount(ref.watch(todoListProvider.select(
-                          (value) => value.value?.getNotBeginTodoList()))),
+                      todoCount(ref.watch(todoListProvider
+                          .select((value) => value.getProgressTodoList()))),
                     ],
                   ),
                 ),
@@ -45,8 +45,8 @@ class TodoTabControllerView extends ConsumerWidget {
                   child: Column(
                     children: [
                       Text(TabState.stay.tabName),
-                      todoCount(ref.watch(todoListProvider.select(
-                          (value) => value.value?.getNotBeginTodoList()))),
+                      todoCount(ref.watch(todoListProvider
+                          .select((value) => value.getStayTodoList()))),
                     ],
                   ),
                 ),
@@ -54,8 +54,8 @@ class TodoTabControllerView extends ConsumerWidget {
                   child: Column(
                     children: [
                       Text(TabState.complete.tabName),
-                      todoCount(ref.watch(todoListProvider.select(
-                          (value) => value.value?.getNotBeginTodoList()))),
+                      todoCount(ref.watch(todoListProvider
+                          .select((value) => value.getCompleteTodoList()))),
                     ],
                   ),
                 ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_app/Domain/EditTodo/edit_todo.dart';
+import 'package:todo_app/Domain/TodoList/todo.dart';
+import 'package:todo_app/Domain/TodoList/todo_list.dart';
 import 'package:todo_app/UseCase/UpdateTodoUseCase/update_todo_use_case.dart';
 import 'package:todo_app/View/ModalBottomSheetView/common_bottom_sheet_view.dart';
 
@@ -11,15 +13,31 @@ var editBottomSheetKey = UniqueKey();
 var cancelButtonKey = UniqueKey();
 var editButtonKey = UniqueKey();
 
-class EditBottomSheetView extends ConsumerWidget {
-  final TodoDto todoDto;
+class EditBottomSheetView extends ConsumerStatefulWidget {
+  final DateTime createAt;
   const EditBottomSheetView({
     Key? key,
-    required this.todoDto,
+    required this.createAt,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<EditBottomSheetView> createState() =>
+      _EditBottomSheetViewState();
+}
+
+class _EditBottomSheetViewState extends ConsumerState<EditBottomSheetView> {
+  @override
+  void initState() {
+    super.initState();
+    Future(() {
+      Todo todo = ref.watch(todoListProvider).getTodo(widget.createAt);
+      ref.read(editTodoProvider.notifier).setInitialValue(todo.createAt,
+          todo.title, todo.emergencyPoint, todo.priorityPoint, todo.status);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     var state = ref.watch(editTodoProvider);
 
     return SingleChildScrollView(
@@ -63,6 +81,7 @@ class EditBottomSheetView extends ConsumerWidget {
                                     state.emergencyPoint,
                                     state.primaryPoint,
                                     state.tabStatus,
+                                    createAt: state.createAt,
                                   ));
                               Navigator.of(context).pop();
                             }
@@ -74,7 +93,10 @@ class EditBottomSheetView extends ConsumerWidget {
               ),
             ],
           ),
-          CommonBottomSheetView(todoDto: todoDto),
+          CommonBottomSheetView(
+            todoDto: ref.watch(todoListProvider
+                .select((value) => value.getTodo(widget.createAt))),
+          ),
         ],
       ),
     );

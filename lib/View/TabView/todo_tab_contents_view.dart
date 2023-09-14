@@ -40,14 +40,14 @@ class TodoTabContentsView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return TabBarView(
       children: <Widget>[
-        convertToTodoViewList(ref.watch(todoListProvider.select(
-            (value) => value.value?.getNotBeginTodoList()))), // 未着手タブのコンテンツ
-        convertToTodoViewList(ref.watch(todoListProvider.select(
-            (value) => value.value?.getProgressTodoList()))), // 作業中タブのコンテンツ
         convertToTodoViewList(ref.watch(todoListProvider
-            .select((value) => value.value?.getStayTodoList()))), // 保留タブのコンテンツ
-        convertToTodoViewList(ref.watch(todoListProvider.select(
-            (value) => value.value?.getCompleteTodoList()))), // 完了タブのコンテンツ
+            .select((value) => value.getNotBeginTodoList()))), // 未着手タブのコンテンツ
+        convertToTodoViewList(ref.watch(todoListProvider
+            .select((value) => value.getProgressTodoList()))), // 作業中タブのコンテンツ
+        convertToTodoViewList(ref.watch(todoListProvider
+            .select((value) => value.getStayTodoList()))), // 保留タブのコンテンツ
+        convertToTodoViewList(ref.watch(todoListProvider
+            .select((value) => value.getCompleteTodoList()))), // 完了タブのコンテンツ
       ],
     );
   }

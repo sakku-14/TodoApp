@@ -5,11 +5,20 @@ part 'todo.freezed.dart';
 
 @freezed
 abstract class Todo with _$Todo {
-  const factory Todo({
+  factory Todo({
     required DateTime createAt,
     required String title,
     required int emergencyPoint,
     required int priorityPoint,
     required TabState status,
   }) = _Todo;
+  Todo._();
+
+  @override
+  bool equal(Todo other) =>
+      createAt == other.createAt &&
+      title == other.title &&
+      emergencyPoint == other.emergencyPoint &&
+      priorityPoint == other.priorityPoint &&
+      status == other.status;
 }

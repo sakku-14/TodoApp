@@ -31,6 +31,7 @@ class EditTodo extends _$EditTodo {
         emergencyPoint: emergency,
         primaryPoint: primary,
         tabStatus: tabState);
+    textController = TextEditingController(text: title);
   }
 }
 

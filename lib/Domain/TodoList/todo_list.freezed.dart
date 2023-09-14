@@ -15,26 +15,27 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$TodoList {
+mixin _$TodoListState {
   List<Todo> get todoList => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $TodoListCopyWith<TodoList> get copyWith =>
+  $TodoListStateCopyWith<TodoListState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $TodoListCopyWith<$Res> {
-  factory $TodoListCopyWith(TodoList value, $Res Function(TodoList) then) =
-      _$TodoListCopyWithImpl<$Res, TodoList>;
+abstract class $TodoListStateCopyWith<$Res> {
+  factory $TodoListStateCopyWith(
+          TodoListState value, $Res Function(TodoListState) then) =
+      _$TodoListStateCopyWithImpl<$Res, TodoListState>;
   @useResult
   $Res call({List<Todo> todoList});
 }
 
 /// @nodoc
-class _$TodoListCopyWithImpl<$Res, $Val extends TodoList>
-    implements $TodoListCopyWith<$Res> {
-  _$TodoListCopyWithImpl(this._value, this._then);
+class _$TodoListStateCopyWithImpl<$Res, $Val extends TodoListState>
+    implements $TodoListStateCopyWith<$Res> {
+  _$TodoListStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -56,21 +57,22 @@ class _$TodoListCopyWithImpl<$Res, $Val extends TodoList>
 }
 
 /// @nodoc
-abstract class _$$_TodoListCopyWith<$Res> implements $TodoListCopyWith<$Res> {
-  factory _$$_TodoListCopyWith(
-          _$_TodoList value, $Res Function(_$_TodoList) then) =
-      __$$_TodoListCopyWithImpl<$Res>;
+abstract class _$$_TodoListStateCopyWith<$Res>
+    implements $TodoListStateCopyWith<$Res> {
+  factory _$$_TodoListStateCopyWith(
+          _$_TodoListState value, $Res Function(_$_TodoListState) then) =
+      __$$_TodoListStateCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<Todo> todoList});
 }
 
 /// @nodoc
-class __$$_TodoListCopyWithImpl<$Res>
-    extends _$TodoListCopyWithImpl<$Res, _$_TodoList>
-    implements _$$_TodoListCopyWith<$Res> {
-  __$$_TodoListCopyWithImpl(
-      _$_TodoList _value, $Res Function(_$_TodoList) _then)
+class __$$_TodoListStateCopyWithImpl<$Res>
+    extends _$TodoListStateCopyWithImpl<$Res, _$_TodoListState>
+    implements _$$_TodoListStateCopyWith<$Res> {
+  __$$_TodoListStateCopyWithImpl(
+      _$_TodoListState _value, $Res Function(_$_TodoListState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -78,7 +80,7 @@ class __$$_TodoListCopyWithImpl<$Res>
   $Res call({
     Object? todoList = null,
   }) {
-    return _then(_$_TodoList(
+    return _then(_$_TodoListState(
       todoList: null == todoList
           ? _value._todoList
           : todoList // ignore: cast_nullable_to_non_nullable
@@ -89,8 +91,8 @@ class __$$_TodoListCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_TodoList extends _TodoList {
-  _$_TodoList({required final List<Todo> todoList})
+class _$_TodoListState extends _TodoListState {
+  _$_TodoListState({required final List<Todo> todoList})
       : _todoList = todoList,
         super._();
 
@@ -104,14 +106,14 @@ class _$_TodoList extends _TodoList {
 
   @override
   String toString() {
-    return 'TodoList(todoList: $todoList)';
+    return 'TodoListState(todoList: $todoList)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TodoList &&
+            other is _$_TodoListState &&
             const DeepCollectionEquality().equals(other._todoList, _todoList));
   }
 
@@ -122,18 +124,19 @@ class _$_TodoList extends _TodoList {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TodoListCopyWith<_$_TodoList> get copyWith =>
-      __$$_TodoListCopyWithImpl<_$_TodoList>(this, _$identity);
+  _$$_TodoListStateCopyWith<_$_TodoListState> get copyWith =>
+      __$$_TodoListStateCopyWithImpl<_$_TodoListState>(this, _$identity);
 }
 
-abstract class _TodoList extends TodoList {
-  factory _TodoList({required final List<Todo> todoList}) = _$_TodoList;
-  _TodoList._() : super._();
+abstract class _TodoListState extends TodoListState {
+  factory _TodoListState({required final List<Todo> todoList}) =
+      _$_TodoListState;
+  _TodoListState._() : super._();
 
   @override
   List<Todo> get todoList;
   @override
   @JsonKey(ignore: true)
-  _$$_TodoListCopyWith<_$_TodoList> get copyWith =>
+  _$$_TodoListStateCopyWith<_$_TodoListState> get copyWith =>
       throw _privateConstructorUsedError;
 }

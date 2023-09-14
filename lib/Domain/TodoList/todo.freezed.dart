@@ -139,13 +139,14 @@ class __$$_TodoCopyWithImpl<$Res> extends _$TodoCopyWithImpl<$Res, _$_Todo>
 
 /// @nodoc
 
-class _$_Todo implements _Todo {
-  const _$_Todo(
+class _$_Todo extends _Todo {
+  _$_Todo(
       {required this.createAt,
       required this.title,
       required this.emergencyPoint,
       required this.priorityPoint,
-      required this.status});
+      required this.status})
+      : super._();
 
   @override
   final DateTime createAt;
@@ -189,13 +190,14 @@ class _$_Todo implements _Todo {
       __$$_TodoCopyWithImpl<_$_Todo>(this, _$identity);
 }
 
-abstract class _Todo implements Todo {
-  const factory _Todo(
+abstract class _Todo extends Todo {
+  factory _Todo(
       {required final DateTime createAt,
       required final String title,
       required final int emergencyPoint,
       required final int priorityPoint,
       required final TabState status}) = _$_Todo;
+  _Todo._() : super._();
 
   @override
   DateTime get createAt;
