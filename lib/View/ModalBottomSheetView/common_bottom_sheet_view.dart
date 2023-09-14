@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo_app/Domain/EditTodo/edit_todo.dart';
-import 'package:todo_app/Domain/Tab/tab.dart';
-import 'package:todo_app/Domain/TodoList/todo.dart';
+import 'package:todo_app/Model/EditTodo/edit_todo.dart';
+import 'package:todo_app/Model/Entities/Tab/tab.dart';
+import 'package:todo_app/Model/Entities/Todo/todo.dart';
 
 // WidgetTestで使用するKey
 final titleKey = UniqueKey();

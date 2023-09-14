@@ -1,8 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:todo_app/Domain/Tab/tab.dart';
-import 'package:todo_app/Domain/TodoList/todo.dart';
 import 'package:todo_app/Infrastructure/Repository/todo_list_repository.dart';
+import 'package:todo_app/Model/Entities/Tab/tab.dart';
+import 'package:todo_app/Model/Entities/Todo/todo.dart';
 
 part 'todo_list.freezed.dart';
 part 'todo_list.g.dart';

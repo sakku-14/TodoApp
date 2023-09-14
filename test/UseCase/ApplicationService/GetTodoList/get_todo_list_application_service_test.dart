@@ -4,7 +4,7 @@ import 'package:mockito/mockito.dart';
 import 'package:todo_app/Domain/TodoList/todo.dart';
 import 'package:todo_app/Infrastructure/Repository/todo_list_repository.dart';
 import 'package:todo_app/UseCase/ApplicationService/GetTodoList/get_todo_list_application_service.dart';
-import 'package:todo_app/ViewModel/Dto/todo_dto.dart';
+import 'package:todo_app/UseCase/Dto/todo_dto.dart';
 
 import 'get_todo_list_application_service_test.mocks.dart';
 

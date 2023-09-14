@@ -1,13 +1,9 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:todo_app/Domain/TodoList/todo.dart';
+import 'package:todo_app/Model/Entities/Todo/todo.dart';
 
 part 'todo_list_repository.g.dart';
 
 class TodoListRepository {
-  // late TodoList todoListProvider;
-  //
-  // TodoListRepository(this.todoListProvider);
-
   /// Todoを新規追加
   bool save(Todo todo) {
     // 保存処理
@@ -47,12 +43,6 @@ class TodoListRepository {
   }
 }
 
-// @riverpod
-// TodoListRepository todoListRepository(TodoListRepositoryRef ref) {
-//   return TodoListRepository(
-//     ref.read(todoListProvider.notifier),
-//   );
-// }
 @riverpod
 TodoListRepository todoListRepository(TodoListRepositoryRef ref) {
   // 本来はここでDBサービスをwatchする

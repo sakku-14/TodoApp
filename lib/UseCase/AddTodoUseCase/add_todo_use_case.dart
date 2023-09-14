@@ -1,7 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:todo_app/Domain/TodoList/todo.dart';
-import 'package:todo_app/Domain/TodoList/todo_list.dart';
-import 'package:todo_app/ViewModel/Dto/todo_dto.dart';
+import 'package:todo_app/Model/Entities/Todo/todo.dart';
+import 'package:todo_app/Model/TodoList/todo_list.dart';
+import 'package:todo_app/UseCase/Dto/todo_dto.dart';
 
 part 'add_todo_use_case.g.dart';
 

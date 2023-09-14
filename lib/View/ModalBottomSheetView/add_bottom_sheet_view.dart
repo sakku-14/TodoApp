@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo_app/Domain/EditTodo/edit_todo.dart';
+import 'package:todo_app/Model/EditTodo/edit_todo.dart';
 import 'package:todo_app/UseCase/AddTodoUseCase/add_todo_use_case.dart';
+import 'package:todo_app/UseCase/Dto/todo_dto.dart';
 import 'package:todo_app/View/ModalBottomSheetView/common_bottom_sheet_view.dart';
-import 'package:todo_app/ViewModel/Dto/todo_dto.dart';
 
 // WidgetTest用Key
 var addBottomSheetKey = UniqueKey();

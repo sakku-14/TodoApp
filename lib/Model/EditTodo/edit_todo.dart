@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:todo_app/Domain/Tab/tab.dart';
+import 'package:todo_app/Model/Entities/Tab/tab.dart';
 
 part 'edit_todo.freezed.dart';
 part 'edit_todo.g.dart';

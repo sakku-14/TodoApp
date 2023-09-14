@@ -2,8 +2,8 @@ import 'dart:math' as math; // Debug用
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:todo_app/UseCase/Dto/todo_dto.dart';
 import 'package:todo_app/View/TabView/todo_tab_controller_view.dart';
-import 'package:todo_app/ViewModel/Dto/todo_dto.dart';
 
 // region Debug用
 var random = math.Random();

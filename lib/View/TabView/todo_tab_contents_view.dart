@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:todo_app/Domain/TodoList/todo.dart';
-import 'package:todo_app/Domain/TodoList/todo_list.dart';
+import 'package:todo_app/Model/Entities/Todo/todo.dart';
+import 'package:todo_app/Model/TodoList/todo_list.dart';
+import 'package:todo_app/UseCase/Dto/todo_dto.dart';
 import 'package:todo_app/View/todo_view.dart';
-import 'package:todo_app/ViewModel/Dto/todo_dto.dart';
 
 class TodoTabContentsView extends ConsumerWidget {
   const TodoTabContentsView({

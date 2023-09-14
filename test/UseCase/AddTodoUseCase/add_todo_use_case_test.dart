@@ -3,7 +3,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:todo_app/Infrastructure/Repository/todo_list_repository.dart';
 import 'package:todo_app/UseCase/AddTodoUseCase/add_todo_use_case.dart';
-import 'package:todo_app/ViewModel/Dto/todo_dto.dart';
+import 'package:todo_app/UseCase/Dto/todo_dto.dart';
 
 import 'add_todo_use_case_test.mocks.dart';
 

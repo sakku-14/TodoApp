@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo_app/Domain/SortType/sort_type.dart';
+import 'package:todo_app/Model/SortType/sort_type.dart';
 
 /// WidgetTestで使用するKey
 final sortComboBoxKey = UniqueKey();

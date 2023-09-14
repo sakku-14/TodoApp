@@ -1,4 +1,4 @@
-import 'package:todo_app/Domain/Tab/tab.dart';
+import 'package:todo_app/Model/Entities/Tab/tab.dart';
 
 class TodoDto {
   final DateTime? createAt;
