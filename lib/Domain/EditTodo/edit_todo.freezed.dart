@@ -20,7 +20,7 @@ mixin _$EditTodoState {
   String get title => throw _privateConstructorUsedError;
   int get emergencyPoint => throw _privateConstructorUsedError;
   int get primaryPoint => throw _privateConstructorUsedError;
-  TabState get tabStatus => throw _privateConstructorUsedError;
+  TabTitle get tabStatus => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $EditTodoStateCopyWith<EditTodoState> get copyWith =>
@@ -38,7 +38,7 @@ abstract class $EditTodoStateCopyWith<$Res> {
       String title,
       int emergencyPoint,
       int primaryPoint,
-      TabState tabStatus});
+      TabTitle tabStatus});
 }
 
 /// @nodoc
@@ -80,7 +80,7 @@ class _$EditTodoStateCopyWithImpl<$Res, $Val extends EditTodoState>
       tabStatus: null == tabStatus
           ? _value.tabStatus
           : tabStatus // ignore: cast_nullable_to_non_nullable
-              as TabState,
+              as TabTitle,
     ) as $Val);
   }
 }
@@ -98,7 +98,7 @@ abstract class _$$_EditTodoStateCopyWith<$Res>
       String title,
       int emergencyPoint,
       int primaryPoint,
-      TabState tabStatus});
+      TabTitle tabStatus});
 }
 
 /// @nodoc
@@ -138,7 +138,7 @@ class __$$_EditTodoStateCopyWithImpl<$Res>
       tabStatus: null == tabStatus
           ? _value.tabStatus
           : tabStatus // ignore: cast_nullable_to_non_nullable
-              as TabState,
+              as TabTitle,
     ));
   }
 }
@@ -151,7 +151,7 @@ class _$_EditTodoState extends _EditTodoState {
       this.title = '',
       this.emergencyPoint = 1,
       this.primaryPoint = 1,
-      this.tabStatus = TabState.notBegin})
+      this.tabStatus = TabTitle.notBegin})
       : super._();
 
   @override
@@ -167,7 +167,7 @@ class _$_EditTodoState extends _EditTodoState {
   final int primaryPoint;
   @override
   @JsonKey()
-  final TabState tabStatus;
+  final TabTitle tabStatus;
 
   @override
   String toString() {
@@ -207,7 +207,7 @@ abstract class _EditTodoState extends EditTodoState {
       final String title,
       final int emergencyPoint,
       final int primaryPoint,
-      final TabState tabStatus}) = _$_EditTodoState;
+      final TabTitle tabStatus}) = _$_EditTodoState;
   _EditTodoState._() : super._();
 
   @override
@@ -219,7 +219,7 @@ abstract class _EditTodoState extends EditTodoState {
   @override
   int get primaryPoint;
   @override
-  TabState get tabStatus;
+  TabTitle get tabStatus;
   @override
   @JsonKey(ignore: true)
   _$$_EditTodoStateCopyWith<_$_EditTodoState> get copyWith =>

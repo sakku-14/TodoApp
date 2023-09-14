@@ -6,7 +6,7 @@ part of 'edit_todo.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$editTodoHash() => r'eab361b9ba8e801a0224e5c45e9e27471455b517';
+String _$editTodoHash() => r'8bf71493f4b34974dda9ce7d75da316f8fdb85a3';
 
 /// See also [EditTodo].
 @ProviderFor(EditTodo)

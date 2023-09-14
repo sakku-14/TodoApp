@@ -5,7 +5,7 @@ class TodoDto {
   final String title;
   final int emergencyPoint;
   final int priorityPoint;
-  final TabState status;
+  final TabTitle status;
 
   TodoDto(this.title, this.emergencyPoint, this.priorityPoint, this.status,
       {this.createAt});

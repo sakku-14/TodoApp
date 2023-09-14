@@ -21,10 +21,10 @@ class EditTodo extends _$EditTodo {
       state = state.copyWith(emergencyPoint: point);
   void setPrimaryPoint(int point) =>
       state = state.copyWith(primaryPoint: point);
-  void setTabStatus(TabState tabState) =>
+  void setTabStatus(TabTitle tabState) =>
       state = state.copyWith(tabStatus: tabState);
   void setInitialValue(DateTime time, String title, int emergency, int primary,
-      TabState tabState) {
+      TabTitle tabState) {
     state = state.copyWith(
         createAt: time,
         title: title,
@@ -42,7 +42,7 @@ abstract class EditTodoState with _$EditTodoState {
     @Default('') String title,
     @Default(1) int emergencyPoint,
     @Default(1) int primaryPoint,
-    @Default(TabState.notBegin) TabState tabStatus,
+    @Default(TabTitle.notBegin) TabTitle tabStatus,
   }) = _EditTodoState;
   EditTodoState._();
 

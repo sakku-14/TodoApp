@@ -10,7 +10,7 @@ abstract class Todo with _$Todo {
     required String title,
     required int emergencyPoint,
     required int priorityPoint,
-    required TabState status,
+    required TabTitle status,
   }) = _Todo;
   Todo._();
 

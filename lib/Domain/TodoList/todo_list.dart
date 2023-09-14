@@ -11,19 +11,22 @@ part 'todo_list.g.dart';
 class TodoList extends _$TodoList {
   @override
   TodoListState build() {
-    var todoList = ref.watch(todoListRepositoryProvider.notifier).getTodoList();
+    var todoList = ref.watch(todoListRepositoryProvider).getTodoList();
     return TodoListState(todoList: todoList);
   }
 
   void add(Todo todo) {
+    if (!ref.watch(todoListRepositoryProvider).save(todo)) return;
     state = state.add(todo);
   }
 
   void update(Todo newTodo) {
+    if (!ref.watch(todoListRepositoryProvider).update(newTodo)) return;
     state = state.update(newTodo);
   }
 
   void delete(Todo todo) {
+    // リポジトリの削除処理呼び出す
     state = state.delete(todo);
   }
 }
@@ -36,13 +39,13 @@ abstract class TodoListState with _$TodoListState {
   TodoListState._();
 
   List<Todo> getNotBeginTodoList() =>
-      todoList.where((element) => element.status == TabState.notBegin).toList();
+      todoList.where((element) => element.status == TabTitle.notBegin).toList();
   List<Todo> getProgressTodoList() =>
-      todoList.where((element) => element.status == TabState.progress).toList();
+      todoList.where((element) => element.status == TabTitle.progress).toList();
   List<Todo> getStayTodoList() =>
-      todoList.where((element) => element.status == TabState.stay).toList();
+      todoList.where((element) => element.status == TabTitle.stay).toList();
   List<Todo> getCompleteTodoList() =>
-      todoList.where((element) => element.status == TabState.complete).toList();
+      todoList.where((element) => element.status == TabTitle.complete).toList();
   Todo getTodo(DateTime createAt) => todoList
       .where((element) => element.createAt == createAt)
       .toList()

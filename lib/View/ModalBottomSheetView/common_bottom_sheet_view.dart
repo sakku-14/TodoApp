@@ -151,10 +151,10 @@ class CommonBottomSheetView extends ConsumerWidget {
                   child: CupertinoSegmentedControl(
                     key: statusKey,
                     children: {
-                      TabState.notBegin: Text(TabState.notBegin.tabName),
-                      TabState.progress: Text(TabState.progress.tabName),
-                      TabState.stay: Text(TabState.stay.tabName),
-                      TabState.complete: Text(TabState.complete.tabName),
+                      TabTitle.notBegin: Text(TabTitle.notBegin.tabName),
+                      TabTitle.progress: Text(TabTitle.progress.tabName),
+                      TabTitle.stay: Text(TabTitle.stay.tabName),
+                      TabTitle.complete: Text(TabTitle.complete.tabName),
                     },
                     groupValue: ref.watch(editTodoProvider).tabStatus,
                     onValueChanged: (value) {

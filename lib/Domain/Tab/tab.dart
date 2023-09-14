@@ -1,39 +1,30 @@
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-part 'tab.g.dart';
-
-@riverpod
-TabState tab(TabRef ref) {
-  return TabState.notBegin;
-}
-
-enum TabState {
+enum TabTitle {
   notBegin('未着手'),
   progress('作業中'),
   stay('保留'),
   complete('完了');
 
-  const TabState(this.tabName);
+  const TabTitle(this.tabName);
 
-  factory TabState.fromName(String name) {
+  factory TabTitle.fromName(String name) {
     switch (name) {
       case '未着手':
-        return TabState.notBegin;
+        return TabTitle.notBegin;
       case '作業中':
-        return TabState.progress;
+        return TabTitle.progress;
       case '保留':
-        return TabState.stay;
+        return TabTitle.stay;
       case '完了':
-        return TabState.complete;
+        return TabTitle.complete;
     }
-    return TabState.notBegin;
+    return TabTitle.notBegin;
   }
 
   final String tabName;
   List<String> get tabNameList => [
-        TabState.notBegin.tabName,
-        TabState.progress.tabName,
-        TabState.stay.tabName,
-        TabState.complete.tabName
+        TabTitle.notBegin.tabName,
+        TabTitle.progress.tabName,
+        TabTitle.stay.tabName,
+        TabTitle.complete.tabName
       ];
 }

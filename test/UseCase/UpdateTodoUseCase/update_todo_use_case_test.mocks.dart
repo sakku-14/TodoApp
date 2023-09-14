@@ -4,10 +4,9 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:riverpod_annotation/riverpod_annotation.dart' as _i2;
-import 'package:todo_app/Domain/TodoList/todo.dart' as _i4;
+import 'package:todo_app/Domain/TodoList/todo.dart' as _i3;
 import 'package:todo_app/Infrastructure/Repository/todo_list_repository.dart'
-    as _i3;
+    as _i2;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -20,89 +19,17 @@ import 'package:todo_app/Infrastructure/Repository/todo_list_repository.dart'
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeAutoDisposeNotifierProviderRef_0<T> extends _i1.SmartFake
-    implements _i2.AutoDisposeNotifierProviderRef<T> {
-  _FakeAutoDisposeNotifierProviderRef_0(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeTodoListRepository_1 extends _i1.SmartFake
-    implements _i3.TodoListRepository {
-  _FakeTodoListRepository_1(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeTodo_2 extends _i1.SmartFake implements _i4.Todo {
-  _FakeTodo_2(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
 /// A class which mocks [TodoListRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockTodoListRepository extends _i1.Mock
-    implements _i3.TodoListRepository {
+    implements _i2.TodoListRepository {
   MockTodoListRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.AutoDisposeNotifierProviderRef<_i3.TodoListRepository> get ref =>
-      (super.noSuchMethod(
-        Invocation.getter(#ref),
-        returnValue:
-            _FakeAutoDisposeNotifierProviderRef_0<_i3.TodoListRepository>(
-          this,
-          Invocation.getter(#ref),
-        ),
-      ) as _i2.AutoDisposeNotifierProviderRef<_i3.TodoListRepository>);
-  @override
-  _i3.TodoListRepository get state => (super.noSuchMethod(
-        Invocation.getter(#state),
-        returnValue: _FakeTodoListRepository_1(
-          this,
-          Invocation.getter(#state),
-        ),
-      ) as _i3.TodoListRepository);
-  @override
-  set state(_i3.TodoListRepository? value) => super.noSuchMethod(
-        Invocation.setter(
-          #state,
-          value,
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
-  _i3.TodoListRepository build() => (super.noSuchMethod(
-        Invocation.method(
-          #build,
-          [],
-        ),
-        returnValue: _FakeTodoListRepository_1(
-          this,
-          Invocation.method(
-            #build,
-            [],
-          ),
-        ),
-      ) as _i3.TodoListRepository);
-  @override
-  bool save(_i4.Todo? todo) => (super.noSuchMethod(
+  bool save(_i3.Todo? todo) => (super.noSuchMethod(
         Invocation.method(
           #save,
           [todo],
@@ -110,47 +37,18 @@ class MockTodoListRepository extends _i1.Mock
         returnValue: false,
       ) as bool);
   @override
-  List<_i4.Todo> getTodoList() => (super.noSuchMethod(
+  List<_i3.Todo> getTodoList() => (super.noSuchMethod(
         Invocation.method(
           #getTodoList,
           [],
         ),
-        returnValue: <_i4.Todo>[],
-      ) as List<_i4.Todo>);
+        returnValue: <_i3.Todo>[],
+      ) as List<_i3.Todo>);
   @override
-  bool update(_i4.Todo? todo) => (super.noSuchMethod(
+  bool update(_i3.Todo? todo) => (super.noSuchMethod(
         Invocation.method(
           #update,
           [todo],
-        ),
-        returnValue: false,
-      ) as bool);
-  @override
-  _i4.Todo clone(_i4.Todo? todo) => (super.noSuchMethod(
-        Invocation.method(
-          #clone,
-          [todo],
-        ),
-        returnValue: _FakeTodo_2(
-          this,
-          Invocation.method(
-            #clone,
-            [todo],
-          ),
-        ),
-      ) as _i4.Todo);
-  @override
-  bool updateShouldNotify(
-    _i3.TodoListRepository? previous,
-    _i3.TodoListRepository? next,
-  ) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #updateShouldNotify,
-          [
-            previous,
-            next,
-          ],
         ),
         returnValue: false,
       ) as bool);

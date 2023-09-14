@@ -1,16 +1,14 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:todo_app/Domain/TodoList/todo.dart';
 import 'package:todo_app/Domain/TodoList/todo_list.dart';
-import 'package:todo_app/Infrastructure/Repository/todo_list_repository.dart';
 import 'package:todo_app/ViewModel/Dto/todo_dto.dart';
 
 part 'update_todo_use_case.g.dart';
 
 class UpdateTodoUseCase {
-  late final TodoListRepository todoListRepository;
   late TodoList todoListProvider;
 
-  UpdateTodoUseCase(this.todoListRepository, this.todoListProvider);
+  UpdateTodoUseCase(this.todoListProvider);
 
   /// 更新されたTodoを更新
   void execute(TodoDto todoDto) {
@@ -24,7 +22,6 @@ class UpdateTodoUseCase {
     );
 
     // 変更されたTodoを特定してRepositoryを更新
-    if (!todoListRepository.update(todo)) return;
     todoListProvider.update(todo);
   }
 }
@@ -32,7 +29,6 @@ class UpdateTodoUseCase {
 @riverpod
 UpdateTodoUseCase updateTodoUseCase(UpdateTodoUseCaseRef ref) {
   return UpdateTodoUseCase(
-    ref.watch(todoListRepositoryProvider.notifier),
     ref.watch(todoListProvider.notifier),
   );
 }
