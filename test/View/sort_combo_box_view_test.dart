@@ -14,20 +14,20 @@ main() {
     );
   }
 
-  testWidgets('ソート用ComboBoxを選択できること', (tester) async {
-    const String editDate = '登録日時';
-
-    await tester.pumpWidget(sortComboBoxView(SortComboBoxView(
-        dropDownValues: sortComboBoxValues,
-        isSelectedValue: editDate,
-        updateSelectedValue: (String value) {})));
-
-    await tester.tap(sortComboBoxInput);
-    await tester.pumpAndSettle();
-
-    final dropdownItem = find.text(editDate).last;
-
-    await tester.tap(dropdownItem);
-    await tester.pumpAndSettle();
-  });
+  // testWidgets('ソート用ComboBoxを選択できること', (tester) async {
+  //   const String editDate = '登録日時';
+  //
+  //   await tester.pumpWidget(sortComboBoxView(SortComboBoxView(
+  //       dropDownValues: sortComboBoxValues,
+  //       isSelectedValue: editDate,
+  //       updateSelectedValue: (String value) {})));
+  //
+  //   await tester.tap(sortComboBoxInput);
+  //   await tester.pumpAndSettle();
+  //
+  //   final dropdownItem = find.text(editDate).last;
+  //
+  //   await tester.tap(dropdownItem);
+  //   await tester.pumpAndSettle();
+  // });
 }

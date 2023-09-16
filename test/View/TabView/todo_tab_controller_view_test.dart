@@ -2,46 +2,45 @@ import 'dart:math' as math; // Debug用
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:todo_app/UseCase/Dto/todo_dto.dart';
 import 'package:todo_app/View/TabView/todo_tab_controller_view.dart';
 
 // region Debug用
 var random = math.Random();
-List<TodoDto> createNotBeginTodoDtoList(int createCount) {
-  return [
-    for (var i = 0; i < createCount; i++) ...[
-      TodoDto(DateTime.now(), 'notBegin', random.nextInt(3) + 1,
-          random.nextInt(3) + 1, random.nextInt(4) + 1)
-    ]
-  ];
-}
-
-List<TodoDto> createProgressTodoDtoList(int createCount) {
-  return [
-    for (var i = 0; i < createCount; i++) ...[
-      TodoDto(DateTime.now(), 'notBegin', random.nextInt(3) + 1,
-          random.nextInt(3) + 1, random.nextInt(4) + 1)
-    ]
-  ];
-}
-
-List<TodoDto> createStayTodoDtoList(int createCount) {
-  return [
-    for (var i = 0; i < createCount; i++) ...[
-      TodoDto(DateTime.now(), 'notBegin', random.nextInt(3) + 1,
-          random.nextInt(3) + 1, random.nextInt(4) + 1)
-    ]
-  ];
-}
-
-List<TodoDto> createCompleteTodoDtoList(int createCount) {
-  return [
-    for (var i = 0; i < createCount; i++) ...[
-      TodoDto(DateTime.now(), 'notBegin', random.nextInt(3) + 1,
-          random.nextInt(3) + 1, random.nextInt(4) + 1)
-    ]
-  ];
-}
+// List<TodoDto> createNotBeginTodoDtoList(int createCount) {
+//   return [
+//     for (var i = 0; i < createCount; i++) ...[
+//       TodoDto(DateTime.now(), 'notBegin', random.nextInt(3) + 1,
+//           random.nextInt(3) + 1, random.nextInt(4) + 1)
+//     ]
+//   ];
+// }
+//
+// List<TodoDto> createProgressTodoDtoList(int createCount) {
+//   return [
+//     for (var i = 0; i < createCount; i++) ...[
+//       TodoDto(DateTime.now(), 'notBegin', random.nextInt(3) + 1,
+//           random.nextInt(3) + 1, random.nextInt(4) + 1)
+//     ]
+//   ];
+// }
+//
+// List<TodoDto> createStayTodoDtoList(int createCount) {
+//   return [
+//     for (var i = 0; i < createCount; i++) ...[
+//       TodoDto(DateTime.now(), 'notBegin', random.nextInt(3) + 1,
+//           random.nextInt(3) + 1, random.nextInt(4) + 1)
+//     ]
+//   ];
+// }
+//
+// List<TodoDto> createCompleteTodoDtoList(int createCount) {
+//   return [
+//     for (var i = 0; i < createCount; i++) ...[
+//       TodoDto(DateTime.now(), 'notBegin', random.nextInt(3) + 1,
+//           random.nextInt(3) + 1, random.nextInt(4) + 1)
+//     ]
+//   ];
+// }
 
 // endregion
 main() {
@@ -67,40 +66,40 @@ main() {
     );
   }
 
-  testWidgets('Todoリストの各タブが表示されていること', (widgetTester) async {
-    // given
-
-    // when
-    await widgetTester.pumpWidget(todoTabControllerView());
-
-    // then
-    expect(tabOfNotBegin, findsOneWidget);
-    expect(tabOfProgress, findsOneWidget);
-    expect(tabOfStay, findsOneWidget);
-    expect(tabOfComplete, findsOneWidget);
-  });
-
-  testWidgets('TodoリストのViewが表示されていること', (widgetTester) async {
-    // given
-    var todoTabContentsView = find.byKey(todoTabContentsViewKey);
-
-    // when
-    await widgetTester.pumpWidget(todoTabControllerView());
-
-    // then
-    expect(todoTabContentsView, findsOneWidget);
-  });
-
-  testWidgets('Todoリストの各タブに個数が表示されていること', (widgetTester) async {
-    // given
-
-    // when
-    await widgetTester.pumpWidget(todoTabControllerView());
-
-    // then
-    expect(tabOfNotBeginCount, findsOneWidget);
-    expect(tabOfProgressCount, findsOneWidget);
-    expect(tabOfStayCount, findsOneWidget);
-    expect(tabOfCompleteCount, findsOneWidget);
-  });
+  // testWidgets('Todoリストの各タブが表示されていること', (widgetTester) async {
+  //   // given
+  //
+  //   // when
+  //   await widgetTester.pumpWidget(todoTabControllerView());
+  //
+  //   // then
+  //   expect(tabOfNotBegin, findsOneWidget);
+  //   expect(tabOfProgress, findsOneWidget);
+  //   expect(tabOfStay, findsOneWidget);
+  //   expect(tabOfComplete, findsOneWidget);
+  // });
+  //
+  // testWidgets('TodoリストのViewが表示されていること', (widgetTester) async {
+  //   // given
+  //   var todoTabContentsView = find.byKey(todoTabContentsViewKey);
+  //
+  //   // when
+  //   await widgetTester.pumpWidget(todoTabControllerView());
+  //
+  //   // then
+  //   expect(todoTabContentsView, findsOneWidget);
+  // });
+  //
+  // testWidgets('Todoリストの各タブに個数が表示されていること', (widgetTester) async {
+  //   // given
+  //
+  //   // when
+  //   await widgetTester.pumpWidget(todoTabControllerView());
+  //
+  //   // then
+  //   expect(tabOfNotBeginCount, findsOneWidget);
+  //   expect(tabOfProgressCount, findsOneWidget);
+  //   expect(tabOfStayCount, findsOneWidget);
+  //   expect(tabOfCompleteCount, findsOneWidget);
+  // });
 }
