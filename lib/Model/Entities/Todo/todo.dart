@@ -14,7 +14,6 @@ abstract class Todo with _$Todo {
   }) = _Todo;
   Todo._();
 
-  @override
   bool equal(Todo other) =>
       createAt == other.createAt &&
       title == other.title &&

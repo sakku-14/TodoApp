@@ -74,7 +74,7 @@ class AddBottomSheetView extends ConsumerWidget {
               ),
             ],
           ),
-          CommonBottomSheetView(),
+          const CommonBottomSheetView(),
         ],
       ),
     );

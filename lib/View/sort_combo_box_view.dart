@@ -27,7 +27,6 @@ class SortComboBoxView extends ConsumerWidget {
         key: sortComboBoxKey,
         value: selectedSortType.typeName,
         onChanged: (value) {
-          value = value as String;
           if (value == null || value.isEmpty) return;
 
           ref.read(sortTypeProvider.notifier).update(SortState.fromName(value));
