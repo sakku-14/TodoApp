@@ -1,33 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:todo_app/Model/SortType/sort_type.dart';
 import 'package:todo_app/View/sort_combo_box_view.dart';
 
 main() {
   /// 各WidgetのKey
   final sortComboBoxInput = find.byKey(sortComboBoxKey);
 
-  List<String> sortComboBoxValues = ['登録日時', '緊急度×重要度'];
-
-  MaterialApp sortComboBoxView(Widget widget) {
-    return MaterialApp(
-      home: Material(child: widget),
+  ProviderScope sortComboBoxView(Widget widget) {
+    return ProviderScope(
+      child: MaterialApp(
+        home: Material(child: widget),
+      ),
     );
   }
 
-  // testWidgets('ソート用ComboBoxを選択できること', (tester) async {
-  //   const String editDate = '登録日時';
-  //
-  //   await tester.pumpWidget(sortComboBoxView(SortComboBoxView(
-  //       dropDownValues: sortComboBoxValues,
-  //       isSelectedValue: editDate,
-  //       updateSelectedValue: (String value) {})));
-  //
-  //   await tester.tap(sortComboBoxInput);
-  //   await tester.pumpAndSettle();
-  //
-  //   final dropdownItem = find.text(editDate).last;
-  //
-  //   await tester.tap(dropdownItem);
-  //   await tester.pumpAndSettle();
-  // });
+  testWidgets('ソート用ComboBoxを選択し、選択肢を変更できること', (tester) async {
+    // given
+    final dropdownItem = find.text(SortState.createdAt.typeName).last;
+    final anotherDropDownItem =
+        find.text(SortState.emergencyTimesPrimary.typeName).last;
+
+    // when
+    await tester.pumpWidget(sortComboBoxView(const SortComboBoxView()));
+
+    await tester.tap(sortComboBoxInput);
+    await tester.pumpAndSettle();
+    expect(dropdownItem.hitTestable(), findsOneWidget);
+
+    await tester.tap(anotherDropDownItem);
+    await tester.pumpAndSettle();
+
+    // then
+    expect(anotherDropDownItem.hitTestable(), findsOneWidget);
+  });
 }
