@@ -13,19 +13,19 @@ var editBottomSheetKey = UniqueKey();
 var cancelButtonKey = UniqueKey();
 var editButtonKey = UniqueKey();
 
-class EditBottomSheetView extends ConsumerStatefulWidget {
+class UpdateBottomSheetView extends ConsumerStatefulWidget {
   final DateTime createAt;
-  const EditBottomSheetView({
+  const UpdateBottomSheetView({
     Key? key,
     required this.createAt,
   }) : super(key: key);
 
   @override
-  ConsumerState<EditBottomSheetView> createState() =>
+  ConsumerState<UpdateBottomSheetView> createState() =>
       _EditBottomSheetViewState();
 }
 
-class _EditBottomSheetViewState extends ConsumerState<EditBottomSheetView> {
+class _EditBottomSheetViewState extends ConsumerState<UpdateBottomSheetView> {
   @override
   void initState() {
     super.initState();

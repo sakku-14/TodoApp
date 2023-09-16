@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:todo_app/UseCase/Dto/todo_dto.dart';
 import 'package:todo_app/View/ModalBottomSheetView/common_bottom_sheet_view.dart';
-import 'package:todo_app/View/ModalBottomSheetView/edit_bottom_sheet_view.dart';
+import 'package:todo_app/View/ModalBottomSheetView/update_bottom_sheet_view.dart';
 
 main() {
   /// 各WidgetのKey
@@ -25,7 +25,7 @@ main() {
 
   testWidgets('キャンセルボタンを押下するとボトムシートが閉じること', (tester) async {
     // AddBottomSheetViewを生成
-    await tester.pumpWidget(editBottomSheetView(EditBottomSheetView(
+    await tester.pumpWidget(editBottomSheetView(UpdateBottomSheetView(
       todo: TodoDto(
         DateTime.now(),
         "aaa",
@@ -45,7 +45,7 @@ main() {
 
   testWidgets('更新ボタンを押下すると更新処理を呼び出し、かつボトムシートが閉じること', (tester) async {
     // AddBottomSheetViewを生成
-    await tester.pumpWidget(editBottomSheetView(EditBottomSheetView(
+    await tester.pumpWidget(editBottomSheetView(UpdateBottomSheetView(
       todo: TodoDto(
         DateTime.now(),
         "aaa",
@@ -66,7 +66,7 @@ main() {
 
   testWidgets('更新用ボトムシートの表示項目が正しいこと', (tester) async {
     // EditBottomSheetViewを生成
-    await tester.pumpWidget(editBottomSheetView(EditBottomSheetView(
+    await tester.pumpWidget(editBottomSheetView(UpdateBottomSheetView(
       todo: TodoDto(
         DateTime.now(),
         "aaa",
@@ -97,7 +97,7 @@ main() {
 
   testWidgets('タイトルが空の状態で更新ボタンを押下してもボトムシートが閉じないこと', (tester) async {
     // EditBottomSheetViewを生成
-    await tester.pumpWidget(editBottomSheetView(EditBottomSheetView(
+    await tester.pumpWidget(editBottomSheetView(UpdateBottomSheetView(
       todo: TodoDto(
         DateTime.now(),
         "aaa",
@@ -121,7 +121,7 @@ main() {
 
   testWidgets('タイトルが入力された状態で更新ボタンを押下するとボトムシートが閉じること', (tester) async {
     // EditBottomSheetViewを生成
-    await tester.pumpWidget(editBottomSheetView(EditBottomSheetView(
+    await tester.pumpWidget(editBottomSheetView(UpdateBottomSheetView(
       todo: TodoDto(
         DateTime.now(),
         "aaa",
@@ -142,7 +142,7 @@ main() {
 
   testWidgets('更新用ボトムシートが開かれた時、Todoの情報が反映されていること', (tester) async {
     // AddBottomSheetViewを生成
-    await tester.pumpWidget(editBottomSheetView(EditBottomSheetView(
+    await tester.pumpWidget(editBottomSheetView(UpdateBottomSheetView(
       todo: TodoDto(
         DateTime.now(),
         "aaa",
