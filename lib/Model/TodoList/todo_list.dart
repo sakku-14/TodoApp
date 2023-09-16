@@ -51,19 +51,17 @@ abstract class TodoListState with _$TodoListState {
       .toList()
       .elementAt(0);
 
-  TodoListState add(Todo todo) {
-    return TodoListState(todoList: [...todoList, todo]);
-  }
+  TodoListState add(Todo todo) => TodoListState(todoList: [...todoList, todo]);
 
   TodoListState update(Todo todo) {
-    return TodoListState(
-        todoList: [...todoList]
-          ..removeWhere((element) => element.createAt == todo.createAt)
-          ..add(todo));
+    var index =
+        todoList.indexWhere((element) => element.createAt == todo.createAt);
+
+    var list = [...todoList];
+    list[index] = todo;
+    return TodoListState(todoList: list);
   }
 
-  TodoListState delete(Todo todo) {
-    todoList.remove(todo);
-    return TodoListState(todoList: todoList);
-  }
+  TodoListState delete(Todo todo) =>
+      TodoListState(todoList: [...todoList]..remove(todo));
 }
