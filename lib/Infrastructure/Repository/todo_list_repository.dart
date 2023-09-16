@@ -10,8 +10,6 @@ class TodoListRepository {
     try {
       // 本来はここでDBへ保存処理
 
-      // todoListProvider.add(todo);
-
       return true;
     } catch (e) {
       return false;
@@ -22,8 +20,6 @@ class TodoListRepository {
   List<Todo> getTodoList() {
     try {
       // 本来はここでDBへ取得処理
-
-      // return todoListProvider.state.todoList;
       return [];
     } catch (e) {
       return List<Todo>.empty();
@@ -34,12 +30,10 @@ class TodoListRepository {
   bool update(Todo todo) {
     try {
       // 本来はここでDBへ更新処理
-
-      // todoListProvider.update(todo);
+      return true;
     } catch (e) {
       return false;
     }
-    return true;
   }
 }
 
