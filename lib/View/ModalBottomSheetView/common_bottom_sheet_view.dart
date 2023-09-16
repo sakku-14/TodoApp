@@ -34,7 +34,7 @@ class CommonBottomSheetView extends ConsumerWidget {
                 border: OutlineInputBorder(),
                 labelText: 'Todoのタイトル',
               ),
-              controller: ref.watch(editTodoProvider.notifier).textController,
+              controller: ref.watch(editTodoProvider).textEditingController,
               onChanged: (text) {
                 ref.read(editTodoProvider.notifier).setTitle(text);
               },

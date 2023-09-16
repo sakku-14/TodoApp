@@ -8,8 +8,6 @@ part 'edit_todo.g.dart';
 
 @riverpod
 class EditTodo extends _$EditTodo {
-  TextEditingController textController = TextEditingController();
-
   @override
   EditTodoState build() {
     return EditTodoState();
@@ -28,10 +26,10 @@ class EditTodo extends _$EditTodo {
     state = state.copyWith(
         createAt: time,
         title: title,
+        textEditingController: TextEditingController(text: title),
         emergencyPoint: emergency,
         primaryPoint: primary,
         tabStatus: tabState);
-    textController = TextEditingController(text: title);
   }
 }
 
@@ -40,6 +38,7 @@ abstract class EditTodoState with _$EditTodoState {
   factory EditTodoState({
     DateTime? createAt,
     @Default('') String title,
+    TextEditingController? textEditingController,
     @Default(1) int emergencyPoint,
     @Default(1) int primaryPoint,
     @Default(TabTitle.notBegin) TabTitle tabStatus,

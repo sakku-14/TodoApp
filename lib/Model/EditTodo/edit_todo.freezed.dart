@@ -18,6 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$EditTodoState {
   DateTime? get createAt => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
+  TextEditingController? get textEditingController =>
+      throw _privateConstructorUsedError;
   int get emergencyPoint => throw _privateConstructorUsedError;
   int get primaryPoint => throw _privateConstructorUsedError;
   TabTitle get tabStatus => throw _privateConstructorUsedError;
@@ -36,6 +38,7 @@ abstract class $EditTodoStateCopyWith<$Res> {
   $Res call(
       {DateTime? createAt,
       String title,
+      TextEditingController? textEditingController,
       int emergencyPoint,
       int primaryPoint,
       TabTitle tabStatus});
@@ -56,6 +59,7 @@ class _$EditTodoStateCopyWithImpl<$Res, $Val extends EditTodoState>
   $Res call({
     Object? createAt = freezed,
     Object? title = null,
+    Object? textEditingController = freezed,
     Object? emergencyPoint = null,
     Object? primaryPoint = null,
     Object? tabStatus = null,
@@ -69,6 +73,10 @@ class _$EditTodoStateCopyWithImpl<$Res, $Val extends EditTodoState>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
+      textEditingController: freezed == textEditingController
+          ? _value.textEditingController
+          : textEditingController // ignore: cast_nullable_to_non_nullable
+              as TextEditingController?,
       emergencyPoint: null == emergencyPoint
           ? _value.emergencyPoint
           : emergencyPoint // ignore: cast_nullable_to_non_nullable
@@ -96,6 +104,7 @@ abstract class _$$_EditTodoStateCopyWith<$Res>
   $Res call(
       {DateTime? createAt,
       String title,
+      TextEditingController? textEditingController,
       int emergencyPoint,
       int primaryPoint,
       TabTitle tabStatus});
@@ -114,6 +123,7 @@ class __$$_EditTodoStateCopyWithImpl<$Res>
   $Res call({
     Object? createAt = freezed,
     Object? title = null,
+    Object? textEditingController = freezed,
     Object? emergencyPoint = null,
     Object? primaryPoint = null,
     Object? tabStatus = null,
@@ -127,6 +137,10 @@ class __$$_EditTodoStateCopyWithImpl<$Res>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
+      textEditingController: freezed == textEditingController
+          ? _value.textEditingController
+          : textEditingController // ignore: cast_nullable_to_non_nullable
+              as TextEditingController?,
       emergencyPoint: null == emergencyPoint
           ? _value.emergencyPoint
           : emergencyPoint // ignore: cast_nullable_to_non_nullable
@@ -149,6 +163,7 @@ class _$_EditTodoState extends _EditTodoState {
   _$_EditTodoState(
       {this.createAt,
       this.title = '',
+      this.textEditingController,
       this.emergencyPoint = 1,
       this.primaryPoint = 1,
       this.tabStatus = TabTitle.notBegin})
@@ -159,6 +174,8 @@ class _$_EditTodoState extends _EditTodoState {
   @override
   @JsonKey()
   final String title;
+  @override
+  final TextEditingController? textEditingController;
   @override
   @JsonKey()
   final int emergencyPoint;
@@ -171,7 +188,7 @@ class _$_EditTodoState extends _EditTodoState {
 
   @override
   String toString() {
-    return 'EditTodoState(createAt: $createAt, title: $title, emergencyPoint: $emergencyPoint, primaryPoint: $primaryPoint, tabStatus: $tabStatus)';
+    return 'EditTodoState(createAt: $createAt, title: $title, textEditingController: $textEditingController, emergencyPoint: $emergencyPoint, primaryPoint: $primaryPoint, tabStatus: $tabStatus)';
   }
 
   @override
@@ -182,6 +199,8 @@ class _$_EditTodoState extends _EditTodoState {
             (identical(other.createAt, createAt) ||
                 other.createAt == createAt) &&
             (identical(other.title, title) || other.title == title) &&
+            (identical(other.textEditingController, textEditingController) ||
+                other.textEditingController == textEditingController) &&
             (identical(other.emergencyPoint, emergencyPoint) ||
                 other.emergencyPoint == emergencyPoint) &&
             (identical(other.primaryPoint, primaryPoint) ||
@@ -191,8 +210,8 @@ class _$_EditTodoState extends _EditTodoState {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, createAt, title, emergencyPoint, primaryPoint, tabStatus);
+  int get hashCode => Object.hash(runtimeType, createAt, title,
+      textEditingController, emergencyPoint, primaryPoint, tabStatus);
 
   @JsonKey(ignore: true)
   @override
@@ -205,6 +224,7 @@ abstract class _EditTodoState extends EditTodoState {
   factory _EditTodoState(
       {final DateTime? createAt,
       final String title,
+      final TextEditingController? textEditingController,
       final int emergencyPoint,
       final int primaryPoint,
       final TabTitle tabStatus}) = _$_EditTodoState;
@@ -214,6 +234,8 @@ abstract class _EditTodoState extends EditTodoState {
   DateTime? get createAt;
   @override
   String get title;
+  @override
+  TextEditingController? get textEditingController;
   @override
   int get emergencyPoint;
   @override
