@@ -9,9 +9,9 @@ import 'package:todo_app/View/BottomSheetView/common_bottom_sheet_view.dart';
 import '../../UseCase/Dto/todo_dto.dart';
 
 // WidgetTest用Key
-var editBottomSheetKey = UniqueKey();
+var updateBottomSheetKey = UniqueKey();
 var cancelButtonKey = UniqueKey();
-var editButtonKey = UniqueKey();
+var updateButtonKey = UniqueKey();
 
 class UpdateBottomSheetView extends ConsumerStatefulWidget {
   final DateTime createAt;
@@ -42,7 +42,7 @@ class _EditBottomSheetViewState extends ConsumerState<UpdateBottomSheetView> {
 
     return SingleChildScrollView(
       child: Column(
-        key: editBottomSheetKey,
+        key: updateBottomSheetKey,
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Stack(
@@ -70,7 +70,7 @@ class _EditBottomSheetViewState extends ConsumerState<UpdateBottomSheetView> {
                   ),
                   SizedBox(
                     child: TextButton(
-                      key: editButtonKey,
+                      key: updateButtonKey,
                       onPressed: ref.watch(editTodoProvider).canSubmit()
                           ? () {
                               // Todo更新処理呼び出し

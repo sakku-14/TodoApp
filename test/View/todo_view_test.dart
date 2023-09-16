@@ -26,7 +26,7 @@ class _MockTodoList extends TodoList {
 main() {
   /// 各WidgetのKey
   final todoInput = find.byKey(todoKey);
-  final editBottomSheetInput = find.byKey(editBottomSheetKey);
+  final updateBottomSheetInput = find.byKey(updateBottomSheetKey);
 
   /// TodoDtoを生成
   TodoDto createTodoDto() {
@@ -110,7 +110,7 @@ main() {
     await tester.pumpAndSettle();
 
     // then
-    expect(editBottomSheetInput, findsOneWidget); // ボトムシートが表示されていること
+    expect(updateBottomSheetInput, findsOneWidget); // ボトムシートが表示されていること
     expect(find.text('Todoの更新'), findsOneWidget); // タイトルが「登録」であること
   });
 }
