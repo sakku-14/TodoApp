@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_app/View/sort_combo_box_view.dart';
 
 import 'ModalBottomSheetView/add_bottom_sheet_view.dart';
@@ -8,11 +7,11 @@ import 'TabView/todo_tab_controller_view.dart';
 // widgetテスト用Key
 var todoTabControllerViewKey = UniqueKey();
 
-class MainView extends ConsumerWidget {
+class MainView extends StatelessWidget {
   const MainView({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
 
