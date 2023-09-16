@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_app/Model/EditTodo/edit_todo.dart';
 import 'package:todo_app/Model/Entities/Tab/tab.dart';
-import 'package:todo_app/Model/Entities/Todo/todo.dart';
 
 // WidgetTestで使用するKey
 final titleKey = UniqueKey();
@@ -12,12 +11,9 @@ final priorityKey = UniqueKey();
 final statusKey = UniqueKey();
 
 class CommonBottomSheetView extends ConsumerWidget {
-  CommonBottomSheetView({
+  const CommonBottomSheetView({
     Key? key,
-    todoDto,
   }) : super(key: key);
-
-  Todo? todo;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

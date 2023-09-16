@@ -93,10 +93,7 @@ class _EditBottomSheetViewState extends ConsumerState<UpdateBottomSheetView> {
               ),
             ],
           ),
-          CommonBottomSheetView(
-            todoDto: ref.watch(todoListProvider
-                .select((value) => value.getTodo(widget.createAt))),
-          ),
+          const CommonBottomSheetView(),
         ],
       ),
     );
