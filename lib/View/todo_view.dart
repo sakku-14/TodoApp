@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:todo_app/UseCase/Dto/todo_dto.dart';
-import 'package:todo_app/View/ModalBottomSheetView/update_bottom_sheet_view.dart';
+import 'package:todo_app/View/BottomSheetView/update_bottom_sheet_view.dart';
 
 /// WidgetTestで使用するKey
 final todoKey = UniqueKey();

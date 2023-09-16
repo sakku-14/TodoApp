@@ -4,7 +4,7 @@ import 'package:todo_app/Model/EditTodo/edit_todo.dart';
 import 'package:todo_app/Model/Entities/Todo/todo.dart';
 import 'package:todo_app/Model/TodoList/todo_list.dart';
 import 'package:todo_app/UseCase/UpdateTodoUseCase/update_todo_use_case.dart';
-import 'package:todo_app/View/ModalBottomSheetView/common_bottom_sheet_view.dart';
+import 'package:todo_app/View/BottomSheetView/common_bottom_sheet_view.dart';
 
 import '../../UseCase/Dto/todo_dto.dart';
 

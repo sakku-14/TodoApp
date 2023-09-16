@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:todo_app/View/ModalBottomSheetView/add_bottom_sheet_view.dart';
-import 'package:todo_app/View/ModalBottomSheetView/common_bottom_sheet_view.dart';
+import 'package:todo_app/View/BottomSheetView/add_bottom_sheet_view.dart';
+import 'package:todo_app/View/BottomSheetView/common_bottom_sheet_view.dart';
 
 main() {
   /// 各WidgetのKey
