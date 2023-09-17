@@ -4,9 +4,9 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:todo_app/Infrastructure/Repository/todo_list_repository.dart'
-    as _i2;
-import 'package:todo_app/Model/Entities/Todo/todo.dart' as _i3;
+import 'package:riverpod_annotation/riverpod_annotation.dart' as _i2;
+import 'package:todo_app/Model/Entities/Todo/todo.dart' as _i4;
+import 'package:todo_app/Model/TodoList/todo_list.dart' as _i3;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -19,36 +19,110 @@ import 'package:todo_app/Model/Entities/Todo/todo.dart' as _i3;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-/// A class which mocks [TodoListRepository].
+class _FakeAutoDisposeNotifierProviderRef_0<T> extends _i1.SmartFake
+    implements _i2.AutoDisposeNotifierProviderRef<T> {
+  _FakeAutoDisposeNotifierProviderRef_0(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeTodoListState_1 extends _i1.SmartFake implements _i3.TodoListState {
+  _FakeTodoListState_1(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+/// A class which mocks [TodoList].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockTodoListRepository extends _i1.Mock
-    implements _i2.TodoListRepository {
-  MockTodoListRepository() {
+class MockTodoList extends _i1.Mock implements _i3.TodoList {
+  MockTodoList() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  bool save(_i3.Todo? todo) => (super.noSuchMethod(
-        Invocation.method(
-          #save,
-          [todo],
+  _i2.AutoDisposeNotifierProviderRef<_i3.TodoListState> get ref =>
+      (super.noSuchMethod(
+        Invocation.getter(#ref),
+        returnValue: _FakeAutoDisposeNotifierProviderRef_0<_i3.TodoListState>(
+          this,
+          Invocation.getter(#ref),
         ),
-        returnValue: false,
-      ) as bool);
+      ) as _i2.AutoDisposeNotifierProviderRef<_i3.TodoListState>);
   @override
-  List<_i3.Todo> getTodoList() => (super.noSuchMethod(
+  _i3.TodoListState get state => (super.noSuchMethod(
+        Invocation.getter(#state),
+        returnValue: _FakeTodoListState_1(
+          this,
+          Invocation.getter(#state),
+        ),
+      ) as _i3.TodoListState);
+  @override
+  set state(_i3.TodoListState? value) => super.noSuchMethod(
+        Invocation.setter(
+          #state,
+          value,
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  _i3.TodoListState build() => (super.noSuchMethod(
         Invocation.method(
-          #getTodoList,
+          #build,
           [],
         ),
-        returnValue: <_i3.Todo>[],
-      ) as List<_i3.Todo>);
+        returnValue: _FakeTodoListState_1(
+          this,
+          Invocation.method(
+            #build,
+            [],
+          ),
+        ),
+      ) as _i3.TodoListState);
   @override
-  bool update(_i3.Todo? todo) => (super.noSuchMethod(
+  void add(_i4.Todo? todo) => super.noSuchMethod(
+        Invocation.method(
+          #add,
+          [todo],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void update(_i4.Todo? newTodo) => super.noSuchMethod(
         Invocation.method(
           #update,
+          [newTodo],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void delete(_i4.Todo? todo) => super.noSuchMethod(
+        Invocation.method(
+          #delete,
           [todo],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  bool updateShouldNotify(
+    _i3.TodoListState? previous,
+    _i3.TodoListState? next,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateShouldNotify,
+          [
+            previous,
+            next,
+          ],
         ),
         returnValue: false,
       ) as bool);

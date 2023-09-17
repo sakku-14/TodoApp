@@ -1,25 +1,35 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
-import 'package:todo_app/Infrastructure/Repository/todo_list_repository.dart';
+import 'package:mockito/mockito.dart';
+import 'package:todo_app/Model/Entities/Tab/tab.dart';
+import 'package:todo_app/Model/TodoList/todo_list.dart';
+import 'package:todo_app/UseCase/Dto/todo_dto.dart';
+import 'package:todo_app/UseCase/UpdateTodoUseCase/update_todo_use_case.dart';
 
 import 'update_todo_use_case_test.mocks.dart';
 
 @GenerateMocks([
-  TodoListRepository,
+  TodoList,
 ])
 void main() {
-  late MockTodoListRepository todoListRepository;
+  late MockTodoList todoListProvider;
   setUp(() {
-    todoListRepository = MockTodoListRepository();
+    todoListProvider = MockTodoList();
   });
 
-  // testWidgets('Todo更新処理を呼び出せること', (tester) async {
-  //   final useCase = UpdateTodoUseCase(todoListRepository);
-  //   var todoDto = TodoDto(DateTime.now(), '単体試験用タイトル', 1, 1, 1);
-  //   when(todoListRepository.update(any)).thenReturn(true);
-  //
-  //   useCase.execute(todoDto);
-  //
-  //   verify(todoListRepository.update(any)).called(1);
-  // });
+  testWidgets('Todo更新処理を呼び出せること', (tester) async {
+    final useCase = UpdateTodoUseCase(todoListProvider);
+    var todoDto = TodoDto(
+      '単体試験用タイトル',
+      1,
+      1,
+      TabTitle.notBegin,
+      createAt: DateTime.now(),
+    );
+    when(todoListProvider.update(any));
+
+    useCase.execute(todoDto);
+
+    verify(todoListProvider.update(any)).called(1);
+  });
 }
