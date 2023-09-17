@@ -1,72 +1,97 @@
 import 'dart:math' as math; // Debug用
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:todo_app/Model/Entities/Tab/tab.dart';
+import 'package:todo_app/Model/Entities/Todo/todo.dart';
+import 'package:todo_app/Model/TodoList/todo_list.dart';
 import 'package:todo_app/View/TabView/todo_tab_controller_view.dart';
-import 'package:todo_app/ViewModel/Dto/todo_dto.dart';
 
 // region Debug用
-var random = math.Random();
-List<TodoDto> createNotBeginTodoDtoList(int createCount) {
-  return [
-    for (var i = 0; i < createCount; i++) ...[
-      TodoDto(DateTime.now(), 'notBegin', random.nextInt(3) + 1,
-          random.nextInt(3) + 1, random.nextInt(4) + 1)
-    ]
-  ];
-}
+var notBeginCount = 20;
+var progressCount = 15;
+var stayCount = 10;
+var completeCount = 5;
 
-List<TodoDto> createProgressTodoDtoList(int createCount) {
-  return [
-    for (var i = 0; i < createCount; i++) ...[
-      TodoDto(DateTime.now(), 'notBegin', random.nextInt(3) + 1,
-          random.nextInt(3) + 1, random.nextInt(4) + 1)
-    ]
-  ];
-}
+var tabOfNotBegin = find.widgetWithText(Tab, '未着手');
+var tabOfNotBeginCount = find.widgetWithText(Tab, notBeginCount.toString());
+var tabOfProgress = find.widgetWithText(Tab, '作業中');
+var tabOfProgressCount = find.widgetWithText(Tab, progressCount.toString());
+var tabOfStay = find.widgetWithText(Tab, '保留');
+var tabOfStayCount = find.widgetWithText(Tab, stayCount.toString());
+var tabOfComplete = find.widgetWithText(Tab, '完了');
+var tabOfCompleteCount = find.widgetWithText(Tab, completeCount.toString());
 
-List<TodoDto> createStayTodoDtoList(int createCount) {
-  return [
-    for (var i = 0; i < createCount; i++) ...[
-      TodoDto(DateTime.now(), 'notBegin', random.nextInt(3) + 1,
-          random.nextInt(3) + 1, random.nextInt(4) + 1)
-    ]
-  ];
-}
+class _MockTodoList extends TodoList {
+  final List<Todo> _todoList = <Todo>[];
+  final _random = math.Random();
 
-List<TodoDto> createCompleteTodoDtoList(int createCount) {
-  return [
-    for (var i = 0; i < createCount; i++) ...[
-      TodoDto(DateTime.now(), 'notBegin', random.nextInt(3) + 1,
-          random.nextInt(3) + 1, random.nextInt(4) + 1)
-    ]
-  ];
+  @override
+  TodoListState build() {
+    for (int i = 0; i < notBeginCount; i++) {
+      _todoList.add(
+        Todo(
+          createAt: DateTime.now(),
+          title: 'NotBeginTodoTitle$i',
+          emergencyPoint: _random.nextInt(3) + 1,
+          priorityPoint: _random.nextInt(3) + 1,
+          status: TabTitle.notBegin,
+        ),
+      );
+    }
+
+    for (int i = 0; i < progressCount; i++) {
+      _todoList.add(
+        Todo(
+          createAt: DateTime.now(),
+          title: 'ProgressTodoTitle$i',
+          emergencyPoint: _random.nextInt(3) + 1,
+          priorityPoint: _random.nextInt(3) + 1,
+          status: TabTitle.progress,
+        ),
+      );
+    }
+
+    for (int i = 0; i < stayCount; i++) {
+      _todoList.add(
+        Todo(
+          createAt: DateTime.now(),
+          title: 'StayTodoTitle$i',
+          emergencyPoint: _random.nextInt(3) + 1,
+          priorityPoint: _random.nextInt(3) + 1,
+          status: TabTitle.stay,
+        ),
+      );
+    }
+
+    for (int i = 0; i < completeCount; i++) {
+      _todoList.add(
+        Todo(
+          createAt: DateTime.now(),
+          title: 'CompleteTodoTitle$i',
+          emergencyPoint: _random.nextInt(3) + 1,
+          priorityPoint: _random.nextInt(3) + 1,
+          status: TabTitle.complete,
+        ),
+      );
+    }
+
+    return TodoListState(todoList: _todoList);
+  }
 }
 
 // endregion
+
 main() {
-  var notBeginCount = 20;
-  var progressCount = 15;
-  var stayCount = 10;
-  var completeCount = 5;
-
-  var tabOfNotBegin = find.widgetWithText(Tab, '未着手');
-  var tabOfNotBeginCount = find.widgetWithText(Tab, notBeginCount.toString());
-  var tabOfProgress = find.widgetWithText(Tab, '作業中');
-  var tabOfProgressCount = find.widgetWithText(Tab, progressCount.toString());
-  var tabOfStay = find.widgetWithText(Tab, '保留');
-  var tabOfStayCount = find.widgetWithText(Tab, stayCount.toString());
-  var tabOfComplete = find.widgetWithText(Tab, '完了');
-  var tabOfCompleteCount = find.widgetWithText(Tab, completeCount.toString());
-
-  MaterialApp todoTabControllerView() {
-    return MaterialApp(
-      home: Scaffold(
-        body: TodoTabControllerView(
-          notBeginTodoDtoList: createNotBeginTodoDtoList(notBeginCount),
-          progressTodoDtoList: createProgressTodoDtoList(progressCount),
-          stayTodoDtoList: createStayTodoDtoList(stayCount),
-          completeTodoDtoList: createCompleteTodoDtoList(completeCount),
+  ProviderScope todoTabControllerView(Widget widget) {
+    return ProviderScope(
+      overrides: [
+        todoListProvider.overrideWith(() => _MockTodoList()),
+      ],
+      child: MaterialApp(
+        home: Material(
+          child: widget,
         ),
       ),
     );
@@ -74,9 +99,9 @@ main() {
 
   testWidgets('Todoリストの各タブが表示されていること', (widgetTester) async {
     // given
-
     // when
-    await widgetTester.pumpWidget(todoTabControllerView());
+    await widgetTester
+        .pumpWidget(todoTabControllerView(const TodoTabControllerView()));
 
     // then
     expect(tabOfNotBegin, findsOneWidget);
@@ -90,7 +115,8 @@ main() {
     var todoTabContentsView = find.byKey(todoTabContentsViewKey);
 
     // when
-    await widgetTester.pumpWidget(todoTabControllerView());
+    await widgetTester
+        .pumpWidget(todoTabControllerView(const TodoTabControllerView()));
 
     // then
     expect(todoTabContentsView, findsOneWidget);
@@ -100,7 +126,8 @@ main() {
     // given
 
     // when
-    await widgetTester.pumpWidget(todoTabControllerView());
+    await widgetTester
+        .pumpWidget(todoTabControllerView(const TodoTabControllerView()));
 
     // then
     expect(tabOfNotBeginCount, findsOneWidget);

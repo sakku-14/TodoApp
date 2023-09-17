@@ -1,31 +1,15 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import '../../Domain/Todo/todo.dart';
+import 'package:todo_app/Model/Entities/Todo/todo.dart';
 
 part 'todo_list_repository.g.dart';
 
-@riverpod
-class TodoListRepository extends _$TodoListRepository {
-  final List<Todo> _todoList = <Todo>[];
-
-  @override
-  TodoListRepository build() {
-    return TodoListRepository();
-  }
-
+class TodoListRepository {
   /// Todoを新規追加
   bool save(Todo todo) {
     // 保存処理
     try {
-      final newTodo = todo.copyWith(
-        createAt: todo.createAt,
-        title: todo.title,
-        emergencyPoint: todo.emergencyPoint,
-        priorityPoint: todo.priorityPoint,
-        status: todo.status,
-      );
+      // 本来はここでDBへ保存処理
 
-      _todoList.add(clone(newTodo));
       return true;
     } catch (e) {
       return false;
@@ -35,11 +19,8 @@ class TodoListRepository extends _$TodoListRepository {
   /// TodoListを取得
   List<Todo> getTodoList() {
     try {
-      List<Todo> todoList = [];
-      for (int i = 0; i < _todoList.length; i++) {
-        todoList.add(clone(_todoList[i]));
-      }
-      return todoList;
+      // 本来はここでDBへ取得処理
+      return [];
     } catch (e) {
       return List<Todo>.empty();
     }
@@ -47,36 +28,17 @@ class TodoListRepository extends _$TodoListRepository {
 
   /// 特定のTodoを更新
   bool update(Todo todo) {
-    int index;
     try {
-      index =
-          _todoList.indexWhere((element) => element.createAt == todo.createAt);
+      // 本来はここでDBへ更新処理
+      return true;
     } catch (e) {
       return false;
     }
-
-    // 要素が見つからない場合、-1が返される
-    if (index == -1) return false;
-
-    _todoList[index] = Todo(
-      createAt: todo.createAt,
-      title: todo.title,
-      emergencyPoint: todo.emergencyPoint,
-      priorityPoint: todo.priorityPoint,
-      status: todo.status,
-    );
-
-    return true;
   }
+}
 
-  /// Todoのクローン生成
-  Todo clone(Todo todo) {
-    return Todo(
-      createAt: todo.createAt,
-      title: todo.title,
-      emergencyPoint: todo.emergencyPoint,
-      priorityPoint: todo.priorityPoint,
-      status: todo.status,
-    );
-  }
+@riverpod
+TodoListRepository todoListRepository(TodoListRepositoryRef ref) {
+  // 本来はここでDBサービスをwatchする
+  return TodoListRepository();
 }

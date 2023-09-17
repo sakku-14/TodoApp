@@ -1,26 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todo_app/Model/SortType/sort_type.dart';
 
 /// WidgetTestで使用するKey
 final sortComboBoxKey = UniqueKey();
 
-class SortComboBoxView extends StatelessWidget {
-  final List<String> dropDownValues;
-  final String isSelectedValue;
-  final Function updateSelectedValue;
-
+class SortComboBoxView extends ConsumerWidget {
   const SortComboBoxView({
     super.key,
-    required this.dropDownValues,
-    required this.isSelectedValue,
-    required this.updateSelectedValue,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    SortState selectedSortType = ref.watch(sortTypeProvider);
+
     return Center(
       child: DropdownButton(
         items: [
-          for (var value in dropDownValues) ...[
+          for (var value in selectedSortType.sortTypeList) ...[
             DropdownMenuItem(
               value: value,
               child: Text(value),
@@ -28,10 +25,11 @@ class SortComboBoxView extends StatelessWidget {
           ]
         ],
         key: sortComboBoxKey,
-        value: isSelectedValue,
-        onChanged: (String? value) {
+        value: selectedSortType.typeName,
+        onChanged: (value) {
           if (value == null || value.isEmpty) return;
-          updateSelectedValue(value);
+
+          ref.read(sortTypeProvider.notifier).update(SortState.fromName(value));
         },
       ),
     );

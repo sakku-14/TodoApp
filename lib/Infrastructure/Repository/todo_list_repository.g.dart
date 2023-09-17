@@ -7,13 +7,13 @@ part of 'todo_list_repository.dart';
 // **************************************************************************
 
 String _$todoListRepositoryHash() =>
-    r'6a4812e033048fe4139f4fbee3370c6678075d27';
+    r'c779e09fc66fceeaa8df99b22812e6516e4df8ca';
 
-/// See also [TodoListRepository].
-@ProviderFor(TodoListRepository)
-final todoListRepositoryProvider = AutoDisposeNotifierProvider<
-    TodoListRepository, TodoListRepository>.internal(
-  TodoListRepository.new,
+/// See also [todoListRepository].
+@ProviderFor(todoListRepository)
+final todoListRepositoryProvider =
+    AutoDisposeProvider<TodoListRepository>.internal(
+  todoListRepository,
   name: r'todoListRepositoryProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
@@ -22,6 +22,6 @@ final todoListRepositoryProvider = AutoDisposeNotifierProvider<
   allTransitiveDependencies: null,
 );
 
-typedef _$TodoListRepository = AutoDisposeNotifier<TodoListRepository>;
+typedef TodoListRepositoryRef = AutoDisposeProviderRef<TodoListRepository>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member

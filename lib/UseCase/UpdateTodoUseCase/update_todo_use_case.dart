@@ -1,17 +1,14 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:todo_app/Domain/Event/update_todo_event.dart';
-import 'package:todo_app/Infrastructure/event_bus.dart';
-
-import '../../Domain/Todo/todo.dart';
-import '../../Infrastructure/Repository/todo_list_repository.dart';
-import '../../ViewModel/Dto/todo_dto.dart';
+import 'package:todo_app/Model/Entities/Todo/todo.dart';
+import 'package:todo_app/Model/TodoList/todo_list.dart';
+import 'package:todo_app/UseCase/Dto/todo_dto.dart';
 
 part 'update_todo_use_case.g.dart';
 
 class UpdateTodoUseCase {
-  late final TodoListRepository todoListRepository;
+  late TodoList todoListProvider;
 
-  UpdateTodoUseCase(this.todoListRepository);
+  UpdateTodoUseCase(this.todoListProvider);
 
   /// 更新されたTodoを更新
   void execute(TodoDto todoDto) {
@@ -25,14 +22,13 @@ class UpdateTodoUseCase {
     );
 
     // 変更されたTodoを特定してRepositoryを更新
-    if (!todoListRepository.update(todo)) return;
-
-    // 更新処理が正常に完了したらDomainEvent通知
-    eventBus.fire(UpdateTodoEvent());
+    todoListProvider.update(todo);
   }
 }
 
-@riverpod
+@Riverpod(dependencies: [TodoList])
 UpdateTodoUseCase updateTodoUseCase(UpdateTodoUseCaseRef ref) {
-  return UpdateTodoUseCase(ref.watch(todoListRepositoryProvider.notifier));
+  return UpdateTodoUseCase(
+    ref.watch(todoListProvider.notifier),
+  );
 }

@@ -1,26 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:todo_app/Model/Entities/Todo/todo.dart';
+import 'package:todo_app/Model/TodoList/todo_list.dart';
+import 'package:todo_app/UseCase/Dto/todo_dto.dart';
 import 'package:todo_app/View/todo_view.dart';
-import 'package:todo_app/ViewModel/Dto/todo_dto.dart';
 
-class TodoTabContentsView extends StatelessWidget {
+class TodoTabContentsView extends ConsumerWidget {
   const TodoTabContentsView({
     super.key,
-    required this.notBeginTodoDtoList,
-    required this.progressTodoDtoList,
-    required this.stayTodoDtoList,
-    required this.completeTodoDtoList,
   });
 
-  final List<TodoDto> notBeginTodoDtoList;
-  final List<TodoDto> progressTodoDtoList;
-  final List<TodoDto> stayTodoDtoList;
-  final List<TodoDto> completeTodoDtoList;
-
-  Widget convertToTodoViewList(List<TodoDto> todoDtoList) {
-    var todoContents = todoDtoList.isEmpty
+  // Widgetに切り出したい
+  Widget convertToTodoViewList(List<Todo>? todoList) {
+    var todoContents = (todoList == null || todoList.isEmpty)
         ? [Container()]
-        : todoDtoList.map((e) => TodoView(todoDto: e)).toList();
+        : todoList
+            .map((e) => TodoView(
+                    todoDto: TodoDto(
+                  e.title,
+                  e.emergencyPoint,
+                  e.priorityPoint,
+                  e.status,
+                  createAt: e.createAt,
+                )))
+            .toList();
     var todoViews = SingleChildScrollView(
       child: SlidableAutoCloseBehavior(
         closeWhenOpened: true,
@@ -33,13 +37,17 @@ class TodoTabContentsView extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return TabBarView(
       children: <Widget>[
-        convertToTodoViewList(notBeginTodoDtoList), // 未着手タブのコンテンツ
-        convertToTodoViewList(progressTodoDtoList), // 作業中タブのコンテンツ
-        convertToTodoViewList(stayTodoDtoList), // 保留タブのコンテンツ
-        convertToTodoViewList(completeTodoDtoList), // 完了タブのコンテンツ
+        convertToTodoViewList(ref.watch(todoListProvider
+            .select((value) => value.getNotBeginTodoList()))), // 未着手タブのコンテンツ
+        convertToTodoViewList(ref.watch(todoListProvider
+            .select((value) => value.getProgressTodoList()))), // 作業中タブのコンテンツ
+        convertToTodoViewList(ref.watch(todoListProvider
+            .select((value) => value.getStayTodoList()))), // 保留タブのコンテンツ
+        convertToTodoViewList(ref.watch(todoListProvider
+            .select((value) => value.getCompleteTodoList()))), // 完了タブのコンテンツ
       ],
     );
   }

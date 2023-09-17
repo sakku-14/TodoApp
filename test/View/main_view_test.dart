@@ -1,9 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:todo_app/View/ModalBottomSheetView/add_bottom_sheet_view.dart';
+import 'package:todo_app/Model/Entities/Tab/tab.dart';
+import 'package:todo_app/Model/Entities/Todo/todo.dart';
+import 'package:todo_app/Model/TodoList/todo_list.dart';
+import 'package:todo_app/View/BottomSheetView/add_bottom_sheet_view.dart';
 import 'package:todo_app/View/main_view.dart';
 import 'package:todo_app/View/sort_combo_box_view.dart';
+
+// テスト用Todoの作成
+class _MockTodoList extends TodoList {
+  @override
+  TodoListState build() {
+    return TodoListState(
+      todoList: [
+        Todo(
+          createAt: DateTime(1, 2, 3, 4),
+          title: 'NotBeginTodoTitle',
+          emergencyPoint: 1,
+          priorityPoint: 2,
+          status: TabTitle.notBegin,
+        ),
+        Todo(
+          createAt: DateTime(1, 2, 3, 5),
+          title: 'ProgressTodoTitle',
+          emergencyPoint: 1,
+          priorityPoint: 2,
+          status: TabTitle.progress,
+        ),
+        Todo(
+          createAt: DateTime(1, 2, 3, 6),
+          title: 'StayTodoTitle',
+          emergencyPoint: 1,
+          priorityPoint: 2,
+          status: TabTitle.stay,
+        ),
+        Todo(
+          createAt: DateTime(1, 2, 3, 7),
+          title: 'CompleteTodoTitle',
+          emergencyPoint: 1,
+          priorityPoint: 2,
+          status: TabTitle.complete,
+        ),
+      ],
+    );
+  }
+}
 
 main() {
   /// 各WidgetのKey
@@ -12,10 +54,19 @@ main() {
 
   ProviderScope mainView(Widget widget) {
     return ProviderScope(
+      overrides: [
+        todoListProvider.overrideWith(() => _MockTodoList()),
+      ],
       child: MaterialApp(
         home: widget,
       ),
     );
+  }
+
+  /// 指定されたWidgetをタップして描画を待つ
+  Future<void> tapWidget(WidgetTester tester, Finder tapTarget) async {
+    await tester.tap(tapTarget);
+    await tester.pumpAndSettle();
   }
 
   group('Title', () {
@@ -51,12 +102,10 @@ main() {
           equals(editDate));
 
       // ドロップダウンをtapして描画(開くまで)を待つ
-      await tester.tap(find.text(editDate));
-      await tester.pumpAndSettle();
+      await tapWidget(tester, find.text(editDate));
 
       // 「緊急度×重要度」をtapして描画(閉じるまで)を待つ
-      await tester.tap(find.text(emergencyPriority).last);
-      await tester.pumpAndSettle();
+      await tapWidget(tester, find.text(emergencyPriority).last);
 
       // 「緊急度×重要度」を持つWidgetが1つあること
       expect((tester.widget(sortComboBoxInput) as DropdownButton).value,
@@ -65,31 +114,50 @@ main() {
   });
 
   group('Todoリストタブ', () {
-    testWidgets('Todoリスト表示タブが表示されていること', (tester) async {
+    testWidgets('ステータス毎にタブが4つ表示されていること', (tester) async {
       // given
-      var todoListTab = find.byKey(todoTabControllerViewKey);
+      var notBeginTab = find.widgetWithText(Tab, '未着手');
+      var progressTab = find.widgetWithText(Tab, '作業中');
+      var stayTab = find.widgetWithText(Tab, '保留');
+      var completeTab = find.widgetWithText(Tab, '完了');
 
       // when
       await tester.pumpWidget(mainView(const MainView()));
 
       // then
-      expect(todoListTab, findsOneWidget);
+      expect(notBeginTab, findsOneWidget);
+      expect(progressTab, findsOneWidget);
+      expect(stayTab, findsOneWidget);
+      expect(completeTab, findsOneWidget);
     });
 
-    testWidgets('Todoリストのタブを切り替えると、Todoリストの内容が切り替わること', (tester) async {
+    testWidgets('タブを切り替えられること', (tester) async {
       // given
-      var todoListTab = find.widgetWithText(Tab, '作業中');
-      var notBeginTodoElementTitle = find.text('notBegin');
-      var progressTodoElementTitle = find.text('progress');
+      var notBeginTab = find.widgetWithText(Tab, '未着手');
+      var progressTab = find.widgetWithText(Tab, '作業中');
+      var stayTab = find.widgetWithText(Tab, '保留');
+      var completeTab = find.widgetWithText(Tab, '完了');
+
+      var notBeginTodo = find.text('NotBeginTodoTitle');
+      var progressTodo = find.text('ProgressTodoTitle');
+      var stayTodo = find.text('StayTodoTitle');
+      var completeTodo = find.text('CompleteTodoTitle');
 
       // when
       await tester.pumpWidget(mainView(const MainView()));
-      await tester.tap(todoListTab);
-      await tester.pumpAndSettle();
 
       // then
-      expect(notBeginTodoElementTitle, findsNothing);
-      expect(progressTodoElementTitle, findsAtLeastNWidgets(1));
+      await tapWidget(tester, notBeginTab);
+      expect(notBeginTodo, findsOneWidget); // 未着手タブを選択した時、未着手のTodoが存在すること
+
+      await tapWidget(tester, progressTab);
+      expect(progressTodo, findsOneWidget); // 作業中タブを選択した時、未着手のTodoが存在すること
+
+      await tapWidget(tester, stayTab);
+      expect(stayTodo, findsOneWidget); // 保留タブを選択した時、未着手のTodoが存在すること
+
+      await tapWidget(tester, completeTab);
+      expect(completeTodo, findsOneWidget); // 完了タブを選択した時、未着手のTodoが存在すること
     });
   });
 
@@ -104,8 +172,7 @@ main() {
       expect(floatingActionButton, findsOneWidget);
 
       // when
-      await tester.tap(floatingActionButton); // Todo追加ボタンを押下する
-      await tester.pumpAndSettle();
+      await tapWidget(tester, floatingActionButton); // Todo追加ボタンを押下する
 
       // then
       expect(addBottomSheetInput, findsOneWidget); // ボトムシートが表示されていること

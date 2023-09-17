@@ -1,26 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todo_app/Model/Entities/Tab/tab.dart';
+import 'package:todo_app/Model/TodoList/todo_list.dart';
 import 'package:todo_app/View/TabView/todo_count_view.dart';
 import 'package:todo_app/View/TabView/todo_tab_contents_view.dart';
-import 'package:todo_app/ViewModel/Dto/todo_dto.dart';
 
 var todoTabContentsViewKey = UniqueKey();
 
-class TodoTabControllerView extends StatelessWidget {
+class TodoTabControllerView extends ConsumerWidget {
   const TodoTabControllerView({
     super.key,
-    required this.notBeginTodoDtoList,
-    required this.progressTodoDtoList,
-    required this.stayTodoDtoList,
-    required this.completeTodoDtoList,
   });
 
-  final List<TodoDto> notBeginTodoDtoList;
-  final List<TodoDto> progressTodoDtoList;
-  final List<TodoDto> stayTodoDtoList;
-  final List<TodoDto> completeTodoDtoList;
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return DefaultTabController(
       initialIndex: 0, // 最初に表示するタブ
       length: 4, // タブの数
@@ -33,37 +26,48 @@ class TodoTabControllerView extends StatelessWidget {
                 Tab(
                   child: Column(
                     children: [
-                      const Text('未着手'),
+                      Text(TabTitle.notBegin.tabName),
                       TodoCountView(
-                        targetListCount: notBeginTodoDtoList.length,
-                      ),
+                          targetListCount: ref
+                              .watch(todoListProvider.select(
+                                  (value) => value.getNotBeginTodoList()))
+                              .length),
                     ],
                   ),
                 ),
                 Tab(
                   child: Column(
                     children: [
-                      const Text('作業中'),
+                      Text(TabTitle.progress.tabName),
                       TodoCountView(
-                        targetListCount: progressTodoDtoList.length,
-                      ),
+                          targetListCount: ref
+                              .watch(todoListProvider.select(
+                                  (value) => value.getProgressTodoList()))
+                              .length),
                     ],
                   ),
                 ),
                 Tab(
                   child: Column(
                     children: [
-                      const Text('保留'),
-                      TodoCountView(targetListCount: stayTodoDtoList.length),
+                      Text(TabTitle.stay.tabName),
+                      TodoCountView(
+                          targetListCount: ref
+                              .watch(todoListProvider
+                                  .select((value) => value.getStayTodoList()))
+                              .length),
                     ],
                   ),
                 ),
                 Tab(
                   child: Column(
                     children: [
-                      const Text('完了'),
+                      Text(TabTitle.complete.tabName),
                       TodoCountView(
-                        targetListCount: completeTodoDtoList.length,
+                        targetListCount: ref
+                            .watch(todoListProvider
+                                .select((value) => value.getCompleteTodoList()))
+                            .length,
                       ),
                     ],
                   ),
@@ -73,13 +77,7 @@ class TodoTabControllerView extends StatelessWidget {
           ),
           Flexible(
             flex: 10,
-            child: TodoTabContentsView(
-              key: todoTabContentsViewKey,
-              notBeginTodoDtoList: notBeginTodoDtoList,
-              progressTodoDtoList: progressTodoDtoList,
-              stayTodoDtoList: stayTodoDtoList,
-              completeTodoDtoList: completeTodoDtoList,
-            ),
+            child: TodoTabContentsView(key: todoTabContentsViewKey),
           ),
         ],
       ),

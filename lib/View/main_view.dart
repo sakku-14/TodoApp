@@ -1,25 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_app/View/sort_combo_box_view.dart';
-import 'package:todo_app/ViewModel/MainViewModel/main_view_model.dart';
 
-import '../ViewModel/SortComboBoxViewModel/sort_combo_box_view_model.dart';
-import 'ModalBottomSheetView/add_bottom_sheet_view.dart';
+import 'BottomSheetView/add_bottom_sheet_view.dart';
 import 'TabView/todo_tab_controller_view.dart';
 
 // widgetテスト用Key
 var todoTabControllerViewKey = UniqueKey();
 
-class MainView extends ConsumerWidget {
+class MainView extends StatelessWidget {
   const MainView({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    var mainState = ref.watch(mainViewModelProvider);
-    var mainNotifier = ref.read(mainViewModelProvider.notifier);
-    var sortComboBoxState = ref.watch(sortComboBoxViewModelProvider);
-    var sortComboBoxNotifier = ref.read(sortComboBoxViewModelProvider.notifier);
-
+  Widget build(BuildContext context) {
     final isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
 
@@ -29,22 +21,14 @@ class MainView extends ConsumerWidget {
       ),
       body: Column(
         children: [
-          Flexible(
+          const Flexible(
             flex: 1,
-            child: SortComboBoxView(
-              dropDownValues: SortComboBoxViewModel.sortComboBoxValues,
-              isSelectedValue: sortComboBoxState.sortComboBoxValue,
-              updateSelectedValue: sortComboBoxNotifier.updateSelectedValue,
-            ),
+            child: SortComboBoxView(),
           ),
           Flexible(
             flex: isLandscape ? 7 : 10,
             child: TodoTabControllerView(
               key: todoTabControllerViewKey,
-              notBeginTodoDtoList: mainState.notBeginTodoDtoList,
-              progressTodoDtoList: mainState.progressTodoDtoList,
-              stayTodoDtoList: mainState.stayTodoDtoList,
-              completeTodoDtoList: mainState.completeTodoDtoList,
             ),
           ),
         ],
