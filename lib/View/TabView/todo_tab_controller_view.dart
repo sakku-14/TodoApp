@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_app/Model/Entities/Tab/tab.dart';
-import 'package:todo_app/Model/Entities/Todo/todo.dart';
 import 'package:todo_app/Model/TodoList/todo_list.dart';
+import 'package:todo_app/View/TabView/todo_count_view.dart';
 import 'package:todo_app/View/TabView/todo_tab_contents_view.dart';
 
 var todoTabContentsViewKey = UniqueKey();
@@ -27,8 +27,11 @@ class TodoTabControllerView extends ConsumerWidget {
                   child: Column(
                     children: [
                       Text(TabTitle.notBegin.tabName),
-                      todoCount(ref.watch(todoListProvider
-                          .select((value) => value.getNotBeginTodoList()))),
+                      TodoCountView(
+                          targetListCount: ref
+                              .watch(todoListProvider.select(
+                                  (value) => value.getNotBeginTodoList()))
+                              .length),
                     ],
                   ),
                 ),
@@ -36,8 +39,11 @@ class TodoTabControllerView extends ConsumerWidget {
                   child: Column(
                     children: [
                       Text(TabTitle.progress.tabName),
-                      todoCount(ref.watch(todoListProvider
-                          .select((value) => value.getProgressTodoList()))),
+                      TodoCountView(
+                          targetListCount: ref
+                              .watch(todoListProvider.select(
+                                  (value) => value.getProgressTodoList()))
+                              .length),
                     ],
                   ),
                 ),
@@ -45,8 +51,11 @@ class TodoTabControllerView extends ConsumerWidget {
                   child: Column(
                     children: [
                       Text(TabTitle.stay.tabName),
-                      todoCount(ref.watch(todoListProvider
-                          .select((value) => value.getStayTodoList()))),
+                      TodoCountView(
+                          targetListCount: ref
+                              .watch(todoListProvider
+                                  .select((value) => value.getStayTodoList()))
+                              .length),
                     ],
                   ),
                 ),
@@ -54,8 +63,12 @@ class TodoTabControllerView extends ConsumerWidget {
                   child: Column(
                     children: [
                       Text(TabTitle.complete.tabName),
-                      todoCount(ref.watch(todoListProvider
-                          .select((value) => value.getCompleteTodoList()))),
+                      TodoCountView(
+                        targetListCount: ref
+                            .watch(todoListProvider
+                                .select((value) => value.getCompleteTodoList()))
+                            .length,
+                      ),
                     ],
                   ),
                 ),
@@ -67,17 +80,6 @@ class TodoTabControllerView extends ConsumerWidget {
             child: TodoTabContentsView(key: todoTabContentsViewKey),
           ),
         ],
-      ),
-    );
-  }
-
-  Center todoCount(List<Todo>? targetList) {
-    return Center(
-      child: Text(
-        targetList == null ? '0' : targetList.length.toString(),
-        style: const TextStyle(
-          fontSize: 13,
-        ),
       ),
     );
   }
