@@ -26,7 +26,7 @@ class UpdateTodoUseCase {
   }
 }
 
-@riverpod
+@Riverpod(dependencies: [TodoList])
 UpdateTodoUseCase updateTodoUseCase(UpdateTodoUseCaseRef ref) {
   return UpdateTodoUseCase(
     ref.watch(todoListProvider.notifier),

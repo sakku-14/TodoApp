@@ -69,8 +69,6 @@ main() {
 
   testWidgets('指定したWidgetを表示すること', (widgetTester) async {
     // given
-    var firstWidget = find.text('notBegin');
-
     // when
     await widgetTester.pumpWidget(todoTabContents());
 

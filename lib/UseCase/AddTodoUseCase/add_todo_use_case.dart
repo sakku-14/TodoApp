@@ -27,7 +27,7 @@ class AddTodoUseCase {
   }
 }
 
-@riverpod
+@Riverpod(dependencies: [TodoList])
 AddTodoUseCase addTodoUseCase(AddTodoUseCaseRef ref) {
   return AddTodoUseCase(
     ref.watch(todoListProvider.notifier),

@@ -7,7 +7,7 @@ import 'package:todo_app/Model/Entities/Todo/todo.dart';
 part 'todo_list.freezed.dart';
 part 'todo_list.g.dart';
 
-@riverpod
+@Riverpod(dependencies: [])
 class TodoList extends _$TodoList {
   @override
   TodoListState build() {
