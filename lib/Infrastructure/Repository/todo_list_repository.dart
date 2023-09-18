@@ -35,6 +35,16 @@ class TodoListRepository {
       return false;
     }
   }
+
+  /// 特定のTodoを削除
+  bool delete(Todo todo) {
+    try {
+      // 本来はここでDBへ削除処理
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
 }
 
 @riverpod

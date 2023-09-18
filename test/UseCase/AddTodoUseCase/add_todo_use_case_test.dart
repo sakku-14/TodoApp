@@ -20,7 +20,7 @@ void main() {
   testWidgets('Todo登録処理を呼び出せること', (tester) async {
     final useCase = AddTodoUseCase(todoListProvider);
     var todoDto = TodoDto('単体試験用タイトル', 1, 1, TabTitle.notBegin);
-    when(todoListProvider.add(any));
+    when(todoListProvider.add(any)).thenReturn(true);
 
     useCase.execute(todoDto);
 
