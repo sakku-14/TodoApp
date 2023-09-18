@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:todo_app/UseCase/DeleteTodoUseCase/delete_todo_use_case.dart';
 import 'package:todo_app/UseCase/Dto/todo_dto.dart';
 import 'package:todo_app/View/BottomSheetView/update_bottom_sheet_view.dart';
 
 /// WidgetTestで使用するKey
 final todoKey = UniqueKey();
 
-class TodoView extends StatelessWidget {
+class TodoView extends ConsumerWidget {
   final TodoDto todoDto;
 
   const TodoView({
-    super.key,
+    Key? key,
     required this.todoDto,
-  });
+  }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
     return Slidable(
@@ -25,7 +27,17 @@ class TodoView extends StatelessWidget {
         children: [
           SlidableAction(
             onPressed: (context) {
-              // TODO:23.8.16:A.Uehara:削除処理呼び出し
+              ref.read(deleteTodoUseCaseProvider).execute(todoDto)
+                  ? ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Todoを削除しました。'),
+                      ),
+                    )
+                  : ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Todoを削除できませんでした。'),
+                      ),
+                    );
             },
             backgroundColor: const Color(0xFFFE4A49),
             foregroundColor: Colors.white,

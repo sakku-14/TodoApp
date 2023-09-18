@@ -15,19 +15,22 @@ class TodoList extends _$TodoList {
     return TodoListState(todoList: todoList);
   }
 
-  void add(Todo todo) {
-    if (!ref.watch(todoListRepositoryProvider).save(todo)) return;
+  bool add(Todo todo) {
+    if (!ref.watch(todoListRepositoryProvider).save(todo)) return false;
     state = state.add(todo);
+    return true;
   }
 
-  void update(Todo newTodo) {
-    if (!ref.watch(todoListRepositoryProvider).update(newTodo)) return;
+  bool update(Todo newTodo) {
+    if (!ref.watch(todoListRepositoryProvider).update(newTodo)) return false;
     state = state.update(newTodo);
+    return true;
   }
 
-  void delete(Todo todo) {
-    // リポジトリの削除処理呼び出す
+  bool delete(Todo todo) {
+    if (!ref.watch(todoListRepositoryProvider).delete(todo)) return false;
     state = state.delete(todo);
+    return true;
   }
 }
 
