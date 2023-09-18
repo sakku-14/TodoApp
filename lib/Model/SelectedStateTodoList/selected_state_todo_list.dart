@@ -33,16 +33,28 @@ List<Todo> selectedStateTodoList(
 
   switch (tabTitle) {
     case TabTitle.notBegin:
-      return ref.watch(todoListProvider).getNotBeginTodoList()
-        ..sort((a, b) => sortRule(a, b));
+      return ref.watch(todoListProvider).when(
+          data: (data) =>
+              [...data.getNotBeginTodoList()]..sort((a, b) => sortRule(a, b)),
+          error: (err, st) => [],
+          loading: () => []);
     case TabTitle.progress:
-      return ref.watch(todoListProvider).getProgressTodoList()
-        ..sort((a, b) => sortRule(a, b));
+      return ref.watch(todoListProvider).when(
+          data: (data) =>
+              [...data.getProgressTodoList()]..sort((a, b) => sortRule(a, b)),
+          error: (err, st) => [],
+          loading: () => []);
     case TabTitle.stay:
-      return ref.watch(todoListProvider).getStayTodoList()
-        ..sort((a, b) => sortRule(a, b));
+      return ref.watch(todoListProvider).when(
+          data: (data) =>
+              [...data.getStayTodoList()]..sort((a, b) => sortRule(a, b)),
+          error: (err, st) => [],
+          loading: () => []);
     case TabTitle.complete:
-      return ref.watch(todoListProvider).getCompleteTodoList()
-        ..sort((a, b) => sortRule(a, b));
+      return ref.watch(todoListProvider).when(
+          data: (data) =>
+              [...data.getCompleteTodoList()]..sort((a, b) => sortRule(a, b)),
+          error: (err, st) => [],
+          loading: () => []);
   }
 }

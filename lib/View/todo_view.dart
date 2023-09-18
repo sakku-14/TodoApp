@@ -26,14 +26,15 @@ class TodoView extends ConsumerWidget {
         motion: const DrawerMotion(),
         children: [
           SlidableAction(
-            onPressed: (context) {
-              ref.read(deleteTodoUseCaseProvider).execute(todoDto)
-                  ? ScaffoldMessenger.of(context).showSnackBar(
+            onPressed: (context) async {
+              var snackBar = ScaffoldMessenger.of(context);
+              await ref.read(deleteTodoUseCaseProvider).execute(todoDto)
+                  ? snackBar.showSnackBar(
                       const SnackBar(
                         content: Text('Todoを削除しました。'),
                       ),
                     )
-                  : ScaffoldMessenger.of(context).showSnackBar(
+                  : snackBar.showSnackBar(
                       const SnackBar(
                         content: Text('Todoを削除できませんでした。'),
                       ),

@@ -11,7 +11,7 @@ class DeleteTodoUseCase {
   DeleteTodoUseCase(this.todoListProvider);
 
   /// Todoを削除
-  bool execute(TodoDto todoDto) {
+  Future<bool> execute(TodoDto todoDto) async {
     // TodoDtoをTodoに変換
     var todo = Todo(
       createAt: todoDto.createAt!,
@@ -22,7 +22,7 @@ class DeleteTodoUseCase {
     );
 
     // 削除対象Todoを特定してRepositoryから削除
-    if (!todoListProvider.delete(todo)) return false;
+    if (!await todoListProvider.deleteTodo(todo)) return false;
 
     return true;
   }

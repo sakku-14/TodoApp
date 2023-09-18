@@ -7,7 +7,7 @@ part of 'selected_state_todo_list.dart';
 // **************************************************************************
 
 String _$selectedStateTodoListHash() =>
-    r'0ba771690cbcb7b0029fc9c4a66e5f7234adf7e1';
+    r'bfaac12c76be5be227311b4cd40cfe0622ff9e4d';
 
 /// Copied from Dart SDK
 class _SystemHash {

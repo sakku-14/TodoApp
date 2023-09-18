@@ -30,7 +30,7 @@ class _EditBottomSheetViewState extends ConsumerState<UpdateBottomSheetView> {
   void initState() {
     super.initState();
     Future(() {
-      Todo todo = ref.watch(todoListProvider).getTodo(widget.createAt);
+      Todo todo = ref.watch(todoListProvider).value!.getTodo(widget.createAt);
       ref.read(editTodoProvider.notifier).setInitialValue(todo.createAt,
           todo.title, todo.emergencyPoint, todo.priorityPoint, todo.status);
     });

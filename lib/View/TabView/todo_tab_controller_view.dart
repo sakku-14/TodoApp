@@ -28,10 +28,16 @@ class TodoTabControllerView extends ConsumerWidget {
                     children: [
                       Text(TabTitle.notBegin.tabName),
                       TodoCountView(
-                          targetListCount: ref
-                              .watch(todoListProvider.select(
-                                  (value) => value.getNotBeginTodoList()))
-                              .length),
+                        targetListCount: ref.watch(
+                          todoListProvider.select(
+                            (value) => value.when(
+                                data: (data) =>
+                                    data.getNotBeginTodoList().length,
+                                error: (err, st) => null,
+                                loading: () => null),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -40,10 +46,16 @@ class TodoTabControllerView extends ConsumerWidget {
                     children: [
                       Text(TabTitle.progress.tabName),
                       TodoCountView(
-                          targetListCount: ref
-                              .watch(todoListProvider.select(
-                                  (value) => value.getProgressTodoList()))
-                              .length),
+                        targetListCount: ref.watch(
+                          todoListProvider.select(
+                            (value) => value.when(
+                                data: (data) =>
+                                    data.getProgressTodoList().length,
+                                error: (err, st) => null,
+                                loading: () => null),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -52,10 +64,15 @@ class TodoTabControllerView extends ConsumerWidget {
                     children: [
                       Text(TabTitle.stay.tabName),
                       TodoCountView(
-                          targetListCount: ref
-                              .watch(todoListProvider
-                                  .select((value) => value.getStayTodoList()))
-                              .length),
+                        targetListCount: ref.watch(
+                          todoListProvider.select(
+                            (value) => value.when(
+                                data: (data) => data.getStayTodoList().length,
+                                error: (err, st) => null,
+                                loading: () => null),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -64,10 +81,15 @@ class TodoTabControllerView extends ConsumerWidget {
                     children: [
                       Text(TabTitle.complete.tabName),
                       TodoCountView(
-                        targetListCount: ref
-                            .watch(todoListProvider
-                                .select((value) => value.getCompleteTodoList()))
-                            .length,
+                        targetListCount: ref.watch(
+                          todoListProvider.select(
+                            (value) => value.when(
+                                data: (data) =>
+                                    data.getCompleteTodoList().length,
+                                error: (err, st) => null,
+                                loading: () => null),
+                          ),
+                        ),
                       ),
                     ],
                   ),

@@ -1,14 +1,21 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:todo_app/Infrastructure/Service/db_service.dart';
 import 'package:todo_app/Model/Entities/Todo/todo.dart';
 
 part 'todo_list_repository.g.dart';
 
 class TodoListRepository {
+  late DbService? dbService;
+
+  TodoListRepository(this.dbService);
+
   /// Todoを新規追加
-  bool save(Todo todo) {
+  Future<bool> save(Todo todo) async {
     // 保存処理
     try {
-      // 本来はここでDBへ保存処理
+      if (dbService == null) return false;
+
+      await dbService!.saveTodo(todo);
 
       return true;
     } catch (e) {
@@ -17,19 +24,23 @@ class TodoListRepository {
   }
 
   /// TodoListを取得
-  List<Todo> getTodoList() {
+  Future<List<Todo>> getTodoList() async {
     try {
-      // 本来はここでDBへ取得処理
-      return [];
+      if (dbService == null) return List<Todo>.empty();
+
+      return await dbService!.getTodoList();
     } catch (e) {
       return List<Todo>.empty();
     }
   }
 
   /// 特定のTodoを更新
-  bool update(Todo todo) {
+  Future<bool> update(Todo todo) async {
     try {
-      // 本来はここでDBへ更新処理
+      if (dbService == null) return false;
+
+      await dbService!.updateTodo(todo);
+
       return true;
     } catch (e) {
       return false;
@@ -37,9 +48,12 @@ class TodoListRepository {
   }
 
   /// 特定のTodoを削除
-  bool delete(Todo todo) {
+  Future<bool> delete(Todo todo) async {
     try {
-      // 本来はここでDBへ削除処理
+      if (dbService == null) return false;
+
+      await dbService!.deleteTodo(todo.createAt);
+
       return true;
     } catch (e) {
       return false;
@@ -49,6 +63,15 @@ class TodoListRepository {
 
 @riverpod
 TodoListRepository todoListRepository(TodoListRepositoryRef ref) {
-  // 本来はここでDBサービスをwatchする
-  return TodoListRepository();
+  return ref.watch(dbServiceProvider).when(
+    data: (data) {
+      return TodoListRepository(data);
+    },
+    error: (e, st) {
+      throw Exception('DBに接続できませんでした');
+    },
+    loading: () {
+      return TodoListRepository(null);
+    },
+  );
 }

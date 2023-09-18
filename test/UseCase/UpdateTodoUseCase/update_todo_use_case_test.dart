@@ -26,10 +26,10 @@ void main() {
       TabTitle.notBegin,
       createAt: DateTime.now(),
     );
-    when(todoListProvider.update(any));
+    when(todoListProvider.updateTodo(any));
 
     useCase.execute(todoDto);
 
-    verify(todoListProvider.update(any)).called(1);
+    verify(todoListProvider.updateTodo(any)).called(1);
   });
 }
