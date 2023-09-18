@@ -6,7 +6,7 @@ part of 'add_todo_use_case.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$addTodoUseCaseHash() => r'07bb35fff20ace87226eaa9f8a1533be8d6c7c7e';
+String _$addTodoUseCaseHash() => r'296dfa38c1ac41d54dc91a65a4f76332f40c7cae';
 
 /// See also [addTodoUseCase].
 @ProviderFor(addTodoUseCase)
@@ -16,8 +16,11 @@ final addTodoUseCaseProvider = AutoDisposeProvider<AddTodoUseCase>.internal(
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
       : _$addTodoUseCaseHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
+  dependencies: <ProviderOrFamily>[todoListProvider],
+  allTransitiveDependencies: <ProviderOrFamily>{
+    todoListProvider,
+    ...?todoListProvider.allTransitiveDependencies
+  },
 );
 
 typedef AddTodoUseCaseRef = AutoDisposeProviderRef<AddTodoUseCase>;

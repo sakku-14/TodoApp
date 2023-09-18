@@ -6,7 +6,7 @@ part of 'todo_list.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$todoListHash() => r'05c3617508863ce64d91744b857cb0093f2a98d3';
+String _$todoListHash() => r'f015b04280e43604d828583795892fcd2faa9316';
 
 /// See also [TodoList].
 @ProviderFor(TodoList)
@@ -16,8 +16,8 @@ final todoListProvider =
   name: r'todoListProvider',
   debugGetCreateSourceHash:
       const bool.fromEnvironment('dart.vm.product') ? null : _$todoListHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
+  dependencies: const <ProviderOrFamily>[],
+  allTransitiveDependencies: const <ProviderOrFamily>{},
 );
 
 typedef _$TodoList = AutoDisposeNotifier<TodoListState>;
