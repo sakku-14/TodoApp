@@ -8,14 +8,12 @@ class TodoCountView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: targetListCount == null
-          ? Container()
-          : Text(
-              targetListCount.toString(),
-              style: const TextStyle(
-                fontSize: 13,
-              ),
-            ),
+      child: Text(
+        targetListCount == null ? '0' : targetListCount.toString(),
+        style: const TextStyle(
+          fontSize: 13,
+        ),
+      ),
     );
   }
 }
