@@ -88,29 +88,29 @@ class MockTodoList extends _i1.Mock implements _i3.TodoList {
         ),
       ) as _i3.TodoListState);
   @override
-  void add(_i4.Todo? todo) => super.noSuchMethod(
+  bool add(_i4.Todo? todo) => (super.noSuchMethod(
         Invocation.method(
           #add,
           [todo],
         ),
-        returnValueForMissingStub: null,
-      );
+        returnValue: false,
+      ) as bool);
   @override
-  void update(_i4.Todo? newTodo) => super.noSuchMethod(
+  bool update(_i4.Todo? newTodo) => (super.noSuchMethod(
         Invocation.method(
           #update,
           [newTodo],
         ),
-        returnValueForMissingStub: null,
-      );
+        returnValue: false,
+      ) as bool);
   @override
-  void delete(_i4.Todo? todo) => super.noSuchMethod(
+  bool delete(_i4.Todo? todo) => (super.noSuchMethod(
         Invocation.method(
           #delete,
           [todo],
         ),
-        returnValueForMissingStub: null,
-      );
+        returnValue: false,
+      ) as bool);
   @override
   bool updateShouldNotify(
     _i3.TodoListState? previous,
