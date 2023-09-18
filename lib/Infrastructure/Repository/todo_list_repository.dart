@@ -15,9 +15,7 @@ class TodoListRepository {
     try {
       if (dbService == null) return false;
 
-      await dbService!.saveTodo(todo);
-
-      return true;
+      return await dbService!.saveTodo(todo);
     } catch (e) {
       return false;
     }
@@ -39,9 +37,7 @@ class TodoListRepository {
     try {
       if (dbService == null) return false;
 
-      await dbService!.updateTodo(todo);
-
-      return true;
+      return await dbService!.updateTodo(todo);
     } catch (e) {
       return false;
     }
@@ -52,9 +48,7 @@ class TodoListRepository {
     try {
       if (dbService == null) return false;
 
-      await dbService!.deleteTodo(todo.createAt);
-
-      return true;
+      return await dbService!.deleteTodo(todo.createAt);
     } catch (e) {
       return false;
     }

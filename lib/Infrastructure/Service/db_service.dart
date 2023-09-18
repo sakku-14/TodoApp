@@ -21,27 +21,32 @@ class DbService {
     });
   }
 
-  Future saveTodo(Todo todo) async {
-    await database.insert('todo', todo.toMap());
+  Future<bool> saveTodo(Todo todo) async {
+    var ret = await database.insert('todo', todo.toMap());
+    return ret <= 0 ? false : true;
   }
 
-  Future<void> updateTodo(Todo todo) async {
+  Future<bool> updateTodo(Todo todo) async {
     // Get a reference to the database.
-    await database.update(
+    var ret = await database.update(
       'todo',
       todo.toMap(),
       where: "created_at = ?",
       whereArgs: [todo.createAt.toUtc().toIso8601String()],
       conflictAlgorithm: ConflictAlgorithm.fail,
     );
+
+    return ret <= 0 ? false : true;
   }
 
-  Future<void> deleteTodo(DateTime createAt) async {
-    await database.delete(
+  Future<bool> deleteTodo(DateTime createAt) async {
+    var ret = await database.delete(
       'todo',
       where: "created_at = ?",
       whereArgs: [createAt.toUtc().toIso8601String()],
     );
+
+    return ret <= 0 ? false : true;
   }
 
   Future<(bool, String)> tryGetDatabasePath() async {
