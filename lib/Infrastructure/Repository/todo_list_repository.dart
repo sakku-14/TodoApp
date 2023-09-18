@@ -57,15 +57,5 @@ class TodoListRepository {
 
 @riverpod
 TodoListRepository todoListRepository(TodoListRepositoryRef ref) {
-  return ref.watch(dbServiceProvider).when(
-    data: (data) {
-      return TodoListRepository(data);
-    },
-    error: (e, st) {
-      throw Exception('DBに接続できませんでした');
-    },
-    loading: () {
-      return TodoListRepository(null);
-    },
-  );
+  return TodoListRepository(ref.watch(dbServiceProvider));
 }
