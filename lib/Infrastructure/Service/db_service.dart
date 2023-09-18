@@ -68,6 +68,7 @@ class DbService {
 @riverpod
 Future<DbService> dbService(DbServiceRef ref) async {
   var dbFilePath = '';
+
   if (Platform.isAndroid) {
     dbFilePath = await getDatabasesPath();
   } else if (Platform.isIOS) {
@@ -79,11 +80,16 @@ Future<DbService> dbService(DbServiceRef ref) async {
   if (kDebugMode) {
     print('sqLiteFilePath:$dbFilePath');
   }
+
   var database = await openDatabase(
     dbFilePath,
     onCreate: (db, version) {
-      return db.execute(
-          'CREATE TABLE todo(created_at TEXT PRIMARY KEY, title TEXT, emergency_point INTEGER, priority_point INTEGER, status TEXT)');
+      return db.execute('''CREATE TABLE todo(
+          created_at TEXT PRIMARY KEY, 
+          title TEXT, 
+          emergency_point INTEGER, 
+          priority_point INTEGER, 
+          status TEXT)''');
     },
     version: 1,
   );
