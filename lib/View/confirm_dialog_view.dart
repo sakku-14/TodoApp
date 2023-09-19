@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 
+/// WidgetTestで使用するKey
+final confirmDialogKey = UniqueKey();
+
 class ConfirmDialogView extends StatelessWidget {
   final String message;
 
@@ -11,6 +14,7 @@ class ConfirmDialogView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoAlertDialog(
+      key: confirmDialogKey,
       title: const Text("確認"),
       content: Text(message),
       actions: [

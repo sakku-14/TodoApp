@@ -7,6 +7,7 @@ import 'package:todo_app/Model/Entities/Todo/todo.dart';
 import 'package:todo_app/Model/TodoList/todo_list.dart';
 import 'package:todo_app/UseCase/Dto/todo_dto.dart';
 import 'package:todo_app/View/BottomSheetView/update_bottom_sheet_view.dart';
+import 'package:todo_app/View/confirm_dialog_view.dart';
 import 'package:todo_app/View/todo_view.dart';
 
 class _MockTodoList extends TodoList {
@@ -27,6 +28,7 @@ main() {
   /// 各WidgetのKey
   final todoInput = find.byKey(todoKey);
   final updateBottomSheetInput = find.byKey(updateBottomSheetKey);
+  final confirmDialogInput = find.byKey(confirmDialogKey);
 
   /// TodoDtoを生成
   TodoDto createTodoDto() {
@@ -112,5 +114,28 @@ main() {
     // then
     expect(updateBottomSheetInput, findsOneWidget); // ボトムシートが表示されていること
     expect(find.text('Todoの更新'), findsOneWidget); // タイトルが「登録」であること
+  });
+
+  testWidgets('削除アイコンをタップすると確認ダイアログが表示されること', (tester) async {
+    // given
+    var todoDeleteIcon = find.widgetWithIcon(SlidableAction, Icons.delete);
+
+    // when
+    // Test用のTodoを生成
+    await tester.pumpWidget(todoView(TodoView(
+      todoDto: createTodoDto(),
+    )));
+
+    // Todoをスライドして、描画完了まで待機
+    await slideToRight(tester);
+
+    // 編集アイコンをタップ
+    await tester.tap(todoDeleteIcon);
+    await tester.pumpAndSettle();
+
+    // then
+    expect(confirmDialogInput, findsOneWidget); // 確認ダイアログが表示されていること
+    expect(find.text('確認'), findsOneWidget); // タイトルが正しいこと
+    expect(find.text('Todoを削除しますか？'), findsOneWidget); // メッセージが正しいこと
   });
 }

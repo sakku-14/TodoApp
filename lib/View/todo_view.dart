@@ -4,7 +4,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:todo_app/UseCase/DeleteTodoUseCase/delete_todo_use_case.dart';
 import 'package:todo_app/UseCase/Dto/todo_dto.dart';
 import 'package:todo_app/View/BottomSheetView/update_bottom_sheet_view.dart';
-import 'package:todo_app/View/confim_dialog_view.dart';
+import 'package:todo_app/View/confirm_dialog_view.dart';
 
 import '../main.dart';
 
