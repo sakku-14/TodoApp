@@ -4,6 +4,9 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:todo_app/UseCase/DeleteTodoUseCase/delete_todo_use_case.dart';
 import 'package:todo_app/UseCase/Dto/todo_dto.dart';
 import 'package:todo_app/View/BottomSheetView/update_bottom_sheet_view.dart';
+import 'package:todo_app/View/confirm_dialog_view.dart';
+
+import '../main.dart';
 
 /// WidgetTestで使用するKey
 final todoKey = UniqueKey();
@@ -27,18 +30,23 @@ class TodoView extends ConsumerWidget {
         children: [
           SlidableAction(
             onPressed: (context) async {
-              var snackBar = ScaffoldMessenger.of(context);
-              await ref.read(deleteTodoUseCaseProvider).execute(todoDto)
-                  ? snackBar.showSnackBar(
-                      const SnackBar(
-                        content: Text('Todoを削除しました。'),
-                      ),
-                    )
-                  : snackBar.showSnackBar(
-                      const SnackBar(
-                        content: Text('Todoを削除できませんでした。'),
-                      ),
-                    );
+              var isOk = await showDialog<bool>(
+                context: context,
+                builder: (context) {
+                  return const ConfirmDialogView(
+                    message: 'Todoを削除しますか？',
+                  );
+                },
+              );
+              var message = 'Todoを削除しました。';
+              if (isOk!) {
+                if (!await ref
+                    .read(deleteTodoUseCaseProvider)
+                    .execute(todoDto)) {
+                  message = 'Todoを削除できませんでした。';
+                }
+                showSnackBar(message);
+              }
             },
             backgroundColor: const Color(0xFFFE4A49),
             foregroundColor: Colors.white,
@@ -121,6 +129,15 @@ class TodoView extends ConsumerWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  void showSnackBar(String message) {
+    ScaffoldMessengerState scaffoldMessengerState = scaffoldKey.currentState!;
+    scaffoldMessengerState.showSnackBar(
+      SnackBar(
+        content: Text(message),
       ),
     );
   }
