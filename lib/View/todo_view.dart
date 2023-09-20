@@ -40,7 +40,9 @@ class TodoView extends ConsumerWidget {
               );
               var message = 'Todoを削除しました。';
               if (isOk!) {
-                if (!ref.read(deleteTodoUseCaseProvider).execute(todoDto)) {
+                if (!await ref
+                    .read(deleteTodoUseCaseProvider)
+                    .execute(todoDto)) {
                   message = 'Todoを削除できませんでした。';
                 }
                 showSnackBar(message);

@@ -22,7 +22,7 @@ class UpdateTodoUseCase {
     );
 
     // 変更されたTodoを特定してRepositoryを更新
-    todoListProvider.update(todo);
+    todoListProvider.updateTodo(todo);
   }
 }
 

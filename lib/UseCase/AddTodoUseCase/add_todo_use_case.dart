@@ -21,7 +21,7 @@ class AddTodoUseCase {
     );
 
     // Repositoryへ新規登録
-    todoListProvider.add(todo);
+    todoListProvider.addTodo(todo);
 
     return true;
   }

@@ -10,26 +10,28 @@ part 'todo_list.g.dart';
 @Riverpod(dependencies: [])
 class TodoList extends _$TodoList {
   @override
-  TodoListState build() {
-    var todoList = ref.watch(todoListRepositoryProvider).getTodoList();
+  FutureOr<TodoListState> build() async {
+    var todoList = await ref.watch(todoListRepositoryProvider).getTodoList();
     return TodoListState(todoList: todoList);
   }
 
-  bool add(Todo todo) {
-    if (!ref.watch(todoListRepositoryProvider).save(todo)) return false;
-    state = state.add(todo);
+  Future<bool> addTodo(Todo todo) async {
+    if (!await ref.watch(todoListRepositoryProvider).save(todo)) return false;
+    state = AsyncValue.data(state.value!.add(todo));
     return true;
   }
 
-  bool update(Todo newTodo) {
-    if (!ref.watch(todoListRepositoryProvider).update(newTodo)) return false;
-    state = state.update(newTodo);
+  Future<bool> updateTodo(Todo newTodo) async {
+    if (!await ref.watch(todoListRepositoryProvider).update(newTodo)) {
+      return false;
+    }
+    state = AsyncValue.data(state.value!.update(newTodo));
     return true;
   }
 
-  bool delete(Todo todo) {
-    if (!ref.watch(todoListRepositoryProvider).delete(todo)) return false;
-    state = state.delete(todo);
+  Future<bool> deleteTodo(Todo todo) async {
+    if (!await ref.watch(todoListRepositoryProvider).delete(todo)) return false;
+    state = AsyncValue.data(state.value!.delete(todo));
     return true;
   }
 }

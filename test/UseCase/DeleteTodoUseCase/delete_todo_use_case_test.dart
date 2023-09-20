@@ -12,9 +12,9 @@ import 'delete_todo_use_case_test.mocks.dart';
   TodoList,
 ])
 void main() {
-  late MockTodoList todoListProvider;
+  final MockTodoList todoListProvider = MockTodoList();
   setUp(() {
-    todoListProvider = MockTodoList();
+    reset(todoListProvider);
   });
 
   testWidgets('Todo削除処理を呼び出せること', (tester) async {
@@ -26,10 +26,10 @@ void main() {
       TabTitle.notBegin,
       createAt: DateTime.now(),
     );
-    when(todoListProvider.delete(any)).thenReturn(true);
+    when(todoListProvider.deleteTodo(any)).thenAnswer((_) async => true);
 
     useCase.execute(todoDto);
 
-    verify(todoListProvider.delete(any)).called(1);
+    verify(todoListProvider.deleteTodo(any)).called(1);
   });
 }

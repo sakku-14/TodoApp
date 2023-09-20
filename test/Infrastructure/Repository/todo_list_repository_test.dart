@@ -1,7 +1,12 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 import 'package:todo_app/Infrastructure/Repository/todo_list_repository.dart';
+import 'package:todo_app/Infrastructure/Service/db_service.dart';
 import 'package:todo_app/Model/Entities/Tab/tab.dart';
 import 'package:todo_app/Model/Entities/Todo/todo.dart';
+
+import 'todo_list_repository_test.mocks.dart';
 
 Todo createTodo(DateTime createAt, String title) {
   return Todo(
@@ -13,14 +18,24 @@ Todo createTodo(DateTime createAt, String title) {
   );
 }
 
+@GenerateMocks([
+  DbService,
+])
 void main() {
+  final MockDbService dbService = MockDbService();
+
+  setUp(() {
+    reset(dbService);
+  });
+
   testWidgets('Todoを登録できること', (tester) async {
     // given
     final todo = createTodo(DateTime.now(), 'title');
-    final target = TodoListRepository();
+    when(dbService.saveTodo(todo)).thenAnswer((_) async => true);
+    final target = TodoListRepository(dbService);
 
     // when
-    var actual = target.save(todo);
+    var actual = await target.save(todo);
 
     // then
     expect(true, actual);
@@ -28,10 +43,11 @@ void main() {
 
   testWidgets('TodoListを取得できること', (tester) async {
     // given
-    final target = TodoListRepository();
+    when(dbService.getTodoList()).thenAnswer((_) async => []);
+    final target = TodoListRepository(dbService);
 
     // when
-    var actualList = target.getTodoList();
+    var actualList = await target.getTodoList();
 
     // then
     expect(actualList, []);
@@ -46,10 +62,11 @@ void main() {
       priorityPoint: 2,
       status: TabTitle.progress,
     );
-    final target = TodoListRepository();
+    when(dbService.updateTodo(updateTodo)).thenAnswer((_) async => true);
+    final target = TodoListRepository(dbService);
 
     // when
-    final actual = target.update(updateTodo);
+    final actual = await target.update(updateTodo);
 
     // then
     expect(actual, true);

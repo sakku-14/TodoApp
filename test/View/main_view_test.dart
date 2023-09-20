@@ -8,38 +8,37 @@ import 'package:todo_app/View/BottomSheetView/add_bottom_sheet_view.dart';
 import 'package:todo_app/View/main_view.dart';
 import 'package:todo_app/View/sort_combo_box_view.dart';
 
-// テスト用Todoの作成
 class _MockTodoList extends TodoList {
   @override
   TodoListState build() {
     return TodoListState(
       todoList: [
         Todo(
-          createAt: DateTime(1, 2, 3, 4),
+          createAt: DateTime.now(),
           title: 'NotBeginTodoTitle',
           emergencyPoint: 1,
-          priorityPoint: 2,
+          priorityPoint: 1,
           status: TabTitle.notBegin,
         ),
         Todo(
-          createAt: DateTime(1, 2, 3, 5),
+          createAt: DateTime.now(),
           title: 'ProgressTodoTitle',
           emergencyPoint: 1,
-          priorityPoint: 2,
+          priorityPoint: 1,
           status: TabTitle.progress,
         ),
         Todo(
-          createAt: DateTime(1, 2, 3, 6),
+          createAt: DateTime.now(),
           title: 'StayTodoTitle',
           emergencyPoint: 1,
-          priorityPoint: 2,
+          priorityPoint: 1,
           status: TabTitle.stay,
         ),
         Todo(
-          createAt: DateTime(1, 2, 3, 7),
+          createAt: DateTime.now(),
           title: 'CompleteTodoTitle',
           emergencyPoint: 1,
-          priorityPoint: 2,
+          priorityPoint: 1,
           status: TabTitle.complete,
         ),
       ],
