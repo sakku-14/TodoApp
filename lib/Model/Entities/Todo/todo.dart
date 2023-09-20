@@ -2,7 +2,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:todo_app/Model/Entities/Tab/tab.dart';
 
 part 'todo.freezed.dart';
-// part 'todo.g.dart';
 
 @freezed
 abstract class Todo with _$Todo {
