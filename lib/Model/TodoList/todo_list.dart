@@ -10,7 +10,7 @@ part 'todo_list.g.dart';
 @Riverpod(dependencies: [])
 class TodoList extends _$TodoList {
   @override
-  Future<TodoListState> build() async {
+  FutureOr<TodoListState> build() async {
     var todoList = await ref.watch(todoListRepositoryProvider).getTodoList();
     return TodoListState(todoList: todoList);
   }
