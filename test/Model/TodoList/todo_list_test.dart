@@ -152,7 +152,6 @@ void main() {
 
     final container = providerContainerFactory(todoListRepository);
     final notifier = container.read(todoListProvider.notifier);
-    final expected = [todo1, todo2];
 
     // when
     notifier.addTodo(todo3);
@@ -237,7 +236,6 @@ void main() {
 
     final container = providerContainerFactory(todoListRepository);
     final notifier = container.read(todoListProvider.notifier);
-    final expected = [todo1, todo2];
 
     // when
     notifier.updateTodo(newTodo2);
@@ -310,7 +308,6 @@ void main() {
 
     final container = providerContainerFactory(todoListRepository);
     final notifier = container.read(todoListProvider.notifier);
-    final expected = [todo1, todo2, todo3];
 
     // when
     notifier.deleteTodo(todo2);

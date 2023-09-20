@@ -2,7 +2,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'sort_type.g.dart';
 
-@riverpod
+@Riverpod(dependencies: [])
 class SortType extends _$SortType {
   @override
   SortState build() => SortState.createdAt;

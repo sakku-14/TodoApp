@@ -6,7 +6,10 @@ import 'package:todo_app/Model/TodoList/todo_list.dart';
 
 part 'selected_state_todo_list.g.dart';
 
-@riverpod
+@Riverpod(dependencies: [
+  SortType,
+  TodoList,
+])
 List<Todo> selectedStateTodoList(
     SelectedStateTodoListRef ref, TabTitle tabTitle) {
   final sortState = ref.watch(sortTypeProvider);
