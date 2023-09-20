@@ -12,18 +12,18 @@ import 'add_todo_use_case_test.mocks.dart';
   TodoList,
 ])
 void main() {
-  late MockTodoList todoListProvider;
+  final MockTodoList todoListProvider = MockTodoList();
   setUp(() {
-    todoListProvider = MockTodoList();
+    reset(todoListProvider);
   });
 
   testWidgets('Todo登録処理を呼び出せること', (tester) async {
     final useCase = AddTodoUseCase(todoListProvider);
     var todoDto = TodoDto('単体試験用タイトル', 1, 1, TabTitle.notBegin);
-    when(todoListProvider.add(any)).thenReturn(true);
+    when(todoListProvider.addTodo(any)).thenAnswer((_) async => true);
 
     useCase.execute(todoDto);
 
-    verify(todoListProvider.add(any)).called(1);
+    verify(todoListProvider.addTodo(any)).called(1);
   });
 }

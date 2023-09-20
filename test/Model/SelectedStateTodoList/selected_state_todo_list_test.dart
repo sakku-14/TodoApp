@@ -6,8 +6,8 @@ import 'package:todo_app/Model/SelectedStateTodoList/selected_state_todo_list.da
 import 'package:todo_app/Model/SortType/sort_type.dart';
 import 'package:todo_app/Model/TodoList/todo_list.dart';
 
-import '../../DummyProvider/dummy_sort_type.dart';
-import '../../DummyProvider/dummy_todo_list.dart';
+import 'dummy_sort_type.dart';
+import 'dummy_todo_list.dart';
 
 void main() {
   /// 緊急度x重要度のソート順であればtrueを返す

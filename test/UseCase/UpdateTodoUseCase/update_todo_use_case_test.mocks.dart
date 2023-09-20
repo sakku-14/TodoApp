@@ -95,7 +95,7 @@ class MockTodoList extends _i1.Mock implements _i3.TodoList {
         )),
       ) as _i4.Future<_i3.TodoListState>);
   @override
-  _i4.Future<_i3.TodoListState> build() => (super.noSuchMethod(
+  _i4.FutureOr<_i3.TodoListState> build() => (super.noSuchMethod(
         Invocation.method(
           #build,
           [],
@@ -107,7 +107,7 @@ class MockTodoList extends _i1.Mock implements _i3.TodoList {
             [],
           ),
         )),
-      ) as _i4.Future<_i3.TodoListState>);
+      ) as _i4.FutureOr<_i3.TodoListState>);
   @override
   _i4.Future<bool> addTodo(_i5.Todo? todo) => (super.noSuchMethod(
         Invocation.method(
