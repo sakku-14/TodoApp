@@ -22,7 +22,8 @@ class TodoView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isLandscape =
-        MediaQuery.of(context).orientation == Orientation.landscape;
+        MediaQuery.of(context).orientation == Orientation.landscape; // 縦or横を取得
+    final screenWidth = MediaQuery.of(context).size.width; // 画面幅の取得
     return Slidable(
       key: const ValueKey(0),
       startActionPane: ActionPane(
@@ -74,57 +75,89 @@ class TodoView extends ConsumerWidget {
           ),
         ],
       ),
-      child: Card(
-        shape: const RoundedRectangleBorder(
-          side: BorderSide(
-            color: Colors.black38, //色
-            width: 0.5, //太さ
+      child: LongPressDraggable(
+        data: TodoDto(
+          createAt: todoDto.createAt,
+          todoDto.title,
+          todoDto.emergencyPoint,
+          todoDto.priorityPoint,
+          todoDto.status,
+        ),
+        // ドラッグ中の見た目
+        feedback: Material(
+          child: Container(
+            width: screenWidth * 0.8, // 幅を設定
+            height: 50, // 高さを設定
+            decoration: BoxDecoration(
+              // 半透明の背景色
+              border: Border.all(
+                color: Colors.black.withOpacity(0.5), // ボーダーラインの色
+                width: 0.5, // ボーダーラインの太さ
+              ),
+            ),
+            child: Center(
+              child: Text(
+                todoDto.title, // 表示するテキスト
+                style: const TextStyle(
+                  fontSize: 16, // テキストのフォントサイズ
+                  color: Colors.black, // テキストの色
+                ),
+              ),
+            ),
           ),
         ),
-        child: ListTile(
-          key: todoKey,
-          title: Text(todoDto.title),
-          trailing: FractionallySizedBox(
-            widthFactor: 0.2,
-            child: Center(
-              child: Row(
-                mainAxisAlignment: isLandscape
-                    ? MainAxisAlignment.spaceEvenly
-                    : MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    width: 30,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Color(0xfff7a3a3),
-                    ),
-                    child: Center(
-                      child: Text(
-                        todoDto.emergencyPoint.toString(),
-                        style: const TextStyle(
-                          fontSize: 18,
-                          color: Colors.black54,
+        child: Card(
+          shape: const RoundedRectangleBorder(
+            side: BorderSide(
+              color: Colors.black38, //色
+              width: 0.5, //太さ
+            ),
+          ),
+          child: ListTile(
+            key: todoKey,
+            title: Text(todoDto.title),
+            trailing: FractionallySizedBox(
+              widthFactor: 0.2,
+              child: Center(
+                child: Row(
+                  mainAxisAlignment: isLandscape
+                      ? MainAxisAlignment.spaceEvenly
+                      : MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      width: 30,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Color(0xfff7a3a3),
+                      ),
+                      child: Center(
+                        child: Text(
+                          todoDto.emergencyPoint.toString(),
+                          style: const TextStyle(
+                            fontSize: 18,
+                            color: Colors.black54,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Container(
-                    width: 30,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Color(0xfff7d092),
-                    ),
-                    child: Center(
-                      child: Text(
-                        todoDto.priorityPoint.toString(),
-                        style: const TextStyle(
-                          fontSize: 18,
-                          color: Colors.black54,
+                    Container(
+                      width: 30,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Color(0xfff7d092),
+                      ),
+                      child: Center(
+                        child: Text(
+                          todoDto.priorityPoint.toString(),
+                          style: const TextStyle(
+                            fontSize: 18,
+                            color: Colors.black54,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
