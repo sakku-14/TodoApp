@@ -5,6 +5,7 @@ import 'package:todo_app/UseCase/DeleteTodoUseCase/delete_todo_use_case.dart';
 import 'package:todo_app/UseCase/Dto/todo_dto.dart';
 import 'package:todo_app/View/BottomSheetView/update_bottom_sheet_view.dart';
 import 'package:todo_app/View/confirm_dialog_view.dart';
+import 'package:todo_app/View/while_dragging_todo_view.dart';
 
 import '../main.dart';
 
@@ -23,7 +24,6 @@ class TodoView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape; // 縦or横を取得
-    final screenWidth = MediaQuery.of(context).size.width; // 画面幅の取得
     return Slidable(
       key: const ValueKey(0),
       startActionPane: ActionPane(
@@ -84,28 +84,7 @@ class TodoView extends ConsumerWidget {
           todoDto.status,
         ),
         // ドラッグ中の見た目
-        feedback: Material(
-          child: Container(
-            width: screenWidth * 0.8, // 幅を設定
-            height: 50, // 高さを設定
-            decoration: BoxDecoration(
-              // 半透明の背景色
-              border: Border.all(
-                color: Colors.black.withOpacity(0.5), // ボーダーラインの色
-                width: 0.5, // ボーダーラインの太さ
-              ),
-            ),
-            child: Center(
-              child: Text(
-                todoDto.title, // 表示するテキスト
-                style: const TextStyle(
-                  fontSize: 16, // テキストのフォントサイズ
-                  color: Colors.black, // テキストの色
-                ),
-              ),
-            ),
-          ),
-        ),
+        feedback: WhileDraggingTodoView(todoDto: todoDto),
         child: Card(
           shape: const RoundedRectangleBorder(
             side: BorderSide(
