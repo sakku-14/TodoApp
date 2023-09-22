@@ -46,7 +46,7 @@ class _MockTodoList extends TodoList {
   }
 }
 
-main() {
+void main() {
   /// 各WidgetのKey
   final sortComboBoxInput = find.byKey(sortComboBoxKey);
   final addBottomSheetInput = find.byKey(addBottomSheetKey);
@@ -176,6 +176,40 @@ main() {
       // then
       expect(addBottomSheetInput, findsOneWidget); // ボトムシートが表示されていること
       expect(find.text('Todoの登録'), findsOneWidget); // タイトルが「登録」であること
+    });
+  });
+
+  group('ドラッグ&ドロップ', () {
+    testWidgets('ドラッグ&ドロップでTodoのステータス変更ができること', (tester) async {
+      // given
+      await tester.pumpWidget(mainView(const MainView()));
+      var ddTargetTodo = find.text('NotBeginTodoTitle');
+
+      // DD対象のTodoが未着手タブ内に存在すること
+      expect(ddTargetTodo, findsOneWidget);
+
+      // ジェスチャーの開始地点を決定
+      final firstLocation = tester.getCenter(find.text('NotBeginTodoTitle'));
+      final gesture = await tester.startGesture(firstLocation);
+
+      // ドラッグ可能になるまで待機
+      await tester.pump(const Duration(seconds: 1));
+
+      // 対象の箇所まで開始地点から移動
+      await gesture.moveTo(tester.getCenter(find.widgetWithText(Tab, '作業中')));
+      await tester.pumpAndSettle();
+
+      // ジェスチャーの解除
+      await gesture.up();
+      await tester.pumpAndSettle();
+
+      expect(ddTargetTodo, findsNothing,
+          skip: "DBとの整合性が取れないため確認できない"); // DD対象のTodoが未着手タブ内に存在しないこと
+
+      await tapWidget(tester, find.widgetWithText(Tab, '作業中'));
+      await tester.pumpAndSettle();
+      expect(ddTargetTodo, findsOneWidget,
+          skip: "DBとの整合性が取れないため確認できない"); // DD対象のTodoが作業中タブ内に存在すること
     });
   });
 }
