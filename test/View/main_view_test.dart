@@ -44,6 +44,12 @@ class _MockTodoList extends TodoList {
       ],
     );
   }
+
+  @override
+  Future<bool> updateTodo(Todo newTodo) async {
+    state = AsyncValue.data(state.value!.update(newTodo));
+    return true;
+  }
 }
 
 void main() {
@@ -203,13 +209,11 @@ void main() {
       await gesture.up();
       await tester.pumpAndSettle();
 
-      expect(ddTargetTodo, findsNothing,
-          skip: "DBとの整合性が取れないため確認できない"); // DD対象のTodoが未着手タブ内に存在しないこと
+      expect(ddTargetTodo, findsNothing); // DD対象のTodoが未着手タブ内に存在しないこと
 
       await tapWidget(tester, find.widgetWithText(Tab, '作業中'));
       await tester.pumpAndSettle();
-      expect(ddTargetTodo, findsOneWidget,
-          skip: "DBとの整合性が取れないため確認できない"); // DD対象のTodoが作業中タブ内に存在すること
+      expect(ddTargetTodo, findsOneWidget); // DD対象のTodoが作業中タブ内に存在すること
     });
   });
 }
