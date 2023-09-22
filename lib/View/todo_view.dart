@@ -5,6 +5,7 @@ import 'package:todo_app/UseCase/DeleteTodoUseCase/delete_todo_use_case.dart';
 import 'package:todo_app/UseCase/Dto/todo_dto.dart';
 import 'package:todo_app/View/BottomSheetView/update_bottom_sheet_view.dart';
 import 'package:todo_app/View/confirm_dialog_view.dart';
+import 'package:todo_app/View/while_dragging_todo_view.dart';
 
 import '../main.dart';
 
@@ -22,7 +23,7 @@ class TodoView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isLandscape =
-        MediaQuery.of(context).orientation == Orientation.landscape;
+        MediaQuery.of(context).orientation == Orientation.landscape; // 縦or横を取得
     return Slidable(
       key: const ValueKey(0),
       startActionPane: ActionPane(
@@ -74,57 +75,68 @@ class TodoView extends ConsumerWidget {
           ),
         ],
       ),
-      child: Card(
-        shape: const RoundedRectangleBorder(
-          side: BorderSide(
-            color: Colors.black38, //色
-            width: 0.5, //太さ
-          ),
+      child: LongPressDraggable(
+        data: TodoDto(
+          createAt: todoDto.createAt,
+          todoDto.title,
+          todoDto.emergencyPoint,
+          todoDto.priorityPoint,
+          todoDto.status,
         ),
-        child: ListTile(
-          key: todoKey,
-          title: Text(todoDto.title),
-          trailing: FractionallySizedBox(
-            widthFactor: 0.2,
-            child: Center(
-              child: Row(
-                mainAxisAlignment: isLandscape
-                    ? MainAxisAlignment.spaceEvenly
-                    : MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    width: 30,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Color(0xfff7a3a3),
-                    ),
-                    child: Center(
-                      child: Text(
-                        todoDto.emergencyPoint.toString(),
-                        style: const TextStyle(
-                          fontSize: 18,
-                          color: Colors.black54,
+        // ドラッグ中の見た目
+        feedback: WhileDraggingTodoView(todoDto: todoDto),
+        child: Card(
+          shape: const RoundedRectangleBorder(
+            side: BorderSide(
+              color: Colors.black38, //色
+              width: 0.5, //太さ
+            ),
+          ),
+          child: ListTile(
+            key: todoKey,
+            title: Text(todoDto.title),
+            trailing: FractionallySizedBox(
+              widthFactor: 0.2,
+              child: Center(
+                child: Row(
+                  mainAxisAlignment: isLandscape
+                      ? MainAxisAlignment.spaceEvenly
+                      : MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      width: 30,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Color(0xfff7a3a3),
+                      ),
+                      child: Center(
+                        child: Text(
+                          todoDto.emergencyPoint.toString(),
+                          style: const TextStyle(
+                            fontSize: 18,
+                            color: Colors.black54,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Container(
-                    width: 30,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Color(0xfff7d092),
-                    ),
-                    child: Center(
-                      child: Text(
-                        todoDto.priorityPoint.toString(),
-                        style: const TextStyle(
-                          fontSize: 18,
-                          color: Colors.black54,
+                    Container(
+                      width: 30,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Color(0xfff7d092),
+                      ),
+                      child: Center(
+                        child: Text(
+                          todoDto.priorityPoint.toString(),
+                          style: const TextStyle(
+                            fontSize: 18,
+                            color: Colors.black54,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
