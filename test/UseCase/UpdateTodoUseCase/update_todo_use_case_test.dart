@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:todo_app/Model/Entities/Tab/tab.dart';
 import 'package:todo_app/Model/Entities/Todo/todo.dart';
+import 'package:todo_app/Model/Entities/TodoStatus/todo_status.dart';
 import 'package:todo_app/Model/TodoList/todo_list.dart';
 import 'package:todo_app/UseCase/Dto/todo_dto.dart';
 import 'package:todo_app/UseCase/UpdateTodoUseCase/update_todo_use_case.dart';
@@ -23,7 +23,7 @@ void main() {
       '単体試験用タイトル',
       1,
       1,
-      TabTitle.notBegin,
+      TodoStatus.notBegin,
       createAt: DateTime.now(),
     );
     var todo = Todo(

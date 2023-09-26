@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:todo_app/Model/Entities/Tab/tab.dart';
+import 'package:todo_app/Model/Entities/TodoStatus/todo_status.dart';
 
 part 'todo.freezed.dart';
 
@@ -10,7 +10,7 @@ abstract class Todo with _$Todo {
     required String title,
     required int emergencyPoint,
     required int priorityPoint,
-    required TabTitle status,
+    required TodoStatus status,
   }) = _Todo;
   Todo._();
 
@@ -26,7 +26,7 @@ abstract class Todo with _$Todo {
         'title': title,
         'emergency_point': emergencyPoint,
         'priority_point': priorityPoint,
-        'status': status.tabName,
+        'status': status.statusName,
       };
 
   factory Todo.fromJson(Map<String, dynamic> json) {
@@ -35,7 +35,7 @@ abstract class Todo with _$Todo {
       title: json['title'],
       emergencyPoint: json['emergency_point'] as int,
       priorityPoint: json['priority_point'] as int,
-      status: TabTitle.fromName(json['status']),
+      status: TodoStatus.fromName(json['status']),
     );
   }
 }

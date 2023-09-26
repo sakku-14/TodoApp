@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:todo_app/Model/Entities/Tab/tab.dart';
+import 'package:todo_app/Model/Entities/TodoStatus/todo_status.dart';
 
 part 'edit_todo.freezed.dart';
 part 'edit_todo.g.dart';
@@ -19,10 +19,10 @@ class EditTodo extends _$EditTodo {
       state = state.copyWith(emergencyPoint: point);
   void setPrimaryPoint(int point) =>
       state = state.copyWith(primaryPoint: point);
-  void setTabStatus(TabTitle tabState) =>
+  void setTabStatus(TodoStatus tabState) =>
       state = state.copyWith(tabStatus: tabState);
   void setInitialValue(DateTime time, String title, int emergency, int primary,
-      TabTitle tabState) {
+      TodoStatus tabState) {
     state = state.copyWith(
         createAt: time,
         title: title,
@@ -41,7 +41,7 @@ abstract class EditTodoState with _$EditTodoState {
     TextEditingController? textEditingController,
     @Default(1) int emergencyPoint,
     @Default(1) int primaryPoint,
-    @Default(TabTitle.notBegin) TabTitle tabStatus,
+    @Default(TodoStatus.notBegin) TodoStatus tabStatus,
   }) = _EditTodoState;
   EditTodoState._();
 

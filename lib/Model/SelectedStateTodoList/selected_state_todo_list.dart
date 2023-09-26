@@ -1,6 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:todo_app/Model/Entities/Tab/tab.dart';
 import 'package:todo_app/Model/Entities/Todo/todo.dart';
+import 'package:todo_app/Model/Entities/TodoStatus/todo_status.dart';
 import 'package:todo_app/Model/SortType/sort_type.dart';
 import 'package:todo_app/Model/TodoList/todo_list.dart';
 
@@ -11,7 +11,7 @@ part 'selected_state_todo_list.g.dart';
   TodoList,
 ])
 List<Todo> selectedStateTodoList(
-    SelectedStateTodoListRef ref, TabTitle tabTitle) {
+    SelectedStateTodoListRef ref, TodoStatus tabTitle) {
   final sortState = ref.watch(sortTypeProvider);
   late Function sortRule;
   switch (sortState) {
@@ -35,25 +35,25 @@ List<Todo> selectedStateTodoList(
   }
 
   switch (tabTitle) {
-    case TabTitle.notBegin:
+    case TodoStatus.notBegin:
       return ref.watch(todoListProvider).when(
           data: (data) =>
               [...data.getNotBeginTodoList()]..sort((a, b) => sortRule(a, b)),
           error: (err, st) => [],
           loading: () => []);
-    case TabTitle.progress:
+    case TodoStatus.progress:
       return ref.watch(todoListProvider).when(
           data: (data) =>
               [...data.getProgressTodoList()]..sort((a, b) => sortRule(a, b)),
           error: (err, st) => [],
           loading: () => []);
-    case TabTitle.stay:
+    case TodoStatus.stay:
       return ref.watch(todoListProvider).when(
           data: (data) =>
               [...data.getStayTodoList()]..sort((a, b) => sortRule(a, b)),
           error: (err, st) => [],
           loading: () => []);
-    case TabTitle.complete:
+    case TodoStatus.complete:
       return ref.watch(todoListProvider).when(
           data: (data) =>
               [...data.getCompleteTodoList()]..sort((a, b) => sortRule(a, b)),

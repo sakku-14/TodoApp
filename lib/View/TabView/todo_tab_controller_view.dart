@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo_app/Model/Entities/Tab/tab.dart';
+import 'package:todo_app/Model/Entities/TodoStatus/todo_status.dart';
 import 'package:todo_app/Model/TodoList/todo_list.dart';
 import 'package:todo_app/UseCase/Dto/todo_dto.dart';
 import 'package:todo_app/UseCase/UpdateTodoUseCase/update_todo_use_case.dart';
@@ -39,7 +39,7 @@ class TodoTabControllerView extends ConsumerWidget {
                       child: Tab(
                         child: Column(
                           children: [
-                            Text(TabTitle.notBegin.tabName),
+                            Text(TodoStatus.notBegin.statusName),
                             TodoCountView(
                               targetListCount: ref.watch(
                                 todoListProvider.select(
@@ -69,7 +69,7 @@ class TodoTabControllerView extends ConsumerWidget {
                           data.title,
                           data.emergencyPoint,
                           data.priorityPoint,
-                          TabTitle.notBegin,
+                          TodoStatus.notBegin,
                         ));
                   },
                   // DragTarget の範囲から離れた時に呼ばれる
@@ -87,7 +87,7 @@ class TodoTabControllerView extends ConsumerWidget {
                       child: Tab(
                         child: Column(
                           children: [
-                            Text(TabTitle.progress.tabName),
+                            Text(TodoStatus.progress.statusName),
                             TodoCountView(
                               targetListCount: ref.watch(
                                 todoListProvider.select(
@@ -117,7 +117,7 @@ class TodoTabControllerView extends ConsumerWidget {
                           data.title,
                           data.emergencyPoint,
                           data.priorityPoint,
-                          TabTitle.progress,
+                          TodoStatus.progress,
                         ));
                   },
                   // DragTarget の範囲から離れた時に呼ばれる
@@ -135,7 +135,7 @@ class TodoTabControllerView extends ConsumerWidget {
                       child: Tab(
                         child: Column(
                           children: [
-                            Text(TabTitle.stay.tabName),
+                            Text(TodoStatus.stay.statusName),
                             TodoCountView(
                               targetListCount: ref.watch(
                                 todoListProvider.select(
@@ -165,7 +165,7 @@ class TodoTabControllerView extends ConsumerWidget {
                           data.title,
                           data.emergencyPoint,
                           data.priorityPoint,
-                          TabTitle.stay,
+                          TodoStatus.stay,
                         ));
                   },
                   // DragTarget の範囲から離れた時に呼ばれる
@@ -183,7 +183,7 @@ class TodoTabControllerView extends ConsumerWidget {
                       child: Tab(
                         child: Column(
                           children: [
-                            Text(TabTitle.complete.tabName),
+                            Text(TodoStatus.complete.statusName),
                             TodoCountView(
                               targetListCount: ref.watch(
                                 todoListProvider.select(
@@ -213,7 +213,7 @@ class TodoTabControllerView extends ConsumerWidget {
                           data.title,
                           data.emergencyPoint,
                           data.priorityPoint,
-                          TabTitle.complete,
+                          TodoStatus.complete,
                         ));
                   },
                   // DragTarget の範囲から離れた時に呼ばれる

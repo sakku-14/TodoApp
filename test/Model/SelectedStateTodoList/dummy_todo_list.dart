@@ -1,5 +1,5 @@
-import 'package:todo_app/Model/Entities/Tab/tab.dart';
 import 'package:todo_app/Model/Entities/Todo/todo.dart';
+import 'package:todo_app/Model/Entities/TodoStatus/todo_status.dart';
 import 'package:todo_app/Model/TodoList/todo_list.dart';
 
 class DummyTodoList extends TodoList {
@@ -11,16 +11,16 @@ class DummyTodoList extends TodoList {
 
 TodoListState dummyTodoList() => TodoListState(
       todoList: [
-        ..._TodoListFactory.todoListFactory(TabTitle.notBegin),
-        ..._TodoListFactory.todoListFactory(TabTitle.progress),
-        ..._TodoListFactory.todoListFactory(TabTitle.stay),
-        ..._TodoListFactory.todoListFactory(TabTitle.complete),
+        ..._TodoListFactory.todoListFactory(TodoStatus.notBegin),
+        ..._TodoListFactory.todoListFactory(TodoStatus.progress),
+        ..._TodoListFactory.todoListFactory(TodoStatus.stay),
+        ..._TodoListFactory.todoListFactory(TodoStatus.complete),
       ],
     );
 
 class _TodoListFactory {
   static Todo todoFactory(int createOrder, int emergencyPoint,
-          int priorityPoint, TabTitle status) =>
+          int priorityPoint, TodoStatus status) =>
       Todo(
           createAt: DateTime(createOrder),
           title: 'title',
@@ -30,7 +30,7 @@ class _TodoListFactory {
 
   static int todoListIndex = 0;
 
-  static List<Todo> todoListFactory(TabTitle status) => [
+  static List<Todo> todoListFactory(TodoStatus status) => [
         todoFactory(todoListIndex, 1, 1, status),
         todoFactory(++todoListIndex, 1, 2, status),
         todoFactory(++todoListIndex, 2, 1, status),

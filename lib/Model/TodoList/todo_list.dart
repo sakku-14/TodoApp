@@ -1,8 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:todo_app/Infrastructure/Repository/todo_list_repository.dart';
-import 'package:todo_app/Model/Entities/Tab/tab.dart';
 import 'package:todo_app/Model/Entities/Todo/todo.dart';
+import 'package:todo_app/Model/Entities/TodoStatus/todo_status.dart';
 
 part 'todo_list.freezed.dart';
 part 'todo_list.g.dart';
@@ -43,14 +43,17 @@ abstract class TodoListState with _$TodoListState {
   }) = _TodoListState;
   TodoListState._();
 
-  List<Todo> getNotBeginTodoList() =>
-      todoList.where((element) => element.status == TabTitle.notBegin).toList();
-  List<Todo> getProgressTodoList() =>
-      todoList.where((element) => element.status == TabTitle.progress).toList();
+  List<Todo> getNotBeginTodoList() => todoList
+      .where((element) => element.status == TodoStatus.notBegin)
+      .toList();
+  List<Todo> getProgressTodoList() => todoList
+      .where((element) => element.status == TodoStatus.progress)
+      .toList();
   List<Todo> getStayTodoList() =>
-      todoList.where((element) => element.status == TabTitle.stay).toList();
-  List<Todo> getCompleteTodoList() =>
-      todoList.where((element) => element.status == TabTitle.complete).toList();
+      todoList.where((element) => element.status == TodoStatus.stay).toList();
+  List<Todo> getCompleteTodoList() => todoList
+      .where((element) => element.status == TodoStatus.complete)
+      .toList();
   Todo getTodo(DateTime createAt) => todoList
       .where((element) => element.createAt == createAt)
       .toList()

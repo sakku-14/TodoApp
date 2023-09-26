@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:todo_app/Model/Entities/Tab/tab.dart';
 import 'package:todo_app/Model/Entities/Todo/todo.dart';
+import 'package:todo_app/Model/Entities/TodoStatus/todo_status.dart';
 import 'package:todo_app/Model/SelectedStateTodoList/selected_state_todo_list.dart';
 import 'package:todo_app/Model/SortType/sort_type.dart';
 import 'package:todo_app/Model/TodoList/todo_list.dart';
@@ -42,12 +42,12 @@ void main() {
 
       // when
       final selectedStateTodoList =
-          container.read(selectedStateTodoListProvider(TabTitle.notBegin));
+          container.read(selectedStateTodoListProvider(TodoStatus.notBegin));
 
       // then
       var behindTodoCreateAt = DateTime(0);
       for (var element in selectedStateTodoList) {
-        expect(TabTitle.notBegin, element.status); // 未着手のTodoであること
+        expect(TodoStatus.notBegin, element.status); // 未着手のTodoであること
         expect(behindTodoCreateAt.compareTo(element.createAt),
             lessThanOrEqualTo(0)); // 登録日順であること
         behindTodoCreateAt = element.createAt;
@@ -66,12 +66,12 @@ void main() {
 
       // when
       final selectedStateTodoList =
-          container.read(selectedStateTodoListProvider(TabTitle.notBegin));
+          container.read(selectedStateTodoListProvider(TodoStatus.notBegin));
 
       // then
       Todo? behindTodo;
       for (var element in selectedStateTodoList) {
-        expect(TabTitle.notBegin, element.status);
+        expect(TodoStatus.notBegin, element.status);
         if (behindTodo != null) {
           expect(isEmergencyTimesPrimaryOrder(behindTodo, element), isTrue);
         }
@@ -92,12 +92,12 @@ void main() {
 
       // when
       final selectedStateTodoList =
-          container.read(selectedStateTodoListProvider(TabTitle.progress));
+          container.read(selectedStateTodoListProvider(TodoStatus.progress));
 
       // then
       var behindTodoCreateAt = DateTime(0);
       for (var element in selectedStateTodoList) {
-        expect(TabTitle.progress, element.status); // 未着手のTodoであること
+        expect(TodoStatus.progress, element.status); // 未着手のTodoであること
         expect(behindTodoCreateAt.compareTo(element.createAt),
             lessThanOrEqualTo(0)); // 登録日順であること
         behindTodoCreateAt = element.createAt;
@@ -116,12 +116,12 @@ void main() {
 
       // when
       final selectedStateTodoList =
-          container.read(selectedStateTodoListProvider(TabTitle.progress));
+          container.read(selectedStateTodoListProvider(TodoStatus.progress));
 
       // then
       Todo? behindTodo;
       for (var element in selectedStateTodoList) {
-        expect(TabTitle.progress, element.status);
+        expect(TodoStatus.progress, element.status);
         if (behindTodo != null) {
           expect(isEmergencyTimesPrimaryOrder(behindTodo, element), isTrue);
         }
@@ -142,12 +142,12 @@ void main() {
 
       // when
       final selectedStateTodoList =
-          container.read(selectedStateTodoListProvider(TabTitle.stay));
+          container.read(selectedStateTodoListProvider(TodoStatus.stay));
 
       // then
       var behindTodoCreateAt = DateTime(0);
       for (var element in selectedStateTodoList) {
-        expect(TabTitle.stay, element.status); // 未着手のTodoであること
+        expect(TodoStatus.stay, element.status); // 未着手のTodoであること
         expect(behindTodoCreateAt.compareTo(element.createAt),
             lessThanOrEqualTo(0)); // 登録日順であること
         behindTodoCreateAt = element.createAt;
@@ -166,12 +166,12 @@ void main() {
 
       // when
       final selectedStateTodoList =
-          container.read(selectedStateTodoListProvider(TabTitle.notBegin));
+          container.read(selectedStateTodoListProvider(TodoStatus.notBegin));
 
       // then
       Todo? behindTodo;
       for (var element in selectedStateTodoList) {
-        expect(TabTitle.notBegin, element.status);
+        expect(TodoStatus.notBegin, element.status);
         if (behindTodo != null) {
           expect(isEmergencyTimesPrimaryOrder(behindTodo, element), isTrue);
         }
@@ -192,12 +192,12 @@ void main() {
 
       // when
       final selectedStateTodoList =
-          container.read(selectedStateTodoListProvider(TabTitle.complete));
+          container.read(selectedStateTodoListProvider(TodoStatus.complete));
 
       // then
       var behindTodoCreateAt = DateTime(0);
       for (var element in selectedStateTodoList) {
-        expect(TabTitle.complete, element.status); // 未着手のTodoであること
+        expect(TodoStatus.complete, element.status); // 未着手のTodoであること
         expect(behindTodoCreateAt.compareTo(element.createAt),
             lessThanOrEqualTo(0)); // 登録日順であること
         behindTodoCreateAt = element.createAt;
@@ -216,12 +216,12 @@ void main() {
 
       // when
       final selectedStateTodoList =
-          container.read(selectedStateTodoListProvider(TabTitle.complete));
+          container.read(selectedStateTodoListProvider(TodoStatus.complete));
 
       // then
       Todo? behindTodo;
       for (var element in selectedStateTodoList) {
-        expect(TabTitle.complete, element.status);
+        expect(TodoStatus.complete, element.status);
         if (behindTodo != null) {
           expect(isEmergencyTimesPrimaryOrder(behindTodo, element), isTrue);
         }

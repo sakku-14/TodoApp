@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:todo_app/Model/Entities/Tab/tab.dart';
 import 'package:todo_app/Model/Entities/Todo/todo.dart';
+import 'package:todo_app/Model/Entities/TodoStatus/todo_status.dart';
 import 'package:todo_app/Model/SelectedStateTodoList/selected_state_todo_list.dart';
 import 'package:todo_app/UseCase/Dto/todo_dto.dart';
 import 'package:todo_app/View/todo_view.dart';
@@ -43,16 +43,16 @@ class TodoTabContentsView extends ConsumerWidget {
       children: <Widget>[
         // 未着手タブのコンテンツ
         convertToTodoViewList(
-            ref.watch(selectedStateTodoListProvider(TabTitle.notBegin))),
+            ref.watch(selectedStateTodoListProvider(TodoStatus.notBegin))),
         // 作業中タブのコンテンツ
         convertToTodoViewList(
-            ref.watch(selectedStateTodoListProvider(TabTitle.progress))),
+            ref.watch(selectedStateTodoListProvider(TodoStatus.progress))),
         // 保留タブのコンテンツ
         convertToTodoViewList(
-            ref.watch(selectedStateTodoListProvider(TabTitle.stay))),
+            ref.watch(selectedStateTodoListProvider(TodoStatus.stay))),
         // 完了タブのコンテンツ
         convertToTodoViewList(
-            ref.watch(selectedStateTodoListProvider(TabTitle.complete))),
+            ref.watch(selectedStateTodoListProvider(TodoStatus.complete))),
       ],
     );
   }

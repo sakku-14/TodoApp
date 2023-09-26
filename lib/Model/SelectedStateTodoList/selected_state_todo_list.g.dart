@@ -7,7 +7,7 @@ part of 'selected_state_todo_list.dart';
 // **************************************************************************
 
 String _$selectedStateTodoListHash() =>
-    r'bfaac12c76be5be227311b4cd40cfe0622ff9e4d';
+    r'82c6d0c0f3b1a7ffec80674aa84ae96f69e7898f';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -43,7 +43,7 @@ class SelectedStateTodoListFamily extends Family<List<Todo>> {
 
   /// See also [selectedStateTodoList].
   SelectedStateTodoListProvider call(
-    TabTitle tabTitle,
+    TodoStatus tabTitle,
   ) {
     return SelectedStateTodoListProvider(
       tabTitle,
@@ -59,12 +59,21 @@ class SelectedStateTodoListFamily extends Family<List<Todo>> {
     );
   }
 
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
+  static final Iterable<ProviderOrFamily> _dependencies = <ProviderOrFamily>[
+    sortTypeProvider,
+    todoListProvider
+  ];
 
   @override
   Iterable<ProviderOrFamily>? get dependencies => _dependencies;
 
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+  static final Iterable<ProviderOrFamily> _allTransitiveDependencies =
+      <ProviderOrFamily>{
+    sortTypeProvider,
+    ...?sortTypeProvider.allTransitiveDependencies,
+    todoListProvider,
+    ...?todoListProvider.allTransitiveDependencies
+  };
 
   @override
   Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
@@ -95,7 +104,7 @@ class SelectedStateTodoListProvider extends AutoDisposeProvider<List<Todo>> {
               SelectedStateTodoListFamily._allTransitiveDependencies,
         );
 
-  final TabTitle tabTitle;
+  final TodoStatus tabTitle;
 
   @override
   bool operator ==(Object other) {

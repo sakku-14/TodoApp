@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:todo_app/Model/Entities/Tab/tab.dart';
 import 'package:todo_app/Model/Entities/Todo/todo.dart';
+import 'package:todo_app/Model/Entities/TodoStatus/todo_status.dart';
 import 'package:todo_app/Model/TodoList/todo_list.dart';
 import 'package:todo_app/UseCase/Dto/todo_dto.dart';
 import 'package:todo_app/View/BottomSheetView/update_bottom_sheet_view.dart';
@@ -19,7 +19,7 @@ class _MockTodoList extends TodoList {
           title: 'title',
           emergencyPoint: 1,
           priorityPoint: 2,
-          status: TabTitle.notBegin)
+          status: TodoStatus.notBegin)
     ]);
   }
 }
@@ -36,7 +36,7 @@ main() {
     const String todoTitle = '単体試験用タイトル';
     const int emergencyPoint = 2;
     const int priorityPoint = 2;
-    const TabTitle status = TabTitle.notBegin;
+    const TodoStatus status = TodoStatus.notBegin;
     return TodoDto(todoTitle, emergencyPoint, priorityPoint, status,
         createAt: createAt);
   }

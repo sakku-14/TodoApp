@@ -3,8 +3,8 @@ import 'dart:math' as math; // Debug用
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:todo_app/Model/Entities/Tab/tab.dart';
 import 'package:todo_app/Model/Entities/Todo/todo.dart';
+import 'package:todo_app/Model/Entities/TodoStatus/todo_status.dart';
 import 'package:todo_app/Model/TodoList/todo_list.dart';
 import 'package:todo_app/View/TabView/todo_tab_contents_view.dart';
 
@@ -24,7 +24,7 @@ class _MockTodoList extends TodoList {
           title: 'NotBeginTodoTitle$i',
           emergencyPoint: _random.nextInt(3) + 1,
           priorityPoint: _random.nextInt(3) + 1,
-          status: TabTitle.notBegin,
+          status: TodoStatus.notBegin,
         ),
       );
     }

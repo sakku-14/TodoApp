@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_app/Model/EditTodo/edit_todo.dart';
-import 'package:todo_app/Model/Entities/Tab/tab.dart';
+import 'package:todo_app/Model/Entities/TodoStatus/todo_status.dart';
 
 // WidgetTestで使用するKey
 final titleKey = UniqueKey();
@@ -147,10 +147,10 @@ class CommonBottomSheetView extends ConsumerWidget {
                   child: CupertinoSegmentedControl(
                     key: statusKey,
                     children: {
-                      TabTitle.notBegin: Text(TabTitle.notBegin.tabName),
-                      TabTitle.progress: Text(TabTitle.progress.tabName),
-                      TabTitle.stay: Text(TabTitle.stay.tabName),
-                      TabTitle.complete: Text(TabTitle.complete.tabName),
+                      TodoStatus.notBegin: Text(TodoStatus.notBegin.statusName),
+                      TodoStatus.progress: Text(TodoStatus.progress.statusName),
+                      TodoStatus.stay: Text(TodoStatus.stay.statusName),
+                      TodoStatus.complete: Text(TodoStatus.complete.statusName),
                     },
                     groupValue: ref.watch(editTodoProvider).tabStatus,
                     onValueChanged: (value) {

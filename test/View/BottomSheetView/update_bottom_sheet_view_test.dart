@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:todo_app/Model/Entities/Tab/tab.dart';
 import 'package:todo_app/Model/Entities/Todo/todo.dart';
+import 'package:todo_app/Model/Entities/TodoStatus/todo_status.dart';
 import 'package:todo_app/Model/TodoList/todo_list.dart';
 import 'package:todo_app/View/BottomSheetView/common_bottom_sheet_view.dart';
 import 'package:todo_app/View/BottomSheetView/update_bottom_sheet_view.dart';
@@ -20,7 +20,7 @@ class _MockTodoList extends TodoList {
           title: 'title',
           emergencyPoint: 1,
           priorityPoint: 2,
-          status: TabTitle.notBegin,
+          status: TodoStatus.notBegin,
         ),
       ],
     );
@@ -159,7 +159,7 @@ main() {
     // groupValueの値を検証
     expect(emergencyPointGroupValue, 1);
     expect(primaryPointGroupValue, 2);
-    expect(statusPointGroupValue, TabTitle.notBegin);
+    expect(statusPointGroupValue, TodoStatus.notBegin);
 
     // Providerスコープのクリーンアップ
     container.dispose();

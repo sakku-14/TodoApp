@@ -37,6 +37,7 @@ class MockDbService extends _i1.Mock implements _i2.DbService {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   _i4.Future<dynamic> initDatabase() => (super.noSuchMethod(
         Invocation.method(
@@ -45,6 +46,7 @@ class MockDbService extends _i1.Mock implements _i2.DbService {
         ),
         returnValue: _i4.Future<dynamic>.value(),
       ) as _i4.Future<dynamic>);
+
   @override
   _i4.Future<List<_i5.Todo>> getTodoList() => (super.noSuchMethod(
         Invocation.method(
@@ -53,6 +55,7 @@ class MockDbService extends _i1.Mock implements _i2.DbService {
         ),
         returnValue: _i4.Future<List<_i5.Todo>>.value(<_i5.Todo>[]),
       ) as _i4.Future<List<_i5.Todo>>);
+
   @override
   _i4.Future<bool> saveTodo(_i5.Todo? todo) => (super.noSuchMethod(
         Invocation.method(
@@ -61,6 +64,7 @@ class MockDbService extends _i1.Mock implements _i2.DbService {
         ),
         returnValue: _i4.Future<bool>.value(false),
       ) as _i4.Future<bool>);
+
   @override
   _i4.Future<bool> updateTodo(_i5.Todo? todo) => (super.noSuchMethod(
         Invocation.method(
@@ -69,6 +73,7 @@ class MockDbService extends _i1.Mock implements _i2.DbService {
         ),
         returnValue: _i4.Future<bool>.value(false),
       ) as _i4.Future<bool>);
+
   @override
   _i4.Future<bool> deleteTodo(DateTime? createAt) => (super.noSuchMethod(
         Invocation.method(

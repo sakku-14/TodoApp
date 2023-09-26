@@ -41,6 +41,7 @@ class MockTodoListRepository extends _i1.Mock
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   _i4.Future<bool> save(_i5.Todo? todo) => (super.noSuchMethod(
         Invocation.method(
@@ -49,6 +50,7 @@ class MockTodoListRepository extends _i1.Mock
         ),
         returnValue: _i4.Future<bool>.value(false),
       ) as _i4.Future<bool>);
+
   @override
   _i4.Future<List<_i5.Todo>> getTodoList() => (super.noSuchMethod(
         Invocation.method(
@@ -57,6 +59,7 @@ class MockTodoListRepository extends _i1.Mock
         ),
         returnValue: _i4.Future<List<_i5.Todo>>.value(<_i5.Todo>[]),
       ) as _i4.Future<List<_i5.Todo>>);
+
   @override
   _i4.Future<bool> update(_i5.Todo? todo) => (super.noSuchMethod(
         Invocation.method(
@@ -65,6 +68,7 @@ class MockTodoListRepository extends _i1.Mock
         ),
         returnValue: _i4.Future<bool>.value(false),
       ) as _i4.Future<bool>);
+
   @override
   _i4.Future<bool> delete(_i5.Todo? todo) => (super.noSuchMethod(
         Invocation.method(

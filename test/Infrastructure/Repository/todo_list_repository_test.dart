@@ -3,8 +3,8 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:todo_app/Infrastructure/Repository/todo_list_repository.dart';
 import 'package:todo_app/Infrastructure/Service/db_service.dart';
-import 'package:todo_app/Model/Entities/Tab/tab.dart';
 import 'package:todo_app/Model/Entities/Todo/todo.dart';
+import 'package:todo_app/Model/Entities/TodoStatus/todo_status.dart';
 
 import 'todo_list_repository_test.mocks.dart';
 
@@ -14,7 +14,7 @@ Todo createTodo(DateTime createAt, String title) {
     title: title,
     emergencyPoint: 1,
     priorityPoint: 1,
-    status: TabTitle.notBegin,
+    status: TodoStatus.notBegin,
   );
 }
 
@@ -60,7 +60,7 @@ void main() {
       title: '更新後の単体試験用タイトル2',
       emergencyPoint: 2,
       priorityPoint: 2,
-      status: TabTitle.progress,
+      status: TodoStatus.progress,
     );
     when(dbService.updateTodo(updateTodo)).thenAnswer((_) async => true);
     final target = TodoListRepository(dbService);

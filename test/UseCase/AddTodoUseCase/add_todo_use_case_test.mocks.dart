@@ -70,6 +70,7 @@ class MockTodoList extends _i1.Mock implements _i3.TodoList {
           Invocation.getter(#ref),
         ),
       ) as _i2.AutoDisposeAsyncNotifierProviderRef<_i3.TodoListState>);
+
   @override
   _i2.AsyncValue<_i3.TodoListState> get state => (super.noSuchMethod(
         Invocation.getter(#state),
@@ -78,6 +79,7 @@ class MockTodoList extends _i1.Mock implements _i3.TodoList {
           Invocation.getter(#state),
         ),
       ) as _i2.AsyncValue<_i3.TodoListState>);
+
   @override
   set state(_i2.AsyncValue<_i3.TodoListState>? newState) => super.noSuchMethod(
         Invocation.setter(
@@ -86,6 +88,7 @@ class MockTodoList extends _i1.Mock implements _i3.TodoList {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   _i4.Future<_i3.TodoListState> get future => (super.noSuchMethod(
         Invocation.getter(#future),
@@ -94,6 +97,7 @@ class MockTodoList extends _i1.Mock implements _i3.TodoList {
           Invocation.getter(#future),
         )),
       ) as _i4.Future<_i3.TodoListState>);
+
   @override
   _i4.FutureOr<_i3.TodoListState> build() => (super.noSuchMethod(
         Invocation.method(
@@ -108,6 +112,7 @@ class MockTodoList extends _i1.Mock implements _i3.TodoList {
           ),
         )),
       ) as _i4.FutureOr<_i3.TodoListState>);
+
   @override
   _i4.Future<bool> addTodo(_i5.Todo? todo) => (super.noSuchMethod(
         Invocation.method(
@@ -116,6 +121,7 @@ class MockTodoList extends _i1.Mock implements _i3.TodoList {
         ),
         returnValue: _i4.Future<bool>.value(false),
       ) as _i4.Future<bool>);
+
   @override
   _i4.Future<bool> updateTodo(_i5.Todo? newTodo) => (super.noSuchMethod(
         Invocation.method(
@@ -124,6 +130,7 @@ class MockTodoList extends _i1.Mock implements _i3.TodoList {
         ),
         returnValue: _i4.Future<bool>.value(false),
       ) as _i4.Future<bool>);
+
   @override
   _i4.Future<bool> deleteTodo(_i5.Todo? todo) => (super.noSuchMethod(
         Invocation.method(
@@ -132,6 +139,7 @@ class MockTodoList extends _i1.Mock implements _i3.TodoList {
         ),
         returnValue: _i4.Future<bool>.value(false),
       ) as _i4.Future<bool>);
+
   @override
   _i4.Future<_i3.TodoListState> update(
     _i4.FutureOr<_i3.TodoListState> Function(_i3.TodoListState)? cb, {
@@ -155,6 +163,7 @@ class MockTodoList extends _i1.Mock implements _i3.TodoList {
           ),
         )),
       ) as _i4.Future<_i3.TodoListState>);
+
   @override
   bool updateShouldNotify(
     _i2.AsyncValue<_i3.TodoListState>? previous,

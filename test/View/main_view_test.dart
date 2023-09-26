@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:todo_app/Model/Entities/Tab/tab.dart';
 import 'package:todo_app/Model/Entities/Todo/todo.dart';
+import 'package:todo_app/Model/Entities/TodoStatus/todo_status.dart';
 import 'package:todo_app/Model/TodoList/todo_list.dart';
 import 'package:todo_app/View/BottomSheetView/add_bottom_sheet_view.dart';
 import 'package:todo_app/View/main_view.dart';
@@ -18,28 +18,28 @@ class _MockTodoList extends TodoList {
           title: 'NotBeginTodoTitle',
           emergencyPoint: 1,
           priorityPoint: 1,
-          status: TabTitle.notBegin,
+          status: TodoStatus.notBegin,
         ),
         Todo(
           createAt: DateTime.now(),
           title: 'ProgressTodoTitle',
           emergencyPoint: 1,
           priorityPoint: 1,
-          status: TabTitle.progress,
+          status: TodoStatus.progress,
         ),
         Todo(
           createAt: DateTime.now(),
           title: 'StayTodoTitle',
           emergencyPoint: 1,
           priorityPoint: 1,
-          status: TabTitle.stay,
+          status: TodoStatus.stay,
         ),
         Todo(
           createAt: DateTime.now(),
           title: 'CompleteTodoTitle',
           emergencyPoint: 1,
           priorityPoint: 1,
-          status: TabTitle.complete,
+          status: TodoStatus.complete,
         ),
       ],
     );

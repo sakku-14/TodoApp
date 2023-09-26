@@ -3,8 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:todo_app/Infrastructure/Repository/todo_list_repository.dart';
-import 'package:todo_app/Model/Entities/Tab/tab.dart';
 import 'package:todo_app/Model/Entities/Todo/todo.dart';
+import 'package:todo_app/Model/Entities/TodoStatus/todo_status.dart';
 import 'package:todo_app/Model/TodoList/todo_list.dart';
 
 import 'todo_list_test.mocks.dart';
@@ -29,19 +29,19 @@ void main() {
       title: 'title',
       emergencyPoint: 1,
       priorityPoint: 1,
-      status: TabTitle.notBegin);
+      status: TodoStatus.notBegin);
   final todo2 = Todo(
       createAt: DateTime(2),
       title: 'title',
       emergencyPoint: 1,
       priorityPoint: 1,
-      status: TabTitle.notBegin);
+      status: TodoStatus.notBegin);
   final todo3 = Todo(
       createAt: DateTime(3),
       title: 'title',
       emergencyPoint: 1,
       priorityPoint: 1,
-      status: TabTitle.notBegin);
+      status: TodoStatus.notBegin);
   // endregion
 
   setUp(() {
@@ -183,7 +183,7 @@ void main() {
         title: 'title',
         emergencyPoint: 2,
         priorityPoint: 2,
-        status: TabTitle.progress);
+        status: TodoStatus.progress);
     when(todoListRepository.getTodoList())
         .thenAnswer((_) async => defaultTodoList);
     when(todoListRepository.update(newTodo2)).thenAnswer((_) async => true);
@@ -229,7 +229,7 @@ void main() {
         title: 'title',
         emergencyPoint: 2,
         priorityPoint: 2,
-        status: TabTitle.progress);
+        status: TodoStatus.progress);
     when(todoListRepository.getTodoList())
         .thenAnswer((_) async => defaultTodoList);
     when(todoListRepository.update(newTodo2)).thenAnswer((_) async => false);
