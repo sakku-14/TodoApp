@@ -35,7 +35,7 @@ class EditTodo extends _$EditTodo {
 }
 
 @freezed
-abstract class EditTodoState with _$EditTodoState {
+class EditTodoState with _$EditTodoState {
   factory EditTodoState({
     DateTime? createAt,
     @Default('') String title,
