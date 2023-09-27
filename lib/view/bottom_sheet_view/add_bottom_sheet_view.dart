@@ -47,7 +47,8 @@ class AddBottomSheetView extends ConsumerWidget {
                   SizedBox(
                     child: TextButton(
                       key: addButtonKey,
-                      onPressed: state.canSubmit()
+                      onPressed: ref.watch(editTodoProvider
+                              .select((value) => value.canSubmit))
                           ? () {
                               // Todo登録処理呼び出し
                               var result = ref
