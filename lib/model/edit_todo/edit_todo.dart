@@ -46,5 +46,5 @@ class EditTodoState with _$EditTodoState {
   }) = _EditTodoState;
   EditTodoState._();
 
-  bool canSubmit() => title.toString().isNotEmpty;
+  late final canSubmit = title.toString().isNotEmpty;
 }
