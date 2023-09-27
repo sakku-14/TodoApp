@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:todo_app/Model/SortType/sort_type.dart';
-import 'package:todo_app/View/sort_combo_box_view.dart';
+import 'package:todo_app/model/model.dart';
+import 'package:todo_app/view/view.dart';
 
 main() {
   /// 各WidgetのKey

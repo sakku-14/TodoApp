@@ -1,6 +1,4 @@
-import 'package:todo_app/Model/Entities/Todo/todo.dart';
-import 'package:todo_app/Model/Entities/TodoStatus/todo_status.dart';
-import 'package:todo_app/Model/TodoList/todo_list.dart';
+import 'package:todo_app/model/model.dart';
 
 class DummyTodoList extends TodoList {
   @override

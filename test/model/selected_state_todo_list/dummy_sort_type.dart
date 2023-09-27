@@ -1,4 +1,4 @@
-import 'package:todo_app/Model/SortType/sort_type.dart';
+import 'package:todo_app/model/model.dart';
 
 class DummySortTypeCreatedAt extends SortType {
   @override

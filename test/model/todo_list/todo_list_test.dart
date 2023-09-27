@@ -2,10 +2,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:todo_app/Infrastructure/Repository/todo_list_repository.dart';
-import 'package:todo_app/Model/Entities/Todo/todo.dart';
-import 'package:todo_app/Model/Entities/TodoStatus/todo_status.dart';
-import 'package:todo_app/Model/TodoList/todo_list.dart';
+import 'package:todo_app/infrastructure/infrastructure.dart';
+import 'package:todo_app/model/model.dart';
 
 import 'todo_list_test.mocks.dart';
 

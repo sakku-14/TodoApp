@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:todo_app/Model/Entities/Todo/todo.dart';
-import 'package:todo_app/Model/Entities/TodoStatus/todo_status.dart';
-import 'package:todo_app/Model/TodoList/todo_list.dart';
-import 'package:todo_app/View/BottomSheetView/add_bottom_sheet_view.dart';
-import 'package:todo_app/View/main_view.dart';
-import 'package:todo_app/View/sort_combo_box_view.dart';
+import 'package:todo_app/model/model.dart';
+import 'package:todo_app/view/view.dart';
 
 class _MockTodoList extends TodoList {
   @override

@@ -2,11 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:todo_app/Model/Entities/Todo/todo.dart';
-import 'package:todo_app/Model/Entities/TodoStatus/todo_status.dart';
-import 'package:todo_app/Model/TodoList/todo_list.dart';
-import 'package:todo_app/View/BottomSheetView/common_bottom_sheet_view.dart';
-import 'package:todo_app/View/BottomSheetView/update_bottom_sheet_view.dart';
+import 'package:todo_app/model/model.dart';
+import 'package:todo_app/view/view.dart';
 
 DateTime createAt = DateTime.now();
 
@@ -36,7 +33,7 @@ main() {
   final emergencyInput = find.byKey(emergencyKey);
   final priorityInput = find.byKey(priorityKey);
   final statusInput = find.byKey(statusKey);
-  final cancelButtonInput = find.byKey(cancelButtonKey);
+  final cancelButtonInput = find.byKey(cancelButtonForUpdateBottomSheetKey);
   final editButtonInput = find.byKey(updateButtonKey);
 
   ProviderScope updateBottomSheetView(Widget widget) {

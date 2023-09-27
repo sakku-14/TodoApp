@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:todo_app/View/BottomSheetView/add_bottom_sheet_view.dart';
-import 'package:todo_app/View/BottomSheetView/common_bottom_sheet_view.dart';
+import 'package:todo_app/view/view.dart';
 
 main() {
   /// 各WidgetのKey
@@ -11,7 +10,7 @@ main() {
   final emergencyInput = find.byKey(emergencyKey);
   final priorityInput = find.byKey(priorityKey);
   final statusInput = find.byKey(statusKey);
-  final cancelButtonInput = find.byKey(cancelButtonKey);
+  final cancelButtonInput = find.byKey(cancelButtonForAddBottomSheetKey);
   final addButtonInput = find.byKey(addButtonKey);
 
   ProviderScope addBottomSheetView(Widget widget) {

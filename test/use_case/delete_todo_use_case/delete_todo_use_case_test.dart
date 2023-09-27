@@ -1,10 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:todo_app/Model/Entities/TodoStatus/todo_status.dart';
-import 'package:todo_app/Model/TodoList/todo_list.dart';
-import 'package:todo_app/UseCase/DeleteTodoUseCase/delete_todo_use_case.dart';
-import 'package:todo_app/UseCase/Dto/todo_dto.dart';
+import 'package:todo_app/model/model.dart';
+import 'package:todo_app/use_case/use_case.dart';
 
 import 'delete_todo_use_case_test.mocks.dart';
 

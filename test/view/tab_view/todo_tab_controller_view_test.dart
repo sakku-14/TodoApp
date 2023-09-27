@@ -3,10 +3,8 @@ import 'dart:math' as math; // Debug用
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:todo_app/Model/Entities/Todo/todo.dart';
-import 'package:todo_app/Model/Entities/TodoStatus/todo_status.dart';
-import 'package:todo_app/Model/TodoList/todo_list.dart';
-import 'package:todo_app/View/TabView/todo_tab_controller_view.dart';
+import 'package:todo_app/model/model.dart';
+import 'package:todo_app/view/view.dart';
 
 // region Debug用
 var notBeginCount = 20;
