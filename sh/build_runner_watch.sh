@@ -1,3 +1,3 @@
 #!/bin/bash
-# プロジェクトフォルダ直下で以下実行
+# このコマンドはプロジェクト直下（libフォルダと同階層）で実行すること
 dart run build_runner watch
