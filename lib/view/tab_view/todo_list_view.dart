@@ -14,26 +14,27 @@ class TodoListView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final todoList = ref.watch(selectedStateTodoListProvider(status));
-    var todoContents = (todoList == null || todoList.isEmpty)
-        ? [Container()]
-        : todoList
-            .map((e) => TodoView(
-                    todoDto: TodoDto(
-                  e.title,
-                  e.emergencyPoint,
-                  e.priorityPoint,
-                  e.status,
-                  createAt: e.createAt,
-                )))
-            .toList();
-    var todoViews = SingleChildScrollView(
+    return SingleChildScrollView(
       child: SlidableAutoCloseBehavior(
         closeWhenOpened: true,
         child: Column(
-          children: todoContents,
+          children: (todoList == null || todoList.isEmpty)
+              ? [Container()]
+              : todoList
+                  .map(
+                    (e) => TodoView(
+                      todoDto: TodoDto(
+                        e.title,
+                        e.emergencyPoint,
+                        e.priorityPoint,
+                        e.status,
+                        createAt: e.createAt,
+                      ),
+                    ),
+                  )
+                  .toList(),
         ),
       ),
     );
-    return todoViews;
   }
 }
