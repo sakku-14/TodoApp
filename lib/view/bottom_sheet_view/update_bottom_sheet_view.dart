@@ -68,7 +68,8 @@ class _EditBottomSheetViewState extends ConsumerState<UpdateBottomSheetView> {
                   SizedBox(
                     child: TextButton(
                       key: updateButtonKey,
-                      onPressed: ref.watch(editTodoProvider).canSubmit()
+                      onPressed: ref.watch(editTodoProvider
+                              .select((value) => value.canSubmit))
                           ? () {
                               // Todo更新処理呼び出し
                               ref

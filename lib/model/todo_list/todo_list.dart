@@ -37,21 +37,21 @@ class TodoList extends _$TodoList {
 }
 
 @freezed
-abstract class TodoListState with _$TodoListState {
+class TodoListState with _$TodoListState {
   factory TodoListState({
     required List<Todo> todoList,
   }) = _TodoListState;
   TodoListState._();
 
-  List<Todo> getNotBeginTodoList() => todoList
+  late final notBeginTodoList = todoList
       .where((element) => element.status == TodoStatus.notBegin)
       .toList();
-  List<Todo> getProgressTodoList() => todoList
+  late final progressTodoList = todoList
       .where((element) => element.status == TodoStatus.progress)
       .toList();
-  List<Todo> getStayTodoList() =>
+  late final stayTodoList =
       todoList.where((element) => element.status == TodoStatus.stay).toList();
-  List<Todo> getCompleteTodoList() => todoList
+  late final completeTodoList = todoList
       .where((element) => element.status == TodoStatus.complete)
       .toList();
   Todo getTodo(DateTime createAt) => todoList

@@ -35,7 +35,7 @@ class EditTodo extends _$EditTodo {
 }
 
 @freezed
-abstract class EditTodoState with _$EditTodoState {
+class EditTodoState with _$EditTodoState {
   factory EditTodoState({
     DateTime? createAt,
     @Default('') String title,
@@ -46,5 +46,5 @@ abstract class EditTodoState with _$EditTodoState {
   }) = _EditTodoState;
   EditTodoState._();
 
-  bool canSubmit() => title.toString().isNotEmpty;
+  late final canSubmit = title.toString().isNotEmpty;
 }
