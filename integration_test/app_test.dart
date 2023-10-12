@@ -7,12 +7,34 @@ import '../test/robot/todo_robot.dart';
 
 void main() {
   var binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-  testWidgets('authenticate a user', (WidgetTester tester) async {
+
+  testWidgets('DBが空の状態でスタート', (WidgetTester tester) async {
+    // DBのSetUpをやるよ
     final todoRobot = TodoRobot(tester);
     final modalBottomSheetRobot = ModalBottomSheetRobot(tester);
     app.main();
     await tester.pumpAndSettle();
 
     // await todoRobot.slideTodo();
+
+    addTearDown(() {
+      // このテストケースの直後のみで実行される
+      print("   Only this Test Case");
+    });
+  });
+
+  testWidgets('DBにデータがある状態でスタート', (WidgetTester tester) async {
+    // DBのSetUpをやるよ
+    final todoRobot = TodoRobot(tester);
+    final modalBottomSheetRobot = ModalBottomSheetRobot(tester);
+    app.main();
+    await tester.pumpAndSettle();
+
+    // await todoRobot.slideTodo();
+
+    addTearDown(() {
+      // このテストケースの直後のみで実行される
+      print("   Only this Test Case");
+    });
   });
 }
