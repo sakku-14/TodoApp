@@ -9,7 +9,7 @@ import 'package:sqflite/sqflite.dart';
 
 import '../test/robot/robot.dart';
 
-const String dbFileName = 'todo_database_test.db';
+const String dbFileName = 'todo_database.db';
 const String dbFilePath = 'integration_test/resources/$dbFileName';
 
 void main() {
@@ -32,9 +32,9 @@ void main() {
       final file = await crateFilePath(dbFileName);
       if (file.existsSync()) {
         file.deleteSync(); // ファイルを削除
-        debugPrint('ファイルを削除しました: todo_database_test.db');
+        debugPrint('ファイルを削除しました: todo_database.db');
       } else {
-        debugPrint('指定されたファイルが存在しません: todo_database_test.db');
+        debugPrint('指定されたファイルが存在しません: todo_database.db');
       }
     } catch (e) {
       debugPrint('ファイルの削除中にエラーが発生しました: $e');
@@ -75,6 +75,8 @@ void main() {
 
     await r.todoPane.scrollToBottom();
     await r.todoPane.scrollToTop();
+
+    await r.mainScreen.changeComboBoxItem();
     // 【消して良いやつ】>>>>>>>>>> ここまで >>>>>>>>>>
 
     // await todoRobot.slideTodo();
