@@ -18,7 +18,7 @@ class TodoListView extends ConsumerWidget {
       child: SlidableAutoCloseBehavior(
         closeWhenOpened: true,
         child: Column(
-          children: (todoList == null || todoList.isEmpty)
+          children: (todoList.isEmpty)
               ? [Container()]
               : todoList
                   .map(

@@ -17,7 +17,9 @@ class TodoList extends _$TodoList {
 
   Future<bool> addTodo(Todo todo) async {
     if (!await ref.watch(todoListRepositoryProvider).save(todo)) return false;
-    state = AsyncValue.data(state.value!.add(todo));
+
+    ref.invalidateSelf();
+    await future;
     return true;
   }
 
@@ -25,13 +27,17 @@ class TodoList extends _$TodoList {
     if (!await ref.watch(todoListRepositoryProvider).update(newTodo)) {
       return false;
     }
-    state = AsyncValue.data(state.value!.update(newTodo));
+
+    ref.invalidateSelf();
+    await future;
     return true;
   }
 
   Future<bool> deleteTodo(Todo todo) async {
     if (!await ref.watch(todoListRepositoryProvider).delete(todo)) return false;
-    state = AsyncValue.data(state.value!.delete(todo));
+
+    ref.invalidateSelf();
+    await future;
     return true;
   }
 }

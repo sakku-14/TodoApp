@@ -104,16 +104,17 @@ void main() {
   test('Todoを登録できること', () async {
     // given
     final defaultTodoList = [todo1, todo2];
+    final expected = [todo1, todo2, todo3];
+    final responses = [defaultTodoList, expected];
     when(todoListRepository.getTodoList())
-        .thenAnswer((_) async => defaultTodoList);
+        .thenAnswer((_) async => responses.removeAt(0));
     when(todoListRepository.save(todo3)).thenAnswer((_) async => true);
 
     final container = providerContainerFactory(todoListRepository);
     final notifier = container.read(todoListProvider.notifier);
-    final expected = [todo1, todo2, todo3];
 
     // when
-    notifier.addTodo(todo3);
+    await notifier.addTodo(todo3);
     await notifier.future;
 
     // then
@@ -137,7 +138,7 @@ void main() {
             TodoListState(todoList: expected))),
       ),
     ]);
-    verify(todoListRepository.getTodoList()).called(1);
+    verify(todoListRepository.getTodoList()).called(2);
     verify(todoListRepository.save(todo3)).called(1);
   });
 
@@ -182,16 +183,17 @@ void main() {
         emergencyPoint: 2,
         priorityPoint: 2,
         status: TodoStatus.progress);
+    final expected = [todo1, newTodo2];
+    final responses = [defaultTodoList, expected];
     when(todoListRepository.getTodoList())
-        .thenAnswer((_) async => defaultTodoList);
+        .thenAnswer((_) async => responses.removeAt(0));
     when(todoListRepository.update(newTodo2)).thenAnswer((_) async => true);
 
     final container = providerContainerFactory(todoListRepository);
     final notifier = container.read(todoListProvider.notifier);
-    final expected = [todo1, newTodo2];
 
     // when
-    notifier.updateTodo(newTodo2);
+    await notifier.updateTodo(newTodo2);
     await notifier.future;
 
     // then
@@ -215,7 +217,7 @@ void main() {
             TodoListState(todoList: expected))),
       ),
     ]);
-    verify(todoListRepository.getTodoList()).called(1);
+    verify(todoListRepository.getTodoList()).called(2);
     verify(todoListRepository.update(newTodo2)).called(1);
   });
 
@@ -260,16 +262,17 @@ void main() {
   test('特定のTodoを削除できること', () async {
     // given
     final defaultTodoList = [todo1, todo2, todo3];
+    final expected = [todo1, todo3];
+    final responses = [defaultTodoList, expected];
     when(todoListRepository.getTodoList())
-        .thenAnswer((_) async => defaultTodoList);
+        .thenAnswer((_) async => responses.removeAt(0));
     when(todoListRepository.delete(todo2)).thenAnswer((_) async => true);
 
     final container = providerContainerFactory(todoListRepository);
     final notifier = container.read(todoListProvider.notifier);
-    final expected = [todo1, todo3];
 
     // when
-    notifier.deleteTodo(todo2);
+    await notifier.deleteTodo(todo2);
     await notifier.future;
 
     // then
@@ -293,7 +296,7 @@ void main() {
             TodoListState(todoList: expected))),
       ),
     ]);
-    verify(todoListRepository.getTodoList()).called(1);
+    verify(todoListRepository.getTodoList()).called(2);
     verify(todoListRepository.delete(todo2)).called(1);
   });
 
