@@ -76,6 +76,8 @@ void main() {
 
     await r.todoPane.scrollToBottom(TodoStatus.notBegin);
     await r.todoPane.scrollToTop(TodoStatus.notBegin);
+
+    await r.mainScreen.changeComboBoxItem();
     // 【消して良いやつ】>>>>>>>>>> ここまで >>>>>>>>>>
 
     // await todoRobot.slideTodo();
