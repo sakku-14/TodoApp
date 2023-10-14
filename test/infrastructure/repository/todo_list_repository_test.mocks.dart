@@ -25,10 +25,6 @@ import 'package:todo_app/model/model.dart' as _i5;
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockDbService extends _i1.Mock implements _i2.DbService {
-  MockDbService() {
-    _i1.throwOnMissingStub(this);
-  }
-
   @override
   set database(_i3.Database? _database) => super.noSuchMethod(
         Invocation.setter(
@@ -45,6 +41,7 @@ class MockDbService extends _i1.Mock implements _i2.DbService {
           [],
         ),
         returnValue: _i4.Future<dynamic>.value(),
+        returnValueForMissingStub: _i4.Future<dynamic>.value(),
       ) as _i4.Future<dynamic>);
 
   @override
@@ -54,6 +51,8 @@ class MockDbService extends _i1.Mock implements _i2.DbService {
           [],
         ),
         returnValue: _i4.Future<List<_i5.Todo>>.value(<_i5.Todo>[]),
+        returnValueForMissingStub:
+            _i4.Future<List<_i5.Todo>>.value(<_i5.Todo>[]),
       ) as _i4.Future<List<_i5.Todo>>);
 
   @override
@@ -63,6 +62,7 @@ class MockDbService extends _i1.Mock implements _i2.DbService {
           [todo],
         ),
         returnValue: _i4.Future<bool>.value(false),
+        returnValueForMissingStub: _i4.Future<bool>.value(false),
       ) as _i4.Future<bool>);
 
   @override
@@ -72,6 +72,7 @@ class MockDbService extends _i1.Mock implements _i2.DbService {
           [todo],
         ),
         returnValue: _i4.Future<bool>.value(false),
+        returnValueForMissingStub: _i4.Future<bool>.value(false),
       ) as _i4.Future<bool>);
 
   @override
@@ -81,5 +82,6 @@ class MockDbService extends _i1.Mock implements _i2.DbService {
           [createAt],
         ),
         returnValue: _i4.Future<bool>.value(false),
+        returnValueForMissingStub: _i4.Future<bool>.value(false),
       ) as _i4.Future<bool>);
 }

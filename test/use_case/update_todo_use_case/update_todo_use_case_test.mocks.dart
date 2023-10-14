@@ -55,15 +55,16 @@ class _FakeTodoListState_2 extends _i1.SmartFake implements _i3.TodoListState {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockTodoList extends _i1.Mock implements _i3.TodoList {
-  MockTodoList() {
-    _i1.throwOnMissingStub(this);
-  }
-
   @override
   _i2.AutoDisposeAsyncNotifierProviderRef<_i3.TodoListState> get ref =>
       (super.noSuchMethod(
         Invocation.getter(#ref),
         returnValue:
+            _FakeAutoDisposeAsyncNotifierProviderRef_0<_i3.TodoListState>(
+          this,
+          Invocation.getter(#ref),
+        ),
+        returnValueForMissingStub:
             _FakeAutoDisposeAsyncNotifierProviderRef_0<_i3.TodoListState>(
           this,
           Invocation.getter(#ref),
@@ -74,6 +75,10 @@ class MockTodoList extends _i1.Mock implements _i3.TodoList {
   _i2.AsyncValue<_i3.TodoListState> get state => (super.noSuchMethod(
         Invocation.getter(#state),
         returnValue: _FakeAsyncValue_1<_i3.TodoListState>(
+          this,
+          Invocation.getter(#state),
+        ),
+        returnValueForMissingStub: _FakeAsyncValue_1<_i3.TodoListState>(
           this,
           Invocation.getter(#state),
         ),
@@ -95,6 +100,11 @@ class MockTodoList extends _i1.Mock implements _i3.TodoList {
           this,
           Invocation.getter(#future),
         )),
+        returnValueForMissingStub:
+            _i4.Future<_i3.TodoListState>.value(_FakeTodoListState_2(
+          this,
+          Invocation.getter(#future),
+        )),
       ) as _i4.Future<_i3.TodoListState>);
 
   @override
@@ -110,6 +120,14 @@ class MockTodoList extends _i1.Mock implements _i3.TodoList {
             [],
           ),
         )),
+        returnValueForMissingStub:
+            _i4.Future<_i3.TodoListState>.value(_FakeTodoListState_2(
+          this,
+          Invocation.method(
+            #build,
+            [],
+          ),
+        )),
       ) as _i4.FutureOr<_i3.TodoListState>);
 
   @override
@@ -119,6 +137,7 @@ class MockTodoList extends _i1.Mock implements _i3.TodoList {
           [todo],
         ),
         returnValue: _i4.Future<bool>.value(false),
+        returnValueForMissingStub: _i4.Future<bool>.value(false),
       ) as _i4.Future<bool>);
 
   @override
@@ -128,6 +147,7 @@ class MockTodoList extends _i1.Mock implements _i3.TodoList {
           [newTodo],
         ),
         returnValue: _i4.Future<bool>.value(false),
+        returnValueForMissingStub: _i4.Future<bool>.value(false),
       ) as _i4.Future<bool>);
 
   @override
@@ -137,6 +157,7 @@ class MockTodoList extends _i1.Mock implements _i3.TodoList {
           [todo],
         ),
         returnValue: _i4.Future<bool>.value(false),
+        returnValueForMissingStub: _i4.Future<bool>.value(false),
       ) as _i4.Future<bool>);
 
   @override
@@ -161,6 +182,15 @@ class MockTodoList extends _i1.Mock implements _i3.TodoList {
             {#onError: onError},
           ),
         )),
+        returnValueForMissingStub:
+            _i4.Future<_i3.TodoListState>.value(_FakeTodoListState_2(
+          this,
+          Invocation.method(
+            #update,
+            [cb],
+            {#onError: onError},
+          ),
+        )),
       ) as _i4.Future<_i3.TodoListState>);
 
   @override
@@ -177,5 +207,6 @@ class MockTodoList extends _i1.Mock implements _i3.TodoList {
           ],
         ),
         returnValue: false,
+        returnValueForMissingStub: false,
       ) as bool);
 }
