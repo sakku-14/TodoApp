@@ -7,7 +7,6 @@ import 'package:path/path.dart' as path;
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:todo_app/model/entities/todo_status/todo_status.dart';
 
 import '../test/robot/robot.dart';
 
@@ -96,8 +95,11 @@ void main() {
     await r.modalBottomSheet.pressRegisterButton();
     // } // Todoをスクロールできるように１２個作る
 
-    await r.todoPane.scrollToBottom(TodoStatus.notBegin);
-    await r.todoPane.scrollToTop(TodoStatus.notBegin);
+    await r.todoPane.scrollToBottom();
+    await r.todoPane.scrollToTop();
+
+    await r.todoPane.slideTodo();
+    await r.todoPane.slideTodo(isToRight: false);
     // 【消して良いやつ】>>>>>>>>>> ここまで >>>>>>>>>>
 
     // await todoRobot.slideTodo();

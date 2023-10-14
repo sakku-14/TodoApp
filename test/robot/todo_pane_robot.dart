@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:todo_app/model/model.dart';
+import 'package:todo_app/view/todo_view.dart';
 
 class TodoPaneRobot {
   const TodoPaneRobot(this.tester);
 
   final WidgetTester tester;
 
-  Future<void> scrollToBottom(TodoStatus status) async {
+  Future<void> scrollToBottom({TodoStatus status = TodoStatus.notBegin}) async {
     final tab = find.widgetWithText(Tab, status.statusName);
     expect(tab, findsOneWidget);
 
@@ -26,7 +27,7 @@ class TodoPaneRobot {
     expect(lastTodo.hitTestable(), findsOneWidget);
   }
 
-  Future<void> scrollToTop(TodoStatus status) async {
+  Future<void> scrollToTop({TodoStatus status = TodoStatus.notBegin}) async {
     final tab = find.widgetWithText(Tab, status.statusName);
     expect(tab, findsOneWidget);
 
@@ -52,9 +53,19 @@ class TodoPaneRobot {
     await tester.pumpAndSettle();
   }
 
-  Future<void> slideTodo() async {}
+  /// isToLeft = falseの時は機能していないので注意！！！（このチケット完了までに直します）
+  Future<void> slideTodo({int index = 0, bool isToRight = true}) async {
+    final todo = find.byKey(todoKey).at(index);
+    expect(todo, findsOneWidget);
+
+    // Todoをスライドして、描画完了まで待機：Offset(+右/-左, +上/-下)
+    await tester.drag(todo, Offset(isToRight ? 100 : -100, 0));
+    await tester.pumpAndSettle();
+  }
+
   Future<void> pressUpdateButton() async {}
   Future<void> pressDeleteButton() async {}
+
   Future<void> dragToNotBegin() async {}
   Future<void> dragToProgress() async {}
   Future<void> dragToComplete() async {}
