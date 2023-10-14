@@ -75,9 +75,6 @@ void main() {
 
     await r.todoPane.scrollToBottom();
     await r.todoPane.scrollToTop();
-
-    await r.todoPane.slideTodo();
-    await r.todoPane.slideTodo(isToRight: false);
     // 【消して良いやつ】>>>>>>>>>> ここまで >>>>>>>>>>
 
     // await todoRobot.slideTodo();
