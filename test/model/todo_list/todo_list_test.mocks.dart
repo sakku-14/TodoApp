@@ -27,10 +27,6 @@ import 'todo_list_test.dart' as _i5;
 /// See the documentation for Mockito's code generation for more information.
 class MockTodoListRepository extends _i1.Mock
     implements _i2.TodoListRepository {
-  MockTodoListRepository() {
-    _i1.throwOnMissingStub(this);
-  }
-
   @override
   set dbService(_i2.DbService? _dbService) => super.noSuchMethod(
         Invocation.setter(
@@ -47,6 +43,7 @@ class MockTodoListRepository extends _i1.Mock
           [todo],
         ),
         returnValue: _i3.Future<bool>.value(false),
+        returnValueForMissingStub: _i3.Future<bool>.value(false),
       ) as _i3.Future<bool>);
 
   @override
@@ -56,6 +53,8 @@ class MockTodoListRepository extends _i1.Mock
           [],
         ),
         returnValue: _i3.Future<List<_i4.Todo>>.value(<_i4.Todo>[]),
+        returnValueForMissingStub:
+            _i3.Future<List<_i4.Todo>>.value(<_i4.Todo>[]),
       ) as _i3.Future<List<_i4.Todo>>);
 
   @override
@@ -65,6 +64,7 @@ class MockTodoListRepository extends _i1.Mock
           [todo],
         ),
         returnValue: _i3.Future<bool>.value(false),
+        returnValueForMissingStub: _i3.Future<bool>.value(false),
       ) as _i3.Future<bool>);
 
   @override
@@ -74,6 +74,7 @@ class MockTodoListRepository extends _i1.Mock
           [todo],
         ),
         returnValue: _i3.Future<bool>.value(false),
+        returnValueForMissingStub: _i3.Future<bool>.value(false),
       ) as _i3.Future<bool>);
 }
 
@@ -81,10 +82,6 @@ class MockTodoListRepository extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockChangeListener<T> extends _i1.Mock implements _i5.ChangeListener<T> {
-  MockChangeListener() {
-    _i1.throwOnMissingStub(this);
-  }
-
   @override
   void call(
     T? previous,
