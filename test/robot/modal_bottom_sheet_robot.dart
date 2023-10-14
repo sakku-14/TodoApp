@@ -18,7 +18,7 @@ class ModalBottomSheetRobot {
   Future<void> changePriorityPoint() async {}
   Future<void> changeStatusPoint() async {}
 
-  Future<void> pressAddButton() async {
+  Future<void> pressRegisterButton() async {
     final addBottomSheetViewInput = find.byKey(addBottomSheetKey);
     // Todo追加のボトムシートが表示されていること
     expect(addBottomSheetViewInput, findsOneWidget);

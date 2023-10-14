@@ -91,7 +91,7 @@ void main() {
     // 【消して良いやつ】試しに１個Todoを追加する操作
     await r.mainScreen.pressAddButton();
     await r.modalBottomSheet.enterTodoTitle('title');
-    await r.modalBottomSheet.pressAddButton();
+    await r.modalBottomSheet.pressRegisterButton();
     await r.todoPane.changeStatusTabTo(TodoStatus.stay);
     await r.todoPane.changeStatusTabTo(TodoStatus.notBegin);
 
