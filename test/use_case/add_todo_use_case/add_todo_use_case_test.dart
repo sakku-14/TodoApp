@@ -6,8 +6,8 @@ import 'package:todo_app/use_case/use_case.dart';
 
 import 'add_todo_use_case_test.mocks.dart';
 
-@GenerateMocks([
-  TodoList,
+@GenerateNiceMocks([
+  MockSpec<TodoList>(),
 ])
 void main() {
   final MockTodoList todoListProvider = MockTodoList();

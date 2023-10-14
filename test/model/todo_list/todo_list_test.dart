@@ -11,9 +11,9 @@ abstract class ChangeListener<T> {
   void call(T? previous, T next);
 }
 
-@GenerateMocks([
-  TodoListRepository,
-  ChangeListener,
+@GenerateNiceMocks([
+  MockSpec<TodoListRepository>(),
+  MockSpec<ChangeListener>(),
 ])
 void main() {
   // region フィールド
