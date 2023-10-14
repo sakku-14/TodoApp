@@ -7,13 +7,11 @@ import 'package:path/path.dart' as path;
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:todo_app/main.dart' as app;
 
-import '../test/robot/modal_bottom_sheet_robot.dart';
-import '../test/robot/todo_robot.dart';
+import '../test/robot/robot.dart';
 
 void main() {
-  var binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+  final _ = IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   Future<String> crateFilePath(String fileName) async {
     var dbFilePath = '';
@@ -85,10 +83,9 @@ void main() {
   }
 
   testWidgets('DBが空の状態でスタート', (WidgetTester tester) async {
-    final todoRobot = TodoRobot(tester);
-    final modalBottomSheetRobot = ModalBottomSheetRobot(tester);
-    app.main();
-    await tester.pumpAndSettle();
+    // DBのSetUpをやるよ
+    final r = Robot(tester);
+    await r.pumpMyApp();
 
     // await todoRobot.slideTodo();
 
@@ -100,10 +97,8 @@ void main() {
 
   testWidgets('DBにデータがある状態でスタート', (WidgetTester tester) async {
     // DBのSetUpをやるよ
-    final todoRobot = TodoRobot(tester);
-    final modalBottomSheetRobot = ModalBottomSheetRobot(tester);
-    app.main();
-    await tester.pumpAndSettle();
+    final r = Robot(tester);
+    await r.pumpMyApp();
 
     // await todoRobot.slideTodo();
 

@@ -16,8 +16,8 @@ Todo createTodo(DateTime createAt, String title) {
   );
 }
 
-@GenerateMocks([
-  DbService,
+@GenerateNiceMocks([
+  MockSpec<DbService>(),
 ])
 void main() {
   final MockDbService dbService = MockDbService();
