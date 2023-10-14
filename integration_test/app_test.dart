@@ -66,12 +66,17 @@ void main() {
     final r = Robot(tester);
     await r.pumpMyApp();
 
-    // 【消して良いやつ】試しに１個Todoを追加する操作
+    // 【消して良いやつ】<<<<<<<<< ここから <<<<<<<<<
+    // for (var i = 0; i < 12; i++) { // Todoをスクロールできるように１２個作る
+    // 試しに１個Todoを追加する操作
     await r.mainScreen.pressAddButton();
     await r.modalBottomSheet.enterTodoTitle('title');
-    await r.modalBottomSheet.pressAddButton();
-    await r.todoPane.changeStatusTabTo(TodoStatus.stay);
-    await r.todoPane.changeStatusTabTo(TodoStatus.notBegin);
+    await r.modalBottomSheet.pressRegisterButton();
+    // } // Todoをスクロールできるように１２個作る
+
+    await r.todoPane.scrollToBottom(TodoStatus.notBegin);
+    await r.todoPane.scrollToTop(TodoStatus.notBegin);
+    // 【消して良いやつ】>>>>>>>>>> ここまで >>>>>>>>>>
 
     // await todoRobot.slideTodo();
 
