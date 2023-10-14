@@ -5,7 +5,6 @@ class ModalBottomSheetRobot {
 
   final WidgetTester tester;
 
-  Future<void> pumpMyApp() async {}
   Future<void> enterTodoTitle() async {}
   Future<void> changeEmergencyPoint() async {}
   Future<void> changePriorityPoint() async {}
