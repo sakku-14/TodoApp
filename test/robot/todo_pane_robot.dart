@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:todo_app/model/model.dart';
+import 'package:todo_app/view/confirm_dialog_view.dart';
 import 'package:todo_app/view/todo_view.dart';
 
 class TodoPaneRobot {
@@ -63,8 +65,39 @@ class TodoPaneRobot {
     await tester.pumpAndSettle();
   }
 
-  Future<void> pressUpdateButton() async {}
-  Future<void> pressDeleteButton() async {}
+  Future<void> pressUpdateButton() async {
+    final todoEditIcon = find.widgetWithIcon(SlidableAction, Icons.edit);
+    expect(todoEditIcon, findsOneWidget);
+
+    await tester.tap(todoEditIcon);
+    await tester.pumpAndSettle();
+    expect(todoEditIcon, findsNothing);
+  }
+
+  Future<void> pressDeleteButton() async {
+    final todoDeleteIcon = find.widgetWithIcon(SlidableAction, Icons.delete);
+    expect(todoDeleteIcon, findsOneWidget);
+
+    await tester.tap(todoDeleteIcon);
+    await tester.pumpAndSettle();
+    expect(todoDeleteIcon, findsNothing);
+  }
+
+  Future<void> pressDeleteOkButton() async {
+    final okButton = find.byKey(confirmOkKey);
+    expect(okButton, findsOneWidget);
+
+    await tester.tap(okButton);
+    await tester.pumpAndSettle();
+  }
+
+  Future<void> pressDeleteCancelButton() async {
+    final cancelButton = find.byKey(confirmCancelKey);
+    expect(cancelButton, findsOneWidget);
+
+    await tester.tap(cancelButton);
+    await tester.pumpAndSettle();
+  }
 
   Future<void> dragToNotBegin() async {}
   Future<void> dragToProgress() async {}
