@@ -55,7 +55,6 @@ class TodoPaneRobot {
     await tester.pumpAndSettle();
   }
 
-  /// isToLeft = falseの時は機能していないので注意！！！（このチケット完了までに直します）
   Future<void> slideTodo({int index = 0, bool isToRight = true}) async {
     final todo = find.byKey(todoKey).at(index);
     expect(todo, findsOneWidget);

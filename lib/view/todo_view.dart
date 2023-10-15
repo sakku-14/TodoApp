@@ -22,7 +22,7 @@ class TodoView extends ConsumerWidget {
     final isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape; // 縦or横を取得
     return Slidable(
-      key: const ValueKey(0),
+      key: todoKey,
       startActionPane: ActionPane(
         motion: const DrawerMotion(),
         children: [
@@ -90,7 +90,6 @@ class TodoView extends ConsumerWidget {
             ),
           ),
           child: ListTile(
-            key: todoKey,
             title: Text(todoDto.title),
             trailing: FractionallySizedBox(
               widthFactor: 0.2,
