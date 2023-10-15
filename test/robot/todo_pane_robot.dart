@@ -99,8 +99,29 @@ class TodoPaneRobot {
     await tester.pumpAndSettle();
   }
 
-  Future<void> dragToNotBegin() async {}
-  Future<void> dragToProgress() async {}
-  Future<void> dragToComplete() async {}
-  Future<void> dragToStay() async {}
+  Future<void> dragFromTo(
+      {required TodoStatus destStatus, int todoIndex = 0}) async {
+    final destTab = find.widgetWithText(Tab, destStatus.statusName);
+    expect(destTab, findsOneWidget);
+
+    final todo = find.byKey(todoKey).at(todoIndex);
+    expect(todo, findsOneWidget);
+
+    // ドラッグ
+    final firstLocation = tester.getCenter(todo);
+    final gesture = await tester.startGesture(firstLocation);
+    await tester.pump(const Duration(seconds: 1));
+
+    // ドラッグしながら移動
+    await gesture.moveTo(tester.getCenter(destTab));
+    await tester.pumpAndSettle();
+
+    // ドロップ
+    await gesture.up();
+    await tester.pumpAndSettle();
+
+    await tester.tap(destTab);
+    await tester.pumpAndSettle();
+    expect(todo, findsOneWidget); // DD対象のTodoが作業中タブ内に存在すること
+  }
 }
