@@ -6,6 +6,7 @@ import 'package:integration_test/integration_test.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:todo_app/model/entities/todo_status/todo_status.dart';
 
 import '../test/robot/robot.dart';
 
@@ -75,6 +76,9 @@ void main() {
     // 試しに１個Todoを追加する操作
     await r.mainScreen.pressAddButton();
     await r.modalBottomSheet.enterTodoTitle('title');
+    await r.modalBottomSheet.changeEmergencyPoint(3);
+    await r.modalBottomSheet.changePriorityPoint(3);
+    await r.modalBottomSheet.changeStatusPoint(TodoStatus.complete.statusName);
     await r.modalBottomSheet.pressRegisterButton();
     // } // Todoをスクロールできるように１２個作る
 
