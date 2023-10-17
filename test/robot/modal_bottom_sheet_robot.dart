@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:todo_app/model/entities/todo_status/todo_status.dart';
 import 'package:todo_app/view/view.dart';
 
 class ModalBottomSheetRobot {
@@ -73,31 +74,21 @@ class ModalBottomSheetRobot {
     expect(priorityPointGroupValue, targetPoint);
   }
 
-  Future<void> changeStatusPoint(String targetStatusName) async {
+  Future<void> changeStatusPoint(TodoStatus status) async {
     // ステータスの選択肢が存在すること
-    expect(find.byKey(statusKey), findsOneWidget);
+    final statusWidget = find.byKey(statusKey);
+    expect(statusWidget, findsOneWidget);
 
-    UniqueKey key = statusNotBegin;
-    int index = 0;
-    switch (targetStatusName) {
-      case '未着手':
+    UniqueKey key;
+    switch (status) {
+      case TodoStatus.notBegin:
         key = statusNotBegin;
-        index = 0;
-        break;
-      case '作業中':
+      case TodoStatus.progress:
         key = statusProgress;
-        index = 1;
-        break;
-      case '保留':
+      case TodoStatus.stay:
         key = statusStay;
-        index = 2;
-        break;
-      case '完了':
+      case TodoStatus.complete:
         key = statusComplete;
-        index = 3;
-        break;
-      default:
-        debugPrint("StatusName：正しいステータス名を指定してください。");
     }
 
     // 選択状態を切り替える
@@ -105,9 +96,10 @@ class ModalBottomSheetRobot {
     await tester.pumpAndSettle();
 
     final statusNameSegmentedControl =
-        tester.widget<CupertinoSegmentedControl>(find.byKey(priorityKey));
-    final statusNameGroupValue = statusNameSegmentedControl.groupValue;
-    expect(statusNameGroupValue, index);
+        tester.widget<CupertinoSegmentedControl>(statusWidget);
+    final statusNameGroupValue =
+        statusNameSegmentedControl.groupValue as TodoStatus;
+    expect(statusNameGroupValue, status);
   }
 
   Future<void> pressRegisterButton() async {

@@ -6,6 +6,7 @@ import 'package:integration_test/integration_test.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:todo_app/model/entities/todo_status/todo_status.dart';
 
 import '../test/robot/robot.dart';
 
@@ -71,7 +72,34 @@ void main() {
     await r.pumpMyApp();
 
     // region 追加
-    //全てのタブからTodoを追加できること
+    // region 全てのタブからTodoを追加できること
+    await r.todoPane.changeStatusTabTo(TodoStatus.notBegin);
+    await r.mainScreen.pressAddButton();
+    await r.modalBottomSheet.enterTodoTitle('1_1_notBegin');
+    await r.modalBottomSheet.pressRegisterButton();
+    r.todoPane.expectFindNTodo(1);
+
+    await r.todoPane.changeStatusTabTo(TodoStatus.progress);
+    await r.mainScreen.pressAddButton();
+    await r.modalBottomSheet.enterTodoTitle('1_1_progress');
+    await r.modalBottomSheet.changeStatusPoint(TodoStatus.progress);
+    await r.modalBottomSheet.pressRegisterButton();
+    r.todoPane.expectFindNTodo(1);
+
+    await r.todoPane.changeStatusTabTo(TodoStatus.stay);
+    await r.mainScreen.pressAddButton();
+    await r.modalBottomSheet.enterTodoTitle('1_1_stay');
+    await r.modalBottomSheet.changeStatusPoint(TodoStatus.stay);
+    await r.modalBottomSheet.pressRegisterButton();
+    r.todoPane.expectFindNTodo(1);
+
+    await r.todoPane.changeStatusTabTo(TodoStatus.complete);
+    await r.mainScreen.pressAddButton();
+    await r.modalBottomSheet.enterTodoTitle('1_1_complete');
+    await r.modalBottomSheet.changeStatusPoint(TodoStatus.complete);
+    await r.modalBottomSheet.pressRegisterButton();
+    r.todoPane.expectFindNTodo(1);
+    // endregion
     // endregion
 
     // region 変更
@@ -98,7 +126,7 @@ void main() {
     // endregion
   });
 
-  // TODO:23.10.17:Y.Sakuma:DBある状態だと、読み書きができないため、後ほど修正する
+  // TODO:23.10.17:Y.Sakuma:DB差し替えると、DBの読み書きができないため、後ほど修正する
   // testWidgets('DBにデータがある状態でスタート', (WidgetTester tester) async {
   //   // テスト用DBの配置
   //   await deleteFile();

@@ -123,4 +123,9 @@ class TodoPaneRobot {
     await tester.pumpAndSettle();
     expect(todo, findsOneWidget); // DD対象のTodoが作業中タブ内に存在すること
   }
+
+  void expectFindNTodo(int count) {
+    final todos = find.byKey(todoKey);
+    expect(todos, findsNWidgets(count));
+  }
 }
