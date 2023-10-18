@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:todo_app/model/model.dart';
 import 'package:todo_app/view/sort_combo_box_view.dart';
 
 class MainScreenRobot {
@@ -8,7 +9,7 @@ class MainScreenRobot {
   final WidgetTester tester;
 
   /// 指定されたWidgetをタップして描画を待つ
-  Future<void> _tapWidget(WidgetTester tester, Finder tapTarget) async {
+  Future<void> _tapWidget(Finder tapTarget) async {
     await tester.tap(tapTarget);
     await tester.pumpAndSettle(const Duration(milliseconds: 1000));
   }
@@ -21,23 +22,19 @@ class MainScreenRobot {
     await tester.pumpAndSettle();
   }
 
-  Future<void> changeComboBoxItem() async {
-    const String editDate = '登録日時';
-    const String emergencyPriority = '緊急度×重要度';
+  Future<void> changeComboBoxItemTo(SortState sortState) async {
+    final comboBox = find.byKey(sortComboBoxKey);
+    expect(comboBox, findsOneWidget);
 
-    // 「登録日時」を持つWidgetが1つあること
-    final sortComboBoxInput = find.byKey(sortComboBoxKey);
-    expect((tester.widget(sortComboBoxInput) as DropdownButton).value,
-        equals(editDate));
+    await _tapWidget(comboBox);
 
-    // ドロップダウンをtapして描画(開くまで)を待つ
-    await _tapWidget(tester, find.text(editDate));
+    final destComboBoxItem = find.text(sortState.typeName);
+    expect(destComboBoxItem, findsOneWidget);
 
-    // 「緊急度×重要度」をtapして描画(閉じるまで)を待つ
-    await _tapWidget(tester, find.text(emergencyPriority).last);
+    await _tapWidget(destComboBoxItem);
 
-    // 「緊急度×重要度」を持つWidgetが1つあること
-    expect((tester.widget(sortComboBoxInput) as DropdownButton).value,
-        equals(emergencyPriority));
+    final comboBoxItemName =
+        tester.widget<DropdownButton>(comboBox).value as String;
+    expect(comboBoxItemName, equals(sortState.typeName));
   }
 }

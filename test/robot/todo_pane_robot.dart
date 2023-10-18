@@ -3,6 +3,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:todo_app/model/model.dart';
 import 'package:todo_app/view/confirm_dialog_view.dart';
+import 'package:todo_app/view/tab_view/todo_count_view.dart';
 import 'package:todo_app/view/todo_view.dart';
 
 class TodoPaneRobot {
@@ -145,5 +146,36 @@ class TodoPaneRobot {
       expect(tester.widget<Text>(todoPriorityPoint).data,
           equals(priorityPoint.toString()));
     }
+  }
+
+  /// 期待通りの順にTodoがソートされていること
+  void expectIsExpectedOrder(List<String> expectedOrderTitle) {
+    final displayedTodoCount = expectedOrderTitle.length;
+    final todos = find.byKey(todoTitleKey);
+
+    for (int i = 0; i < displayedTodoCount; i++) {
+      final todo = todos.at(i);
+      final actualTodoTitle = tester.widget<Text>(todo).data ?? '';
+      expect(actualTodoTitle, equals(expectedOrderTitle.elementAt(i)));
+    }
+  }
+
+  /// 指定のタブに期待通りのカウントが表示されていること
+  void expectTodoTabNCount(TodoStatus status, int expectedCount) {
+    late final int index;
+    switch (status) {
+      case TodoStatus.notBegin:
+        index = 0;
+      case TodoStatus.progress:
+        index = 1;
+      case TodoStatus.stay:
+        index = 2;
+      case TodoStatus.complete:
+        index = 3;
+    }
+
+    final actualCountString =
+        tester.widget<Text>(find.byKey(todoCountKey).at(index)).data as String;
+    expect(expectedCount, equals(int.parse(actualCountString)));
   }
 }

@@ -6,7 +6,7 @@ import 'package:integration_test/integration_test.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:todo_app/model/entities/todo_status/todo_status.dart';
+import 'package:todo_app/model/model.dart';
 
 import '../test/robot/robot.dart';
 
@@ -203,11 +203,45 @@ void main() {
     // endregion
 
     // region 表示
-    // 登録日時でソートできること
-    // 緊急度×重要度でソートできること
-    // 緊急度×重要度の結果が等しい場合、緊急度が優先されてソートできること
-    // 緊急度×重要度の結果、及び各ポイントも等しい場合、登録日時が優先されてソートできること
-    // 各タブに表示されているTodoの数をタブに表示できること
+    // region 登録日時でソートできること
+    await r.todoPane.changeStatusTabTo(TodoStatus.notBegin);
+
+    // 以下の順にTodoを追加する
+    // (タイトル、緊急度、重要度) = (1_1_2、１、２)
+    // (タイトル、緊急度、重要度) = (2_2_1、２、１)
+    // (タイトル、緊急度、重要度) = (3_1_3、１、３)
+    // (タイトル、緊急度、重要度) = (4_1_3、１、３)
+    await r.mainScreen.pressAddButton();
+    await r.modalBottomSheet.enterTodoTitle('1_1_2');
+    await r.modalBottomSheet.changePriorityPoint(2);
+    await r.modalBottomSheet.pressRegisterButton();
+    await r.mainScreen.pressAddButton();
+    await r.modalBottomSheet.enterTodoTitle('2_2_1');
+    await r.modalBottomSheet.changeEmergencyPoint(2);
+    await r.modalBottomSheet.pressRegisterButton();
+    await r.mainScreen.pressAddButton();
+    await r.modalBottomSheet.enterTodoTitle('3_1_3');
+    await r.modalBottomSheet.changePriorityPoint(3);
+    await r.modalBottomSheet.pressRegisterButton();
+    await r.mainScreen.pressAddButton();
+    await r.modalBottomSheet.enterTodoTitle('4_1_3');
+    await r.modalBottomSheet.changePriorityPoint(3);
+    await r.modalBottomSheet.pressRegisterButton();
+
+    r.todoPane.expectIsExpectedOrder(['1_1_2', '2_2_1', '3_1_3', '4_1_3']);
+    // endregion
+
+    // region 緊急度×重要度でソートできること
+    await r.mainScreen.changeComboBoxItemTo(SortState.emergencyTimesPrimary);
+    r.todoPane.expectIsExpectedOrder(['3_1_3', '4_1_3', '2_2_1', '1_1_2']);
+    // endregion
+
+    // region 各タブに表示されているTodoの数をタブに表示できること
+    r.todoPane.expectTodoTabNCount(TodoStatus.notBegin, 4);
+    r.todoPane.expectTodoTabNCount(TodoStatus.progress, 3);
+    r.todoPane.expectTodoTabNCount(TodoStatus.stay, 0);
+    r.todoPane.expectTodoTabNCount(TodoStatus.complete, 0);
+    // endregion
     // endregion
   });
 
