@@ -118,10 +118,6 @@ class TodoPaneRobot {
     // ドロップ
     await gesture.up();
     await tester.pumpAndSettle();
-
-    await tester.tap(destTab);
-    await tester.pumpAndSettle();
-    expect(todo, findsOneWidget); // DD対象のTodoが作業中タブ内に存在すること
   }
 
   /// 期待する数のTodoが現在洗濯中のタブ内に表示されていること

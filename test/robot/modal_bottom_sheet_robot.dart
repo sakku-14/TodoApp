@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:todo_app/model/entities/todo_status/todo_status.dart';
 import 'package:todo_app/view/view.dart';
@@ -138,5 +139,38 @@ class ModalBottomSheetRobot {
     expect(cancelButtonInput, findsOneWidget);
     await tester.tap(cancelButtonInput);
     await tester.pumpAndSettle();
+  }
+
+  /// ボトムシートの内容が期待通りであること
+  void expectSheetContents(
+      String title, int emergencyPoint, int priorityPoint, TodoStatus status) {
+    final titleInput = find.byKey(titleKey);
+    expect(titleInput, findsOneWidget);
+
+    final actualTitle =
+        tester.widget<TextField>(find.byKey(titleKey)).controller?.value.text ??
+            '';
+    expect(actualTitle, equals(title));
+
+    final actualEmergencyPoint = tester
+        .widget<CupertinoSegmentedControl>(find.byKey(emergencyKey))
+        .groupValue as int;
+    expect(actualEmergencyPoint, equals(emergencyPoint));
+
+    final actualPriorityPoint = tester
+        .widget<CupertinoSegmentedControl>(find.byKey(priorityKey))
+        .groupValue as int;
+    expect(actualPriorityPoint, equals(priorityPoint));
+
+    final actualTodoStatus = tester
+        .widget<CupertinoSegmentedControl>(find.byKey(statusKey))
+        .groupValue as TodoStatus;
+    expect(actualTodoStatus, equals(status));
+  }
+
+  ///　ボトムシートが表示されていること
+  void expectStillOpenBottomSheet() {
+    final bottomSheet = find.byKey(commonBottomSheetKey);
+    expect(bottomSheet, findsOneWidget);
   }
 }

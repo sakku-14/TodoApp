@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../model/model.dart';
 
 // WidgetTestで使用するKey
+final commonBottomSheetKey = UniqueKey();
 final titleKey = UniqueKey();
 final emergencyKey = UniqueKey();
 final emergency1 = UniqueKey();
@@ -28,6 +29,7 @@ class CommonBottomSheetView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Column(
+      key: commonBottomSheetKey,
       children: [
         /// タイトル
         Container(

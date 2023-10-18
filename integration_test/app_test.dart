@@ -104,12 +104,13 @@ void main() {
 
     // region 変更
     // region 全てのタブからTodoを編集できること
+    const newTitle = '1_1_notBegin_update';
     await r.todoPane.changeStatusTabTo(TodoStatus.notBegin);
     await r.todoPane.slideTodo();
     await r.todoPane.pressUpdateButton();
-    await r.modalBottomSheet.enterTodoTitle('1_1_notBegin_update');
+    await r.modalBottomSheet.enterTodoTitle(newTitle);
     await r.modalBottomSheet.pressUpdateButton();
-    r.todoPane.expectTodoSetting(title: '1_1_notBegin_update');
+    r.todoPane.expectTodoSetting(title: newTitle);
 
     await r.todoPane.changeStatusTabTo(TodoStatus.progress);
     await r.todoPane.slideTodo();
@@ -133,8 +134,24 @@ void main() {
     r.todoPane.expectTodoSetting(priorityPoint: 3);
     // endregion
 
-    // region Todo編集アイコンからステータスを変更した場合、対応したタブに移動すること
+    // region Todoの更新ボトムシート表示時、既存のTodoの内容を表示していること
     await r.todoPane.changeStatusTabTo(TodoStatus.notBegin);
+    await r.todoPane.slideTodo();
+    await r.todoPane.pressUpdateButton();
+    r.modalBottomSheet.expectSheetContents(newTitle, 1, 1, TodoStatus.notBegin);
+    await r.modalBottomSheet.pressUpdateCancelButton();
+    // endregion
+
+    // region Todo編集アイコンからTodoのタイトルや緊急度、重要度、ステータスを変更した後、キャンセルを押下するとTodoが元のまま更新されていないこと
+    r.todoPane.expectFindNTodo(1);
+    await r.todoPane.slideTodo();
+    await r.todoPane.pressUpdateButton();
+    await r.modalBottomSheet.changeStatusPoint(TodoStatus.progress);
+    await r.modalBottomSheet.pressUpdateCancelButton();
+    r.todoPane.expectFindNTodo(1);
+    // endregion
+
+    // region Todo編集アイコンからステータスを変更した場合、対応したタブに移動すること
     await r.todoPane.slideTodo();
     await r.todoPane.pressUpdateButton();
     await r.modalBottomSheet.changeStatusPoint(TodoStatus.progress);
@@ -144,16 +161,34 @@ void main() {
     r.todoPane.expectFindNTodo(2);
     // endregion
 
-    // DDからステータスを変更した場合、対応したタブに移動すること
-    // Todo編集アイコンからTodoのタイトルや緊急度、重要度、ステータスを変更した後、キャンセルを押下するとTodoが元のまま更新されていないこと
-    // Todoの登録ボトムシートでタイトルを入力していない状態で登録ボタンを押下できないこと
-    // Todoの更新ボトムシートでタイトルをクリアした状態で更新ボタンを押下できないこと
-    // Todoの更新ボトムシート表示時、既存のTodoの内容を表示していること
+    // region DDからステータスを変更した場合、対応したタブに移動すること
+    await r.todoPane.changeStatusTabTo(TodoStatus.stay);
+    await r.todoPane.dragFromTo(destStatus: TodoStatus.progress);
+    r.todoPane.expectFindNTodo(0);
+    await r.todoPane.changeStatusTabTo(TodoStatus.progress);
+    // endregion
+
+    // region Todoの登録ボトムシートでタイトルを入力していない状態で登録ボタンを押下できないこと
+    await r.mainScreen.pressAddButton();
+    await r.modalBottomSheet.pressRegisterButton();
+    r.modalBottomSheet.expectStillOpenBottomSheet();
+    await r.modalBottomSheet.pressRegisterCancelButton();
+    // endregion
+
+    // region Todoの更新ボトムシートでタイトルをクリアした状態で更新ボタンを押下できないこと
+    await r.todoPane.changeStatusTabTo(TodoStatus.complete);
+    await r.todoPane.slideTodo();
+    await r.todoPane.pressUpdateButton();
+    await r.modalBottomSheet.enterTodoTitle('');
+    await r.modalBottomSheet.pressUpdateButton();
+    r.modalBottomSheet.expectStillOpenBottomSheet();
+    await r.modalBottomSheet.pressUpdateCancelButton();
+    // endregion
     // endregion
 
     // region 削除
-    // Todo削除アイコン押下後、確認ダイアログでOKを押下した場合、削除されること
     // Todo削除アイコン押下後、確認ダイアログでCancelを押下した場合、削除されないこと
+    // Todo削除アイコン押下後、確認ダイアログでOKを押下した場合、削除されること
     // endregion
 
     // region 表示
