@@ -187,8 +187,19 @@ void main() {
     // endregion
 
     // region 削除
-    // Todo削除アイコン押下後、確認ダイアログでCancelを押下した場合、削除されないこと
-    // Todo削除アイコン押下後、確認ダイアログでOKを押下した場合、削除されること
+    // region Todo削除アイコン押下後、確認ダイアログでCancelを押下した場合、削除されないこと
+    await r.todoPane.slideTodo();
+    await r.todoPane.pressDeleteButton();
+    await r.todoPane.pressDeleteCancelButton();
+    r.todoPane.expectFindNTodo(1);
+    // endregion
+
+    // region Todo削除アイコン押下後、確認ダイアログでOKを押下した場合、削除されること
+    await r.todoPane.slideTodo();
+    await r.todoPane.pressDeleteButton();
+    await r.todoPane.pressDeleteOkButton();
+    r.todoPane.expectFindNTodo(0);
+    // endregion
     // endregion
 
     // region 表示
