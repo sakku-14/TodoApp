@@ -103,7 +103,7 @@ void main() {
     // endregion
 
     // region 変更
-    // 全てのタブからTodoを編集できること
+    // region 全てのタブからTodoを編集できること
     await r.todoPane.changeStatusTabTo(TodoStatus.notBegin);
     await r.todoPane.slideTodo();
     await r.todoPane.pressUpdateButton();
@@ -131,8 +131,19 @@ void main() {
     await r.modalBottomSheet.changePriorityPoint(3);
     await r.modalBottomSheet.pressUpdateButton();
     r.todoPane.expectTodoSetting(priorityPoint: 3);
+    // endregion
 
-    // Todo編集アイコンからステータスを変更した場合、対応したタブに移動すること
+    // region Todo編集アイコンからステータスを変更した場合、対応したタブに移動すること
+    await r.todoPane.changeStatusTabTo(TodoStatus.notBegin);
+    await r.todoPane.slideTodo();
+    await r.todoPane.pressUpdateButton();
+    await r.modalBottomSheet.changeStatusPoint(TodoStatus.progress);
+    await r.modalBottomSheet.pressUpdateButton();
+    r.todoPane.expectFindNTodo(0);
+    await r.todoPane.changeStatusTabTo(TodoStatus.progress);
+    r.todoPane.expectFindNTodo(2);
+    // endregion
+
     // DDからステータスを変更した場合、対応したタブに移動すること
     // Todo編集アイコンからTodoのタイトルや緊急度、重要度、ステータスを変更した後、キャンセルを押下するとTodoが元のまま更新されていないこと
     // Todoの登録ボトムシートでタイトルを入力していない状態で登録ボタンを押下できないこと
