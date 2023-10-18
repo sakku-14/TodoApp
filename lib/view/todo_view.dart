@@ -8,6 +8,9 @@ import '../use_case/use_case.dart';
 
 /// WidgetTestで使用するKey
 final todoKey = UniqueKey();
+final todoTitleKey = UniqueKey();
+final todoEmergencyPointKey = UniqueKey();
+final todoPriorityPointKey = UniqueKey();
 
 class TodoView extends ConsumerWidget {
   final TodoDto todoDto;
@@ -90,7 +93,7 @@ class TodoView extends ConsumerWidget {
             ),
           ),
           child: ListTile(
-            title: Text(todoDto.title),
+            title: Text(key: todoTitleKey, todoDto.title),
             trailing: FractionallySizedBox(
               widthFactor: 0.2,
               child: Center(
@@ -107,6 +110,7 @@ class TodoView extends ConsumerWidget {
                       ),
                       child: Center(
                         child: Text(
+                          key: todoEmergencyPointKey,
                           todoDto.emergencyPoint.toString(),
                           style: const TextStyle(
                             fontSize: 18,
@@ -123,6 +127,7 @@ class TodoView extends ConsumerWidget {
                       ),
                       child: Center(
                         child: Text(
+                          key: todoPriorityPointKey,
                           todoDto.priorityPoint.toString(),
                           style: const TextStyle(
                             fontSize: 18,

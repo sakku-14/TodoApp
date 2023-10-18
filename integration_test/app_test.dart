@@ -104,6 +104,34 @@ void main() {
 
     // region 変更
     // 全てのタブからTodoを編集できること
+    await r.todoPane.changeStatusTabTo(TodoStatus.notBegin);
+    await r.todoPane.slideTodo();
+    await r.todoPane.pressUpdateButton();
+    await r.modalBottomSheet.enterTodoTitle('1_1_notBegin_update');
+    await r.modalBottomSheet.pressUpdateButton();
+    r.todoPane.expectTodoSetting(title: '1_1_notBegin_update');
+
+    await r.todoPane.changeStatusTabTo(TodoStatus.progress);
+    await r.todoPane.slideTodo();
+    await r.todoPane.pressUpdateButton();
+    await r.modalBottomSheet.changeEmergencyPoint(2);
+    await r.modalBottomSheet.pressUpdateButton();
+    r.todoPane.expectTodoSetting(emergencyPoint: 2);
+
+    await r.todoPane.changeStatusTabTo(TodoStatus.stay);
+    await r.todoPane.slideTodo();
+    await r.todoPane.pressUpdateButton();
+    await r.modalBottomSheet.changePriorityPoint(2);
+    await r.modalBottomSheet.pressUpdateButton();
+    r.todoPane.expectTodoSetting(priorityPoint: 2);
+
+    await r.todoPane.changeStatusTabTo(TodoStatus.complete);
+    await r.todoPane.slideTodo();
+    await r.todoPane.pressUpdateButton();
+    await r.modalBottomSheet.changePriorityPoint(3);
+    await r.modalBottomSheet.pressUpdateButton();
+    r.todoPane.expectTodoSetting(priorityPoint: 3);
+
     // Todo編集アイコンからステータスを変更した場合、対応したタブに移動すること
     // DDからステータスを変更した場合、対応したタブに移動すること
     // Todo編集アイコンからTodoのタイトルや緊急度、重要度、ステータスを変更した後、キャンセルを押下するとTodoが元のまま更新されていないこと

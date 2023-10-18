@@ -124,8 +124,30 @@ class TodoPaneRobot {
     expect(todo, findsOneWidget); // DD対象のTodoが作業中タブ内に存在すること
   }
 
+  /// 期待する数のTodoが現在洗濯中のタブ内に表示されていること
   void expectFindNTodo(int count) {
     final todos = find.byKey(todoKey);
     expect(todos, findsNWidgets(count));
+  }
+
+  /// (指定していればインデックスの)Todoの内容が期待通りであること
+  void expectTodoSetting(
+      {int index = 0,
+      String title = '',
+      int emergencyPoint = 0,
+      int priorityPoint = 0}) {
+    final todoTitle = find.byKey(todoTitleKey).at(index);
+    final todoEmergencyPoint = find.byKey(todoEmergencyPointKey).at(index);
+    final todoPriorityPoint = find.byKey(todoPriorityPointKey).at(index);
+
+    if (title != '') expect(tester.widget<Text>(todoTitle).data, equals(title));
+    if (emergencyPoint != 0) {
+      expect(tester.widget<Text>(todoEmergencyPoint).data,
+          equals(emergencyPoint.toString()));
+    }
+    if (priorityPoint != 0) {
+      expect(tester.widget<Text>(todoPriorityPoint).data,
+          equals(priorityPoint.toString()));
+    }
   }
 }
