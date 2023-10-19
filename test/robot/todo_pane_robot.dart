@@ -128,7 +128,7 @@ class TodoPaneRobot {
   }
 
   /// (指定していればインデックスの)Todoの内容が期待通りであること
-  void expectTodoSetting(
+  void expectNIndexTodoDisplay(
       {int index = 0,
       String title = '',
       int emergencyPoint = 0,
@@ -178,4 +178,24 @@ class TodoPaneRobot {
         tester.widget<Text>(find.byKey(todoCountKey).at(index)).data as String;
     expect(expectedCount, equals(int.parse(actualCountString)));
   }
+
+  /// 現在表示中のタブに期待通りのTodoが表示されていること
+  void expectTodoDisplayFromTop(List<TodoDisplayData> todos) {
+    var index = 0;
+    for (var value in todos) {
+      expectNIndexTodoDisplay(
+          index: index,
+          title: value.title,
+          emergencyPoint: value.emergencyPoint,
+          priorityPoint: value.priorityPoint);
+      index++;
+    }
+  }
+}
+
+class TodoDisplayData {
+  TodoDisplayData(this.title, this.emergencyPoint, this.priorityPoint);
+  final String title;
+  final int emergencyPoint;
+  final int priorityPoint;
 }

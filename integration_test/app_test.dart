@@ -9,6 +9,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:todo_app/model/model.dart';
 
 import '../test/robot/robot.dart';
+import '../test/robot/todo_pane_robot.dart';
 
 const String dbFileName = 'todo_database.db';
 const String dbFilePath = 'integration_test/resources/$dbFileName';
@@ -78,6 +79,8 @@ void main() {
     await r.modalBottomSheet.enterTodoTitle('1_1_notBegin');
     await r.modalBottomSheet.pressRegisterButton();
     r.todoPane.expectFindNTodo(1);
+    r.todoPane
+        .expectTodoDisplayFromTop([TodoDisplayData('1_1_notBegin', 1, 1)]);
 
     await r.todoPane.changeStatusTabTo(TodoStatus.progress);
     await r.mainScreen.pressAddButton();
@@ -85,6 +88,8 @@ void main() {
     await r.modalBottomSheet.changeStatusPoint(TodoStatus.progress);
     await r.modalBottomSheet.pressRegisterButton();
     r.todoPane.expectFindNTodo(1);
+    r.todoPane
+        .expectTodoDisplayFromTop([TodoDisplayData('1_1_progress', 1, 1)]);
 
     await r.todoPane.changeStatusTabTo(TodoStatus.stay);
     await r.mainScreen.pressAddButton();
@@ -92,6 +97,7 @@ void main() {
     await r.modalBottomSheet.changeStatusPoint(TodoStatus.stay);
     await r.modalBottomSheet.pressRegisterButton();
     r.todoPane.expectFindNTodo(1);
+    r.todoPane.expectTodoDisplayFromTop([TodoDisplayData('1_1_stay', 1, 1)]);
 
     await r.todoPane.changeStatusTabTo(TodoStatus.complete);
     await r.mainScreen.pressAddButton();
@@ -99,6 +105,8 @@ void main() {
     await r.modalBottomSheet.changeStatusPoint(TodoStatus.complete);
     await r.modalBottomSheet.pressRegisterButton();
     r.todoPane.expectFindNTodo(1);
+    r.todoPane
+        .expectTodoDisplayFromTop([TodoDisplayData('1_1_complete', 1, 1)]);
     // endregion
     // endregion
 
@@ -110,28 +118,28 @@ void main() {
     await r.todoPane.pressUpdateButton();
     await r.modalBottomSheet.enterTodoTitle(newTitle);
     await r.modalBottomSheet.pressUpdateButton();
-    r.todoPane.expectTodoSetting(title: newTitle);
+    r.todoPane.expectNIndexTodoDisplay(title: newTitle);
 
     await r.todoPane.changeStatusTabTo(TodoStatus.progress);
     await r.todoPane.slideTodo();
     await r.todoPane.pressUpdateButton();
     await r.modalBottomSheet.changeEmergencyPoint(2);
     await r.modalBottomSheet.pressUpdateButton();
-    r.todoPane.expectTodoSetting(emergencyPoint: 2);
+    r.todoPane.expectNIndexTodoDisplay(emergencyPoint: 2);
 
     await r.todoPane.changeStatusTabTo(TodoStatus.stay);
     await r.todoPane.slideTodo();
     await r.todoPane.pressUpdateButton();
     await r.modalBottomSheet.changePriorityPoint(2);
     await r.modalBottomSheet.pressUpdateButton();
-    r.todoPane.expectTodoSetting(priorityPoint: 2);
+    r.todoPane.expectNIndexTodoDisplay(priorityPoint: 2);
 
     await r.todoPane.changeStatusTabTo(TodoStatus.complete);
     await r.todoPane.slideTodo();
     await r.todoPane.pressUpdateButton();
     await r.modalBottomSheet.changePriorityPoint(3);
     await r.modalBottomSheet.pressUpdateButton();
-    r.todoPane.expectTodoSetting(priorityPoint: 3);
+    r.todoPane.expectNIndexTodoDisplay(priorityPoint: 3);
     // endregion
 
     // region Todoの更新ボトムシート表示時、既存のTodoの内容を表示していること
@@ -246,32 +254,24 @@ void main() {
   });
 
   // TODO:23.10.17:Y.Sakuma:DB差し替えると、DBの読み書きができないため、後ほど修正する
-  // testWidgets('DBにデータがある状態でスタート', (WidgetTester tester) async {
-  //   // テスト用DBの配置
-  //   await deleteFile();
-  //   await deployFile();
-  //   addTearDown(() {
-  //     deleteFile();
-  //   });
-  //
-  //   final r = Robot(tester);
-  //   await r.pumpMyApp();
-  //   await tester.pumpAndSettle(Duration(seconds: 2));
-  //
-  //   // 【消して良いやつ】<<<<<<<<< ここから <<<<<<<<<
-  //   // for (var i = 0; i < 12; i++) { // Todoをスクロールできるように１２個作る
-  //   // 試しに１個Todoを追加する操作
-  //   await r.mainScreen.pressAddButton();
-  //   await r.modalBottomSheet.enterTodoTitle('title');
-  //   await r.modalBottomSheet.pressRegisterButton();
-  //   // } // Todoをスクロールできるように１２個作る
-  //
-  //   await r.todoPane.scrollToBottom();
-  //   await r.todoPane.scrollToTop();
-  //
-  //   await r.mainScreen.changeComboBoxItem();
-  //   // 【消して良いやつ】>>>>>>>>>> ここまで >>>>>>>>>>
-  //
-  //   // await todoRobot.slideTodo();
-  // });
+  testWidgets('DBにデータがある状態でスタート', (WidgetTester tester) async {
+    // テスト用DBの配置
+    await deleteFile();
+    await deployFile();
+    addTearDown(() {
+      deleteFile();
+    });
+
+    final r = Robot(tester);
+    await r.pumpMyApp();
+
+    // 【消して良いやつ】<<<<<<<<< ここから <<<<<<<<<
+    // for (var i = 0; i < 12; i++) { // Todoをスクロールできるように１２個作る
+    // 試しに１個Todoを追加する操作
+    await r.mainScreen.pressAddButton();
+    await r.modalBottomSheet.enterTodoTitle('title');
+    await r.modalBottomSheet.pressRegisterButton();
+    // } // Todoをスクロールできるように１２個作る
+    // 【消して良いやつ】>>>>>>>>>> ここまで >>>>>>>>>>
+  });
 }
