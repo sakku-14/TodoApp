@@ -30,8 +30,8 @@ class DbService {
 
     database = await openDatabase(
       dbFilePath,
-      onCreate: (db, version) {
-        return db.execute('''CREATE TABLE todo(
+      onCreate: (db, version) async {
+        await db.execute('''CREATE TABLE todo(
           created_at TEXT PRIMARY KEY, 
           title TEXT, 
           emergency_point INTEGER, 
@@ -43,21 +43,23 @@ class DbService {
   }
 
   Future<List<Todo>> getTodoList() async {
-    if (database == null) await initDatabase();
+    await initDatabase();
     final List<Map<String, dynamic>> maps = await database!.query('todo');
+    await database!.close();
     return List.generate(maps.length, (i) {
       return Todo.fromJson(maps[i]);
     });
   }
 
   Future<bool> saveTodo(Todo todo) async {
-    if (database == null) await initDatabase();
+    await initDatabase();
     var ret = await database!.insert('todo', todo.toMap());
+    await database!.close();
     return ret <= 0 ? false : true;
   }
 
   Future<bool> updateTodo(Todo todo) async {
-    if (database == null) await initDatabase();
+    await initDatabase();
     var ret = await database!.update(
       'todo',
       todo.toMap(),
@@ -66,17 +68,19 @@ class DbService {
       conflictAlgorithm: ConflictAlgorithm.fail,
     );
 
+    await database!.close();
     return ret <= 0 ? false : true;
   }
 
   Future<bool> deleteTodo(DateTime createAt) async {
-    if (database == null) await initDatabase();
+    await initDatabase();
     var ret = await database!.delete(
       'todo',
       where: "created_at = ?",
       whereArgs: [createAt.toUtc().toIso8601String()],
     );
 
+    await database!.close();
     return ret <= 0 ? false : true;
   }
 }
