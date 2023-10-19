@@ -13,7 +13,7 @@ part 'db_service.g.dart';
 class DbService {
   Database? database;
 
-  Future initDatabase() async {
+  Future initDatabase({bool isReadOnly = false}) async {
     var dbFilePath = '';
 
     if (Platform.isAndroid) {
@@ -28,22 +28,26 @@ class DbService {
       print('sqLiteFilePath:$dbFilePath');
     }
 
-    database = await openDatabase(
-      dbFilePath,
-      onCreate: (db, version) async {
-        await db.execute('''CREATE TABLE todo(
+    if (isReadOnly) {
+      database = await openReadOnlyDatabase(dbFilePath);
+    } else {
+      database = await openDatabase(
+        dbFilePath,
+        onCreate: (db, version) async {
+          await db.execute('''CREATE TABLE todo(
           created_at TEXT PRIMARY KEY, 
           title TEXT, 
           emergency_point INTEGER, 
           priority_point INTEGER, 
           status TEXT)''');
-      },
-      version: 1,
-    );
+        },
+        version: 1,
+      );
+    }
   }
 
   Future<List<Todo>> getTodoList() async {
-    await initDatabase();
+    await initDatabase(isReadOnly: true);
     final List<Map<String, dynamic>> maps = await database!.query('todo');
     await database!.close();
     return List.generate(maps.length, (i) {

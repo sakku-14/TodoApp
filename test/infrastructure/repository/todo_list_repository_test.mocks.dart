@@ -35,10 +35,12 @@ class MockDbService extends _i1.Mock implements _i2.DbService {
       );
 
   @override
-  _i4.Future<dynamic> initDatabase() => (super.noSuchMethod(
+  _i4.Future<dynamic> initDatabase({bool? isReadOnly = false}) =>
+      (super.noSuchMethod(
         Invocation.method(
           #initDatabase,
           [],
+          {#isReadOnly: isReadOnly},
         ),
         returnValue: _i4.Future<dynamic>.value(),
         returnValueForMissingStub: _i4.Future<dynamic>.value(),
