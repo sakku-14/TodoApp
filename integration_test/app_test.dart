@@ -34,7 +34,6 @@ void main() {
       final file = await getDbFile(dbFileName);
       if (file.existsSync()) {
         file.deleteSync(); // ファイルを削除
-        debugPrint('ファイルを削除しました: todo_database.db');
       }
     } catch (e) {
       debugPrint('ファイルの削除中にエラーが発生しました: $e');
@@ -53,8 +52,6 @@ void main() {
     }
 
     File destFile = await getDbFile(dbFileName);
-    print('コピー元ファイルパス:${sourceFile.path}');
-    print('コピー先ファイルパス:${destFile.path}');
     try {
       sourceFile.copySync(destFile.path);
     } catch (e) {
@@ -253,7 +250,6 @@ void main() {
     // endregion
   });
 
-  // TODO:23.10.17:Y.Sakuma:DB差し替えると、DBの読み書きができないため、後ほど修正する
   testWidgets('DBにデータがある状態でスタート', (WidgetTester tester) async {
     // テスト用DBの配置
     await deleteFile();
@@ -265,13 +261,28 @@ void main() {
     final r = Robot(tester);
     await r.pumpMyApp();
 
-    // 【消して良いやつ】<<<<<<<<< ここから <<<<<<<<<
-    // for (var i = 0; i < 12; i++) { // Todoをスクロールできるように１２個作る
-    // 試しに１個Todoを追加する操作
-    await r.mainScreen.pressAddButton();
-    await r.modalBottomSheet.enterTodoTitle('title');
-    await r.modalBottomSheet.pressRegisterButton();
-    // } // Todoをスクロールできるように１２個作る
-    // 【消して良いやつ】>>>>>>>>>> ここまで >>>>>>>>>>
+    // region 表示
+    await r.todoPane.changeStatusTabTo(TodoStatus.notBegin);
+    r.todoPane.expectTodoDisplayFromTop([
+      TodoDisplayData('未着手1', 1, 1),
+      TodoDisplayData('未着手2', 2, 2),
+    ]);
+    await r.todoPane.changeStatusTabTo(TodoStatus.progress);
+    r.todoPane.expectTodoDisplayFromTop([
+      TodoDisplayData('作業中1', 1, 1),
+      TodoDisplayData('作業中2', 2, 2),
+    ]);
+    await r.todoPane.changeStatusTabTo(TodoStatus.stay);
+    r.todoPane.expectTodoDisplayFromTop([
+      TodoDisplayData('保留1', 1, 1),
+      TodoDisplayData('保留2', 2, 2),
+    ]);
+    await r.todoPane.changeStatusTabTo(TodoStatus.complete);
+    r.todoPane.expectTodoDisplayFromTop([
+      TodoDisplayData('完了1', 1, 1),
+      TodoDisplayData('完了2', 2, 2),
+    ]);
+
+    // endregion
   });
 }
