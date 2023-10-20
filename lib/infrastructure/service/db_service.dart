@@ -12,6 +12,7 @@ part 'db_service.g.dart';
 
 class DbService {
   Database? database;
+  bool isDisplayedDbPath = false;
 
   Future initDatabase({bool isReadOnly = false}) async {
     var dbFilePath = '';
@@ -24,8 +25,11 @@ class DbService {
     }
 
     dbFilePath = join(dbFilePath, 'todo_database.db');
-    if (kDebugMode) {
-      print('sqLiteFilePath:$dbFilePath');
+    if (!isDisplayedDbPath) {
+      if (kDebugMode) {
+        print('sqLiteFilePath:$dbFilePath');
+      }
+      isDisplayedDbPath = true;
     }
 
     if (isReadOnly) {
