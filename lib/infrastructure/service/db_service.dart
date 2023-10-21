@@ -12,8 +12,9 @@ part 'db_service.g.dart';
 
 class DbService {
   Database? database;
+  bool isDisplayedDbPath = false;
 
-  Future initDatabase() async {
+  Future initDatabase({bool isReadOnly = false}) async {
     var dbFilePath = '';
 
     if (Platform.isAndroid) {
@@ -24,40 +25,49 @@ class DbService {
     }
 
     dbFilePath = join(dbFilePath, 'todo_database.db');
-    if (kDebugMode) {
-      print('sqLiteFilePath:$dbFilePath');
+    if (!isDisplayedDbPath) {
+      if (kDebugMode) {
+        print('sqLiteFilePath:$dbFilePath');
+      }
+      isDisplayedDbPath = true;
     }
 
-    database = await openDatabase(
-      dbFilePath,
-      onCreate: (db, version) {
-        return db.execute('''CREATE TABLE todo(
+    if (isReadOnly) {
+      database = await openReadOnlyDatabase(dbFilePath);
+    } else {
+      database = await openDatabase(
+        dbFilePath,
+        onCreate: (db, version) async {
+          await db.execute('''CREATE TABLE todo(
           created_at TEXT PRIMARY KEY, 
           title TEXT, 
           emergency_point INTEGER, 
           priority_point INTEGER, 
           status TEXT)''');
-      },
-      version: 1,
-    );
+        },
+        version: 1,
+      );
+    }
   }
 
   Future<List<Todo>> getTodoList() async {
-    if (database == null) await initDatabase();
+    await initDatabase(isReadOnly: true);
     final List<Map<String, dynamic>> maps = await database!.query('todo');
+    await database!.close();
     return List.generate(maps.length, (i) {
       return Todo.fromJson(maps[i]);
     });
   }
 
   Future<bool> saveTodo(Todo todo) async {
-    if (database == null) await initDatabase();
+    await initDatabase();
     var ret = await database!.insert('todo', todo.toMap());
+    await database!.close();
     return ret <= 0 ? false : true;
   }
 
   Future<bool> updateTodo(Todo todo) async {
-    if (database == null) await initDatabase();
+    await initDatabase();
     var ret = await database!.update(
       'todo',
       todo.toMap(),
@@ -66,17 +76,19 @@ class DbService {
       conflictAlgorithm: ConflictAlgorithm.fail,
     );
 
+    await database!.close();
     return ret <= 0 ? false : true;
   }
 
   Future<bool> deleteTodo(DateTime createAt) async {
-    if (database == null) await initDatabase();
+    await initDatabase();
     var ret = await database!.delete(
       'todo',
       where: "created_at = ?",
       whereArgs: [createAt.toUtc().toIso8601String()],
     );
 
+    await database!.close();
     return ret <= 0 ? false : true;
   }
 }

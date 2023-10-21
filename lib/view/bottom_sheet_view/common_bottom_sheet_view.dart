@@ -5,10 +5,21 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../model/model.dart';
 
 // WidgetTestで使用するKey
+final commonBottomSheetKey = UniqueKey();
 final titleKey = UniqueKey();
 final emergencyKey = UniqueKey();
+final emergency1 = UniqueKey();
+final emergency2 = UniqueKey();
+final emergency3 = UniqueKey();
 final priorityKey = UniqueKey();
+final priority1 = UniqueKey();
+final priority2 = UniqueKey();
+final priority3 = UniqueKey();
 final statusKey = UniqueKey();
+final statusNotBegin = UniqueKey();
+final statusProgress = UniqueKey();
+final statusStay = UniqueKey();
+final statusComplete = UniqueKey();
 
 class CommonBottomSheetView extends ConsumerWidget {
   const CommonBottomSheetView({
@@ -18,6 +29,7 @@ class CommonBottomSheetView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Column(
+      key: commonBottomSheetKey,
       children: [
         /// タイトル
         Container(
@@ -62,10 +74,10 @@ class CommonBottomSheetView extends ConsumerWidget {
                   width: double.infinity,
                   child: CupertinoSegmentedControl(
                     key: emergencyKey,
-                    children: const {
-                      1: Text("1"),
-                      2: Text("2"),
-                      3: Text("3"),
+                    children: {
+                      1: Text(key: emergency1, "1"),
+                      2: Text(key: emergency2, "2"),
+                      3: Text(key: emergency3, "3"),
                     },
                     groupValue: ref.watch(editTodoProvider).emergencyPoint,
                     onValueChanged: (value) {
@@ -104,10 +116,10 @@ class CommonBottomSheetView extends ConsumerWidget {
                   width: double.infinity,
                   child: CupertinoSegmentedControl(
                     key: priorityKey,
-                    children: const {
-                      1: Text("1"),
-                      2: Text("2"),
-                      3: Text("3"),
+                    children: {
+                      1: Text(key: priority1, "1"),
+                      2: Text(key: priority2, "2"),
+                      3: Text(key: priority3, "3"),
                     },
                     groupValue: ref.watch(editTodoProvider).primaryPoint,
                     onValueChanged: (value) {
@@ -147,10 +159,14 @@ class CommonBottomSheetView extends ConsumerWidget {
                   child: CupertinoSegmentedControl(
                     key: statusKey,
                     children: {
-                      TodoStatus.notBegin: Text(TodoStatus.notBegin.statusName),
-                      TodoStatus.progress: Text(TodoStatus.progress.statusName),
-                      TodoStatus.stay: Text(TodoStatus.stay.statusName),
-                      TodoStatus.complete: Text(TodoStatus.complete.statusName),
+                      TodoStatus.notBegin: Text(
+                          key: statusNotBegin, TodoStatus.notBegin.statusName),
+                      TodoStatus.progress: Text(
+                          key: statusProgress, TodoStatus.progress.statusName),
+                      TodoStatus.stay:
+                          Text(key: statusStay, TodoStatus.stay.statusName),
+                      TodoStatus.complete: Text(
+                          key: statusComplete, TodoStatus.complete.statusName),
                     },
                     groupValue: ref.watch(editTodoProvider).tabStatus,
                     onValueChanged: (value) {

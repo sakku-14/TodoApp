@@ -17,6 +17,7 @@ class SortComboBoxView extends ConsumerWidget {
 
     return Center(
       child: DropdownButton(
+        key: sortComboBoxKey,
         items: [
           for (var value in selectedSortType.sortTypeList) ...[
             DropdownMenuItem(
@@ -25,7 +26,6 @@ class SortComboBoxView extends ConsumerWidget {
             ),
           ]
         ],
-        key: sortComboBoxKey,
         value: selectedSortType.typeName,
         onChanged: (value) {
           if (value == null || value.isEmpty) return;
