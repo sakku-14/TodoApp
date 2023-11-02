@@ -1,6 +1,7 @@
 # Todoアプリ
 一般的なTodoアプリに各Todoの優先順位をつける指標に『緊急度x重要度』という概念を追加したアプリです。
 この概念により、ユーザーが本当に優先すべきTodoが一目で分かり、今まで以上に抱えているタスクを効率良くこなせるようになります。
+
 <img src="https://github.com/sakku-14/TodoApp/assets/65479630/36a60f85-8f4d-46e4-b95d-4848c9386023" width="400">
 
 ## Todoアプリの機能
@@ -68,4 +69,4 @@ https://github.com/sakku-14/TodoApp/assets/65479630/8697c7db-b0a0-4bdc-aec5-fdaa
 
 ## ProviderとWidgetの相関関係
 以下は[Riverpod Graph](https://github.com/rrousselGit/riverpod/tree/master/packages/riverpod_graph)にて生成
-![Riverpod Graph](https://github.com/sakku-14/TodoApp/assets/65479630/a7415fe6-c2bb-4c45-af82-d3504a5ebddb)
+![Riverpod Graph](https://github.com/sakku-14/TodoApp/assets/65479630/dd17bc89-2cd5-4973-8e76-a0e06ca7f75e)
