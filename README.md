@@ -37,19 +37,19 @@ https://github.com/sakku-14/TodoApp/assets/65479630/458b19c0-3d8d-4c88-ae7c-ea8d
 
 <br>
 
-1. Dart/Flutterプラグインの追加
+1. Dart/Flutterプラグインの追加<br>
     以下コマンド実行
     ```bash
     asdf plugin-add dart
     asdf plugin-add flutter
     ```
-2. Dart/Flutter SDKのインストール
+2. Dart/Flutter SDKのインストール<br>
     以下コマンド実行
     ```bash
     asdf install dart 3.1.2
     asdf install flutter 3.13.4
     ```
-3. Dart/Flutter SDKの指定
+3. Dart/Flutter SDKの指定<br>
     **プロジェクトフォルダ内にて**以下コマンド実行
     ```bash
     asdf local dart 3.1.2
