@@ -30,24 +30,27 @@ https://github.com/sakku-14/TodoApp/assets/65479630/458b19c0-3d8d-4c88-ae7c-ea8d
 <details>
   <summary>asdfの導入方法(必要な方は左の▶️をクリックすると手順確認できます)</summary>
   <ol>
-  <li>asdfのインストール<br><code>brew install asdf</code></li>
-  <li>M1 Macの場合は以下のコマンドを実行してください<br>（以下コードはzshを指定してるので、別のシェルを使用してる場合は適宜書き換えてください）<br><code>echo -e "n. $(brew --prefix asdf)/libexec/asdf.sh" >> ~/.zshrc</code></li>
+  <li>asdfのインストール<br>以下コマンド実行<br><code>brew install asdf</code></li>
+  <li>M1 Macの場合は以下コマンド実行<br>（以下コードはzshの設定ファイルを指定してる為、別のシェルを使用してる場合は適宜書き換えてください）<br><code>echo -e "n. $(brew --prefix asdf)/libexec/asdf.sh" >> ~/.zshrc</code></li>
   </ol>
 </details>
 
 <br>
 
 1. Dart/Flutterプラグインの追加
+    以下コマンド実行
     ```bash
     asdf plugin-add dart
     asdf plugin-add flutter
     ```
 2. Dart/Flutter SDKのインストール
+    以下コマンド実行
     ```bash
     asdf install dart 3.1.2
     asdf install flutter 3.13.4
     ```
 3. Dart/Flutter SDKの指定
+    **プロジェクトフォルダ内にて**以下コマンド実行
     ```bash
     asdf local dart 3.1.2
     asdf local flutter 3.13.4
