@@ -35,6 +35,22 @@ class MockDbService extends _i1.Mock implements _i2.DbService {
       );
 
   @override
+  bool get isDisplayedDbPath => (super.noSuchMethod(
+        Invocation.getter(#isDisplayedDbPath),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+
+  @override
+  set isDisplayedDbPath(bool? _isDisplayedDbPath) => super.noSuchMethod(
+        Invocation.setter(
+          #isDisplayedDbPath,
+          _isDisplayedDbPath,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   _i4.Future<dynamic> initDatabase({bool? isReadOnly = false}) =>
       (super.noSuchMethod(
         Invocation.method(
