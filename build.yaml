@@ -1,0 +1,9 @@
+targets:
+  $default:
+    builders:
+      freezed:
+        # freezedでコード生成する階層の指定
+        # （lib/model以外で生成する必要あれば追加必須）
+        generate_for:
+          include:
+            - lib/model/**/*.dart
