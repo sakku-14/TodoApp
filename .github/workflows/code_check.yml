@@ -24,9 +24,10 @@ jobs:
       - name: Create Flutter Environment
         uses: subosito/flutter-action@v2.11.0
         with:
-          flutter-version: ${{env.flutter_version}}
+          flutter-version: ${{ env.flutter_version }}
           channel: 'stable'
           cache: true
+          key: flutter-${{ runner.os }}-${{env.CHANNEL}}-${{ env.flutter_version }}-${{env.ARCHITECTURE}}
       # pubspec依存パッケージのキャッシュ設定（取得・保存）
       - name: Cache pubspec
         id: cache-pubspec
@@ -37,7 +38,7 @@ jobs:
             **/.flutter-plugins
             **/.flutter-plugin-dependencies
             **/.dart_tool/package_config.json
-          key: pubspec-${{ hashFiles('**/pubspec.lock') }}
+          key: pubspec-${{ hashFiles('**/pubspec.yaml') }}
           restore-keys: |
             pubspec-
       # Flutterの各パッケージをインストール
@@ -58,9 +59,10 @@ jobs:
       - name: Create Flutter Environment
         uses: subosito/flutter-action@v2.11.0
         with:
-          flutter-version: ${{env.flutter_version}}
+          flutter-version: ${{ env.flutter_version }}
           channel: 'stable'
           cache: true
+          key: flutter-${{ runner.os }}-${{env.CHANNEL}}-${{ env.flutter_version }}-${{env.ARCHITECTURE}}
       # pubspec依存パッケージのキャッシュ設定（取得・保存）
       - name: Cache pubspec
         id: cache-pubspec
@@ -71,7 +73,7 @@ jobs:
             **/.flutter-plugins
             **/.flutter-plugin-dependencies
             **/.dart_tool/package_config.json
-          key: pubspec-${{ hashFiles('**/pubspec.lock') }}
+          key: pubspec-${{ hashFiles('**/pubspec.yaml') }}
           restore-keys: |
             pubspec-
       # Flutterの各パッケージをインストール
