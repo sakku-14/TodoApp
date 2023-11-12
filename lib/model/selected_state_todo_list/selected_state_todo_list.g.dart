@@ -30,8 +30,6 @@ class _SystemHash {
   }
 }
 
-typedef SelectedStateTodoListRef = AutoDisposeProviderRef<List<Todo>>;
-
 /// See also [selectedStateTodoList].
 @ProviderFor(selectedStateTodoList)
 const selectedStateTodoListProvider = SelectedStateTodoListFamily();
@@ -87,10 +85,10 @@ class SelectedStateTodoListFamily extends Family<List<Todo>> {
 class SelectedStateTodoListProvider extends AutoDisposeProvider<List<Todo>> {
   /// See also [selectedStateTodoList].
   SelectedStateTodoListProvider(
-    this.tabTitle,
-  ) : super.internal(
+    TodoStatus tabTitle,
+  ) : this._internal(
           (ref) => selectedStateTodoList(
-            ref,
+            ref as SelectedStateTodoListRef,
             tabTitle,
           ),
           from: selectedStateTodoListProvider,
@@ -102,9 +100,43 @@ class SelectedStateTodoListProvider extends AutoDisposeProvider<List<Todo>> {
           dependencies: SelectedStateTodoListFamily._dependencies,
           allTransitiveDependencies:
               SelectedStateTodoListFamily._allTransitiveDependencies,
+          tabTitle: tabTitle,
         );
 
+  SelectedStateTodoListProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.tabTitle,
+  }) : super.internal();
+
   final TodoStatus tabTitle;
+
+  @override
+  Override overrideWith(
+    List<Todo> Function(SelectedStateTodoListRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: SelectedStateTodoListProvider._internal(
+        (ref) => create(ref as SelectedStateTodoListRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        tabTitle: tabTitle,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeProviderElement<List<Todo>> createElement() {
+    return _SelectedStateTodoListProviderElement(this);
+  }
 
   @override
   bool operator ==(Object other) {
@@ -119,5 +151,19 @@ class SelectedStateTodoListProvider extends AutoDisposeProvider<List<Todo>> {
     return _SystemHash.finish(hash);
   }
 }
+
+mixin SelectedStateTodoListRef on AutoDisposeProviderRef<List<Todo>> {
+  /// The parameter `tabTitle` of this provider.
+  TodoStatus get tabTitle;
+}
+
+class _SelectedStateTodoListProviderElement
+    extends AutoDisposeProviderElement<List<Todo>>
+    with SelectedStateTodoListRef {
+  _SelectedStateTodoListProviderElement(super.provider);
+
+  @override
+  TodoStatus get tabTitle => (origin as SelectedStateTodoListProvider).tabTitle;
+}
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
