@@ -25,9 +25,8 @@ jobs:
         uses: subosito/flutter-action@v2.11.0
         with:
           flutter-version: ${{ env.flutter_version }}
-          channel: 'stable'
           cache: true
-          cache-key: flutter-${{ runner.os }}-${{env.CHANNEL}}-${{ env.flutter_version }}-${{env.ARCHITECTURE}}
+          cache-key: flutter_environment-${{ runner.os }}-${{ env.flutter_version }}
       # pubspec依存パッケージのキャッシュ設定（取得・保存）
       - name: Cache pubspec
         id: cache-pubspec
@@ -60,9 +59,8 @@ jobs:
         uses: subosito/flutter-action@v2.11.0
         with:
           flutter-version: ${{ env.flutter_version }}
-          channel: 'stable'
           cache: true
-          cache-key: flutter-${{ runner.os }}-${{env.CHANNEL}}-${{ env.flutter_version }}-${{env.ARCHITECTURE}}
+          cache-key: flutter_environment-${{ runner.os }}-${{ env.flutter_version }}
       # pubspec依存パッケージのキャッシュ設定（取得・保存）
       - name: Cache pubspec
         id: cache-pubspec
