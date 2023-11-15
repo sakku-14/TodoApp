@@ -54,7 +54,7 @@ jobs:
         if: ${{ !cancelled() }}                        # required to run this step even if flutter analyze fails
         with:
           analyze_log: flutter_analyze.log             # file path for analyze log
-          verbose: false
+#          verbose: false
   # 単体テスト
   test_code:
     name: Test the source code
