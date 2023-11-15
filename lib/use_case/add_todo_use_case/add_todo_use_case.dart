@@ -20,6 +20,8 @@ class AddTodoUseCase {
       status: todoDto.status,
     );
 
+    print('hello');
+
     // Repositoryへ新規登録
     todoListProvider.addTodo(todo);
 
