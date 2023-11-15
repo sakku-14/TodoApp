@@ -48,7 +48,7 @@ jobs:
         run: flutter pub get
       # DartAnalysisで静的解析
       - name: Linter
-      # run flutter analyze with --write option
+        # flutter-analyze-commenterで使えるようログファイル出力
         run: flutter analyze --write=flutter_analyze.log
       # use flutter-analyze-commenter
       - uses: yorifuji/flutter-analyze-commenter@v1
