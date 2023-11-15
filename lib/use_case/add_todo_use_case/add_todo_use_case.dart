@@ -19,7 +19,6 @@ class AddTodoUseCase {
       priorityPoint: todoDto.priorityPoint,
       status: todoDto.status,
     );
-    final String y1 = 1;
 
     // Repositoryへ新規登録
     todoListProvider.addTodo(todo);
