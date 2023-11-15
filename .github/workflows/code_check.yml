@@ -50,7 +50,7 @@ jobs:
       - name: Linter
         run: flutter analyze --write=flutter_analyze.log
       # 静的解析結果コメントをプルリクへ書き込む
-      - uses: yorifuji/flutter-analyze-commenter@v1
+      - uses: yorifuji/flutter-analyze-commenter@v1.0.7
         if: ${{ !cancelled() }}                        # required to run this step even if flutter analyze fails
         with:
           analyze_log: flutter_analyze.log             # file path for analyze log
