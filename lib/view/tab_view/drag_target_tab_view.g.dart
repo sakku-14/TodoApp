@@ -83,8 +83,8 @@ class IsDragOnFamily extends Family<bool> {
 class IsDragOnProvider extends AutoDisposeNotifierProviderImpl<IsDragOn, bool> {
   /// See also [IsDragOn].
   IsDragOnProvider(
-    this.status,
-  ) : super.internal(
+    TodoStatus status,
+  ) : this._internal(
           () => IsDragOn()..status = status,
           from: isDragOnProvider,
           name: r'isDragOnProvider',
@@ -94,9 +94,50 @@ class IsDragOnProvider extends AutoDisposeNotifierProviderImpl<IsDragOn, bool> {
                   : _$isDragOnHash,
           dependencies: IsDragOnFamily._dependencies,
           allTransitiveDependencies: IsDragOnFamily._allTransitiveDependencies,
+          status: status,
         );
 
+  IsDragOnProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.status,
+  }) : super.internal();
+
   final TodoStatus status;
+
+  @override
+  bool runNotifierBuild(
+    covariant IsDragOn notifier,
+  ) {
+    return notifier.build(
+      status,
+    );
+  }
+
+  @override
+  Override overrideWith(IsDragOn Function() create) {
+    return ProviderOverride(
+      origin: this,
+      override: IsDragOnProvider._internal(
+        () => create()..status = status,
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        status: status,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeNotifierProviderElement<IsDragOn, bool> createElement() {
+    return _IsDragOnProviderElement(this);
+  }
 
   @override
   bool operator ==(Object other) {
@@ -110,15 +151,20 @@ class IsDragOnProvider extends AutoDisposeNotifierProviderImpl<IsDragOn, bool> {
 
     return _SystemHash.finish(hash);
   }
+}
+
+mixin IsDragOnRef on AutoDisposeNotifierProviderRef<bool> {
+  /// The parameter `status` of this provider.
+  TodoStatus get status;
+}
+
+class _IsDragOnProviderElement
+    extends AutoDisposeNotifierProviderElement<IsDragOn, bool>
+    with IsDragOnRef {
+  _IsDragOnProviderElement(super.provider);
 
   @override
-  bool runNotifierBuild(
-    covariant IsDragOn notifier,
-  ) {
-    return notifier.build(
-      status,
-    );
-  }
+  TodoStatus get status => (origin as IsDragOnProvider).status;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

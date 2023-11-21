@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo_app/View/main_view.dart';
+import 'package:todo_app/view/main_view.dart';
 
 final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
 

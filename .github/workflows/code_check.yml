@@ -1,0 +1,98 @@
+name: Analyze and test the source code
+on:
+  # developブランチへのプルリクが更新(プルリク作成・プッシュ)時に走る
+  pull_request:
+    branches:
+      - main
+# 同じブランチで新しいJobが来たら、今実行中のJobをキャンセルする
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+env:
+  # 使用しているFlutter SDKのバージョン
+  flutter_version: 3.13.4
+jobs:
+  # DartAnalysisで静的解析
+  analyze_code:
+    name: Analyze the source code
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write # プルリクへコメントを書き込めるよう権限付与
+    steps:
+      # ブランチをクローンし、チェックアウトする
+      - name: Checkout
+        uses: actions/checkout@v3
+      # Flutterの環境構築(cacheが存在すればそれを使用する)
+      - name: Create Flutter Environment
+        uses: subosito/flutter-action@v2.11.0
+        with:
+          flutter-version: ${{ env.flutter_version }}
+          cache: true
+          cache-key: flutter_environment-${{ runner.os }}-${{ env.flutter_version }}
+      # pubspec依存パッケージのキャッシュ設定（取得・保存）
+      - name: Cache pubspec
+        id: cache-pubspec
+        uses: actions/cache@v3
+        with:
+          path: |
+            ${{ env.PUB_CACHE }}
+            **/.flutter-plugins
+            **/.flutter-plugin-dependencies
+            **/.dart_tool/package_config.json
+          key: pubspec-${{ hashFiles('**/pubspec.yaml') }}
+          restore-keys: |
+            pubspec-
+      # Flutterの各パッケージをインストール
+      - name: Install packages
+        run: flutter pub get
+      # DartAnalysisで静的解析
+      - name: Linter
+        # flutter-analyze-commenterで使えるようログファイル出力
+        run: flutter analyze --write=flutter_analyze.log
+      # 静的解析に引っかかった箇所をプルリクの指摘コメントとして残してくれる機能入れたかったが、うまく動かなかったので一旦コメントアウト
+      # use flutter-analyze-commenter
+#      - uses: yorifuji/flutter-analyze-commenter@v1
+#        if: ${{ !cancelled() }}                        # required to run this step even if flutter analyze fails
+#        with:
+#          analyze_log: flutter_analyze.log             # file path for analyze log
+#          verbose: false
+  # 単体テスト
+  test_code:
+    name: Test the source code
+    runs-on: ubuntu-latest
+    steps:
+      # ブランチをクローンし、チェックアウトする
+      - name: Checkout
+        uses: actions/checkout@v3
+      # Flutterの環境構築(cacheが存在すればそれを使用する)
+      - name: Create Flutter Environment
+        uses: subosito/flutter-action@v2.11.0
+        with:
+          flutter-version: ${{ env.flutter_version }}
+          cache: true
+          cache-key: flutter_environment-${{ runner.os }}-${{ env.flutter_version }}
+      # pubspec依存パッケージのキャッシュ設定（取得・保存）
+      - name: Cache pubspec
+        id: cache-pubspec
+        uses: actions/cache@v3
+        with:
+          path: |
+            ${{ env.PUB_CACHE }}
+            **/.flutter-plugins
+            **/.flutter-plugin-dependencies
+            **/.dart_tool/package_config.json
+          key: pubspec-${{ hashFiles('**/pubspec.yaml') }}
+          restore-keys: |
+            pubspec-
+      # Flutterの各パッケージをインストール
+      - name: Install packages
+        run: flutter pub get
+      # テスト実行
+      - name: Test
+        run: flutter test --coverage
+      # Codecovへテスト結果をアップロード
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
