@@ -1,4 +1,4 @@
-name: Check and test the source code
+name: Analyze and test the source code
 on:
   # developブランチへのプルリクが更新(プルリク作成・プッシュ)時に走る
   pull_request:
@@ -13,8 +13,8 @@ env:
   flutter_version: 3.13.4
 jobs:
   # DartAnalysisで静的解析
-  analysis_code:
-    name: Check the source code
+  analyze_code:
+    name: Analyze the source code
     runs-on: ubuntu-latest
     permissions:
       contents: read
