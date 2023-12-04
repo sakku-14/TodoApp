@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('object');
     return MaterialApp(
       scaffoldMessengerKey: scaffoldKey,
       title: 'Flutter Demo',
