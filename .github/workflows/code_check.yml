@@ -3,7 +3,7 @@ on:
   # developブランチへのプルリクが更新(プルリク作成・プッシュ)時に走る
   pull_request:
     branches:
-      - main
+      - master
 # 同じブランチで新しいJobが来たら、今実行中のJobをキャンセルする
 concurrency:
   group: ${{ github.ref }}
@@ -50,13 +50,12 @@ jobs:
       - name: Linter
         # flutter-analyze-commenterで使えるようログファイル出力
         run: flutter analyze --write=flutter_analyze.log
-      # 静的解析に引っかかった箇所をプルリクの指摘コメントとして残してくれる機能入れたかったが、うまく動かなかったので一旦コメントアウト
       # use flutter-analyze-commenter
-#      - uses: yorifuji/flutter-analyze-commenter@v1
-#        if: ${{ !cancelled() }}                        # required to run this step even if flutter analyze fails
-#        with:
-#          analyze_log: flutter_analyze.log             # file path for analyze log
-#          verbose: false
+      - uses: yorifuji/flutter-analyze-commenter@v1
+        if: ${{ !cancelled() }}                        # required to run this step even if flutter analyze fails
+        with:
+          analyze_log: flutter_analyze.log             # file path for analyze log
+          verbose: false
   # 単体テスト
   test_code:
     name: Test the source code
