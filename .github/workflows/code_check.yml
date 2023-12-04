@@ -3,7 +3,7 @@ on:
   # developブランチへのプルリクが更新(プルリク作成・プッシュ)時に走る
   pull_request:
     branches:
-      - main
+      - master
 # 同じブランチで新しいJobが来たら、今実行中のJobをキャンセルする
 concurrency:
   group: ${{ github.ref }}
