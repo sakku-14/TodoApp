@@ -1,4 +1,6 @@
 # Todoアプリ
+[![codecov](https://codecov.io/gh/sakku-14/TodoApp/graph/badge.svg?token=16SP3CPI06)](https://codecov.io/gh/sakku-14/TodoApp)
+
 一般的なTodoアプリに各Todoの優先順位をつける指標に『緊急度x重要度』という概念を追加したアプリです。
 この概念により、ユーザーが本当に優先すべきTodoが一目で分かり、今まで以上に抱えているタスクを効率良くこなせるようになります。
 
